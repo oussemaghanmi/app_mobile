@@ -18,14 +18,19 @@ application fonctionnelle en conservant **au maximum le design et la navigation 
 
 ## Arborescence
 ```
-src/auth/        AuthProvider, RequireRole (garde de routes), permissions.ts (matrice RBAC front)
-src/i18n/        index.ts (applyLanguage gère dir=rtl) + locales/{fr,en,ar,tn}.json
-src/screens/     patient/, shared/ (Settings, ProDashboard, Placeholder), auth/
-src/components/  PatientLayout (navigation basse)
-src/figma/       code exporté de Figma Make = SOURCE DE VÉRITÉ du design
+src/App.tsx           routes + gardes de rôle
+src/features/<nom>/   components/, api.ts (SEUL accès à supabase), hooks.ts, types.ts, tests
+                      auth (AuthProvider, RequireRole, permissions.ts), home, settings, professional
+src/components/       composants partagés (PatientLayout, AsyncView, Placeholder)
+src/lib/              supabase.ts (client typé), database.types.ts (GÉNÉRÉ), errors.ts, useAsync.ts
+src/i18n/             index.ts (applyLanguage gère dir=rtl) + locales/{fr,en,ar,tn}.json
+src/figma/            code exporté de Figma Make = SOURCE DE VÉRITÉ du design
 supabase/migrations/  0001_init_rbac.sql (schéma + RLS) ; nouvelles migrations = 0002_…, 0003_…
+supabase/tests/       tests pgTAP des policies RLS (`supabase test db`)
 supabase/functions/   Edge Functions (CrohnBot)
+docs/                 ARCHITECTURE.md, adr/, PIPELINE.md, QUESTIONS.md
 ```
+Conventions détaillées : `docs/ARCHITECTURE.md` §5.
 
 ## Rôles (RBAC)
 | Rôle | Autorisé | Interdit |
@@ -56,7 +61,8 @@ supabase/functions/   Edge Functions (CrohnBot)
 ## Workflow Git (repo distant : `origin` sur GitHub)
 - Une branche par fonctionnalité/écran depuis `develop` : `feature/<sujet>` (ex. `feature/ecran-medicaments`).
 - Commits petits, en **Conventional Commits en français** : `feat(medicaments): …`, `fix: …`, `style: …`, `ci: …`.
-- Avant chaque commit : `npm run lint && npm run typecheck && npm test && npm run build`.
+- Avant chaque commit : `npm run lint && npm run typecheck && npm run check:i18n && npm test && npm run build`
+  (+ `npm run db:test` si le schéma change).
 - Fin d'une fonctionnalité : `git push -u origin feature/<sujet>` → Pull Request vers `develop` (`gh pr create`)
   → attendre la CI verte (`gh pr checks --watch`) → `gh pr merge --merge --delete-branch`.
 - `main` ne reçoit que des PR `develop → main` en fin de lot, suivies d'un tag `v0.x.0`.
@@ -75,7 +81,15 @@ nouvelle donne lieu à un ADR court.
 
 ## Commandes
 ```bash
-npm run dev        # serveur de dev
-npm run build      # typecheck + build (doit passer avant tout commit)
+npm run dev          # serveur de dev
+npm run lint         # ESLint (RTL, accès supabase, a11y)
+npm run typecheck
+npm run check:i18n   # mêmes clés dans fr/en/ar/tn
+npm test             # Vitest
+npm run build        # typecheck + build (doit passer avant tout commit)
+npm run db:start     # Supabase local (Docker)
+npm run db:reset     # rejoue migrations + seed.sql
+npm run db:test      # tests pgTAP RLS
+npm run db:types     # régénère src/lib/database.types.ts après une migration
 npm run cap:android
 ```
