@@ -53,12 +53,25 @@ supabase/functions/   Edge Functions (CrohnBot)
    marqués `// TODO(validation-médicale)`.
 8. Actions définitives (suppressions) : toujours une confirmation explicite.
 
-## Workflow Git
+## Workflow Git (repo distant : `origin` sur GitHub)
 - Une branche par fonctionnalité/écran depuis `develop` : `feature/<sujet>` (ex. `feature/ecran-medicaments`).
-- Commits petits, en **Conventional Commits en français** : `feat(medicaments): …`, `fix: …`, `style: …`.
-- Avant chaque commit : `npm run build` doit passer sans erreur TypeScript.
-- Fin d'une fonctionnalité : merge dans `develop` (`git merge --no-ff`), puis passer à la suivante.
-- Ne jamais pousser sur `main`, ne jamais `push --force`.
+- Commits petits, en **Conventional Commits en français** : `feat(medicaments): …`, `fix: …`, `style: …`, `ci: …`.
+- Avant chaque commit : `npm run lint && npm run typecheck && npm test && npm run build`.
+- Fin d'une fonctionnalité : `git push -u origin feature/<sujet>` → Pull Request vers `develop` (`gh pr create`)
+  → attendre la CI verte (`gh pr checks --watch`) → `gh pr merge --merge --delete-branch`.
+- `main` ne reçoit que des PR `develop → main` en fin de lot, suivies d'un tag `v0.x.0`.
+- Jamais de push direct sur `main`, jamais de `push --force`, jamais de secret dans un commit.
+
+## Pipeline CI/CD (`.github/workflows/`)
+- `ci.yml` : sur chaque PR → lint, typecheck, check i18n, tests, build, tests RLS (Supabase local).
+- `android.yml` : sur `develop`/`main` → APK debug en artefact téléchargeable.
+- `deploy-supabase.yml` : sur `main` → migrations + Edge Functions vers le projet Supabase.
+- Secrets GitHub attendus : `SUPABASE_ACCESS_TOKEN`, `SUPABASE_PROJECT_REF`, `SUPABASE_DB_PASSWORD`,
+  `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`.
+
+## Architecture
+La référence est `docs/ARCHITECTURE.md` (+ décisions dans `docs/adr/`). Toute décision structurante
+nouvelle donne lieu à un ADR court.
 
 ## Commandes
 ```bash
