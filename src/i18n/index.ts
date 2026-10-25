@@ -14,10 +14,21 @@ export const LANGUAGES = [
 export type LangCode = (typeof LANGUAGES)[number]['code'];
 
 const STORAGE_KEY = 'croncare.lang';
-const saved = (() => { try { return localStorage.getItem(STORAGE_KEY); } catch { return null; } })();
+const saved = (() => {
+  try {
+    return localStorage.getItem(STORAGE_KEY);
+  } catch {
+    return null;
+  }
+})();
 
 i18n.use(initReactI18next).init({
-  resources: { fr: { translation: fr }, en: { translation: en }, ar: { translation: ar }, tn: { translation: tn } },
+  resources: {
+    fr: { translation: fr },
+    en: { translation: en },
+    ar: { translation: ar },
+    tn: { translation: tn },
+  },
   lng: saved ?? 'fr',
   fallbackLng: 'fr',
   interpolation: { escapeValue: false },
@@ -28,7 +39,11 @@ export function applyLanguage(code: LangCode) {
   const rtl = LANGUAGES.find((l) => l.code === code)?.rtl ?? false;
   document.documentElement.lang = code === 'tn' ? 'ar-TN' : code;
   document.documentElement.dir = rtl ? 'rtl' : 'ltr';
-  try { localStorage.setItem(STORAGE_KEY, code); } catch { /* stockage indisponible */ }
+  try {
+    localStorage.setItem(STORAGE_KEY, code);
+  } catch {
+    /* stockage indisponible */
+  }
   return i18n.changeLanguage(code);
 }
 

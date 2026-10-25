@@ -1,18 +1,7 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 import type { Session } from '@supabase/supabase-js';
-import { supabase } from '@/lib/supabase';
-import type { Role } from './permissions';
-
-export interface Profile {
-  id: string;
-  first_name: string;
-  last_name: string;
-  role: Role;
-  language: 'fr' | 'en' | 'ar' | 'tn';
-  notif_meds: boolean;
-  notif_community: boolean;
-  notif_tips: boolean;
-}
+import * as api from './api';
+import type { Profile } from './types';
 
 interface AuthState {
   session: Session | null;
@@ -31,21 +20,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const loadProfile = async (uid: string | undefined) => {
     if (!uid) return setProfile(null);
-    const { data } = await supabase.from('profiles').select('*').eq('id', uid).single();
-    setProfile(data as Profile | null);
+    try {
+      setProfile(await api.fetchProfile(uid));
+    } catch {
+      setProfile(null);
+    }
   };
 
   useEffect(() => {
-    supabase.auth.getSession().then(async ({ data }) => {
-      setSession(data.session);
-      await loadProfile(data.session?.user.id);
+    api.getSession().then(async (s) => {
+      setSession(s);
+      await loadProfile(s?.user.id);
       setLoading(false);
     });
-    const { data: sub } = supabase.auth.onAuthStateChange((_e, s) => {
+    return api.onSessionChange((s) => {
       setSession(s);
       loadProfile(s?.user.id);
     });
-    return () => sub.subscription.unsubscribe();
   }, []);
 
   return (
@@ -55,7 +46,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         profile,
         loading,
         refreshProfile: () => loadProfile(session?.user.id),
-        signOut: async () => { await supabase.auth.signOut(); },
+        signOut: api.signOut,
       }}
     >
       {children}
@@ -63,6 +54,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useAuth = () => {
   const ctx = useContext(AuthContext);
   if (!ctx) throw new Error('useAuth doit être utilisé dans <AuthProvider>');

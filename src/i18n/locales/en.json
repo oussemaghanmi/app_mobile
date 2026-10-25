@@ -54,5 +54,11 @@
     "prescriptions": "Prescriptions",
     "nursingNotes": "Nursing notes",
     "symptoms": "Symptom journal"
+  },
+  "common": {
+    "loading": "Loading…",
+    "error": "Something went wrong.",
+    "retry": "Try again",
+    "empty": "Nothing to show yet."
   }
 }
