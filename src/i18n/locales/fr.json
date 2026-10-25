@@ -1,0 +1,58 @@
+{
+  "app": "CronCare",
+  "login": {
+    "title": "Connexion",
+    "email": "E-mail",
+    "password": "Mot de passe",
+    "submit": "Se connecter",
+    "error": "Identifiants invalides"
+  },
+  "home": {
+    "hello": "Bonjour {{name}}",
+    "mood": "Comment vous sentez-vous aujourd'hui ?",
+    "intakes": "Prises du jour",
+    "adherence": "Observance du mois",
+    "next": "Prochaine prise",
+    "none": "Aucune prise prévue",
+    "tip": "Conseil du jour",
+    "quick": "Accès rapide"
+  },
+  "sections": {
+    "disease": "Ma maladie",
+    "recipes": "Recettes",
+    "tips": "Conseils",
+    "community": "Communauté",
+    "journal": "Journal",
+    "calendar": "Calendrier",
+    "meds": "Médicaments",
+    "home": "Accueil",
+    "settings": "Paramètres"
+  },
+  "settings": {
+    "profile": "Profil patient",
+    "firstName": "Prénom",
+    "lastName": "Nom",
+    "save": "Enregistrer",
+    "saved": "Modifications enregistrées",
+    "language": "Langue",
+    "notifications": "Notifications",
+    "notifMeds": "Rappels médicamenteux",
+    "notifCommunity": "Activité de la communauté",
+    "notifTips": "Conseils du jour",
+    "privacy": "Confidentialité",
+    "deleteJournal": "Supprimer le journal",
+    "exportData": "Exporter mes données",
+    "deleteAccount": "Supprimer le compte",
+    "confirm": "Cette action est définitive. Confirmer ?",
+    "about": "À propos",
+    "aboutText": "CronCare accompagne les patients atteints de la maladie de Crohn en Tunisie. Projet de fin d'études.",
+    "logout": "Se déconnecter"
+  },
+  "pro": {
+    "patients": "Mes patients",
+    "noPatients": "Aucun patient affecté",
+    "prescriptions": "Prescriptions",
+    "nursingNotes": "Observations infirmières",
+    "symptoms": "Journal des symptômes"
+  }
+}

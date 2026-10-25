@@ -1,0 +1,58 @@
+{
+  "app": "كرون كير",
+  "login": {
+    "title": "أدخل لحسابك",
+    "email": "الإيمايل",
+    "password": "كلمة السر",
+    "submit": "أدخل",
+    "error": "المعلومات غالطة"
+  },
+  "home": {
+    "hello": "عسلامة {{name}}",
+    "mood": "كيفاش تحس روحك اليوم؟",
+    "intakes": "الدوا متاع اليوم",
+    "adherence": "الالتزام متاع الشهر",
+    "next": "الدوا الجاي",
+    "none": "ما فماش دوا مبرمج",
+    "tip": "نصيحة اليوم",
+    "quick": "وصول سريع"
+  },
+  "sections": {
+    "disease": "مرضي",
+    "recipes": "ماكلة",
+    "tips": "نصايح",
+    "community": "الجماعة",
+    "journal": "الكرّاس",
+    "calendar": "الرزنامة",
+    "meds": "الدوا",
+    "home": "الدار",
+    "settings": "الإعدادات"
+  },
+  "settings": {
+    "profile": "البروفيل",
+    "firstName": "الاسم",
+    "lastName": "اللقب",
+    "save": "سجّل",
+    "saved": "تسجّل",
+    "language": "اللغة",
+    "notifications": "النوتيفيكاسيون",
+    "notifMeds": "فكّرني بالدوا",
+    "notifCommunity": "شنوة صاير في الجماعة",
+    "notifTips": "نصيحة اليوم",
+    "privacy": "الخصوصية",
+    "deleteJournal": "فسّخ الكرّاس",
+    "exportData": "خرّج المعطيات متاعي",
+    "deleteAccount": "فسّخ الحساب",
+    "confirm": "ما تنجمش ترجع فيها. متأكد؟",
+    "about": "على التطبيقة",
+    "aboutText": "كرون كير يعاون المرضى بالكرون في تونس. مشروع تخرّج.",
+    "logout": "أخرج"
+  },
+  "pro": {
+    "patients": "المرضى متاعي",
+    "noPatients": "ما فماش مرضى",
+    "prescriptions": "الوصفات",
+    "nursingNotes": "ملاحظات الفرملي",
+    "symptoms": "الأعراض"
+  }
+}
