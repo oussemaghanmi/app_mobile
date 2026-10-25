@@ -1,0 +1,21 @@
+node_modules/
+dist/
+.vite/
+
+# Secrets — never commit real keys
+.env
+.env.local
+.env.*.local
+
+# Capacitor native builds (regenerate with `npx cap add android`)
+android/app/build/
+android/.gradle/
+android/local.properties
+ios/App/Pods/
+
+# Editors / OS
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+*.log
