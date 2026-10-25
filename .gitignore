@@ -19,3 +19,10 @@ ios/App/Pods/
 .idea/
 .DS_Store
 *.log
+
+# Build TypeScript incrémental
+*.tsbuildinfo
+
+# Supabase local
+supabase/.temp/
+supabase/.branches/
