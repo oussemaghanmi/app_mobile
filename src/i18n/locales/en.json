@@ -1,0 +1,58 @@
+{
+  "app": "CronCare",
+  "login": {
+    "title": "Sign in",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Sign in",
+    "error": "Invalid credentials"
+  },
+  "home": {
+    "hello": "Hello {{name}}",
+    "mood": "How are you feeling today?",
+    "intakes": "Today's doses",
+    "adherence": "Monthly adherence",
+    "next": "Next dose",
+    "none": "No dose scheduled",
+    "tip": "Tip of the day",
+    "quick": "Quick access"
+  },
+  "sections": {
+    "disease": "My disease",
+    "recipes": "Recipes",
+    "tips": "Tips",
+    "community": "Community",
+    "journal": "Journal",
+    "calendar": "Calendar",
+    "meds": "Medications",
+    "home": "Home",
+    "settings": "Settings"
+  },
+  "settings": {
+    "profile": "Patient profile",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "save": "Save",
+    "saved": "Changes saved",
+    "language": "Language",
+    "notifications": "Notifications",
+    "notifMeds": "Medication reminders",
+    "notifCommunity": "Community activity",
+    "notifTips": "Tip of the day",
+    "privacy": "Privacy",
+    "deleteJournal": "Delete journal",
+    "exportData": "Export my data",
+    "deleteAccount": "Delete account",
+    "confirm": "This action is permanent. Confirm?",
+    "about": "About",
+    "aboutText": "CronCare supports Crohn's disease patients in Tunisia. Final-year project.",
+    "logout": "Sign out"
+  },
+  "pro": {
+    "patients": "My patients",
+    "noPatients": "No assigned patients",
+    "prescriptions": "Prescriptions",
+    "nursingNotes": "Nursing notes",
+    "symptoms": "Symptom journal"
+  }
+}
