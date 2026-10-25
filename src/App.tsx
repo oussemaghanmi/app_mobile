@@ -1,13 +1,13 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { RequireRole } from '@/auth/RequireRole';
-import { useAuth } from '@/auth/AuthProvider';
-import { homePathFor } from '@/auth/permissions';
-import Login from '@/screens/auth/Login';
+import { RequireRole } from '@/features/auth/components/RequireRole';
+import { useAuth } from '@/features/auth/AuthProvider';
+import { homePathFor } from '@/features/auth/permissions';
+import Login from '@/features/auth/components/Login';
 import PatientLayout from '@/components/PatientLayout';
-import PatientHome from '@/screens/patient/Home';
-import Placeholder from '@/screens/shared/Placeholder';
-import Settings from '@/screens/shared/Settings';
-import ProDashboard from '@/screens/shared/ProDashboard';
+import PatientHome from '@/features/home/components/PatientHome';
+import Placeholder from '@/components/Placeholder';
+import Settings from '@/features/settings/components/Settings';
+import ProDashboard from '@/features/professional/components/ProDashboard';
 
 function RootRedirect() {
   const { session, profile, loading } = useAuth();
