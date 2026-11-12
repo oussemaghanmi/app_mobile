@@ -1,0 +1,44 @@
+name: Déploiement Supabase
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-supabase
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    env:
+      SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+      SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+      SUPABASE_PROJECT_REF: ${{ secrets.SUPABASE_PROJECT_REF }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Vérifier les secrets
+        run: |
+          missing=""
+          for s in SUPABASE_ACCESS_TOKEN SUPABASE_DB_PASSWORD SUPABASE_PROJECT_REF; do
+            [ -n "${!s}" ] || missing="$missing $s"
+          done
+          if [ -n "$missing" ]; then echo "::error::Secrets GitHub manquants :$missing (voir docs/PIPELINE.md)"; exit 1; fi
+      - uses: supabase/setup-cli@v1
+        with:
+          version: 2.122.0
+      - run: supabase link --project-ref "$SUPABASE_PROJECT_REF"
+      - name: Migrations
+        run: supabase db push
+      - name: Edge Functions (crohnbot)
+        run: |
+          if [ -d supabase/functions/crohnbot ]; then
+            supabase functions deploy crohnbot --project-ref "$SUPABASE_PROJECT_REF"
+          else
+            echo "supabase/functions/crohnbot absent : rien à déployer"
+          fi
