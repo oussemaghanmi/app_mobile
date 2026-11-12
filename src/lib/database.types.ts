@@ -359,6 +359,7 @@ export type Database = {
     };
     Functions: {
       delete_my_account: { Args: Record<PropertyKey, never>; Returns: undefined };
+      generate_intakes: { Args: { p_days?: number }; Returns: number };
       is_assigned_to: { Args: { p_patient: string }; Returns: boolean };
       monthly_adherence: { Args: { p_month?: string }; Returns: number };
       my_role: { Args: Record<PropertyKey, never>; Returns: Database['public']['Enums']['app_role'] };
