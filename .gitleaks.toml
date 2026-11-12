@@ -1,0 +1,9 @@
+# Configuration gitleaks : règles par défaut + exceptions documentées.
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Valeurs factices documentées"
+paths = [
+  '''\.env\.example$''',
+]
