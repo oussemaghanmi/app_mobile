@@ -15,7 +15,11 @@
     "next": "Next dose",
     "none": "No dose scheduled",
     "tip": "Tip of the day",
-    "quick": "Quick access"
+    "quick": "Quick access",
+    "markTaken": "Taken",
+    "markTakenLabel": "Mark as taken: {{name}}",
+    "late": "Late",
+    "markError": "Could not save this dose. Please try again."
   },
   "sections": {
     "disease": "My disease",
@@ -60,5 +64,8 @@
     "error": "Something went wrong.",
     "retry": "Try again",
     "empty": "Nothing to show yet."
+  },
+  "nav": {
+    "main": "Main navigation"
   }
 }
