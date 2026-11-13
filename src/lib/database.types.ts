@@ -106,6 +106,33 @@ export type Database = {
           },
         ];
       };
+      chatbot_usage: {
+        Row: {
+          day: string;
+          messages: number;
+          user_id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          day: string;
+          messages?: number;
+          user_id: string;
+        };
+        Update: {
+          day?: string;
+          messages?: number;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'chatbot_usage_user_id_fkey';
+            columns: ['user_id'];
+            isOneToOne: false;
+            referencedRelation: 'profiles';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
       community_comments: {
         Row: {
           author_id: string;
@@ -679,6 +706,7 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
+      consume_chatbot_quota: { Args: { p_limit?: number }; Returns: number };
       delete_my_account: { Args: Record<PropertyKey, never>; Returns: undefined };
       generate_intakes: { Args: { p_days?: number }; Returns: number };
       in_my_care_team: { Args: { p_profile: string }; Returns: boolean };
