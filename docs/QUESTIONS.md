@@ -9,3 +9,5 @@ commentaire de PR.
 | 2 | 2026-10-25 | GitHub | Le changement de branche par défaut (`develop`) et la protection des branches n'ont pas pu être faits automatiquement (droits « settings » refusés). À faire dans Settings → General / Branches (commandes dans `docs/PIPELINE.md`). | Non |
 | 3 | 2026-10-25 | Hébergement | Région du projet Supabase et conformité INPDP (données de santé) à valider par l'équipe. | Non (production) |
 | 4 | 2026-10-25 | Contenu médical | Les textes éducatifs (Ma maladie, Conseils, cycle féminin, tabac) seront rédigés de façon générale et marqués `TODO(validation-médicale)` : qui les valide ? | Non |
+| 5 | 2026-11-13 | Alimentation | **Liste réelle des magasins tunisiens** (nom, ville, adresse, coordonnées) à fournir. `seed.sql` ne contient que des magasins de démonstration génériques. | Non (production) |
+| 6 | 2026-11-13 | Alimentation | Images des recettes du prototype (Unsplash) : URLs à reprendre de l'export Figma. En attendant, chaque recette affiche un emoji (`recipes.image_url` est vide). | Non |
