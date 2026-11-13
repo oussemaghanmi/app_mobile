@@ -11,3 +11,6 @@ commentaire de PR.
 | 4 | 2026-10-25 | Contenu médical | Les textes éducatifs (Ma maladie, Conseils, cycle féminin, tabac) seront rédigés de façon générale et marqués `TODO(validation-médicale)` : qui les valide ? | Non |
 | 5 | 2026-11-13 | Alimentation | **Liste réelle des magasins tunisiens** (nom, ville, adresse, coordonnées) à fournir. `seed.sql` ne contient que des magasins de démonstration génériques. | Non (production) |
 | 6 | 2026-11-13 | Alimentation | Images des recettes du prototype (Unsplash) : URLs à reprendre de l'export Figma. En attendant, chaque recette affiche un emoji (`recipes.image_url` est vide). | Non |
+| 7 | 2026-11-13 | CrohnBot | Créer une clé API Claude et l'enregistrer : `npx supabase secrets set ANTHROPIC_API_KEY=… --project-ref <ref>`. Sans elle, l'écran affiche « CrohnBot n'est pas encore disponible ». | CrohnBot en production |
+| 8 | 2026-11-13 | GitHub | Retirer « Claude » des contributeurs demande de réécrire l'historique des 6 premiers commits et de forcer le push (`push --force-with-lease`) sur toutes les branches. Cette action a été bloquée par la session : elle attend l'accord explicite du propriétaire. | Non |
+| 9 | 2026-11-13 | GitHub | Merges des PR et création des releases `v0.x.0` bloqués depuis la session (merge sans revue). Les PR #1 → #15 sont empilées : les merger dans l'ordre. | Livraison sur `main` |
