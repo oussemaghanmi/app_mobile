@@ -1,6 +1,8 @@
 import { NavLink, Outlet, useOutletContext } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useIntakeGeneration } from '@/features/medicaments/hooks';
+import { useMedicationReminders } from '@/features/rappels/hooks';
+import { useAuth } from '@/features/auth/AuthProvider';
 
 export interface PatientOutletContext {
   /** Vrai une fois les prises des prochains jours générées. */
@@ -21,11 +23,13 @@ const TABS = [
 
 /**
  * Navigation basse accessible (libellés visibles + aria-current via NavLink).
- * Génère aussi les prises à venir à l'ouverture de l'espace patient.
+ * Génère aussi les prises à venir à l'ouverture de l'espace patient et programme les rappels.
  */
 export default function PatientLayout() {
   const { t } = useTranslation();
+  const { profile } = useAuth();
   const intakesReady = useIntakeGeneration(true);
+  useMedicationReminders(profile, intakesReady);
   return (
     <div className="flex min-h-full flex-col">
       <main className="flex-1 pb-24">

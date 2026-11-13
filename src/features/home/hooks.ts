@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import type { Profile } from '@/features/auth/types';
 import * as api from './api';
 import { markIntakeTaken } from '@/features/medicaments/api';
+import { cancelReminder } from '@/features/rappels/notifications';
 import type { TodayIntake } from './types';
 
 /** Données de l'écran d'accueil patient (prises du jour, observance, humeur, conseil). */
@@ -36,6 +37,7 @@ export function usePatientHome(profile: Profile | null, intakesReady = true) {
     setIntakes((list) => list.map((i) => (i.id === intakeId ? { ...i, status: 'taken' } : i)));
     try {
       await markIntakeTaken(intakeId);
+      cancelReminder(intakeId).catch(() => undefined);
       setAdherence(await api.fetchMonthlyAdherence());
     } catch {
       setIntakes(previous);
