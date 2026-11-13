@@ -563,6 +563,7 @@ export type Database = {
           id: string;
           logged_at: string;
           notes: string | null;
+          on_period: boolean;
           pain_level: number | null;
           patient_id: string;
           stools_per_day: number | null;
@@ -572,6 +573,7 @@ export type Database = {
           id?: string;
           logged_at?: string;
           notes?: string | null;
+          on_period?: boolean;
           pain_level?: number | null;
           patient_id: string;
           stools_per_day?: number | null;
@@ -580,6 +582,7 @@ export type Database = {
           id?: string;
           logged_at?: string;
           notes?: string | null;
+          on_period?: boolean;
           pain_level?: number | null;
           patient_id?: string;
           stools_per_day?: number | null;

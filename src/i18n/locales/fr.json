@@ -351,5 +351,40 @@
         "other": "Autre"
       }
     }
+  },
+  "journal": {
+    "tabsLabel": "Espaces du journal",
+    "tabs": {
+      "symptoms": "Symptômes",
+      "private": "Journal privé"
+    },
+    "history": "Historique",
+    "saved": "Entrée enregistrée.",
+    "confirmDelete": "Supprimer définitivement cette entrée ?",
+    "deleteEntry": "Supprimer l'entrée",
+    "symptoms": {
+      "visibility": "Ces informations sont visibles par votre équipe soignante (médecin et infirmier qui vous suivent).",
+      "newEntry": "Comment ça va aujourd'hui ?",
+      "pain": "Douleur",
+      "painValue": "Douleur {{value}} sur 10",
+      "painNone": "0 : aucune",
+      "painMax": "10 : maximale",
+      "stools": "Nombre de selles aujourd'hui",
+      "less": "Diminuer",
+      "more": "Augmenter",
+      "period": "Jour de règles",
+      "notes": "Notes",
+      "notesPlaceholder": "Fatigue, aliments, sommeil, événements…",
+      "empty": "Aucune entrée pour le moment.",
+      "painShort": "Douleur {{value}}/10",
+      "stoolsShort": "{{value}} selle(s)",
+      "periodShort": "Règles"
+    },
+    "private": {
+      "visibility": "Espace personnel : vous seul(e) pouvez lire ces notes. Elles ne sont jamais partagées avec l'équipe soignante.",
+      "newEntry": "Nouvelle note",
+      "placeholder": "Écrivez librement…",
+      "empty": "Votre journal privé est vide."
+    }
   }
 }
