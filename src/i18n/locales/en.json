@@ -276,5 +276,40 @@
       }
     },
     "minutes": "{{count}} min"
+  },
+  "tips": {
+    "subtitle": "Everyday guidance",
+    "priority": "Priority",
+    "category": {
+      "hydratation": "Hydration",
+      "tabac": "Tobacco",
+      "sommeil": "Sleep",
+      "stress": "Stress",
+      "activite": "Physical activity",
+      "voyage": "Travel",
+      "alimentation": "Food",
+      "suivi": "Medical follow-up"
+    },
+    "tobacco": {
+      "title": "Quit cigarettes and shisha",
+      "intro": "It is the step with the biggest effect on how Crohn's disease evolves. Here are four steps to get started.",
+      "date": {
+        "title": "Set a date",
+        "text": "pick a calm day, for example early in the week, and prepare a few days before."
+      },
+      "triggers": {
+        "title": "Spot risky moments",
+        "text": "morning coffee, the work break, shisha with friends or the evening after iftar during Ramadan. Plan an alternative: walk, drink water, chew gum."
+      },
+      "entourage": {
+        "title": "Tell the people around you",
+        "text": "ask family and friends not to offer you cigarettes or shisha, and not to smoke near you."
+      },
+      "help": {
+        "title": "Get support",
+        "text": "your doctor or a smoking-cessation specialist can offer support and suitable nicotine replacement. Don't give up after a slip: start again."
+      },
+      "more": "Why it matters (My disease)"
+    }
   }
 }
