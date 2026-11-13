@@ -57,6 +57,109 @@ export type Database = {
           },
         ];
       };
+      community_comments: {
+        Row: {
+          author_id: string;
+          content: string;
+          created_at: string;
+          hidden: boolean;
+          id: string;
+          post_id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          author_id?: string;
+          content: string;
+          created_at?: string;
+          hidden?: boolean;
+          id?: string;
+          post_id: string;
+        };
+        Update: {
+          author_id?: string;
+          content?: string;
+          created_at?: string;
+          hidden?: boolean;
+          id?: string;
+          post_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'community_comments_author_id_fkey';
+            columns: ['author_id'];
+            isOneToOne: false;
+            referencedRelation: 'community_profiles';
+            referencedColumns: ['user_id'];
+          },
+          {
+            foreignKeyName: 'community_comments_post_id_fkey';
+            columns: ['post_id'];
+            isOneToOne: false;
+            referencedRelation: 'community_posts';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      community_posts: {
+        Row: {
+          author_id: string;
+          content: string;
+          created_at: string;
+          hidden: boolean;
+          id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          author_id?: string;
+          content: string;
+          created_at?: string;
+          hidden?: boolean;
+          id?: string;
+        };
+        Update: {
+          author_id?: string;
+          content?: string;
+          created_at?: string;
+          hidden?: boolean;
+          id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'community_posts_author_id_fkey';
+            columns: ['author_id'];
+            isOneToOne: false;
+            referencedRelation: 'community_profiles';
+            referencedColumns: ['user_id'];
+          },
+        ];
+      };
+      community_profiles: {
+        Row: {
+          created_at: string;
+          pseudonym: string;
+          user_id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          created_at?: string;
+          pseudonym: string;
+          user_id?: string;
+        };
+        Update: {
+          created_at?: string;
+          pseudonym?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'community_profiles_user_id_fkey';
+            columns: ['user_id'];
+            isOneToOne: true;
+            referencedRelation: 'profiles';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
       medication_intakes: {
         Row: {
           id: string;
@@ -367,6 +470,59 @@ export type Database = {
           title_tn?: string;
         };
         Relationships: [];
+      };
+      reports: {
+        Row: {
+          comment_id: string | null;
+          created_at: string;
+          details: string | null;
+          id: string;
+          post_id: string | null;
+          reason: string;
+          reporter_id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          comment_id?: string | null;
+          created_at?: string;
+          details?: string | null;
+          id?: string;
+          post_id?: string | null;
+          reason: string;
+          reporter_id?: string;
+        };
+        Update: {
+          comment_id?: string | null;
+          created_at?: string;
+          details?: string | null;
+          id?: string;
+          post_id?: string | null;
+          reason?: string;
+          reporter_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'reports_comment_id_fkey';
+            columns: ['comment_id'];
+            isOneToOne: false;
+            referencedRelation: 'community_comments';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'reports_post_id_fkey';
+            columns: ['post_id'];
+            isOneToOne: false;
+            referencedRelation: 'community_posts';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'reports_reporter_id_fkey';
+            columns: ['reporter_id'];
+            isOneToOne: false;
+            referencedRelation: 'profiles';
+            referencedColumns: ['id'];
+          },
+        ];
       };
       stores: {
         Row: {

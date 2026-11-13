@@ -65,7 +65,9 @@
     "retry": "Try again",
     "empty": "Nothing to show yet.",
     "back": "Back",
-    "medicalNotice": "General information: it does not replace your doctor's advice."
+    "medicalNotice": "General information: it does not replace your doctor's advice.",
+    "close": "Close",
+    "cancel": "Cancel"
   },
   "nav": {
     "main": "Main navigation"
@@ -310,6 +312,44 @@
         "text": "your doctor or a smoking-cessation specialist can offer support and suitable nicotine replacement. Don't give up after a slip: start again."
       },
       "more": "Why it matters (My disease)"
+    }
+  },
+  "community": {
+    "subtitle": "Talk with other patients",
+    "rules": "You appear under your nickname, never your name. Be kind, don't share personal data and don't give treatment advice: only your doctor can do that.",
+    "pseudonym": {
+      "title": "Choose your nickname",
+      "explain": "Your real name is never shown in the community. Choose a nickname that can't identify you.",
+      "label": "Nickname",
+      "hint": "3 to 30 characters: letters, digits, space, _ . -",
+      "submit": "Confirm",
+      "taken": "This nickname is already taken.",
+      "invalid": "This nickname contains characters that are not allowed."
+    },
+    "postAs": "Post as {{pseudonym}}",
+    "postPlaceholder": "Share your experience, ask a question…",
+    "publish": "Post",
+    "empty": "No posts yet. Start the conversation!",
+    "comments": "Comments ({{count}})",
+    "commentPlaceholder": "Write a comment",
+    "send": "Send",
+    "delete": "Delete",
+    "confirmDelete": "Delete this message permanently?",
+    "hidden": "Hidden after reports",
+    "report": {
+      "action": "Report",
+      "why": "Why are you reporting this message?",
+      "details": "Details (optional)",
+      "submit": "Send report",
+      "thanks": "Thank you, your report has been sent.",
+      "already": "You have already reported this message.",
+      "reasons": {
+        "medical_misinformation": "Dangerous or false medical information",
+        "harassment": "Hurtful words or harassment",
+        "spam": "Advertising or spam",
+        "personal_data": "Personal data exposed",
+        "other": "Other"
+      }
     }
   }
 }
