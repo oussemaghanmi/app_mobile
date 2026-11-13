@@ -276,5 +276,40 @@
       }
     },
     "minutes": "{{count}} min"
+  },
+  "tips": {
+    "subtitle": "Des repères pour le quotidien",
+    "priority": "Priorité",
+    "category": {
+      "hydratation": "Hydratation",
+      "tabac": "Tabac",
+      "sommeil": "Sommeil",
+      "stress": "Stress",
+      "activite": "Activité physique",
+      "voyage": "Voyage",
+      "alimentation": "Alimentation",
+      "suivi": "Suivi médical"
+    },
+    "tobacco": {
+      "title": "Arrêter le tabac et la chicha",
+      "intro": "C'est le geste qui a le plus d'effet sur l'évolution de la maladie de Crohn. Voici quatre étapes pour vous lancer.",
+      "date": {
+        "title": "Fixez une date",
+        "text": "choisissez un jour calme, par exemple en début de semaine, et préparez-vous quelques jours avant."
+      },
+      "triggers": {
+        "title": "Repérez les moments à risque",
+        "text": "le café du matin, la pause au travail, la chicha entre amis ou la soirée après l'iftar pendant le Ramadan. Prévoyez une alternative : marcher, boire de l'eau, mâcher un chewing-gum."
+      },
+      "entourage": {
+        "title": "Prévenez votre entourage",
+        "text": "demandez à vos proches et amis de ne pas vous proposer de cigarette ni de chicha, et de ne pas fumer près de vous."
+      },
+      "help": {
+        "title": "Faites-vous aider",
+        "text": "votre médecin ou un tabacologue peut vous proposer un accompagnement et des substituts adaptés. Ne vous découragez pas en cas d'écart : recommencez."
+      },
+      "more": "Pourquoi c'est important (Ma maladie)"
+    }
   }
 }
