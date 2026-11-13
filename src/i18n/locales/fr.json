@@ -92,7 +92,10 @@
       "regenerateNote": "Après une modification, les prises à venir sont recalculées à la prochaine ouverture de l'application par le patient."
     },
     "notes": {
-      "empty": "Aucune observation pour le moment."
+      "empty": "Aucune observation pour le moment.",
+      "new": "Nouvelle observation",
+      "placeholder": "Soins réalisés, éducation thérapeutique, état général, points à signaler…",
+      "immutable": "Une observation enregistrée ne peut plus être modifiée (traçabilité)."
     },
     "appointments": {
       "title": "Rendez-vous à venir",
