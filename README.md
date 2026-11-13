@@ -88,7 +88,7 @@ npm run lint && npm run typecheck && npm run check:i18n && npm test && npm run b
 - [x] Pipeline CI/CD (qualité, base, secrets, APK, déploiement Supabase) — voir [`docs/PIPELINE.md`](docs/PIPELINE.md)
 - [x] Génération des prises médicamenteuses + bouton « Pris »
 - [x] Écrans patient : Ma maladie, Médicaments, Alimentation, Conseils, Communauté, Journal, Calendrier (design à aligner sur l’export Figma)
-- [ ] Rappels médicamenteux (Capacitor Local Notifications)
+- [x] Rappels médicamenteux (Capacitor Local Notifications)
 - [x] Fiche patient, prescriptions (médecin) et observations (infirmier)
 - [ ] Assistant CrohnBot
 

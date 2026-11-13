@@ -444,5 +444,11 @@
     "summary": "{{taken}} pris, {{missed}} oubliés, {{upcoming}} à venir",
     "appointmentsCount": "{{count}} rendez-vous",
     "nothing": "Rien de prévu ce jour-là."
+  },
+  "reminders": {
+    "title": "💊 C'est l'heure de votre traitement",
+    "body": "{{medication}} — {{dosage}}. Ouvrez CronCare pour indiquer la prise.",
+    "webOnly": "Les rappels fonctionnent dans l'application Android installée, pas dans le navigateur.",
+    "denied": "Les notifications sont bloquées : autorisez-les dans les paramètres du téléphone pour recevoir les rappels."
   }
 }
