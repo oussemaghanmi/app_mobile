@@ -57,7 +57,37 @@
     "noPatients": "No assigned patients",
     "prescriptions": "Prescriptions",
     "nursingNotes": "Nursing notes",
-    "symptoms": "Symptom journal"
+    "symptoms": "Symptom journal",
+    "record": {
+      "subtitle": "Patient record",
+      "privacy": "The patient's private journal is never accessible to the care team.",
+      "notFound": "Patient not found or not assigned.",
+      "adherence30": "30-day adherence",
+      "missed30": "Missed doses (30 d)",
+      "mood": "Mood over the last 30 days",
+      "moodAverage": "Average {{value}}/5",
+      "noData": "No entries",
+      "showValues": "Show values",
+      "date": "Date",
+      "moodValue": "Mood"
+    },
+    "rx": {
+      "inactive": "stopped",
+      "by": "Prescribed by {{name}}"
+    },
+    "notes": {
+      "empty": "No observations yet."
+    },
+    "appointments": {
+      "title": "Upcoming appointments",
+      "new": "New",
+      "add": "Add appointment",
+      "when": "Date and time",
+      "duration": "Duration (min)",
+      "location": "Place",
+      "empty": "No appointment planned.",
+      "confirmDelete": "Delete this appointment permanently?"
+    }
   },
   "common": {
     "loading": "Loading…",

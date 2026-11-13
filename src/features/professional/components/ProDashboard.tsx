@@ -23,19 +23,26 @@ export default function ProDashboard() {
         {(list) => (
           <ul className="flex flex-col gap-3">
             {list.map((p) => (
-              <li key={p.id} className="card">
-                <p className="font-medium">
-                  {p.first_name} {p.last_name}
-                </p>
-                <div className="mt-2 flex flex-wrap gap-2 text-sm">
-                  <span className="rounded-full bg-sage/10 px-3 py-1">{t('pro.symptoms')}</span>
-                  {can(profile?.role, 'prescriptions:write') && (
-                    <span className="rounded-full bg-terracotta/10 px-3 py-1">{t('pro.prescriptions')}</span>
-                  )}
-                  {can(profile?.role, 'nursing_notes:write') && (
-                    <span className="rounded-full bg-terracotta/10 px-3 py-1">{t('pro.nursingNotes')}</span>
-                  )}
-                </div>
+              <li key={p.id}>
+                <Link to={`patients/${p.id}`} className="card block active:bg-sage/5">
+                  <p className="font-medium">
+                    {p.first_name} {p.last_name}{' '}
+                    <span aria-hidden className="text-sage-dark rtl:rotate-180 inline-block">
+                      ›
+                    </span>
+                  </p>
+                  <div className="mt-2 flex flex-wrap gap-2 text-sm">
+                    <span className="rounded-full bg-sage/10 px-3 py-1">{t('pro.symptoms')}</span>
+                    {can(profile?.role, 'prescriptions:write') && (
+                      <span className="rounded-full bg-terracotta/10 px-3 py-1">
+                        {t('pro.prescriptions')}
+                      </span>
+                    )}
+                    {can(profile?.role, 'nursing_notes:write') && (
+                      <span className="rounded-full bg-terracotta/10 px-3 py-1">{t('pro.nursingNotes')}</span>
+                    )}
+                  </div>
+                </Link>
               </li>
             ))}
           </ul>

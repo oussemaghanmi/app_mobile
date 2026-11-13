@@ -57,7 +57,37 @@
     "noPatients": "Aucun patient affecté",
     "prescriptions": "Prescriptions",
     "nursingNotes": "Observations infirmières",
-    "symptoms": "Journal des symptômes"
+    "symptoms": "Journal des symptômes",
+    "record": {
+      "subtitle": "Fiche patient",
+      "privacy": "Le journal privé du patient n'est jamais accessible à l'équipe soignante.",
+      "notFound": "Patient introuvable ou non affecté.",
+      "adherence30": "Observance 30 jours",
+      "missed30": "Prises oubliées (30 j)",
+      "mood": "Humeur des 30 derniers jours",
+      "moodAverage": "Moyenne {{value}}/5",
+      "noData": "Aucune saisie",
+      "showValues": "Voir les valeurs",
+      "date": "Date",
+      "moodValue": "Humeur"
+    },
+    "rx": {
+      "inactive": "arrêtée",
+      "by": "Prescrit par {{name}}"
+    },
+    "notes": {
+      "empty": "Aucune observation pour le moment."
+    },
+    "appointments": {
+      "title": "Rendez-vous à venir",
+      "new": "Nouveau",
+      "add": "Ajouter le rendez-vous",
+      "when": "Date et heure",
+      "duration": "Durée (min)",
+      "location": "Lieu",
+      "empty": "Aucun rendez-vous prévu.",
+      "confirmDelete": "Supprimer définitivement ce rendez-vous ?"
+    }
   },
   "common": {
     "loading": "Chargement…",
