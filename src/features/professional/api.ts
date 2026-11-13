@@ -151,3 +151,12 @@ export async function updatePrescription(id: string, input: PrescriptionInput) {
 export async function setPrescriptionActive(id: string, active: boolean) {
   unwrap(await supabase.from('prescriptions').update({ active }).eq('id', id));
 }
+
+/** RLS : seul un infirmier affecté peut écrire, en son nom. Les observations ne sont pas modifiables. */
+export async function createNursingNote(patientId: string, nurseId: string, content: string) {
+  unwrap(
+    await supabase
+      .from('nursing_notes')
+      .insert({ patient_id: patientId, nurse_id: nurseId, content: content.trim() }),
+  );
+}
