@@ -89,7 +89,7 @@ npm run lint && npm run typecheck && npm run check:i18n && npm test && npm run b
 - [x] Génération des prises médicamenteuses + bouton « Pris »
 - [x] Écrans patient : Ma maladie, Médicaments, Alimentation, Conseils, Communauté, Journal, Calendrier (design à aligner sur l’export Figma)
 - [ ] Rappels médicamenteux (Capacitor Local Notifications)
-- [ ] Écrans prescription (médecin) et observations (infirmier)
+- [x] Fiche patient, prescriptions (médecin) et observations (infirmier)
 - [ ] Assistant CrohnBot
 
 Voir [`docs/CONTRIBUTING.md`](docs/CONTRIBUTING.md) pour le workflow Git.
