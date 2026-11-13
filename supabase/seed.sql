@@ -16,3 +16,15 @@ insert into public.tips (category, fr, en, ar, tn) values
  'Quitting smoking lowers the risk of Crohn''s flares.',
  'الإقلاع عن التدخين يقلل من خطر نوبات داء كرون.',
  'كي تحبس الدخان، يقل الخطر متاع الكريزات.');
+
+-- Magasins de DÉMONSTRATION (développement local uniquement) : noms génériques et coordonnées
+-- de centres-villes. La liste réelle des magasins tunisiens est à fournir (docs/QUESTIONS.md).
+insert into public.stores (name, city, address, kind, lat, lon) values
+('Épicerie bio (démo)', 'Tunis', 'Centre-ville', 'organic', 36.8065, 10.1815),
+('Supermarché (démo)', 'Tunis', 'Lafayette', 'supermarket', 36.8150, 10.1780),
+('Rayon sans gluten (démo)', 'Ariana', 'Centre', 'gluten_free', 36.8625, 10.1956),
+('Supermarché (démo)', 'Sfax', 'Centre-ville', 'supermarket', 34.7406, 10.7603),
+('Épicerie bio (démo)', 'Sousse', 'Centre-ville', 'organic', 35.8256, 10.6360),
+('Supermarché (démo)', 'Monastir', 'Centre-ville', 'supermarket', 35.7643, 10.8113),
+('Supermarché (démo)', 'Nabeul', 'Centre-ville', 'supermarket', 36.4561, 10.7376),
+('Épicerie bio (démo)', 'Bizerte', 'Centre-ville', 'organic', 37.2744, 9.8739);
