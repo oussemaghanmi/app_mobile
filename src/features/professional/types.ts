@@ -35,3 +35,12 @@ export interface AppointmentInput {
   location: string;
   notes: string;
 }
+
+export interface PrescriptionInput {
+  medication: string;
+  dosage: string;
+  /** Heures « HH:MM » en heure locale tunisienne. */
+  times_of_day: string[];
+  start_date: string;
+  end_date: string;
+}
