@@ -38,4 +38,7 @@
     <!-- Permissions -->
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Rappels médicamenteux à l'heure exacte (Android 12+) ; sans cette autorisation, Android
+         peut décaler légèrement la notification. POST_NOTIFICATIONS est déclarée par le plugin. -->
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
 </manifest>
