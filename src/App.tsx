@@ -12,6 +12,7 @@ import TipsScreen from '@/features/conseils/components/TipsScreen';
 import CommunityScreen from '@/features/communaute/components/CommunityScreen';
 import JournalScreen from '@/features/journal/components/JournalScreen';
 import CalendarScreen from '@/features/calendrier/components/CalendarScreen';
+import CrohnBotScreen from '@/features/crohnbot/components/CrohnBotScreen';
 import Settings from '@/features/settings/components/Settings';
 import ProDashboard from '@/features/professional/components/ProDashboard';
 import PatientRecord from '@/features/professional/components/PatientRecord';
@@ -41,6 +42,7 @@ export default function App() {
           <Route path="community" element={<CommunityScreen />} />
           <Route path="journal" element={<JournalScreen />} />
           <Route path="calendar" element={<CalendarScreen />} />
+          <Route path="assistant" element={<CrohnBotScreen />} />
           <Route path="settings" element={<Settings />} />
         </Route>
       </Route>

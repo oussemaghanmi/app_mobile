@@ -30,7 +30,8 @@
     "calendar": "Calendrier",
     "meds": "Médicaments",
     "home": "Accueil",
-    "settings": "Paramètres"
+    "settings": "Paramètres",
+    "bot": "CrohnBot"
   },
   "settings": {
     "profile": "Profil patient",
@@ -450,5 +451,32 @@
     "body": "{{medication}} — {{dosage}}. Ouvrez CronCare pour indiquer la prise.",
     "webOnly": "Les rappels fonctionnent dans l'application Android installée, pas dans le navigateur.",
     "denied": "Les notifications sont bloquées : autorisez-les dans les paramètres du téléphone pour recevoir les rappels."
+  },
+  "bot": {
+    "title": "CrohnBot",
+    "subtitle": "Assistant d'information",
+    "newChat": "Nouvelle conversation",
+    "disclaimer": "Information générale uniquement : CrohnBot ne remplace pas un avis médical et ne pose pas de diagnostic. En cas d'urgence, appelez le 190.",
+    "welcome": "Bonjour ! Je réponds à vos questions générales sur la maladie de Crohn et la vie quotidienne. Pour votre traitement, parlez-en toujours à votre médecin.",
+    "suggestions": {
+      "fatigue": "Comment mieux gérer la fatigue ?",
+      "food": "Que manger pendant une poussée ?",
+      "tobacco": "Pourquoi arrêter de fumer ?",
+      "consultation": "Comment préparer ma consultation ?"
+    },
+    "you": "Vous",
+    "thinking": "CrohnBot écrit…",
+    "placeholder": "Écrivez votre question…",
+    "send": "Envoyer",
+    "remaining": "{{count}} messages restants aujourd’hui",
+    "truncated": "La réponse a été coupée. Posez une question plus précise pour la suite.",
+    "refused": "CrohnBot ne peut pas répondre à cette question. Parlez-en à votre médecin.",
+    "errors": {
+      "daily_limit": "Vous avez atteint la limite de 30 messages pour aujourd'hui. Revenez demain.",
+      "not_configured": "CrohnBot n'est pas encore disponible.",
+      "busy": "CrohnBot est très sollicité. Réessayez dans un instant.",
+      "network": "Pas de connexion. Vérifiez votre accès à Internet.",
+      "unknown": "Une erreur est survenue. Réessayez."
+    }
   }
 }

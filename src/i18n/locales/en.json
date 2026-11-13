@@ -30,7 +30,8 @@
     "calendar": "Calendar",
     "meds": "Medications",
     "home": "Home",
-    "settings": "Settings"
+    "settings": "Settings",
+    "bot": "CrohnBot"
   },
   "settings": {
     "profile": "Patient profile",
@@ -450,5 +451,32 @@
     "body": "{{medication}} — {{dosage}}. Open CronCare to record the dose.",
     "webOnly": "Reminders work in the installed Android app, not in the browser.",
     "denied": "Notifications are blocked: allow them in your phone settings to receive reminders."
+  },
+  "bot": {
+    "title": "CrohnBot",
+    "subtitle": "Information assistant",
+    "newChat": "New conversation",
+    "disclaimer": "General information only: CrohnBot does not replace medical advice and does not diagnose. In an emergency, call 190.",
+    "welcome": "Hello! I answer your general questions about Crohn's disease and daily life. For your treatment, always talk to your doctor.",
+    "suggestions": {
+      "fatigue": "How can I manage fatigue?",
+      "food": "What can I eat during a flare?",
+      "tobacco": "Why should I quit smoking?",
+      "consultation": "How do I prepare my appointment?"
+    },
+    "you": "You",
+    "thinking": "CrohnBot is typing…",
+    "placeholder": "Type your question…",
+    "send": "Send",
+    "remaining": "{{count}} messages left today",
+    "truncated": "The answer was cut off. Ask a more specific question to continue.",
+    "refused": "CrohnBot can't answer this question. Please talk to your doctor.",
+    "errors": {
+      "daily_limit": "You have reached the limit of 30 messages for today. Come back tomorrow.",
+      "not_configured": "CrohnBot is not available yet.",
+      "busy": "CrohnBot is very busy. Try again in a moment.",
+      "network": "No connection. Check your internet access.",
+      "unknown": "Something went wrong. Please try again."
+    }
   }
 }
