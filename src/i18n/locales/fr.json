@@ -15,7 +15,11 @@
     "next": "Prochaine prise",
     "none": "Aucune prise prévue",
     "tip": "Conseil du jour",
-    "quick": "Accès rapide"
+    "quick": "Accès rapide",
+    "markTaken": "Pris",
+    "markTakenLabel": "Marquer comme pris : {{name}}",
+    "late": "En retard",
+    "markError": "Impossible d'enregistrer la prise. Réessayez."
   },
   "sections": {
     "disease": "Ma maladie",
@@ -60,5 +64,8 @@
     "error": "Une erreur est survenue.",
     "retry": "Réessayer",
     "empty": "Rien à afficher pour le moment."
+  },
+  "nav": {
+    "main": "Navigation principale"
   }
 }
