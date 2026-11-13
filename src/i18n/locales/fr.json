@@ -65,7 +65,9 @@
     "retry": "Réessayer",
     "empty": "Rien à afficher pour le moment.",
     "back": "Retour",
-    "medicalNotice": "Information générale : elle ne remplace pas l'avis de votre médecin."
+    "medicalNotice": "Information générale : elle ne remplace pas l'avis de votre médecin.",
+    "close": "Fermer",
+    "cancel": "Annuler"
   },
   "nav": {
     "main": "Navigation principale"
@@ -310,6 +312,44 @@
         "text": "votre médecin ou un tabacologue peut vous proposer un accompagnement et des substituts adaptés. Ne vous découragez pas en cas d'écart : recommencez."
       },
       "more": "Pourquoi c'est important (Ma maladie)"
+    }
+  },
+  "community": {
+    "subtitle": "Échanger entre patients",
+    "rules": "Vous apparaissez sous votre pseudonyme, jamais sous votre nom. Soyez bienveillant, ne partagez pas de données personnelles et ne donnez pas de conseils de traitement : seul votre médecin peut le faire.",
+    "pseudonym": {
+      "title": "Choisissez votre pseudonyme",
+      "explain": "Votre nom réel n'est jamais affiché dans la communauté. Choisissez un pseudonyme qui ne permet pas de vous reconnaître.",
+      "label": "Pseudonyme",
+      "hint": "3 à 30 caractères : lettres, chiffres, espace, _ . -",
+      "submit": "Valider",
+      "taken": "Ce pseudonyme est déjà pris.",
+      "invalid": "Ce pseudonyme contient des caractères non autorisés."
+    },
+    "postAs": "Publier en tant que {{pseudonym}}",
+    "postPlaceholder": "Partagez votre expérience, posez une question…",
+    "publish": "Publier",
+    "empty": "Aucune publication pour le moment. Lancez la discussion !",
+    "comments": "Commentaires ({{count}})",
+    "commentPlaceholder": "Écrire un commentaire",
+    "send": "Envoyer",
+    "delete": "Supprimer",
+    "confirmDelete": "Supprimer définitivement ce message ?",
+    "hidden": "Masqué après signalements",
+    "report": {
+      "action": "Signaler",
+      "why": "Pourquoi signalez-vous ce message ?",
+      "details": "Précisions (facultatif)",
+      "submit": "Envoyer le signalement",
+      "thanks": "Merci, votre signalement a été transmis.",
+      "already": "Vous avez déjà signalé ce message.",
+      "reasons": {
+        "medical_misinformation": "Information médicale dangereuse ou fausse",
+        "harassment": "Propos blessants ou harcèlement",
+        "spam": "Publicité ou spam",
+        "personal_data": "Données personnelles exposées",
+        "other": "Autre"
+      }
     }
   }
 }
