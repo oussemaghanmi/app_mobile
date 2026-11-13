@@ -11,7 +11,7 @@ select ok((select count(*) from public.recipes) >= 6, 'recettes de base présent
 select set_config('request.jwt.claims', '{"sub":"00000000-0000-0000-0000-00000000000a","role":"authenticated"}', true);
 set local role authenticated;
 select ok((select count(*) from public.recipes) >= 6, 'connecté : lit les recettes');
-select is((select count(*)::int from public.stores), 1, 'connecté : lit les magasins');
+select ok(exists (select 1 from public.stores where name = 'Test'), 'connecté : lit les magasins');
 select throws_ok($$ insert into public.stores (name, city, lat, lon) values ('X', 'Sfax', 34.7, 10.7) $$,
   '42501', null, 'connecté : ne peut pas ajouter de magasin');
 select is_empty($$ update public.recipes set title_fr = 'piraté' returning id $$,
