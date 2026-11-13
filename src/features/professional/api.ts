@@ -7,6 +7,7 @@ import type {
   MoodLog,
   NursingNote,
   PatientIntake,
+  PrescriptionInput,
   PrescriptionWithAuthor,
   SymptomLog,
 } from './types';
@@ -123,4 +124,30 @@ export async function createAppointment(patientId: string, input: AppointmentInp
 
 export async function deleteAppointment(id: string): Promise<void> {
   unwrap(await supabase.from('appointments').delete().eq('id', id));
+}
+
+const toRow = (input: PrescriptionInput) => ({
+  medication: input.medication.trim(),
+  dosage: input.dosage.trim(),
+  times_of_day: [...new Set(input.times_of_day.filter(Boolean))].sort(),
+  start_date: input.start_date,
+  end_date: input.end_date || null,
+});
+
+/** RLS : seul un médecin affecté peut prescrire, en son nom (`prescribed_by = auth.uid()`). */
+export async function createPrescription(patientId: string, doctorId: string, input: PrescriptionInput) {
+  unwrap(
+    await supabase
+      .from('prescriptions')
+      .insert({ ...toRow(input), patient_id: patientId, prescribed_by: doctorId }),
+  );
+}
+
+export async function updatePrescription(id: string, input: PrescriptionInput) {
+  unwrap(await supabase.from('prescriptions').update(toRow(input)).eq('id', id));
+}
+
+/** Arrêt (ou reprise) : on ne supprime jamais une prescription, pour garder l'historique. */
+export async function setPrescriptionActive(id: string, active: boolean) {
+  unwrap(await supabase.from('prescriptions').update({ active }).eq('id', id));
 }
