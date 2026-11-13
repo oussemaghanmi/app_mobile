@@ -221,5 +221,60 @@
     "times": "Horaires",
     "since": "Depuis le {{from}}",
     "fromTo": "Du {{from}} au {{to}}"
+  },
+  "nutrition": {
+    "title": "Alimentation",
+    "subtitle": "Recettes, repères et magasins",
+    "tabsLabel": "Rubriques alimentation",
+    "tabs": {
+      "recipes": "Recettes",
+      "foods": "Repères",
+      "stores": "Magasins"
+    },
+    "filterLabel": "Filtrer les recettes",
+    "filter": {
+      "all": "Toutes",
+      "flare": "Poussée",
+      "remission": "Rémission"
+    },
+    "phase": {
+      "flare": "Adaptée en poussée",
+      "remission": "En rémission",
+      "all": "Pour tous les jours"
+    },
+    "showRecipe": "Voir la recette",
+    "hideRecipe": "Masquer la recette",
+    "ingredients": "Ingrédients",
+    "steps": "Préparation",
+    "noRecipe": "Aucune recette pour le moment.",
+    "noStore": "Aucun magasin référencé pour le moment.",
+    "city": "Ville",
+    "mapTitle": "Carte des magasins à {{city}}",
+    "openMap": "Ouvrir la carte",
+    "storeKind": {
+      "supermarket": "Supermarché",
+      "organic": "Bio",
+      "gluten_free": "Sans gluten",
+      "pharmacy": "Pharmacie"
+    },
+    "foods": {
+      "flareOften": {
+        "title": "En poussée : souvent mieux tolérés",
+        "text": "Aliments cuits et peu riches en fibres : riz blanc, pâtes, pommes de terre, carottes et courgettes cuites et épluchées, viande blanche, poisson, œufs, compotes. Chacun réagit différemment : observez ce qui vous convient."
+      },
+      "flareLimit": {
+        "title": "En poussée : souvent à limiter",
+        "text": "Crudités, légumes secs (pois chiches, lentilles), fruits avec peau ou pépins, aliments très gras, frits ou très épicés (harissa), boissons gazeuses. Ces conseils sont temporaires et à adapter avec votre médecin."
+      },
+      "remission": {
+        "title": "En rémission",
+        "text": "Mangez le plus varié possible pour éviter les carences. Réintroduisez les aliments progressivement, un à la fois. Un régime trop restrictif n'est pas recommandé sans avis médical."
+      },
+      "hydration": {
+        "title": "Bien s'hydrater",
+        "text": "Buvez régulièrement de l'eau, surtout en cas de diarrhée ou de forte chaleur. Les soupes et bouillons aident aussi à compenser les pertes."
+      }
+    },
+    "minutes": "{{count}} min"
   }
 }
