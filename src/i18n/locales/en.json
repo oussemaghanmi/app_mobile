@@ -197,5 +197,29 @@
         "text": "Your doctor or a smoking-cessation specialist can support you and offer suitable help. Being supported greatly increases your chances of success."
       }
     }
+  },
+  "meds": {
+    "adherenceMonth": "This month's adherence",
+    "adherence14": "14-day adherence",
+    "tabsLabel": "Medication views",
+    "tabs": {
+      "today": "Today",
+      "treatment": "My treatment",
+      "history": "History"
+    },
+    "status": {
+      "taken": "Taken",
+      "skipped": "Skipped",
+      "missed": "Missed",
+      "late": "Late",
+      "upcoming": "Upcoming"
+    },
+    "noIntakeToday": "No dose planned today.",
+    "noPrescription": "No current treatment.",
+    "noHistory": "No history yet.",
+    "readOnly": "Your treatment is prescribed by your doctor. To change anything, talk to them.",
+    "times": "Times",
+    "since": "Since {{from}}",
+    "fromTo": "From {{from}} to {{to}}"
   }
 }
