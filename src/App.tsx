@@ -6,6 +6,7 @@ import Login from '@/features/auth/components/Login';
 import PatientLayout from '@/components/PatientLayout';
 import PatientHome from '@/features/home/components/PatientHome';
 import Placeholder from '@/components/Placeholder';
+import DiseaseScreen from '@/features/maladie/components/DiseaseScreen';
 import Settings from '@/features/settings/components/Settings';
 import ProDashboard from '@/features/professional/components/ProDashboard';
 
@@ -27,7 +28,7 @@ export default function App() {
         <Route path="/patient" element={<PatientLayout />}>
           <Route index element={<PatientHome />} />
           {/* Écrans à migrer depuis le prototype Figma (voir src/figma/README.md) */}
-          <Route path="disease" element={<Placeholder titleKey="sections.disease" />} />
+          <Route path="disease" element={<DiseaseScreen />} />
           <Route path="meds" element={<Placeholder titleKey="sections.meds" />} />
           <Route path="recipes" element={<Placeholder titleKey="sections.recipes" />} />
           <Route path="tips" element={<Placeholder titleKey="sections.tips" />} />
