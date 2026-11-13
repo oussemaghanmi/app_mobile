@@ -197,5 +197,29 @@
         "text": "Votre médecin ou un tabacologue peut vous accompagner et vous proposer des aides adaptées. Être aidé augmente beaucoup les chances de réussir."
       }
     }
+  },
+  "meds": {
+    "adherenceMonth": "Observance du mois",
+    "adherence14": "Observance 14 jours",
+    "tabsLabel": "Vues des médicaments",
+    "tabs": {
+      "today": "Aujourd'hui",
+      "treatment": "Mon traitement",
+      "history": "Historique"
+    },
+    "status": {
+      "taken": "Pris",
+      "skipped": "Sauté",
+      "missed": "Oublié",
+      "late": "En retard",
+      "upcoming": "À venir"
+    },
+    "noIntakeToday": "Aucune prise prévue aujourd'hui.",
+    "noPrescription": "Aucun traitement en cours.",
+    "noHistory": "Pas encore d'historique.",
+    "readOnly": "Votre traitement est prescrit par votre médecin. Pour toute modification, parlez-en avec lui.",
+    "times": "Horaires",
+    "since": "Depuis le {{from}}",
+    "fromTo": "Du {{from}} au {{to}}"
   }
 }
