@@ -11,6 +11,7 @@ import * as api from '../api';
 import { usePatientRecord } from '../hooks';
 import { AppointmentForm } from './AppointmentForm';
 import { MoodChart } from './MoodChart';
+import { PrescriptionsSection } from './PrescriptionsSection';
 
 /**
  * Fiche patient (médecin / infirmier affecté) : identité, humeur 30 jours, symptômes, observance,
@@ -100,39 +101,7 @@ export default function PatientRecord() {
         </AsyncView>
       </section>
 
-      <section className="card" aria-labelledby="rx-title">
-        <h2 id="rx-title" className="text-lg">
-          {t('pro.prescriptions')}
-        </h2>
-        <AsyncView
-          state={record.prescriptions}
-          isEmpty={(l) => l.length === 0}
-          empty={t('meds.noPrescription')}
-        >
-          {(list) => (
-            <ul className="mt-2 flex flex-col gap-2">
-              {list.map((rx) => (
-                <li
-                  key={rx.id}
-                  className={`rounded-xl border p-3 ${rx.active ? 'border-sage/40' : 'border-black/5 opacity-60'}`}
-                >
-                  <p className="font-medium">
-                    {rx.medication} — {rx.dosage}
-                    {!rx.active && <span className="ms-2 text-xs">({t('pro.rx.inactive')})</span>}
-                  </p>
-                  <p className="text-sm text-ink/70">
-                    {rx.times_of_day.map((h) => h.slice(0, 5)).join(' · ')} ·{' '}
-                    {rx.end_date
-                      ? t('meds.fromTo', { from: fmtDate(rx.start_date), to: fmtDate(rx.end_date) })
-                      : t('meds.since', { from: fmtDate(rx.start_date) })}
-                  </p>
-                  <p className="text-xs text-ink/60">{t('pro.rx.by', { name: name(rx.author) })}</p>
-                </li>
-              ))}
-            </ul>
-          )}
-        </AsyncView>
-      </section>
+      <PrescriptionsSection patientId={id} state={record.prescriptions} fmtDate={(iso) => fmtDate(iso)} />
 
       <section className="card" aria-labelledby="notes-title">
         <h2 id="notes-title" className="text-lg">

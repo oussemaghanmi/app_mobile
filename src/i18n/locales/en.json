@@ -73,7 +73,23 @@
     },
     "rx": {
       "inactive": "stopped",
-      "by": "Prescribed by {{name}}"
+      "by": "Prescribed by {{name}}",
+      "new": "New prescription",
+      "edit": "Edit",
+      "stop": "Stop",
+      "resume": "Resume",
+      "confirmStop": "Stop the {{name}} prescription? Future doses will be removed.",
+      "medication": "Medicine",
+      "dosage": "Dosage",
+      "dosagePlaceholder": "e.g. 1 tablet of 50 mg",
+      "times": "Dose times (Tunisia time)",
+      "timeN": "Time {{n}}",
+      "removeTime": "Remove time {{n}}",
+      "addTime": "Add a time",
+      "start": "Start",
+      "end": "End (optional)",
+      "datesError": "The end date must be after the start date.",
+      "regenerateNote": "After a change, upcoming doses are recalculated the next time the patient opens the app."
     },
     "notes": {
       "empty": "No observations yet."

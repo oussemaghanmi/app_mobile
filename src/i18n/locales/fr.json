@@ -73,7 +73,23 @@
     },
     "rx": {
       "inactive": "arrêtée",
-      "by": "Prescrit par {{name}}"
+      "by": "Prescrit par {{name}}",
+      "new": "Nouvelle prescription",
+      "edit": "Modifier",
+      "stop": "Arrêter",
+      "resume": "Reprendre",
+      "confirmStop": "Arrêter la prescription de {{name}} ? Les prises futures seront supprimées.",
+      "medication": "Médicament",
+      "dosage": "Dosage",
+      "dosagePlaceholder": "ex. 1 comprimé de 50 mg",
+      "times": "Horaires de prise (heure de Tunisie)",
+      "timeN": "Horaire {{n}}",
+      "removeTime": "Retirer l'horaire {{n}}",
+      "addTime": "Ajouter un horaire",
+      "start": "Début",
+      "end": "Fin (facultatif)",
+      "datesError": "La date de fin doit être postérieure à la date de début.",
+      "regenerateNote": "Après une modification, les prises à venir sont recalculées à la prochaine ouverture de l'application par le patient."
     },
     "notes": {
       "empty": "Aucune observation pour le moment."
