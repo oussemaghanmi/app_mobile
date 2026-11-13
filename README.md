@@ -87,7 +87,7 @@ npm run lint && npm run typecheck && npm run check:i18n && npm test && npm run b
 - [x] Architecture documentée, ADR, outillage qualité (ESLint, Prettier, Vitest), tests RLS pgTAP
 - [x] Pipeline CI/CD (qualité, base, secrets, APK, déploiement Supabase) — voir [`docs/PIPELINE.md`](docs/PIPELINE.md)
 - [x] Génération des prises médicamenteuses + bouton « Pris »
-- [ ] Migration des écrans Figma : Ma maladie, Médicaments, Alimentation, Conseils, Communauté, Journal, Calendrier
+- [x] Écrans patient : Ma maladie, Médicaments, Alimentation, Conseils, Communauté, Journal, Calendrier (design à aligner sur l’export Figma)
 - [ ] Rappels médicamenteux (Capacitor Local Notifications)
 - [ ] Écrans prescription (médecin) et observations (infirmier)
 - [ ] Assistant CrohnBot
