@@ -221,5 +221,60 @@
     "times": "Times",
     "since": "Since {{from}}",
     "fromTo": "From {{from}} to {{to}}"
+  },
+  "nutrition": {
+    "title": "Nutrition",
+    "subtitle": "Recipes, guidance and shops",
+    "tabsLabel": "Nutrition sections",
+    "tabs": {
+      "recipes": "Recipes",
+      "foods": "Guidance",
+      "stores": "Shops"
+    },
+    "filterLabel": "Filter recipes",
+    "filter": {
+      "all": "All",
+      "flare": "Flare",
+      "remission": "Remission"
+    },
+    "phase": {
+      "flare": "Suitable during a flare",
+      "remission": "In remission",
+      "all": "For every day"
+    },
+    "showRecipe": "Show recipe",
+    "hideRecipe": "Hide recipe",
+    "ingredients": "Ingredients",
+    "steps": "Method",
+    "noRecipe": "No recipes yet.",
+    "noStore": "No shops listed yet.",
+    "city": "City",
+    "mapTitle": "Map of shops in {{city}}",
+    "openMap": "Open map",
+    "storeKind": {
+      "supermarket": "Supermarket",
+      "organic": "Organic",
+      "gluten_free": "Gluten-free",
+      "pharmacy": "Pharmacy"
+    },
+    "foods": {
+      "flareOften": {
+        "title": "During a flare: often better tolerated",
+        "text": "Cooked, low-fibre foods: white rice, pasta, potatoes, cooked and peeled carrots and courgettes, white meat, fish, eggs, stewed fruit. Everyone reacts differently: notice what suits you."
+      },
+      "flareLimit": {
+        "title": "During a flare: often best limited",
+        "text": "Raw vegetables, pulses (chickpeas, lentils), fruit with skin or seeds, very fatty, fried or very spicy food (harissa), fizzy drinks. This advice is temporary and should be adapted with your doctor."
+      },
+      "remission": {
+        "title": "In remission",
+        "text": "Eat as varied as possible to avoid deficiencies. Reintroduce foods gradually, one at a time. A very restrictive diet is not recommended without medical advice."
+      },
+      "hydration": {
+        "title": "Stay hydrated",
+        "text": "Drink water regularly, especially with diarrhoea or in hot weather. Soups and broths also help replace losses."
+      }
+    },
+    "minutes": "{{count}} min"
   }
 }
