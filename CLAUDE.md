@@ -21,7 +21,7 @@ application fonctionnelle en conservant **au maximum le design et la navigation 
 src/App.tsx           routes + gardes de rôle
 src/features/<nom>/   components/, api.ts (SEUL accès à supabase), hooks.ts, types.ts, tests
                       auth (AuthProvider, RequireRole, permissions.ts), home, settings, professional
-src/components/       composants partagés (PatientLayout, AsyncView, Placeholder)
+src/components/       composants partagés (PatientLayout, AsyncView, ui/)
 src/lib/              supabase.ts (client typé), database.types.ts (GÉNÉRÉ), errors.ts, useAsync.ts
 src/i18n/             index.ts (applyLanguage gère dir=rtl) + locales/{fr,en,ar,tn}.json
 src/figma/            code exporté de Figma Make = SOURCE DE VÉRITÉ du design

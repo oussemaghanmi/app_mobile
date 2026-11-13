@@ -12,7 +12,12 @@ describe('<SymptomForm />', () => {
     await userEvent.click(screen.getByRole('checkbox', { name: 'Jour de règles' }));
     await userEvent.type(screen.getByRole('textbox'), 'fatigue');
     await userEvent.click(screen.getByRole('button', { name: 'Enregistrer' }));
-    expect(onSubmit).toHaveBeenCalledWith({ pain_level: 6, stools_per_day: 2, on_period: true, notes: 'fatigue' });
+    expect(onSubmit).toHaveBeenCalledWith({
+      pain_level: 6,
+      stools_per_day: 2,
+      on_period: true,
+      notes: 'fatigue',
+    });
     expect(await screen.findByText('Entrée enregistrée.')).toBeInTheDocument();
   });
 

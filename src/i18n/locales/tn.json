@@ -386,5 +386,14 @@
       "placeholder": "اكتب اللي تحب…",
       "empty": "الكرّاس الخاص فارغ."
     }
+  },
+  "calendar": {
+    "prev": "الشهر اللي فات",
+    "next": "الشهر الجاي",
+    "legend": "شنوّة معناها",
+    "appointment": "موعد",
+    "summary": "{{taken}} خذيتهم، {{missed}} نسيتهم، {{upcoming}} جايين",
+    "appointmentsCount": "مواعيد: {{count}}",
+    "nothing": "ما فمّا شي في النهار هذا."
   }
 }

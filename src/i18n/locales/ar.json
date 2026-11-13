@@ -386,5 +386,14 @@
       "placeholder": "اكتب بحرّية…",
       "empty": "يومياتك الخاصة فارغة."
     }
+  },
+  "calendar": {
+    "prev": "الشهر السابق",
+    "next": "الشهر التالي",
+    "legend": "مفتاح الرموز",
+    "appointment": "موعد",
+    "summary": "{{taken}} متناولة، {{missed}} منسية، {{upcoming}} قادمة",
+    "appointmentsCount": "مواعيد: {{count}}",
+    "nothing": "لا شيء مبرمج في هذا اليوم."
   }
 }

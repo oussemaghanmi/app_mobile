@@ -386,5 +386,14 @@
       "placeholder": "Write freely…",
       "empty": "Your private journal is empty."
     }
+  },
+  "calendar": {
+    "prev": "Previous month",
+    "next": "Next month",
+    "legend": "Legend",
+    "appointment": "Appointment",
+    "summary": "{{taken}} taken, {{missed}} missed, {{upcoming}} upcoming",
+    "appointmentsCount": "{{count}} appointment(s)",
+    "nothing": "Nothing planned that day."
   }
 }

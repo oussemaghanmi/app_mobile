@@ -332,7 +332,7 @@ sequenceDiagram
 src/
   App.tsx                 routes + gardes de rôle
   main.tsx
-  components/             composants partagés sans logique métier (PatientLayout, AsyncView, Placeholder)
+  components/             composants partagés sans logique métier (PatientLayout, AsyncView, ui/ : ScreenHeader, Tabs, Accordion…)
   features/
     <nom>/
       components/         écrans et composants de la fonctionnalité
