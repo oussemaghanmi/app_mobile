@@ -92,7 +92,10 @@
       "regenerateNote": "After a change, upcoming doses are recalculated the next time the patient opens the app."
     },
     "notes": {
-      "empty": "No observations yet."
+      "empty": "No observations yet.",
+      "new": "New observation",
+      "placeholder": "Care given, patient education, general condition, points to report…",
+      "immutable": "A saved observation can no longer be changed (traceability)."
     },
     "appointments": {
       "title": "Upcoming appointments",

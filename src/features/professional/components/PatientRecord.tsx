@@ -12,6 +12,7 @@ import { usePatientRecord } from '../hooks';
 import { AppointmentForm } from './AppointmentForm';
 import { MoodChart } from './MoodChart';
 import { PrescriptionsSection } from './PrescriptionsSection';
+import { NursingNotesSection } from './NursingNotesSection';
 
 /**
  * Fiche patient (médecin / infirmier affecté) : identité, humeur 30 jours, symptômes, observance,
@@ -103,25 +104,7 @@ export default function PatientRecord() {
 
       <PrescriptionsSection patientId={id} state={record.prescriptions} fmtDate={(iso) => fmtDate(iso)} />
 
-      <section className="card" aria-labelledby="notes-title">
-        <h2 id="notes-title" className="text-lg">
-          {t('pro.nursingNotes')}
-        </h2>
-        <AsyncView state={record.notes} isEmpty={(l) => l.length === 0} empty={t('pro.notes.empty')}>
-          {(list) => (
-            <ul className="mt-2 flex flex-col gap-2">
-              {list.map((n) => (
-                <li key={n.id} className="rounded-xl bg-cream p-3 text-sm">
-                  <p className="text-xs text-ink/60">
-                    {fmtDate(n.created_at, true)} · {name(n.author)}
-                  </p>
-                  <p className="whitespace-pre-line">{n.content}</p>
-                </li>
-              ))}
-            </ul>
-          )}
-        </AsyncView>
-      </section>
+      <NursingNotesSection patientId={id} state={record.notes} fmtDate={(iso) => fmtDate(iso, true)} />
 
       <section className="card" aria-labelledby="appt-title">
         <div className="flex items-center justify-between">
