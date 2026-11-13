@@ -386,5 +386,14 @@
       "placeholder": "Écrivez librement…",
       "empty": "Votre journal privé est vide."
     }
+  },
+  "calendar": {
+    "prev": "Mois précédent",
+    "next": "Mois suivant",
+    "legend": "Légende",
+    "appointment": "Rendez-vous",
+    "summary": "{{taken}} pris, {{missed}} oubliés, {{upcoming}} à venir",
+    "appointmentsCount": "{{count}} rendez-vous",
+    "nothing": "Rien de prévu ce jour-là."
   }
 }
