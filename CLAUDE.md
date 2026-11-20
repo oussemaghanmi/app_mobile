@@ -1,6 +1,7 @@
 # CLAUDE.md — Contexte permanent du projet CronCare
 
-> Ce fichier est lu automatiquement par Claude Code à chaque session. Il décrit le projet,
+> Ce fichier est lu automatiquement par Claude Code à chaque session. Le processus de travail commun à tous
+> les agents (tâches, branches, zones, définition de fini) est dans [`AGENTS.md`](AGENTS.md). Il décrit le projet,
 > les règles non négociables et la manière de travailler.
 
 ## Le projet
