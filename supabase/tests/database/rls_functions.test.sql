@@ -5,11 +5,11 @@ select tests.seed_fixtures();
 
 -- Conseils : lecture pour tout connecté, écriture pour personne.
 select tests.login_as(tests.u('p1'));
-select is((select count(*)::int from public.tips), 1, 'un patient lit les conseils');
+select is((select count(*)::int from public.tips where category = 'test'), 1, 'un patient lit les conseils');
 select throws_ok($$insert into public.tips (category, fr) values ('x', 'y')$$, '42501', null, 'un patient ne crée pas de conseil');
 select tests.logout();
 select tests.login_as(tests.u('d1'));
-select is((select count(*)::int from public.tips), 1, 'un médecin lit les conseils');
+select is((select count(*)::int from public.tips where category = 'test'), 1, 'un médecin lit les conseils');
 select throws_ok($$insert into public.tips (category, fr) values ('x', 'y')$$, '42501', null, 'un médecin ne crée pas de conseil');
 select tests.logout();
 

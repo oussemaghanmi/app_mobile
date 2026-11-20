@@ -1,0 +1,36 @@
+name: Supabase
+
+on:
+  pull_request:
+    branches: [develop, main]
+  push:
+    branches: [develop, main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  database:
+    name: migrations, lint, tests RLS
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+      - name: Démarrer Supabase local (applique les migrations)
+        run: supabase start
+      - name: Rejouer toutes les migrations + le seed depuis zéro
+        run: supabase db reset
+      - name: Lint du schéma
+        run: supabase db lint --level warning --fail-on error
+      - name: Tests pgTAP (règles RLS)
+        run: supabase test db
+      - name: Arrêter
+        if: always()
+        run: supabase stop --no-backup

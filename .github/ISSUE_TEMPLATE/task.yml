@@ -1,0 +1,23 @@
+name: Tâche
+description: Une fonctionnalité ou un écran à construire
+labels: [task]
+body:
+  - type: textarea
+    id: goal
+    attributes:
+      label: Objectif
+      description: Ce que la personne utilisatrice pourra faire, et pourquoi.
+    validations:
+      required: true
+  - type: textarea
+    id: done
+    attributes:
+      label: Critères de fin
+      description: Liste vérifiable (tests, 4 langues, RTL, accessibilité, RLS si nouvelle table).
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: Contenu médical à valider, maquettes, dépendances.

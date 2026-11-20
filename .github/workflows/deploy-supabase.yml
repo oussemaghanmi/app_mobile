@@ -1,0 +1,54 @@
+name: Deploy Supabase
+
+# Déploie migrations et Edge Functions vers le projet Supabase.
+# Reste INACTIF (job vert, aucune action) tant que les secrets ne sont pas définis.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-supabase
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+      SUPABASE_PROJECT_REF: ${{ secrets.SUPABASE_PROJECT_REF }}
+      SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+    steps:
+      - name: Vérifier la présence des secrets
+        id: gate
+        run: |
+          if [ -n "$SUPABASE_ACCESS_TOKEN" ] && [ -n "$SUPABASE_PROJECT_REF" ] && [ -n "$SUPABASE_DB_PASSWORD" ]; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::Secrets SUPABASE_* absents : déploiement ignoré."
+          fi
+      - uses: actions/checkout@v4
+        if: steps.gate.outputs.enabled == 'true'
+      - uses: supabase/setup-cli@v1
+        if: steps.gate.outputs.enabled == 'true'
+        with:
+          version: latest
+      - name: Lier le projet
+        if: steps.gate.outputs.enabled == 'true'
+        run: supabase link --project-ref "$SUPABASE_PROJECT_REF" --password "$SUPABASE_DB_PASSWORD"
+      - name: Appliquer les migrations
+        if: steps.gate.outputs.enabled == 'true'
+        run: supabase db push --password "$SUPABASE_DB_PASSWORD"
+      - name: Déployer les Edge Functions (s'il y en a)
+        if: steps.gate.outputs.enabled == 'true'
+        run: |
+          if ls supabase/functions/*/index.ts >/dev/null 2>&1; then
+            supabase functions deploy --project-ref "$SUPABASE_PROJECT_REF"
+          else
+            echo "Aucune Edge Function à déployer."
+          fi
