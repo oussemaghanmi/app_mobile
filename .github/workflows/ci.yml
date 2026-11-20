@@ -1,13 +1,24 @@
 name: CI
 
 on:
-  push:
-    branches: [main, develop]
   pull_request:
+  push:
+    branches: [develop, main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
 
 jobs:
-  build:
+  quality:
+    name: quality
     runs-on: ubuntu-latest
+    env:
+      VITE_SUPABASE_URL: https://example.supabase.co
+      VITE_SUPABASE_ANON_KEY: ci-placeholder
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -15,7 +26,34 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run check:i18n
+      - run: npm test
       - run: npm run build
+
+  database:
+    name: database
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: supabase/setup-cli@v1
+        with:
+          version: 2.122.0
+      - name: Démarrer Supabase local
+        run: supabase start -x studio,imgproxy,inbucket,mailpit,vector,logflare,supavisor,realtime,storage-api,postgres-meta,edge-runtime
+      - name: Rejouer migrations + seed
+        run: supabase db reset
+      - name: Tests RLS (pgTAP)
+        run: supabase test db
+
+  secrets-scan:
+    name: secrets-scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2
         env:
-          VITE_SUPABASE_URL: https://example.supabase.co
-          VITE_SUPABASE_ANON_KEY: ci-placeholder
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
