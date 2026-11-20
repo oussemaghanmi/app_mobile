@@ -1,0 +1,58 @@
+{
+  "app": "كرون كير",
+  "login": {
+    "title": "تسجيل الدخول",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "submit": "دخول",
+    "error": "بيانات غير صحيحة"
+  },
+  "home": {
+    "hello": "مرحبا {{name}}",
+    "mood": "كيف تشعر اليوم؟",
+    "intakes": "جرعات اليوم",
+    "adherence": "الالتزام الشهري",
+    "next": "الجرعة القادمة",
+    "none": "لا توجد جرعة مبرمجة",
+    "tip": "نصيحة اليوم",
+    "quick": "وصول سريع"
+  },
+  "sections": {
+    "disease": "مرضي",
+    "recipes": "وصفات",
+    "tips": "نصائح",
+    "community": "المجتمع",
+    "journal": "اليوميات",
+    "calendar": "الرزنامة",
+    "meds": "الأدوية",
+    "home": "الرئيسية",
+    "settings": "الإعدادات"
+  },
+  "settings": {
+    "profile": "ملف المريض",
+    "firstName": "الاسم",
+    "lastName": "اللقب",
+    "save": "حفظ",
+    "saved": "تم الحفظ",
+    "language": "اللغة",
+    "notifications": "الإشعارات",
+    "notifMeds": "تذكير بالأدوية",
+    "notifCommunity": "نشاط المجتمع",
+    "notifTips": "نصيحة اليوم",
+    "privacy": "الخصوصية",
+    "deleteJournal": "حذف اليوميات",
+    "exportData": "تصدير بياناتي",
+    "deleteAccount": "حذف الحساب",
+    "confirm": "هذا الإجراء نهائي. تأكيد؟",
+    "about": "حول التطبيق",
+    "aboutText": "كرون كير يرافق مرضى داء كرون في تونس. مشروع تخرج.",
+    "logout": "تسجيل الخروج"
+  },
+  "pro": {
+    "patients": "مرضاي",
+    "noPatients": "لا يوجد مرضى",
+    "prescriptions": "الوصفات الطبية",
+    "nursingNotes": "ملاحظات التمريض",
+    "symptoms": "سجل الأعراض"
+  }
+}
