@@ -7,7 +7,7 @@ Issue d'un prototype Figma Make, transformée en application fonctionnelle avec 
 
 | Couche | Technologie |
 |---|---|
-| Interface | React 18 + TypeScript + Vite + Tailwind CSS v4 (code repris de Figma Make) |
+| Interface | React 18 + TypeScript + Vite + Tailwind CSS v4 |
 | Mobile | Capacitor 7 (Android / iOS) |
 | Backend | Supabase — Auth, PostgreSQL, Row Level Security |
 | Langues | Français, Anglais, Arabe, Darija tunisienne (RTL géré automatiquement) |
@@ -26,48 +26,49 @@ même avec un client modifié, un patient ne peut lire que ses propres données.
 ## Démarrage
 
 ```bash
-git clone https://github.com/<ton-compte>/croncare.git
-cd croncare
-npm install
+git clone https://github.com/oussemaghanmi/app_mobile.git
+cd app_mobile/frontend
+npm ci
 cp .env.example .env        # puis renseigner l'URL et la clé anon Supabase
 npm run dev                 # http://localhost:5173
+npm run check               # lint, format, i18n, RTL, typecheck, tests, build
 ```
 
 ### Base de données
-1. Créer un projet sur [supabase.com](https://supabase.com).
-2. SQL Editor → exécuter `supabase/migrations/0001_init_rbac.sql`.
-3. Créer les comptes de test, puis adapter et exécuter `supabase/seed.sql` (rôles + affectations).
+- **Local avec Docker** : `supabase start` puis `supabase test db` (migrations + tests des règles d'accès).
+- **Local sans Docker** : `scripts/test-db-local.sh` (PostgreSQL 16 + pgTAP).
+- **Projet Supabase en ligne** : créer le projet sur [supabase.com](https://supabase.com), puis
+  `supabase link` et `supabase db push` (applique `0001` et `0002`). Créer les comptes de test, puis adapter
+  et exécuter `supabase/seed.sql` (rôles + affectations).
 
 ### Application Android
 ```bash
-npx cap add android         # une seule fois
-npm run cap:android         # build + sync + ouvre Android Studio
+cd frontend
+npm run cap:android         # build + sync + ouvre Android Studio (projet natif dans frontend/android)
 ```
 
 ## Structure
 
 ```
-src/
-  auth/        AuthProvider, garde de routes RequireRole, matrice des permissions
-  i18n/        configuration + traductions fr / en / ar / tn
-  screens/     écrans patient, soignant, paramètres
-  components/  navigation, composants partagés
-  figma/       code exporté de Figma Make (à migrer écran par écran)
-supabase/
-  migrations/  schéma + policies RLS
-  seed.sql     données de démo
+frontend/      application React + Capacitor (src/, android/)
+supabase/      migrations/, tests/database/ (pgTAP), functions/, seed.sql
+scripts/       contrôles i18n et RTL, tests SQL sans Docker
+docs/          ARCHITECTURE.md, adr/, roadmap.md, known-debt.md, CONTRIBUTING.md
+.github/       workflows CI/CD, modèles d'issue et de PR
 ```
+
+Détail : [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
 ## Avancement
 
 - [x] Squelette, thème, navigation, i18n + RTL
-- [x] Authentification + RBAC (front + RLS)
-- [x] Écran d'accueil patient (§1)
-- [x] Paramètres : profil, langue, notifications, confidentialité, à propos (§2)
-- [x] Tableau de bord médecin / infirmier (liste des patients affectés)
-- [ ] Migration des écrans Figma : Ma maladie, Médicaments, Alimentation, Conseils, Communauté, Journal, Calendrier
+- [x] Authentification + RBAC (front + RLS durci, prouvé par des tests pgTAP)
+- [x] Écran d'accueil patient, paramètres, tableau de bord soignant
+- [x] Socle du dépôt : outillage de qualité, pipeline CI/CD, documentation
+- [ ] Socle front (design system, inscription, TanStack Query)
+- [ ] Écrans patient : Ma maladie, Médicaments, Alimentation, Conseils, Communauté, Journal, Calendrier
 - [ ] Rappels médicamenteux (Capacitor Local Notifications)
 - [ ] Écrans prescription (médecin) et observations (infirmier)
 - [ ] Assistant CrohnBot
 
-Voir [`docs/CONTRIBUTING.md`](docs/CONTRIBUTING.md) pour le workflow Git.
+Voir [`docs/roadmap.md`](docs/roadmap.md) et [`docs/CONTRIBUTING.md`](docs/CONTRIBUTING.md).

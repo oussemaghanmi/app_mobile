@@ -8,6 +8,8 @@ CronCare (aussi écrit CrohnCare) est une application mobile d'accompagnement de
 de la **maladie de Crohn** en Tunisie, issue d'un projet de fin d'études en soins infirmiers.
 Un prototype a été réalisé dans **Figma Make** (React/TypeScript) ; l'objectif est d'en faire une
 application fonctionnelle en conservant **au maximum le design et la navigation existants**.
+L'export du prototype n'est pas dans le dépôt : tant qu'il n'est pas fourni, les écrans suivent le thème et
+les descriptions du README (s'il est fourni, le placer dans `frontend/src/figma/` : il redevient la source de vérité du design).
 
 ## Stack (déjà en place — ne pas changer sans demander)
 - React 18 + TypeScript + Vite 5 + Tailwind CSS v4 (`@tailwindcss/vite`)
@@ -18,13 +20,16 @@ application fonctionnelle en conservant **au maximum le design et la navigation 
 
 ## Arborescence
 ```
-src/auth/        AuthProvider, RequireRole (garde de routes), permissions.ts (matrice RBAC front)
-src/i18n/        index.ts (applyLanguage gère dir=rtl) + locales/{fr,en,ar,tn}.json
-src/screens/     patient/, shared/ (Settings, ProDashboard, Placeholder), auth/
-src/components/  PatientLayout (navigation basse)
-src/figma/       code exporté de Figma Make = SOURCE DE VÉRITÉ du design
-supabase/migrations/  0001_init_rbac.sql (schéma + RLS) ; nouvelles migrations = 0002_…, 0003_…
-supabase/functions/   Edge Functions (CrohnBot)
+frontend/                 application React + Capacitor (npm se lance ici ; projet natif dans android/)
+frontend/src/auth/        AuthProvider, RequireRole (garde de routes), permissions.ts (matrice RBAC front)
+frontend/src/i18n/        index.ts (applyLanguage gère dir=rtl) + locales/{fr,en,ar,tn}.json
+frontend/src/screens/     patient/, shared/ (Settings, ProDashboard, Placeholder), auth/
+frontend/src/components/  PatientLayout (navigation basse)
+supabase/migrations/      0001 (figée), 0002_durcissement_rls ; nouvelles migrations = 0003_…
+supabase/tests/database/  tests pgTAP des règles RLS (obligatoires pour toute nouvelle table)
+supabase/functions/       Edge Functions (CrohnBot)
+scripts/                  check-i18n.mjs, check-rtl.mjs, test-db-local.sh
+docs/                     ARCHITECTURE.md, adr/, roadmap.md, known-debt.md, CONTRIBUTING.md
 ```
 
 ## Rôles (RBAC)
@@ -56,16 +61,18 @@ supabase/functions/   Edge Functions (CrohnBot)
 ## Workflow Git (repo distant : `origin` sur GitHub)
 - Une branche par fonctionnalité/écran depuis `develop` : `feature/<sujet>` (ex. `feature/ecran-medicaments`).
 - Commits petits, en **Conventional Commits en français** : `feat(medicaments): …`, `fix: …`, `style: …`, `ci: …`.
-- Avant chaque commit : `npm run lint && npm run typecheck && npm test && npm run build`.
+- Avant chaque commit : `cd frontend && npm run check` (lint, format, i18n, RTL, typecheck, tests, build) et, si `supabase/` change, `scripts/test-db-local.sh`.
 - Fin d'une fonctionnalité : `git push -u origin feature/<sujet>` → Pull Request vers `develop` (`gh pr create`)
   → attendre la CI verte (`gh pr checks --watch`) → `gh pr merge --merge --delete-branch`.
 - `main` ne reçoit que des PR `develop → main` en fin de lot, suivies d'un tag `v0.x.0`.
 - Jamais de push direct sur `main`, jamais de `push --force`, jamais de secret dans un commit.
 
 ## Pipeline CI/CD (`.github/workflows/`)
-- `ci.yml` : sur chaque PR → lint, typecheck, check i18n, tests, build, tests RLS (Supabase local).
+- `frontend.yml` : sur chaque PR et push `develop`/`main` → lint, format, check i18n, check RTL, typecheck, tests, build.
+- `supabase.yml` : idem → migrations + seed rejoués, lint du schéma, tests pgTAP (règles RLS).
+- `secrets.yml` : gitleaks.
 - `android.yml` : sur `develop`/`main` → APK debug en artefact téléchargeable.
-- `deploy-supabase.yml` : sur `main` → migrations + Edge Functions vers le projet Supabase.
+- `deploy-supabase.yml` : sur `main` → migrations + Edge Functions vers le projet Supabase (inactif sans secrets).
 - Secrets GitHub attendus : `SUPABASE_ACCESS_TOKEN`, `SUPABASE_PROJECT_REF`, `SUPABASE_DB_PASSWORD`,
   `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`.
 
@@ -75,7 +82,9 @@ nouvelle donne lieu à un ADR court.
 
 ## Commandes
 ```bash
+cd frontend
 npm run dev        # serveur de dev
-npm run build      # typecheck + build (doit passer avant tout commit)
+npm run check      # contrôle complet (doit passer avant tout commit)
 npm run cap:android
+../scripts/test-db-local.sh   # tests SQL sans Docker
 ```
