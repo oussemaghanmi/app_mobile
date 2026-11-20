@@ -13,12 +13,31 @@ et aux personnes qui les pilotent. Les règles de fond du projet sont dans [`CLA
 ## Cycle d'une tâche
 1. **Choisir** une issue au label `prêt` et au label de votre agent (`agent:claude` ou `agent:antigravity`).
    Une issue `bloqué` ou `humain` n'est pas pour un agent. Une issue = un agent à la fois.
-2. **Annoncer** : commenter « Je prends cette tâche » et ajouter le label `en-cours` (retirer `prêt`).
+2. **Annoncer** : vous **assigner** l'issue (la carte passe en « In progress ») et retirer le label `prêt`.
 3. **Brancher** : `feature/<numéro>-<sujet>` depuis `develop` (ex. `feature/42-dialogue-confirmation`).
 4. **Travailler petit** : commits en Conventional Commits **en français** (`feat(journal): …`, `fix: …`, `test: …`).
 5. **Vérifier** avant chaque commit (voir « Définition de fini »).
 6. **Ouvrir une PR** vers `develop` avec le modèle de PR, en écrivant `Closes #<numéro>`. Attendre la CI verte.
 7. **Ne pas fusionner** soi-même : la fusion est faite par la personne qui pilote la session ou la propriétaire du dépôt.
+8. **Terminer** : la fusion de la PR ferme l'issue (`Closes #n`) et la carte passe en « Done ».
+
+## Types d'issues
+| Type | Label | Qui la crée | Rôle |
+|---|---|---|---|
+| Plan | `plan` | la personne qui pilote | regroupe les tâches d'un lot (sous-issues) et liste les interfaces entre elles |
+| Tâche | `type:tâche` | la personne qui pilote | une unité de travail avec périmètre et critères de fin vérifiables |
+| Décision | `décision` | n'importe qui | un choix qui bloque une tâche ; nomme la tâche sous « Tâche bloquée » |
+| Bug | `bug` | n'importe qui | un défaut dans du code déjà fusionné, avec étapes de reproduction |
+
+Rien d'autre : une idée ou une corvée se note dans l'issue du plan. Un agent **ne crée pas** de plan ni de tâche et ne
+ferme pas d'issue de décision.
+
+## Tableau de suivi
+GitHub Projects, colonnes **Todo → In progress → In review → Done**, plus **Blocked** (voir [`docs/BOARD.md`](docs/BOARD.md)).
+Chaque agent et chaque personne tient **ses** cartes à jour ; l'automatisation (`.github/workflows/board.yml`) n'est
+qu'un filet : nouvelle issue → Todo, issue assignée → In progress, label `bloqué` → Blocked, PR ouverte avec
+`Closes #n` → In review, fusion ou fermeture → Done. Pour déplacer une carte à la main :
+`PROJECT_NUMBER=<n> scripts/board-status.sh <numéro> "In review"`, ou lancer le workflow `board` à la main depuis l'onglet Actions.
 
 ## Identité et attribution
 - Les commits sont au nom de **la personne qui lance la session** (`git config user.name` / `user.email`).
