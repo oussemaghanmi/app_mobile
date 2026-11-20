@@ -55,7 +55,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         profile,
         loading,
         refreshProfile: () => loadProfile(session?.user.id),
-        signOut: async () => { await supabase.auth.signOut(); },
+        signOut: async () => {
+          await supabase.auth.signOut();
+        },
       }}
     >
       {children}

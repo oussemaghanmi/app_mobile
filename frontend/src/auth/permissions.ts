@@ -14,8 +14,20 @@ export type Permission =
 
 const MATRIX: Record<Role, Permission[]> = {
   patient: ['medications:view', 'symptoms:write', 'private_journal:use', 'education:view'],
-  doctor: ['medications:view', 'prescriptions:write', 'symptoms:view_assigned', 'patients:view_assigned', 'education:view'],
-  nurse: ['medications:view', 'symptoms:view_assigned', 'nursing_notes:write', 'patients:view_assigned', 'education:view'],
+  doctor: [
+    'medications:view',
+    'prescriptions:write',
+    'symptoms:view_assigned',
+    'patients:view_assigned',
+    'education:view',
+  ],
+  nurse: [
+    'medications:view',
+    'symptoms:view_assigned',
+    'nursing_notes:write',
+    'patients:view_assigned',
+    'education:view',
+  ],
 };
 
 export const can = (role: Role | undefined, perm: Permission) =>

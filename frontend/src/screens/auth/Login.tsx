@@ -28,12 +28,28 @@ export default function Login() {
       <h1 className="text-center text-3xl text-sage-dark">{t('app')}</h1>
       <form onSubmit={onSubmit} className="card flex flex-col gap-3">
         <h2 className="text-xl">{t('login.title')}</h2>
-        <input className="input" type="email" autoComplete="email" placeholder={t('login.email')}
-          value={email} onChange={(e) => setEmail(e.target.value)} required />
-        <input className="input" type="password" autoComplete="current-password" placeholder={t('login.password')}
-          value={password} onChange={(e) => setPassword(e.target.value)} required />
+        <input
+          className="input"
+          type="email"
+          autoComplete="email"
+          placeholder={t('login.email')}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <input
+          className="input"
+          type="password"
+          autoComplete="current-password"
+          placeholder={t('login.password')}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
         {error && <p className="text-sm text-terracotta">{t('login.error')}</p>}
-        <button className="btn" disabled={busy}>{t('login.submit')}</button>
+        <button className="btn" disabled={busy}>
+          {t('login.submit')}
+        </button>
       </form>
     </main>
   );
