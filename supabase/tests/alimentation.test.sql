@@ -19,8 +19,8 @@ select is_empty($$ update public.recipes set title_fr = 'piraté' returning id $
 reset role;
 
 set local role anon;
-select is((select count(*)::int from public.recipes), 0, 'anonyme : aucune recette');
-select is((select count(*)::int from public.stores), 0, 'anonyme : aucun magasin');
+select throws_ok('select 1 from public.recipes', '42501', null, 'anonyme : lecture des recettes refusée');
+select throws_ok('select 1 from public.stores', '42501', null, 'anonyme : lecture des magasins refusée');
 reset role;
 
 select * from finish();

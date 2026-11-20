@@ -11,3 +11,4 @@ nouveau qui le remplace (statut « Remplacé par ADR-XXXX »).
 | [0004](0004-llm-derriere-une-edge-function.md) | Le LLM de CrohnBot est appelé uniquement via une Edge Function | Accepté |
 | [0005](0005-organisation-par-fonctionnalite.md) | Code front organisé par fonctionnalité avec couche `api.ts` | Accepté |
 | [0006](0006-projet-android-versionne.md) | Le projet natif `android/` est versionné | Accepté |
+| [0007](0007-aucun-droit-pour-anon.md) | Aucun droit pour le visiteur non connecté (`anon`) | Accepté |

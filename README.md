@@ -38,7 +38,8 @@ Prérequis : Docker.
 ```bash
 npm run db:start            # lance Supabase en local, affiche l'URL et la clé anon à mettre dans .env
 npm run db:reset            # rejoue toutes les migrations + supabase/seed.sql
-npm run db:test             # tests RLS (pgTAP)
+npm run db:test             # tests RLS (pgTAP), avec Docker
+./scripts/test-db-local.sh  # mêmes tests sans Docker (PostgreSQL 16 + pgTAP)
 npm run db:types            # régénère les types TypeScript après une migration
 ```
 
