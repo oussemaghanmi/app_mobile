@@ -54,5 +54,11 @@
     "prescriptions": "الوصفات",
     "nursingNotes": "ملاحظات الفرملي",
     "symptoms": "الأعراض"
+  },
+  "common": {
+    "loading": "قاعد يتشارجا…",
+    "error": "صار مشكل.",
+    "retry": "عاود جرّب",
+    "empty": "ما ثمّة شي توّا."
   }
 }

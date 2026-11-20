@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import { useAuth } from './AuthProvider';
-import { homePathFor, type Role } from './permissions';
+import { useAuth } from '../AuthProvider';
+import { homePathFor, type Role } from '../permissions';
 
 /** Garde de route : redirige vers /login si non connecté, ou vers l'accueil du bon rôle. */
 export function RequireRole({ roles }: { roles: Role[] }) {

@@ -33,9 +33,18 @@ cp .env.example .env        # puis renseigner l'URL et la clé anon Supabase
 npm run dev                 # http://localhost:5173
 ```
 
-### Base de données
+### Base de données locale (recommandé)
+Prérequis : Docker.
+```bash
+npm run db:start            # lance Supabase en local, affiche l'URL et la clé anon à mettre dans .env
+npm run db:reset            # rejoue toutes les migrations + supabase/seed.sql
+npm run db:test             # tests RLS (pgTAP)
+npm run db:types            # régénère les types TypeScript après une migration
+```
+
+### Base de données hébergée
 1. Créer un projet sur [supabase.com](https://supabase.com).
-2. SQL Editor → exécuter `supabase/migrations/0001_init_rbac.sql`.
+2. `npx supabase link --project-ref <ref>` puis `npx supabase db push` (applique `supabase/migrations/`).
 3. Créer les comptes de test, puis adapter et exécuter `supabase/seed.sql` (rôles + affectations).
 
 ### Application Android
@@ -48,14 +57,24 @@ npm run cap:android         # build + sync + ouvre Android Studio
 
 ```
 src/
-  auth/        AuthProvider, garde de routes RequireRole, matrice des permissions
-  i18n/        configuration + traductions fr / en / ar / tn
-  screens/     écrans patient, soignant, paramètres
-  components/  navigation, composants partagés
-  figma/       code exporté de Figma Make (à migrer écran par écran)
+  features/<nom>/  écrans d'une fonctionnalité : components/, api.ts, hooks.ts, types.ts
+  components/      navigation, composants partagés
+  lib/             client Supabase typé, types générés, gestion d'erreurs
+  i18n/            configuration + traductions fr / en / ar / tn
+  figma/           code exporté de Figma Make (à migrer écran par écran)
 supabase/
-  migrations/  schéma + policies RLS
-  seed.sql     données de démo
+  migrations/      schéma + policies RLS
+  tests/           tests pgTAP des policies
+  seed.sql         données de démo
+docs/
+  ARCHITECTURE.md  vue d'ensemble, modèle de données, matrice RBAC, séquences, menaces
+  adr/             décisions d'architecture
+```
+
+## Qualité
+
+```bash
+npm run lint && npm run typecheck && npm run check:i18n && npm test && npm run build
 ```
 
 ## Avancement
@@ -65,6 +84,9 @@ supabase/
 - [x] Écran d'accueil patient (§1)
 - [x] Paramètres : profil, langue, notifications, confidentialité, à propos (§2)
 - [x] Tableau de bord médecin / infirmier (liste des patients affectés)
+- [x] Architecture documentée, ADR, outillage qualité (ESLint, Prettier, Vitest), tests RLS pgTAP
+- [ ] Pipeline CI/CD (qualité, base, secrets, APK, déploiement Supabase)
+- [ ] Génération des prises médicamenteuses + bouton « Pris »
 - [ ] Migration des écrans Figma : Ma maladie, Médicaments, Alimentation, Conseils, Communauté, Journal, Calendrier
 - [ ] Rappels médicamenteux (Capacitor Local Notifications)
 - [ ] Écrans prescription (médecin) et observations (infirmier)

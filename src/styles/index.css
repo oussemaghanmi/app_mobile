@@ -11,7 +11,11 @@
   --font-serif: 'Lora', Georgia, serif;
 }
 
-html, body, #root { height: 100%; }
+html,
+body,
+#root {
+  height: 100%;
+}
 body {
   background: var(--color-cream);
   color: var(--color-ink);
@@ -19,10 +23,23 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 /* Polices adaptées à l'arabe en mode RTL */
-[dir='rtl'] body { font-family: 'DM Sans', 'Noto Sans Arabic', 'Segoe UI', sans-serif; }
+[dir='rtl'] body {
+  font-family: 'DM Sans', 'Noto Sans Arabic', 'Segoe UI', sans-serif;
+}
 
-.card { @apply rounded-2xl bg-white p-4 shadow-sm; }
-.btn { @apply rounded-xl bg-sage px-4 py-3 font-medium text-white active:bg-sage-dark disabled:opacity-50; }
-.btn-danger { @apply rounded-xl border border-terracotta px-4 py-3 font-medium text-terracotta; }
-.input { @apply w-full rounded-xl border border-black/10 bg-white px-3 py-2; }
-h1, h2 { font-family: var(--font-serif); }
+.card {
+  @apply rounded-2xl bg-white p-4 shadow-sm;
+}
+.btn {
+  @apply rounded-xl bg-sage px-4 py-3 font-medium text-white active:bg-sage-dark disabled:opacity-50;
+}
+.btn-danger {
+  @apply rounded-xl border border-terracotta px-4 py-3 font-medium text-terracotta;
+}
+.input {
+  @apply w-full rounded-xl border border-black/10 bg-white px-3 py-2;
+}
+h1,
+h2 {
+  font-family: var(--font-serif);
+}
