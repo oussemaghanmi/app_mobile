@@ -18,7 +18,7 @@ export default function PatientLayout() {
         <Outlet />
       </main>
       <nav
-        aria-label="Navigation principale"
+        aria-label={t('nav.main')}
         className="fixed inset-x-0 bottom-0 flex justify-around border-t border-black/5 bg-white pb-[env(safe-area-inset-bottom)]"
       >
         {TABS.map((tab) => (

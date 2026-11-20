@@ -54,5 +54,11 @@
     "prescriptions": "الوصفات",
     "nursingNotes": "ملاحظات الفرملي",
     "symptoms": "الأعراض"
+  },
+  "nav": {
+    "main": "القائمة الرئيسية"
+  },
+  "placeholder": {
+    "soon": "الشاشة هاذي جاية قريب"
   }
 }

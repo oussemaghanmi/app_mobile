@@ -26,7 +26,7 @@ export default function App() {
       <Route element={<RequireRole roles={['patient']} />}>
         <Route path="/patient" element={<PatientLayout />}>
           <Route index element={<PatientHome />} />
-          {/* Écrans à migrer depuis le prototype Figma (voir src/figma/README.md) */}
+          {/* Écrans à migrer depuis le prototype Figma (construits un par un, voir docs/roadmap.md) */}
           <Route path="disease" element={<Placeholder titleKey="sections.disease" />} />
           <Route path="meds" element={<Placeholder titleKey="sections.meds" />} />
           <Route path="recipes" element={<Placeholder titleKey="sections.recipes" />} />

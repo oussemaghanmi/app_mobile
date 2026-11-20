@@ -54,5 +54,11 @@
     "prescriptions": "Prescriptions",
     "nursingNotes": "Nursing notes",
     "symptoms": "Symptom journal"
+  },
+  "nav": {
+    "main": "Main navigation"
+  },
+  "placeholder": {
+    "soon": "Screen coming soon"
   }
 }
