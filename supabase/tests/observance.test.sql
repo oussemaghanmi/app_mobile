@@ -27,7 +27,7 @@ select is(public.monthly_adherence(), 0::numeric, 'un autre utilisateur obtient 
 reset role;
 
 set local role anon;
-select is(public.monthly_adherence(), 0::numeric, 'anonyme : 0');
+select throws_ok('select public.monthly_adherence()', '42501', null, 'anonyme : monthly_adherence() non exécutable');
 reset role;
 
 select * from finish();

@@ -15,7 +15,7 @@ select ok((select count(*) from public.tips) >= 8, 'connecté : lit les conseils
 reset role;
 
 set local role anon;
-select is((select count(*)::int from public.tips), 0, 'anonyme : aucun conseil');
+select throws_ok('select 1 from public.tips', '42501', null, 'anonyme : lecture des conseils refusée');
 reset role;
 
 select * from finish();

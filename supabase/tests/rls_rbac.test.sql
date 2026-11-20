@@ -122,7 +122,7 @@ select tests.logout();
 
 -- Le rôle anonyme ne voit rien
 set local role anon;
-select is((select count(*)::int from public.private_journal), 0, 'anonyme : journal privé invisible');
+select throws_ok('select 1 from public.private_journal', '42501', null, 'anonyme : journal privé inaccessible');
 reset role;
 
 -- =============================================================
