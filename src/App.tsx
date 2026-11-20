@@ -14,6 +14,7 @@ import JournalScreen from '@/features/journal/components/JournalScreen';
 import CalendarScreen from '@/features/calendrier/components/CalendarScreen';
 import Settings from '@/features/settings/components/Settings';
 import ProDashboard from '@/features/professional/components/ProDashboard';
+import PatientRecord from '@/features/professional/components/PatientRecord';
 
 function RootRedirect() {
   const { session, profile, loading } = useAuth();
@@ -47,12 +48,14 @@ export default function App() {
       {/* ----- Espace médecin ----- */}
       <Route element={<RequireRole roles={['doctor']} />}>
         <Route path="/doctor" element={<ProDashboard />} />
+        <Route path="/doctor/patients/:id" element={<PatientRecord />} />
         <Route path="/doctor/settings" element={<Settings />} />
       </Route>
 
       {/* ----- Espace infirmier ----- */}
       <Route element={<RequireRole roles={['nurse']} />}>
         <Route path="/nurse" element={<ProDashboard />} />
+        <Route path="/nurse/patients/:id" element={<PatientRecord />} />
         <Route path="/nurse/settings" element={<Settings />} />
       </Route>
 

@@ -68,8 +68,8 @@ select tests.login_as('00000000-0000-0000-0000-00000000000a');
 select results_eq($$ select notes from public.symptom_logs $$, array['symptômes A'],
   'patient A : ne voit que ses propres symptômes');
 select is((select count(*)::int from public.mood_logs), 1, 'patient A : ne voit que sa propre humeur');
-select results_eq($$ select first_name from public.profiles $$, array['patientA'],
-  'patient A : ne voit que son propre profil');
+select results_eq($$ select first_name from public.profiles where role = 'patient' $$, array['patientA'],
+  'patient A : ne voit aucun autre patient (seulement soi et son équipe soignante, cf. 0009)');
 select results_eq($$ select medication from public.prescriptions $$, array['Med A'],
   'patient A : ne voit que ses propres prescriptions');
 select results_eq($$ select content from public.private_journal $$, array['secret A'],
@@ -88,7 +88,8 @@ select tests.login_as('00000000-0000-0000-0000-0000000000d1');
 select results_eq($$ select notes from public.symptom_logs $$, array['symptômes A'],
   'médecin affecté : ne voit que les symptômes de son patient');
 select results_eq($$ select first_name from public.profiles order by first_name $$,
-  array['docteur', 'patientA'], 'médecin : voit son profil et celui de son patient uniquement');
+  array['docteur', 'infirmier', 'patientA'],
+  'médecin : voit son profil, son patient et l''équipe de ce patient uniquement');
 select is((select count(*)::int from public.mood_logs), 1, 'médecin : humeur du patient affecté seulement');
 select tests.logout();
 
