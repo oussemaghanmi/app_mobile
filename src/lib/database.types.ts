@@ -289,6 +289,119 @@ export type Database = {
         };
         Relationships: [];
       };
+      recipes: {
+        Row: {
+          created_at: string;
+          emoji: string;
+          id: string;
+          image_url: string | null;
+          ingredients_ar: string;
+          ingredients_en: string;
+          ingredients_fr: string;
+          ingredients_tn: string;
+          phase: Database['public']['Enums']['recipe_phase'];
+          prep_minutes: number | null;
+          slug: string;
+          steps_ar: string;
+          steps_en: string;
+          steps_fr: string;
+          steps_tn: string;
+          summary_ar: string;
+          summary_en: string;
+          summary_fr: string;
+          summary_tn: string;
+          title_ar: string;
+          title_en: string;
+          title_fr: string;
+          title_tn: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          created_at?: string;
+          emoji?: string;
+          id?: string;
+          image_url?: string | null;
+          ingredients_ar: string;
+          ingredients_en: string;
+          ingredients_fr: string;
+          ingredients_tn: string;
+          phase?: Database['public']['Enums']['recipe_phase'];
+          prep_minutes?: number | null;
+          slug: string;
+          steps_ar: string;
+          steps_en: string;
+          steps_fr: string;
+          steps_tn: string;
+          summary_ar: string;
+          summary_en: string;
+          summary_fr: string;
+          summary_tn: string;
+          title_ar: string;
+          title_en: string;
+          title_fr: string;
+          title_tn: string;
+        };
+        Update: {
+          created_at?: string;
+          emoji?: string;
+          id?: string;
+          image_url?: string | null;
+          ingredients_ar?: string;
+          ingredients_en?: string;
+          ingredients_fr?: string;
+          ingredients_tn?: string;
+          phase?: Database['public']['Enums']['recipe_phase'];
+          prep_minutes?: number | null;
+          slug?: string;
+          steps_ar?: string;
+          steps_en?: string;
+          steps_fr?: string;
+          steps_tn?: string;
+          summary_ar?: string;
+          summary_en?: string;
+          summary_fr?: string;
+          summary_tn?: string;
+          title_ar?: string;
+          title_en?: string;
+          title_fr?: string;
+          title_tn?: string;
+        };
+        Relationships: [];
+      };
+      stores: {
+        Row: {
+          address: string | null;
+          city: string;
+          created_at: string;
+          id: string;
+          kind: string;
+          lat: number;
+          lon: number;
+          name: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          address?: string | null;
+          city: string;
+          created_at?: string;
+          id?: string;
+          kind?: string;
+          lat: number;
+          lon: number;
+          name: string;
+        };
+        Update: {
+          address?: string | null;
+          city?: string;
+          created_at?: string;
+          id?: string;
+          kind?: string;
+          lat?: number;
+          lon?: number;
+          name?: string;
+        };
+        Relationships: [];
+      };
       symptom_logs: {
         Row: {
           id: string;
@@ -367,6 +480,7 @@ export type Database = {
     Enums: {
       app_role: 'patient' | 'doctor' | 'nurse';
       intake_status: 'pending' | 'taken' | 'skipped';
+      recipe_phase: 'flare' | 'remission' | 'all';
     };
     CompositeTypes: {
       [_ in never]: never;
@@ -482,6 +596,7 @@ export const Constants = {
     Enums: {
       app_role: ['patient', 'doctor', 'nurse'],
       intake_status: ['pending', 'taken', 'skipped'],
+      recipe_phase: ['flare', 'remission', 'all'],
     },
   },
 } as const;

@@ -14,7 +14,7 @@ export function Accordion({ title, icon, defaultOpen = false, highlight = false,
   const [open, setOpen] = useState(defaultOpen);
   const id = useId();
   return (
-    <section className={`card p-0 ${highlight ? 'border-s-4 border-terracotta' : ''}`}>
+    <section className={`rounded-2xl bg-white shadow-sm ${highlight ? 'border-s-4 border-terracotta' : ''}`}>
       <h3 className="m-0">
         <button
           type="button"

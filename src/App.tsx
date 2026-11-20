@@ -8,6 +8,7 @@ import PatientHome from '@/features/home/components/PatientHome';
 import Placeholder from '@/components/Placeholder';
 import DiseaseScreen from '@/features/maladie/components/DiseaseScreen';
 import MedicationsScreen from '@/features/medicaments/components/MedicationsScreen';
+import NutritionScreen from '@/features/alimentation/components/NutritionScreen';
 import Settings from '@/features/settings/components/Settings';
 import ProDashboard from '@/features/professional/components/ProDashboard';
 
@@ -31,7 +32,7 @@ export default function App() {
           {/* Écrans à migrer depuis le prototype Figma (voir src/figma/README.md) */}
           <Route path="disease" element={<DiseaseScreen />} />
           <Route path="meds" element={<MedicationsScreen />} />
-          <Route path="recipes" element={<Placeholder titleKey="sections.recipes" />} />
+          <Route path="recipes" element={<NutritionScreen />} />
           <Route path="tips" element={<Placeholder titleKey="sections.tips" />} />
           <Route path="community" element={<Placeholder titleKey="sections.community" />} />
           <Route path="journal" element={<Placeholder titleKey="sections.journal" />} />
