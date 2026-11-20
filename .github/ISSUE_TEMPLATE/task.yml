@@ -1,0 +1,30 @@
+name: Tâche
+description: Une fonctionnalité, un écran ou un chantier technique (voir AGENTS.md)
+labels: ['prêt']
+body:
+  - type: textarea
+    id: goal
+    attributes:
+      label: Objectif
+      description: Ce que la personne utilisatrice pourra faire, ou le problème résolu, et pourquoi.
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Périmètre
+      description: Fichiers ou dossiers concernés, et ce qui est explicitement hors périmètre.
+    validations:
+      required: true
+  - type: textarea
+    id: done
+    attributes:
+      label: Critères de fin
+      description: Liste vérifiable (tests, 4 langues, RTL, accessibilité, RLS si nouvelle table).
+    validations:
+      required: true
+  - type: input
+    id: deps
+    attributes:
+      label: Dépend de
+      description: Numéros d'issues à terminer avant, ou « rien ».

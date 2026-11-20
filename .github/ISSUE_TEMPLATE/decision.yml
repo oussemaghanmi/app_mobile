@@ -1,0 +1,21 @@
+name: Décision
+description: Un choix à trancher (donnera un ADR dans docs/adr/)
+labels: ['décision']
+body:
+  - type: textarea
+    id: context
+    attributes:
+      label: Contexte
+    validations:
+      required: true
+  - type: textarea
+    id: options
+    attributes:
+      label: Options
+      description: Deux ou trois options, avec ce que chacune coûte.
+    validations:
+      required: true
+  - type: textarea
+    id: recommendation
+    attributes:
+      label: Recommandation

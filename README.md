@@ -60,7 +60,6 @@ aucune donnée de santé, jamais le journal privé. Les signes d'alerte renvoien
 
 ### Application Android
 ```bash
-npx cap add android         # une seule fois
 npm run cap:android         # build + sync + ouvre Android Studio
 ```
 
