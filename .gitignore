@@ -8,10 +8,10 @@ dist/
 .env.*.local
 
 # Capacitor native builds (regenerate with `npx cap add android`)
-android/app/build/
-android/.gradle/
-android/local.properties
-ios/App/Pods/
+frontend/android/app/build/
+frontend/android/.gradle/
+frontend/android/local.properties
+frontend/ios/App/Pods/
 
 # Editors / OS
 .vscode/*
@@ -19,3 +19,6 @@ ios/App/Pods/
 .idea/
 .DS_Store
 *.log
+
+# TypeScript incremental builds
+*.tsbuildinfo
