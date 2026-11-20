@@ -5,13 +5,13 @@ import { homePathFor } from '@/features/auth/permissions';
 import Login from '@/features/auth/components/Login';
 import PatientLayout from '@/components/PatientLayout';
 import PatientHome from '@/features/home/components/PatientHome';
-import Placeholder from '@/components/Placeholder';
 import DiseaseScreen from '@/features/maladie/components/DiseaseScreen';
 import MedicationsScreen from '@/features/medicaments/components/MedicationsScreen';
 import NutritionScreen from '@/features/alimentation/components/NutritionScreen';
 import TipsScreen from '@/features/conseils/components/TipsScreen';
 import CommunityScreen from '@/features/communaute/components/CommunityScreen';
 import JournalScreen from '@/features/journal/components/JournalScreen';
+import CalendarScreen from '@/features/calendrier/components/CalendarScreen';
 import Settings from '@/features/settings/components/Settings';
 import ProDashboard from '@/features/professional/components/ProDashboard';
 
@@ -39,7 +39,7 @@ export default function App() {
           <Route path="tips" element={<TipsScreen />} />
           <Route path="community" element={<CommunityScreen />} />
           <Route path="journal" element={<JournalScreen />} />
-          <Route path="calendar" element={<Placeholder titleKey="sections.calendar" />} />
+          <Route path="calendar" element={<CalendarScreen />} />
           <Route path="settings" element={<Settings />} />
         </Route>
       </Route>
