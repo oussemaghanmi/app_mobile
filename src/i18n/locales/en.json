@@ -63,9 +63,139 @@
     "loading": "Loading…",
     "error": "Something went wrong.",
     "retry": "Try again",
-    "empty": "Nothing to show yet."
+    "empty": "Nothing to show yet.",
+    "back": "Back",
+    "medicalNotice": "General information: it does not replace your doctor's advice."
   },
   "nav": {
     "main": "Main navigation"
+  },
+  "emergency": {
+    "title": "Warning signs: seek urgent care",
+    "signs": {
+      "blood": "A lot of blood in your stools",
+      "fever": "High fever",
+      "pain": "Severe or unusual abdominal pain",
+      "vomiting": "Vomiting that won't stop",
+      "dehydration": "Signs of dehydration (intense thirst, dry mouth, very little urine, dizziness)"
+    },
+    "call": "Call the SAMU (190)"
+  },
+  "disease": {
+    "subtitle": "Understanding Crohn's disease",
+    "tabsLabel": "Information topics",
+    "tabs": {
+      "understand": "Understand",
+      "symptoms": "Symptoms",
+      "treatments": "Treatments",
+      "living": "Living with it"
+    },
+    "understand": {
+      "what": {
+        "title": "What is Crohn's disease?",
+        "text": "It is a chronic inflammatory bowel disease (IBD). The immune system causes inflammation of the wall of the digestive tract. It is not contagious and it is not your fault."
+      },
+      "where": {
+        "title": "Which parts of the body?",
+        "text": "It can affect the whole digestive tract, from the mouth to the anus. Most often it affects the end of the small intestine (ileum) and the colon."
+      },
+      "course": {
+        "title": "How does it evolve?",
+        "text": "It alternates between flares, when symptoms are present, and periods of remission, when they ease or disappear. With regular treatment and follow-up, many patients lead an active life."
+      },
+      "causes": {
+        "title": "Why me?",
+        "text": "The exact cause is unknown. It combines a genetic predisposition, an abnormal reaction of the immune system and environmental factors. Smoking is the best-known aggravating factor."
+      }
+    },
+    "symptoms": {
+      "digestive": {
+        "title": "Digestive symptoms",
+        "text": "Abdominal pain (often lower right), lasting diarrhoea, sometimes with blood or mucus, an urgent need to go to the toilet. Lesions around the anus (fissures, abscesses, fistulas) are possible."
+      },
+      "general": {
+        "title": "General symptoms",
+        "text": "Severe tiredness, loss of appetite, weight loss, sometimes fever. Fatigue is common, even between flares: talk about it with your care team."
+      },
+      "extra": {
+        "title": "Outside the gut",
+        "text": "The disease can also affect the joints (pain), the skin, the eyes (redness, pain) or the liver. Report these symptoms to your doctor."
+      }
+    },
+    "treatments": {
+      "goals": {
+        "title": "What are treatments for?",
+        "text": "There is no treatment yet that cures the disease for good. Treatments aim to calm the inflammation, achieve and then maintain remission, and prevent complications."
+      },
+      "families": {
+        "title": "Several families of medicines",
+        "text": "Depending on your situation, your doctor may suggest anti-inflammatories, corticosteroids for a limited time, immunosuppressants or biologics. The choice and the dose are personal: your doctor decides them."
+      },
+      "surgery": {
+        "title": "What about surgery?",
+        "text": "Surgery is sometimes needed, for example for a narrowing of the bowel or a complication. It does not cure the disease but can bring a lot of relief. It is discussed with the medical team."
+      },
+      "adherence": {
+        "title": "Taking your treatment well",
+        "text": "Keep taking your treatment even when you feel well: that is what helps prevent flares. Never stop or change a medicine without your doctor's advice. CronCare reminders are there to help."
+      }
+    },
+    "living": {
+      "followup": {
+        "title": "Regular follow-up",
+        "text": "Consultations, blood tests and examinations help adjust your treatment. Write your symptoms in the journal to discuss them with your doctor. Check your vaccinations with your doctor, especially before some treatments."
+      },
+      "food": {
+        "title": "Food",
+        "text": "There is no single diet. During a flare, adapted eating can help; in remission, eat as varied as possible. Ask your doctor or a dietitian for advice. See also the Recipes section."
+      },
+      "activity": {
+        "title": "Physical activity",
+        "text": "Gentle, regular activity (walking, swimming, cycling…) helps against fatigue and stress. Adapt the effort to how you feel and rest during flares."
+      },
+      "mind": {
+        "title": "Your wellbeing matters",
+        "text": "Living with a chronic disease can be hard. Talking to your loved ones, your care team, a psychologist or other patients in the Community can help."
+      }
+    },
+    "more": "Learn more",
+    "cycle": {
+      "title": "Menstrual cycle and Crohn's disease",
+      "menstruation": {
+        "title": "During your period",
+        "text": "Many women notice more abdominal pain or diarrhoea just before or during their period. This is common and is not necessarily a flare."
+      },
+      "contraception": {
+        "title": "Contraception",
+        "text": "Some medicines and some forms of the disease can influence the choice of contraception. Discuss it with your gastroenterologist and gynaecologist."
+      },
+      "pregnancy": {
+        "title": "Planning a pregnancy",
+        "text": "Pregnancy is usually possible. It is best planned with your doctors, ideally during remission. Do not stop your treatment on your own if you are pregnant: talk to your doctor first."
+      },
+      "journal": {
+        "title": "Tip",
+        "text": "Write your symptoms in the journal and note your period days: it will help your doctor tell the difference with a flare."
+      }
+    },
+    "tobacco": {
+      "title": "Quitting smoking: a priority",
+      "why": {
+        "title": "Why it matters",
+        "text": "In people with Crohn's disease, smoking increases the risk of flares, complications and surgery, and can make treatments less effective."
+      },
+      "benefits": {
+        "title": "It is never too late",
+        "text": "Quitting helps at any stage of the disease. The benefits on the disease build up gradually in the months after quitting."
+      },
+      "shisha": {
+        "title": "What about shisha?",
+        "text": "Shisha (hookah) also contains tobacco and produces a lot of smoke: it is not a less harmful alternative to cigarettes."
+      },
+      "help": {
+        "title": "Get support",
+        "text": "Your doctor or a smoking-cessation specialist can support you and offer suitable help. Being supported greatly increases your chances of success."
+      }
+    }
   }
 }

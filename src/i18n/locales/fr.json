@@ -63,9 +63,139 @@
     "loading": "Chargement…",
     "error": "Une erreur est survenue.",
     "retry": "Réessayer",
-    "empty": "Rien à afficher pour le moment."
+    "empty": "Rien à afficher pour le moment.",
+    "back": "Retour",
+    "medicalNotice": "Information générale : elle ne remplace pas l'avis de votre médecin."
   },
   "nav": {
     "main": "Navigation principale"
+  },
+  "emergency": {
+    "title": "Signes d'alerte : consultez en urgence",
+    "signs": {
+      "blood": "Sang abondant dans les selles",
+      "fever": "Fièvre élevée",
+      "pain": "Douleur abdominale intense ou inhabituelle",
+      "vomiting": "Vomissements qui ne s'arrêtent pas",
+      "dehydration": "Signes de déshydratation (soif intense, bouche sèche, très peu d'urine, vertiges)"
+    },
+    "call": "Appeler le SAMU (190)"
+  },
+  "disease": {
+    "subtitle": "Comprendre la maladie de Crohn",
+    "tabsLabel": "Thèmes d'information",
+    "tabs": {
+      "understand": "Comprendre",
+      "symptoms": "Symptômes",
+      "treatments": "Traitements",
+      "living": "Vivre avec"
+    },
+    "understand": {
+      "what": {
+        "title": "Qu'est-ce que la maladie de Crohn ?",
+        "text": "C'est une maladie inflammatoire chronique de l'intestin (MICI). Le système immunitaire provoque une inflammation de la paroi du tube digestif. Elle n'est ni contagieuse, ni due à une faute de votre part."
+      },
+      "where": {
+        "title": "Quelles parties du corps ?",
+        "text": "Elle peut toucher tout le tube digestif, de la bouche à l'anus. Le plus souvent, elle atteint la fin de l'intestin grêle (iléon) et le côlon."
+      },
+      "course": {
+        "title": "Comment évolue-t-elle ?",
+        "text": "Elle alterne des poussées, où les symptômes sont présents, et des périodes de rémission, où ils diminuent ou disparaissent. Avec un traitement et un suivi réguliers, beaucoup de patients mènent une vie active."
+      },
+      "causes": {
+        "title": "Pourquoi moi ?",
+        "text": "La cause exacte n'est pas connue. Elle associe une prédisposition génétique, une réaction anormale du système immunitaire et des facteurs de l'environnement. Le tabac est le facteur aggravant le mieux connu."
+      }
+    },
+    "symptoms": {
+      "digestive": {
+        "title": "Symptômes digestifs",
+        "text": "Douleurs au ventre (souvent en bas à droite), diarrhée qui dure, parfois avec du sang ou des glaires, besoin urgent d'aller aux toilettes. Des lésions autour de l'anus (fissures, abcès, fistules) sont possibles."
+      },
+      "general": {
+        "title": "Symptômes généraux",
+        "text": "Fatigue importante, perte d'appétit, perte de poids, parfois fièvre. La fatigue est fréquente, même en dehors des poussées : parlez-en à votre équipe soignante."
+      },
+      "extra": {
+        "title": "En dehors de l'intestin",
+        "text": "La maladie peut aussi toucher les articulations (douleurs), la peau, les yeux (rougeur, douleur) ou le foie. Signalez ces symptômes à votre médecin."
+      }
+    },
+    "treatments": {
+      "goals": {
+        "title": "À quoi servent les traitements ?",
+        "text": "Il n'existe pas encore de traitement qui guérit définitivement la maladie. Les traitements visent à calmer l'inflammation, à obtenir une rémission puis à la maintenir, et à éviter les complications."
+      },
+      "families": {
+        "title": "Plusieurs familles de médicaments",
+        "text": "Selon votre situation, le médecin peut proposer des anti-inflammatoires, des corticoïdes pour une durée limitée, des immunosuppresseurs ou des biothérapies. Le choix et la dose sont personnels : ils sont décidés par votre médecin."
+      },
+      "surgery": {
+        "title": "Et la chirurgie ?",
+        "text": "Une opération est parfois nécessaire, par exemple en cas de rétrécissement de l'intestin ou de complication. Elle ne guérit pas la maladie mais peut beaucoup soulager. Elle se discute avec l'équipe médicale."
+      },
+      "adherence": {
+        "title": "Bien prendre son traitement",
+        "text": "Prenez votre traitement même quand vous allez bien : c'est ce qui aide à éviter les poussées. N'arrêtez jamais et ne modifiez jamais un médicament sans l'avis de votre médecin. Les rappels de CronCare sont là pour vous aider."
+      }
+    },
+    "living": {
+      "followup": {
+        "title": "Un suivi régulier",
+        "text": "Les consultations, les analyses et les examens permettent d'adapter le traitement. Notez vos symptômes dans le journal pour en parler à votre médecin. Vos vaccins sont à vérifier avec lui, surtout avant certains traitements."
+      },
+      "food": {
+        "title": "Alimentation",
+        "text": "Il n'existe pas de régime unique. Pendant une poussée, une alimentation adaptée peut soulager ; en rémission, mangez le plus varié possible. Demandez conseil à votre médecin ou à un diététicien. Voir aussi la rubrique Recettes."
+      },
+      "activity": {
+        "title": "Activité physique",
+        "text": "Une activité douce et régulière (marche, natation, vélo…) aide contre la fatigue et le stress. Adaptez l'effort à votre état et reposez-vous pendant les poussées."
+      },
+      "mind": {
+        "title": "Le moral compte",
+        "text": "Vivre avec une maladie chronique peut être difficile. En parler à vos proches, à l'équipe soignante, à un psychologue ou à d'autres patients dans la Communauté peut vous aider."
+      }
+    },
+    "more": "Pour aller plus loin",
+    "cycle": {
+      "title": "Cycle féminin et maladie de Crohn",
+      "menstruation": {
+        "title": "Pendant les règles",
+        "text": "Beaucoup de femmes remarquent plus de douleurs au ventre ou de diarrhée juste avant ou pendant les règles. C'est fréquent et ce n'est pas forcément une poussée."
+      },
+      "contraception": {
+        "title": "Contraception",
+        "text": "Certains médicaments et certaines formes de la maladie peuvent influencer le choix de la contraception. Parlez-en avec votre gastro-entérologue et votre gynécologue."
+      },
+      "pregnancy": {
+        "title": "Projet de grossesse",
+        "text": "Une grossesse est le plus souvent possible. Il est conseillé de la préparer avec vos médecins, idéalement en période de rémission. N'arrêtez pas votre traitement de vous-même si vous êtes enceinte : parlez-en d'abord à votre médecin."
+      },
+      "journal": {
+        "title": "Astuce",
+        "text": "Notez vos symptômes dans le journal en indiquant les jours de règles : cela aidera votre médecin à faire la différence avec une poussée."
+      }
+    },
+    "tobacco": {
+      "title": "Arrêter le tabac : une priorité",
+      "why": {
+        "title": "Pourquoi c'est important",
+        "text": "Chez les personnes atteintes de la maladie de Crohn, fumer augmente le risque de poussées, de complications et d'opérations, et peut rendre les traitements moins efficaces."
+      },
+      "benefits": {
+        "title": "Il n'est jamais trop tard",
+        "text": "Arrêter de fumer est bénéfique à tout moment de la maladie. Les bénéfices sur la maladie s'installent progressivement dans les mois qui suivent l'arrêt."
+      },
+      "shisha": {
+        "title": "Et la chicha ?",
+        "text": "La chicha (narguilé) contient aussi du tabac et produit beaucoup de fumée : elle n'est pas une alternative moins nocive à la cigarette."
+      },
+      "help": {
+        "title": "Se faire aider",
+        "text": "Votre médecin ou un tabacologue peut vous accompagner et vous proposer des aides adaptées. Être aidé augmente beaucoup les chances de réussir."
+      }
+    }
   }
 }
