@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useAsync } from '@/lib/useAsync';
 import * as api from './api';
+import { cancelReminder } from '@/features/rappels/notifications';
 
 /**
  * Génère les prises des prochains jours à l'ouverture de l'espace patient.
@@ -38,6 +39,7 @@ export function useMedications(ready: boolean) {
 
   const markTaken = async (id: string) => {
     await api.markIntakeTaken(id);
+    cancelReminder(id).catch(() => undefined);
     today.reload();
     history.reload();
     adherence.reload();

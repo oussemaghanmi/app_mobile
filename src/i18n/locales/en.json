@@ -444,5 +444,11 @@
     "summary": "{{taken}} taken, {{missed}} missed, {{upcoming}} upcoming",
     "appointmentsCount": "{{count}} appointment(s)",
     "nothing": "Nothing planned that day."
+  },
+  "reminders": {
+    "title": "💊 Time for your treatment",
+    "body": "{{medication}} — {{dosage}}. Open CronCare to record the dose.",
+    "webOnly": "Reminders work in the installed Android app, not in the browser.",
+    "denied": "Notifications are blocked: allow them in your phone settings to receive reminders."
   }
 }

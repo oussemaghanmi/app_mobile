@@ -1,7 +1,13 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/features/auth/AuthProvider';
 import * as api from '../api';
+import {
+  checkPermission,
+  remindersSupported,
+  requestPermission,
+  type ReminderPermission,
+} from '@/features/rappels/notifications';
 import { applyLanguage, LANGUAGES, type LangCode } from '@/i18n';
 
 /** Paramètres — cahier des charges §2 */
@@ -11,7 +17,18 @@ export default function Settings() {
   const [firstName, setFirstName] = useState(profile?.first_name ?? '');
   const [lastName, setLastName] = useState(profile?.last_name ?? '');
   const [msg, setMsg] = useState<string | null>(null);
+  const [permission, setPermission] = useState<ReminderPermission>('prompt');
+  useEffect(() => {
+    checkPermission().then(setPermission, () => setPermission('unsupported'));
+  }, []);
   if (!profile) return null;
+  const reminderNote = !profile.notif_meds
+    ? null
+    : permission === 'unsupported'
+      ? 'reminders.webOnly'
+      : permission === 'denied'
+        ? 'reminders.denied'
+        : null;
   const isPatient = profile.role === 'patient';
 
   const update = async (fields: api.ProfileUpdate) => {
@@ -22,6 +39,14 @@ export default function Settings() {
     } catch {
       setMsg(t('common.error'));
     }
+  };
+
+  // Rappels : demande de permission à l'activation ; message si web ou permission refusée.
+  const onToggle = async (field: 'notif_meds' | 'notif_community' | 'notif_tips', value: boolean) => {
+    if (field === 'notif_meds' && value && remindersSupported()) {
+      setPermission(await requestPermission());
+    }
+    await update({ [field]: value });
   };
 
   const changeLanguage = async (code: LangCode) => {
@@ -96,16 +121,17 @@ export default function Settings() {
             ['notif_tips', 'notifTips'],
           ] as const
         ).map(([field, key]) => (
-          <label key={field} className="flex items-center justify-between">
+          <label key={field} className="flex min-h-11 items-center justify-between">
             {t(`settings.${key}`)}
             <input
               type="checkbox"
               className="h-5 w-5 accent-sage"
               checked={profile[field]}
-              onChange={(e) => update({ [field]: e.target.checked })}
+              onChange={(e) => onToggle(field, e.target.checked)}
             />
           </label>
         ))}
+        {isPatient && reminderNote && <p className="text-sm text-ink/70">{t(reminderNote)}</p>}
       </section>
 
       {isPatient && (
