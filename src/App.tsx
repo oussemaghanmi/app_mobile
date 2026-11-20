@@ -11,6 +11,7 @@ import MedicationsScreen from '@/features/medicaments/components/MedicationsScre
 import NutritionScreen from '@/features/alimentation/components/NutritionScreen';
 import TipsScreen from '@/features/conseils/components/TipsScreen';
 import CommunityScreen from '@/features/communaute/components/CommunityScreen';
+import JournalScreen from '@/features/journal/components/JournalScreen';
 import Settings from '@/features/settings/components/Settings';
 import ProDashboard from '@/features/professional/components/ProDashboard';
 
@@ -37,7 +38,7 @@ export default function App() {
           <Route path="recipes" element={<NutritionScreen />} />
           <Route path="tips" element={<TipsScreen />} />
           <Route path="community" element={<CommunityScreen />} />
-          <Route path="journal" element={<Placeholder titleKey="sections.journal" />} />
+          <Route path="journal" element={<JournalScreen />} />
           <Route path="calendar" element={<Placeholder titleKey="sections.calendar" />} />
           <Route path="settings" element={<Settings />} />
         </Route>

@@ -351,5 +351,40 @@
         "other": "Other"
       }
     }
+  },
+  "journal": {
+    "tabsLabel": "Journal spaces",
+    "tabs": {
+      "symptoms": "Symptoms",
+      "private": "Private journal"
+    },
+    "history": "History",
+    "saved": "Entry saved.",
+    "confirmDelete": "Delete this entry permanently?",
+    "deleteEntry": "Delete entry",
+    "symptoms": {
+      "visibility": "This information is visible to your care team (the doctor and nurse who follow you).",
+      "newEntry": "How are you today?",
+      "pain": "Pain",
+      "painValue": "Pain {{value}} out of 10",
+      "painNone": "0: none",
+      "painMax": "10: worst",
+      "stools": "Number of stools today",
+      "less": "Decrease",
+      "more": "Increase",
+      "period": "Period day",
+      "notes": "Notes",
+      "notesPlaceholder": "Fatigue, food, sleep, events…",
+      "empty": "No entries yet.",
+      "painShort": "Pain {{value}}/10",
+      "stoolsShort": "{{value}} stool(s)",
+      "periodShort": "Period"
+    },
+    "private": {
+      "visibility": "Personal space: only you can read these notes. They are never shared with your care team.",
+      "newEntry": "New note",
+      "placeholder": "Write freely…",
+      "empty": "Your private journal is empty."
+    }
   }
 }
