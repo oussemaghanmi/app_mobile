@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/features/auth/AuthProvider';
+import { usePatientContext } from '@/components/PatientLayout';
 import { usePatientHome } from '../hooks';
 
 const MOODS = ['😣', '🙁', '😐', '🙂', '😄'];
@@ -16,10 +18,28 @@ const QUICK = [
 export default function PatientHome() {
   const { t, i18n } = useTranslation();
   const { profile } = useAuth();
-  const { mood, saveMood, intakes, adherence, tip } = usePatientHome(profile);
+  const { intakesReady } = usePatientContext();
+  const { mood, saveMood, intakes, adherence, tip, markTaken } = usePatientHome(profile, intakesReady);
+  const [marking, setMarking] = useState(false);
+  const [markError, setMarkError] = useState(false);
 
   const taken = intakes.filter((i) => i.status === 'taken').length;
-  const next = intakes.find((i) => i.status === 'pending' && new Date(i.scheduled_at) >= new Date());
+  // Prochaine prise = la première prise du jour pas encore cochée (y compris une prise en retard).
+  const next = intakes.find((i) => i.status === 'pending');
+  const isLate = !!next && new Date(next.scheduled_at) < new Date();
+
+  const onMarkTaken = async () => {
+    if (!next) return;
+    setMarking(true);
+    setMarkError(false);
+    try {
+      await markTaken(next.id);
+    } catch {
+      setMarkError(true);
+    } finally {
+      setMarking(false);
+    }
+  };
   const locale = i18n.language === 'tn' ? 'ar-TN' : i18n.language;
   const fmtTime = (iso: string) =>
     new Date(iso).toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' });
@@ -69,11 +89,31 @@ export default function PatientHome() {
       <section className="card">
         <p className="text-sm text-ink/60">{t('home.next')}</p>
         {next ? (
-          <p className="text-lg font-medium">
-            {next.prescriptions?.medication} {next.prescriptions?.dosage} — {fmtTime(next.scheduled_at)}
-          </p>
+          <div className="flex items-center justify-between gap-3">
+            <p className="text-lg font-medium">
+              {next.prescriptions?.medication} {next.prescriptions?.dosage} — {fmtTime(next.scheduled_at)}
+              {isLate && (
+                <span className="ms-2 rounded-full bg-terracotta/10 px-2 py-0.5 text-xs text-terracotta">
+                  {t('home.late')}
+                </span>
+              )}
+            </p>
+            <button
+              className="btn min-h-11 shrink-0"
+              onClick={onMarkTaken}
+              disabled={marking}
+              aria-label={t('home.markTakenLabel', { name: next.prescriptions?.medication ?? '' })}
+            >
+              ✓ {t('home.markTaken')}
+            </button>
+          </div>
         ) : (
           <p>{t('home.none')}</p>
+        )}
+        {markError && (
+          <p role="alert" className="mt-2 text-sm text-terracotta">
+            {t('home.markError')}
+          </p>
         )}
       </section>
 

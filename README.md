@@ -86,7 +86,7 @@ npm run lint && npm run typecheck && npm run check:i18n && npm test && npm run b
 - [x] Tableau de bord médecin / infirmier (liste des patients affectés)
 - [x] Architecture documentée, ADR, outillage qualité (ESLint, Prettier, Vitest), tests RLS pgTAP
 - [x] Pipeline CI/CD (qualité, base, secrets, APK, déploiement Supabase) — voir [`docs/PIPELINE.md`](docs/PIPELINE.md)
-- [ ] Génération des prises médicamenteuses + bouton « Pris »
+- [x] Génération des prises médicamenteuses + bouton « Pris »
 - [ ] Migration des écrans Figma : Ma maladie, Médicaments, Alimentation, Conseils, Communauté, Journal, Calendrier
 - [ ] Rappels médicamenteux (Capacitor Local Notifications)
 - [ ] Écrans prescription (médecin) et observations (infirmier)
