@@ -43,7 +43,7 @@ Sans les secrets `SUPABASE_*`, le job de déploiement échoue avec un message qu
 Secrets **Supabase**, pas GitHub, pour CrohnBot :
 ```bash
 npx supabase secrets set ANTHROPIC_API_KEY=sk-ant-... --project-ref <ref>
-npx supabase secrets set CROHNBOT_MODEL=claude-haiku-4-5 --project-ref <ref>   # optionnel
+npx supabase secrets set CROHNBOT_MODEL=claude-haiku-5-5 --project-ref <ref>   # optionnel
 ```
 
 ## Protection des branches

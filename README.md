@@ -47,6 +47,16 @@ npm run db:types            # régénère les types TypeScript après une migrat
 2. `npx supabase link --project-ref <ref>` puis `npx supabase db push` (applique `supabase/migrations/`).
 3. Créer les comptes de test, puis adapter et exécuter `supabase/seed.sql` (rôles + affectations).
 
+### Assistant CrohnBot (Edge Function)
+La clé de l'API Claude reste **côté serveur**, dans les secrets Supabase : elle n'est jamais dans l'application ni dans Git.
+```bash
+npx supabase secrets set ANTHROPIC_API_KEY=sk-ant-... --project-ref <ref>
+npx supabase secrets set CROHNBOT_MODEL=claude-haiku-5-5 --project-ref <ref>   # optionnel (valeur par défaut)
+npx supabase functions deploy crohnbot --project-ref <ref>                     # fait aussi par deploy-supabase.yml
+```
+Limites : 30 messages par utilisateur et par jour (`chatbot_usage`). Seule la conversation est envoyée au modèle :
+aucune donnée de santé, jamais le journal privé. Les signes d'alerte renvoient vers le **190 (SAMU)**.
+
 ### Application Android
 ```bash
 npx cap add android         # une seule fois
@@ -90,6 +100,6 @@ npm run lint && npm run typecheck && npm run check:i18n && npm test && npm run b
 - [x] Écrans patient : Ma maladie, Médicaments, Alimentation, Conseils, Communauté, Journal, Calendrier (design à aligner sur l’export Figma)
 - [x] Rappels médicamenteux (Capacitor Local Notifications)
 - [x] Fiche patient, prescriptions (médecin) et observations (infirmier)
-- [ ] Assistant CrohnBot
+- [x] Assistant CrohnBot (Edge Function + écran de chat)
 
 Voir [`docs/CONTRIBUTING.md`](docs/CONTRIBUTING.md) pour le workflow Git.

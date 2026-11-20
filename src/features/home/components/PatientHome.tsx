@@ -13,6 +13,7 @@ const QUICK = [
   { to: 'community', key: 'sections.community' },
   { to: 'journal', key: 'sections.journal' },
   { to: 'calendar', key: 'sections.calendar' },
+  { to: 'assistant', key: 'sections.bot' },
 ];
 /** Écran d'accueil — cahier des charges §1 */
 export default function PatientHome() {
