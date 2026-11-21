@@ -6,7 +6,12 @@ import assert from 'node:assert/strict';
 type Handler = (req: Request) => Response | Promise<Response>;
 
 // ---------- Faux serveur Supabase : auth + quota ----------
-const USER = { id: 'user-id-0001', aud: 'authenticated', role: 'authenticated', email: 'patiente.secrete@example.test' };
+const USER = {
+  id: 'user-id-0001',
+  aud: 'authenticated',
+  role: 'authenticated',
+  email: 'patiente.secrete@example.test',
+};
 const GOOD_JWT = 'jwt-valide-0001';
 const LIMIT = 30;
 const supabaseState = { quotaCalls: 0, quotaFails: false };
@@ -30,12 +35,20 @@ type Reply = { status: number; body: Record<string, unknown>; headers?: Record<s
 const textMessage = (stop_reason: string, text = 'Réponse de test'): Reply => ({
   status: 200,
   body: {
-    id: 'msg_test', type: 'message', role: 'assistant', model: 'test-model',
-    content: [{ type: 'text', text }], stop_reason, stop_sequence: null,
+    id: 'msg_test',
+    type: 'message',
+    role: 'assistant',
+    model: 'test-model',
+    content: [{ type: 'text', text }],
+    stop_reason,
+    stop_sequence: null,
     usage: { input_tokens: 1, output_tokens: 1 },
   },
 });
-const anthropicState: { next: Reply; received: Record<string, unknown>[] } = { next: textMessage('end_turn'), received: [] };
+const anthropicState: { next: Reply; received: Record<string, unknown>[] } = {
+  next: textMessage('end_turn'),
+  received: [],
+};
 const fakeAnthropic = Deno.serve({ port: 0, onListen() {} }, async (req) => {
   if (new URL(req.url).pathname !== '/v1/messages') return new Response('not found', { status: 404 });
   anthropicState.received.push(await req.json());
@@ -53,7 +66,13 @@ Deno.env.delete('CROHNBOT_MODEL');
 let handler!: Handler;
 (Deno as unknown as { serve: unknown }).serve = (h: Handler) => {
   handler = h;
-  return { finished: Promise.resolve(), shutdown: () => Promise.resolve(), ref() {}, unref() {}, addr: { port: 0 } };
+  return {
+    finished: Promise.resolve(),
+    shutdown: () => Promise.resolve(),
+    ref() {},
+    unref() {},
+    addr: { port: 0 },
+  };
 };
 const { parseBody } = await import('./index.ts');
 
@@ -61,11 +80,16 @@ const { parseBody } = await import('./index.ts');
 const call = (opts: { method?: string; jwt?: string | null; body?: unknown } = {}) => {
   const headers: Record<string, string> = { 'Content-Type': 'application/json' };
   if (opts.jwt !== null) headers.Authorization = `Bearer ${opts.jwt ?? GOOD_JWT}`;
-  return handler(new Request('http://localhost/crohnbot', {
-    method: opts.method ?? 'POST',
-    headers,
-    body: opts.method === 'GET' || opts.method === 'OPTIONS' ? undefined : JSON.stringify('body' in opts ? opts.body : valid),
-  }));
+  return handler(
+    new Request('http://localhost/crohnbot', {
+      method: opts.method ?? 'POST',
+      headers,
+      body:
+        opts.method === 'GET' || opts.method === 'OPTIONS'
+          ? undefined
+          : JSON.stringify('body' in opts ? opts.body : valid),
+    }),
+  );
 };
 const valid = { lang: 'fr', messages: [{ role: 'user', content: 'Que manger pendant une poussée ?' }] };
 const reset = () => {
@@ -76,7 +100,15 @@ const reset = () => {
   Deno.env.set('ANTHROPIC_API_KEY', 'cle-de-test');
 };
 const t = (name: string, fn: () => Promise<void> | void) =>
-  Deno.test({ name, sanitizeOps: false, sanitizeResources: false, fn: async () => { reset(); await fn(); } });
+  Deno.test({
+    name,
+    sanitizeOps: false,
+    sanitizeResources: false,
+    fn: async () => {
+      reset();
+      await fn();
+    },
+  });
 
 // ---------- Authentification et méthodes ----------
 t('OPTIONS répond aux pré-requêtes CORS', async () => {
@@ -103,9 +135,15 @@ t('JWT invalide : 401', async () => {
 for (const [name, body] of Object.entries({
   'langue inconnue': { lang: 'xx', messages: valid.messages },
   'liste de messages vide': { lang: 'fr', messages: [] },
-  'dernier message de l\'assistant': { lang: 'fr', messages: [{ role: 'user', content: 'a' }, { role: 'assistant', content: 'b' }] },
+  "dernier message de l'assistant": {
+    lang: 'fr',
+    messages: [
+      { role: 'user', content: 'a' },
+      { role: 'assistant', content: 'b' },
+    ],
+  },
   'rôle inconnu': { lang: 'fr', messages: [{ role: 'system', content: 'a' }] },
-  'contenu qui n\'est pas du texte': { lang: 'fr', messages: [{ role: 'user', content: 42 }] },
+  "contenu qui n'est pas du texte": { lang: 'fr', messages: [{ role: 'user', content: 42 }] },
   'messages vides ou blancs': { lang: 'fr', messages: [{ role: 'user', content: '   ' }] },
   'corps absent': null,
 })) {
@@ -116,14 +154,21 @@ for (const [name, body] of Object.entries({
     assert.equal(anthropicState.received.length, 0);
   });
 }
-t('un corps qui n\'est pas du JSON : 400', async () => {
-  const res = await handler(new Request('http://localhost/crohnbot', {
-    method: 'POST', headers: { Authorization: `Bearer ${GOOD_JWT}` }, body: '{pas du json',
-  }));
+t("un corps qui n'est pas du JSON : 400", async () => {
+  const res = await handler(
+    new Request('http://localhost/crohnbot', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${GOOD_JWT}` },
+      body: '{pas du json',
+    }),
+  );
   assert.equal(res.status, 400);
 });
-t('parseBody : garde les 20 derniers messages, coupe à 2 000 caractères, commence par l\'utilisateur', () => {
-  const many = Array.from({ length: 30 }, (_, i) => ({ role: i % 2 === 0 ? 'user' : 'assistant', content: `m${i}` }));
+t("parseBody : garde les 20 derniers messages, coupe à 2 000 caractères, commence par l'utilisateur", () => {
+  const many = Array.from({ length: 30 }, (_, i) => ({
+    role: i % 2 === 0 ? 'user' : 'assistant',
+    content: `m${i}`,
+  }));
   many.push({ role: 'user', content: 'x'.repeat(5000) });
   const parsed = parseBody({ lang: 'ar', messages: many })!;
   assert.ok(parsed.messages.length <= 20);
@@ -138,19 +183,39 @@ t('requête valide : 200, réponse du modèle et messages restants', async () =>
   assert.deepEqual(await res.json(), { reply: 'Réponse de test', truncated: false, remaining: LIMIT - 1 });
   assert.equal(supabaseState.quotaCalls, 1);
 });
-t('CONFIDENTIALITÉ : le modèle ne reçoit que la conversation (ni identité, ni e-mail, ni JWT, ni journal)', async () => {
-  await call();
-  assert.equal(anthropicState.received.length, 1);
-  const sent = anthropicState.received[0];
-  assert.deepEqual(Object.keys(sent).sort(), ['max_tokens', 'messages', 'model', 'output_config', 'system']);
-  assert.deepEqual(sent.messages, valid.messages);
-  assert.equal(sent.model, 'claude-haiku-5-5');
-  assert.equal('temperature' in sent, false);
-  const wire = JSON.stringify(sent).toLowerCase();
-  for (const secret of [USER.email, USER.id, GOOD_JWT, 'private_journal', 'anon-key-de-test', 'cle-de-test']) {
-    assert.equal(wire.includes(secret.toLowerCase()), false, `le modèle ne doit pas recevoir « ${secret} »`);
-  }
-});
+t(
+  'CONFIDENTIALITÉ : le modèle ne reçoit que la conversation (ni identité, ni e-mail, ni JWT, ni journal)',
+  async () => {
+    await call();
+    assert.equal(anthropicState.received.length, 1);
+    const sent = anthropicState.received[0];
+    assert.deepEqual(Object.keys(sent).sort(), [
+      'max_tokens',
+      'messages',
+      'model',
+      'output_config',
+      'system',
+    ]);
+    assert.deepEqual(sent.messages, valid.messages);
+    assert.equal(sent.model, 'claude-haiku-5-5');
+    assert.equal('temperature' in sent, false);
+    const wire = JSON.stringify(sent).toLowerCase();
+    for (const secret of [
+      USER.email,
+      USER.id,
+      GOOD_JWT,
+      'private_journal',
+      'anon-key-de-test',
+      'cle-de-test',
+    ]) {
+      assert.equal(
+        wire.includes(secret.toLowerCase()),
+        false,
+        `le modèle ne doit pas recevoir « ${secret} »`,
+      );
+    }
+  },
+);
 t('le prompt système suit la langue demandée', async () => {
   await call({ body: { lang: 'tn', messages: valid.messages } });
   const tn = String(anthropicState.received[0].system);
@@ -168,7 +233,7 @@ t('quota : 30 messages passent, le 31e est refusé (429 daily_limit) sans appele
   assert.deepEqual(await res.json(), { error: 'daily_limit', remaining: 0 });
   assert.equal(anthropicState.received.length, LIMIT);
 });
-t('quota indisponible : 500 quota_unavailable, le modèle n\'est pas appelé', async () => {
+t("quota indisponible : 500 quota_unavailable, le modèle n'est pas appelé", async () => {
   supabaseState.quotaFails = true;
   const res = await call();
   assert.equal(res.status, 500);
@@ -185,12 +250,15 @@ t('réponse tronquée : truncated true', async () => {
   assert.equal((await (await call()).json()).truncated, true);
 });
 for (const [name, status, expected, error] of [
-  ['clé refusée par l\'API', 401, 503, 'not_configured'],
+  ["clé refusée par l'API", 401, 503, 'not_configured'],
   ['API surchargée (limite de débit)', 429, 503, 'busy'],
-  ['erreur de l\'API', 500, 502, 'upstream'],
+  ["erreur de l'API", 500, 502, 'upstream'],
 ] as const) {
   t(`${name} : ${expected} ${error}`, async () => {
-    anthropicState.next = { status, body: { type: 'error', error: { type: 'api_error', message: 'simulé' } } };
+    anthropicState.next = {
+      status,
+      body: { type: 'error', error: { type: 'api_error', message: 'simulé' } },
+    };
     const res = await call();
     assert.equal(res.status, expected);
     assert.equal((await res.json()).error, error);
@@ -205,4 +273,7 @@ t('clé API absente : 503 not_configured', async () => {
 });
 
 // ---------- Sortie ----------
-globalThis.addEventListener('unload', () => { fakeSupabase.shutdown(); fakeAnthropic.shutdown(); });
+globalThis.addEventListener('unload', () => {
+  fakeSupabase.shutdown();
+  fakeAnthropic.shutdown();
+});
