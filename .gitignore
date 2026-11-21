@@ -26,3 +26,7 @@ ios/App/Pods/
 # Supabase local
 supabase/.temp/
 supabase/.branches/
+
+# Playwright
+playwright-report/
+test-results/
