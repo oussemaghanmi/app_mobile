@@ -6,6 +6,8 @@ async function login(page: Page, email: string, password = PASSWORD) {
   await page.getByPlaceholder('E-mail').fill(email);
   await page.getByPlaceholder('Mot de passe').fill(password);
   await page.getByRole('button', { name: 'Se connecter' }).click();
+  // Avec un bon mot de passe, attendre l'arrivée dans l'espace du rôle : naviguer avant interromprait la connexion.
+  if (password === PASSWORD) await page.waitForURL(/\/(patient|doctor|nurse)$/);
 }
 
 test.describe('accès et redirections', () => {
