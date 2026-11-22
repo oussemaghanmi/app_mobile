@@ -708,6 +708,7 @@ export type Database = {
     Functions: {
       consume_chatbot_quota: { Args: { p_limit?: number }; Returns: number };
       delete_my_account: { Args: Record<PropertyKey, never>; Returns: undefined };
+      export_my_data: { Args: Record<PropertyKey, never>; Returns: Json };
       generate_intakes: { Args: { p_days?: number }; Returns: number };
       in_my_care_team: { Args: { p_profile: string }; Returns: boolean };
       is_assigned_to: { Args: { p_patient: string }; Returns: boolean };

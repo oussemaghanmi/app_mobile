@@ -37,9 +37,14 @@ select is((select count(*)::int from pg_views where schemaname = 'public' and de
   0, 'aucune vue ne référence private_journal');
 select is((select count(*)::int from pg_matviews where schemaname = 'public' and definition ilike '%private_journal%'),
   0, 'aucune vue matérialisée ne référence private_journal');
+-- Seule exception : export_my_data() (0013), qui exporte le journal vers son auteur. Elle doit rester
+-- security invoker, pour que la policy « propriétaire seul » de private_journal s'applique toujours.
 select is((select count(*)::int from pg_proc p join pg_namespace n on n.oid = p.pronamespace
-            where n.nspname = 'public' and p.prosrc ilike '%private_journal%'),
-  0, 'aucune fonction ne référence private_journal');
+            where n.nspname = 'public' and p.prosrc ilike '%private_journal%'
+              and p.oid <> 'public.export_my_data()'::regprocedure),
+  0, 'aucune fonction ne référence private_journal (hors export_my_data)');
+select is((select prosecdef from pg_proc where oid = 'public.export_my_data()'::regprocedure),
+  false, 'export_my_data reste security invoker (le RLS protège private_journal)');
 select is((select count(*)::int from pg_policies where schemaname = 'public' and tablename = 'private_journal'),
   1, 'private_journal a une seule policy');
 select ok((select qual from pg_policies where schemaname = 'public' and tablename = 'private_journal') ~ 'patient_id = auth.uid\(\)'
