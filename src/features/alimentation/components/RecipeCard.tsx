@@ -1,5 +1,6 @@
 import { useId, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Icon } from '@/components/ui/Icon';
 import { lines, localized, type Recipe } from '../types';
 
 /** Carte recette repliable : image (ou emoji), résumé, ingrédients et étapes. */
@@ -28,11 +29,14 @@ export function RecipeCard({ recipe }: { recipe: Recipe }) {
       )}
       <div className="p-4">
         <div className="flex flex-wrap items-center gap-2 text-xs">
-          <span className="rounded-full bg-terracotta/10 px-2 py-0.5 text-terracotta">
+          <span className="rounded-full bg-terracotta/10 px-2 py-0.5 text-terracotta-dark">
             {t(`nutrition.phase.${recipe.phase}`)}
           </span>
           {recipe.prep_minutes && (
-            <span className="text-ink/60">⏱ {t('nutrition.minutes', { count: recipe.prep_minutes })}</span>
+            <span className="text-ink/70">
+              <Icon name="clock" className="me-1 inline h-4 w-4 align-[-3px]" />
+              {t('nutrition.minutes', { count: recipe.prep_minutes })}
+            </span>
           )}
         </div>
         <h3 className="mt-1 text-lg">{title}</h3>

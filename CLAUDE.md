@@ -7,8 +7,8 @@
 ## Le projet
 CronCare (aussi écrit CrohnCare) est une application mobile d'accompagnement des patients atteints
 de la **maladie de Crohn** en Tunisie, issue d'un projet de fin d'études en soins infirmiers.
-Un prototype a été réalisé dans **Figma Make** (React/TypeScript) ; l'objectif est d'en faire une
-application fonctionnelle en conservant **au maximum le design et la navigation existants**.
+Un prototype a été esquissé dans **Figma Make** ; son export n'est pas utilisé (ADR-0008) : l'interface est
+conçue directement dans le code, en gardant son thème et sa navigation.
 
 ## Stack (déjà en place — ne pas changer sans demander)
 - React 18 + TypeScript + Vite 5 + Tailwind CSS v4 (`@tailwindcss/vite`)
@@ -25,7 +25,7 @@ src/features/<nom>/   components/, api.ts (SEUL accès à supabase), hooks.ts, t
 src/components/       composants partagés (PatientLayout, AsyncView, ui/)
 src/lib/              supabase.ts (client typé), database.types.ts (GÉNÉRÉ), errors.ts, useAsync.ts
 src/i18n/             index.ts (applyLanguage gère dir=rtl) + locales/{fr,en,ar,tn}.json
-src/figma/            code exporté de Figma Make = SOURCE DE VÉRITÉ du design
+src/styles/index.css  jetons du thème (@theme) = SOURCE DE VÉRITÉ du design, avec src/components/ui/ (docs/DESIGN.md)
 supabase/migrations/  0001_init_rbac.sql (schéma + RLS) ; nouvelles migrations = 0002_…, 0003_…
 supabase/tests/       tests pgTAP des policies RLS (`supabase test db`)
 supabase/functions/   Edge Functions (CrohnBot)
@@ -77,7 +77,7 @@ Conventions détaillées : `docs/ARCHITECTURE.md` §5.
   `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`.
 
 ## Architecture
-La référence est `docs/ARCHITECTURE.md` (+ décisions dans `docs/adr/`). Toute décision structurante
+La référence est `docs/ARCHITECTURE.md` (+ décisions dans `docs/adr/`, design dans `docs/DESIGN.md`). Toute décision structurante
 nouvelle donne lieu à un ADR court.
 
 ## Commandes

@@ -3,8 +3,8 @@ import { intakeFlowPossible, MEDICATION, PASSWORD, PRIVATE_MARKER, USERS } from 
 
 async function login(page: Page, email: string, password = PASSWORD) {
   await page.goto('/login');
-  await page.getByPlaceholder('E-mail').fill(email);
-  await page.getByPlaceholder('Mot de passe').fill(password);
+  await page.getByLabel('E-mail').fill(email);
+  await page.getByLabel('Mot de passe').fill(password);
   await page.getByRole('button', { name: 'Se connecter' }).click();
   // Avec un bon mot de passe, attendre l'arrivée dans l'espace du rôle : naviguer avant interromprait la connexion.
   if (password === PASSWORD) await page.waitForURL(/\/(patient|doctor|nurse)$/);

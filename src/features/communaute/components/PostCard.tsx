@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Icon } from '@/components/ui/Icon';
 import { timeAgo } from '@/lib/format';
 import * as api from '../api';
 import { useComments } from '../hooks';
@@ -21,7 +22,9 @@ export function PostCard({ post, currentUserId, canWrite, onChanged }: Props) {
   const [reporting, setReporting] = useState<ReportTarget | null>(null);
   const [draft, setDraft] = useState('');
   const [busy, setBusy] = useState(false);
-  const [pendingDelete, setPendingDelete] = useState<{ type: 'post' } | { type: 'comment'; id: string } | null>(null);
+  const [pendingDelete, setPendingDelete] = useState<
+    { type: 'post' } | { type: 'comment'; id: string } | null
+  >(null);
   const comments = useComments(post.id, showComments);
   const mine = post.author_id === currentUserId;
   const count = post.community_comments[0]?.count ?? 0;
@@ -68,10 +71,10 @@ export function PostCard({ post, currentUserId, canWrite, onChanged }: Props) {
         </span>
         <div className="min-w-0 flex-1">
           <p className="truncate font-medium">{post.author?.pseudonym}</p>
-          <p className="text-xs text-ink/60">{timeAgo(post.created_at, i18n.language)}</p>
+          <p className="text-xs text-ink/70">{timeAgo(post.created_at, i18n.language)}</p>
         </div>
         {post.hidden && mine && (
-          <span className="rounded-full bg-terracotta/10 px-2 py-0.5 text-xs text-terracotta">
+          <span className="rounded-full bg-terracotta/10 px-2 py-0.5 text-xs text-terracotta-dark">
             {t('community.hidden')}
           </span>
         )}
@@ -84,19 +87,22 @@ export function PostCard({ post, currentUserId, canWrite, onChanged }: Props) {
           aria-expanded={showComments}
           onClick={() => setShowComments((s) => !s)}
         >
-          💬 {t('community.comments', { count })}
+          <Icon name="comment" className="me-1 inline h-4 w-4 align-[-3px]" />
+          {t('community.comments', { count })}
         </button>
         {!mine && (
           <button
-            className="min-h-11 rounded-full px-3 text-ink/60 active:bg-terracotta/10"
+            className="min-h-11 rounded-full px-3 text-ink/70 active:bg-terracotta/10"
             onClick={() => setReporting({ postId: post.id })}
           >
-            ⚑ {t('community.report.action')}
+            <Icon name="flag" className="me-1 inline h-4 w-4 align-[-3px]" />
+            {t('community.report.action')}
           </button>
         )}
         {mine && (
-          <button className="min-h-11 rounded-full px-3 text-terracotta" onClick={remove}>
-            🗑 {t('community.delete')}
+          <button className="min-h-11 rounded-full px-3 text-terracotta-dark" onClick={remove}>
+            <Icon name="trash" className="me-1 inline h-4 w-4 align-[-3px]" />
+            {t('community.delete')}
           </button>
         )}
       </div>
@@ -112,20 +118,20 @@ export function PostCard({ post, currentUserId, canWrite, onChanged }: Props) {
               <li key={c.id} className="rounded-xl bg-cream p-2 text-sm">
                 <p>
                   <span className="font-medium">{c.author?.pseudonym}</span>
-                  <span className="ms-2 text-xs text-ink/60">{timeAgo(c.created_at, i18n.language)}</span>
+                  <span className="ms-2 text-xs text-ink/70">{timeAgo(c.created_at, i18n.language)}</span>
                 </p>
                 <p className="break-words whitespace-pre-line">{c.content}</p>
                 <div className="flex gap-1">
                   {c.author_id === currentUserId ? (
                     <button
-                      className="min-h-11 px-2 text-xs text-terracotta"
+                      className="min-h-11 px-2 text-xs text-terracotta-dark"
                       onClick={() => removeComment(c.id)}
                     >
                       {t('community.delete')}
                     </button>
                   ) : (
                     <button
-                      className="min-h-11 px-2 text-xs text-ink/60"
+                      className="min-h-11 px-2 text-xs text-ink/70"
                       onClick={() => setReporting({ commentId: c.id })}
                     >
                       {t('community.report.action')}

@@ -27,11 +27,11 @@ export default function MedicationsScreen() {
 
       <div className="grid grid-cols-2 gap-3">
         <section className="card">
-          <h2 className="text-sm font-normal text-ink/60">{t('meds.adherenceMonth')}</h2>
-          <p className="text-3xl font-bold text-terracotta">{adherence.data ?? '–'}%</p>
+          <h2 className="text-sm font-normal text-ink/70">{t('meds.adherenceMonth')}</h2>
+          <p className="text-3xl font-bold text-terracotta-dark">{adherence.data ?? '–'}%</p>
         </section>
         <section className="card">
-          <h2 className="text-sm font-normal text-ink/60">{t('meds.adherence14')}</h2>
+          <h2 className="text-sm font-normal text-ink/70">{t('meds.adherence14')}</h2>
           <p className="text-3xl font-bold text-sage-dark">{weekAdherence ?? '–'}%</p>
         </section>
       </div>
@@ -61,7 +61,7 @@ export default function MedicationsScreen() {
 
         {tab === 'treatment' && (
           <div className="flex flex-col gap-3">
-            <p className="text-sm text-ink/60">{t('meds.readOnly')}</p>
+            <p className="text-sm text-ink/70">{t('meds.readOnly')}</p>
             <AsyncView state={prescriptions} isEmpty={(l) => l.length === 0} empty={t('meds.noPrescription')}>
               {(list) => (
                 <ul className="flex flex-col gap-3">
@@ -70,10 +70,10 @@ export default function MedicationsScreen() {
                       <h3 className="text-lg">{p.medication}</h3>
                       <p className="text-ink/70">{p.dosage}</p>
                       <p className="mt-2 text-sm">
-                        <span className="text-ink/60">{t('meds.times')} : </span>
+                        <span className="text-ink/70">{t('meds.times')} : </span>
                         {p.times_of_day.map((h) => h.slice(0, 5)).join(' · ')}
                       </p>
-                      <p className="text-sm text-ink/60">
+                      <p className="text-sm text-ink/70">
                         {p.end_date
                           ? t('meds.fromTo', {
                               from: fmtDate(p.start_date, { day: 'numeric', month: 'short' }),

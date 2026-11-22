@@ -1,5 +1,5 @@
 ## Description
-<!-- Quoi et pourquoi. Lien vers l'issue / l'écran Figma concerné. -->
+<!-- Quoi et pourquoi. Lien vers l'issue / l'écran concerné. -->
 
 ## Captures d'écran
 | Français (LTR) | العربية (RTL) |

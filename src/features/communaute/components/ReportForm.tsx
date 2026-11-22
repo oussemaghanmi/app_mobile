@@ -43,7 +43,7 @@ export function ReportForm({ target, onClose }: { target: ReportTarget; onClose:
               value={r}
               checked={reason === r}
               onChange={() => setReason(r)}
-              className="h-5 w-5 accent-terracotta"
+              className="h-5 w-5 accent-terracotta-dark"
             />
             {t(`community.report.reasons.${r}`)}
           </label>
@@ -60,12 +60,12 @@ export function ReportForm({ target, onClose }: { target: ReportTarget; onClose:
         />
       </label>
       {status === 'error' && (
-        <p role="alert" className="text-sm text-terracotta">
+        <p role="alert" className="text-sm text-terracotta-dark">
           {t('common.error')}
         </p>
       )}
       <div className="flex gap-2">
-        <button className="btn min-h-11 flex-1 bg-terracotta" disabled={status === 'busy'}>
+        <button className="btn min-h-11 flex-1 bg-terracotta-dark" disabled={status === 'busy'}>
           {t('community.report.submit')}
         </button>
         <button type="button" className="btn-danger min-h-11" onClick={onClose}>

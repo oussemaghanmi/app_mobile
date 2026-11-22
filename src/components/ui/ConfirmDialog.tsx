@@ -108,10 +108,10 @@ export function ConfirmDialog({
         aria-describedby={descId}
         className="w-full max-w-md rounded-2xl bg-cream p-6 shadow-xl border border-terracotta/20 text-start"
       >
-        <h2 id={titleId} className="text-lg font-bold font-serif text-gray-900">
+        <h2 id={titleId} className="text-lg font-bold font-serif text-ink">
           {title}
         </h2>
-        <p id={descId} className="mt-2 text-sm text-gray-700 leading-relaxed">
+        <p id={descId} className="mt-2 text-sm text-ink/80 leading-relaxed">
           {description}
         </p>
 
@@ -120,17 +120,17 @@ export function ConfirmDialog({
             ref={cancelBtnRef}
             type="button"
             onClick={onCancel}
-            className="min-h-[44px] min-w-[44px] px-4 py-2 text-sm font-medium text-gray-700 rounded-xl bg-gray-100 hover:bg-gray-200 transition-colors focus:outline-hidden focus:ring-2 focus:ring-sauge"
+            className="min-h-[44px] min-w-[44px] px-4 py-2 text-sm font-medium text-ink rounded-xl bg-ink/5 hover:bg-ink/10 transition-colors focus:ring-2 focus:ring-sage"
           >
             {resolvedCancelLabel}
           </button>
           <button
             type="button"
             onClick={onConfirm}
-            className={`min-h-[44px] min-w-[44px] px-4 py-2 text-sm font-medium rounded-xl text-white transition-colors focus:outline-hidden focus:ring-2 ${
+            className={`min-h-[44px] min-w-[44px] px-4 py-2 text-sm font-medium rounded-xl text-white transition-colors focus:ring-2 ${
               danger
-                ? 'bg-terracotta hover:bg-[#b06348] focus:ring-terracotta'
-                : 'bg-sauge hover:bg-[#688a6c] focus:ring-sauge'
+                ? 'bg-terracotta-dark hover:brightness-90 focus:ring-terracotta'
+                : 'bg-sage-dark hover:brightness-90 focus:ring-sage'
             }`}
           >
             {resolvedConfirmLabel}

@@ -33,7 +33,7 @@ export default function TipsScreen() {
       <ScreenHeader title={t('sections.tips')} subtitle={t('tips.subtitle')} />
 
       <section aria-labelledby="tobacco-title" className="card border-s-4 border-terracotta bg-terracotta/5">
-        <p className="text-xs font-bold tracking-wide text-terracotta uppercase">{t('tips.priority')}</p>
+        <p className="text-xs font-bold tracking-wide text-terracotta-dark uppercase">{t('tips.priority')}</p>
         <h2 id="tobacco-title" className="mt-1 text-xl">
           <span aria-hidden>🚭 </span>
           {t('tips.tobacco.title')}
@@ -44,7 +44,7 @@ export default function TipsScreen() {
             <li key={k} className="flex gap-3">
               <span
                 aria-hidden
-                className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-terracotta text-sm font-bold text-white"
+                className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-terracotta-dark text-sm font-bold text-white"
               >
                 {i + 1}
               </span>
@@ -56,7 +56,7 @@ export default function TipsScreen() {
         </ol>
         <Link
           to="/patient/disease"
-          className="mt-3 inline-flex min-h-11 items-center text-sm font-medium text-terracotta underline"
+          className="mt-3 inline-flex min-h-11 items-center text-sm font-medium text-terracotta-dark underline"
         >
           {t('tips.tobacco.more')}
         </Link>

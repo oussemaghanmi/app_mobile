@@ -53,7 +53,7 @@ describe('<ConfirmDialog />', () => {
     expect(dialog).toHaveAttribute('aria-describedby');
   });
 
-  it("ne rend rien quand open est faux", () => {
+  it('ne rend rien quand open est faux', () => {
     render(
       <ConfirmDialog
         open={false}
@@ -66,7 +66,7 @@ describe('<ConfirmDialog />', () => {
     expect(screen.queryByRole('alertdialog')).not.toBeInTheDocument();
   });
 
-  it("appelle onCancel au clic sur annuler", async () => {
+  it('appelle onCancel au clic sur annuler', async () => {
     const onCancel = vi.fn();
     render(
       <ConfirmDialog
@@ -83,7 +83,7 @@ describe('<ConfirmDialog />', () => {
     expect(onCancel).toHaveBeenCalledTimes(1);
   });
 
-  it("appelle onConfirm au clic sur le bouton de confirmation", async () => {
+  it('appelle onConfirm au clic sur le bouton de confirmation', async () => {
     const onConfirm = vi.fn();
     render(
       <ConfirmDialog
@@ -116,7 +116,7 @@ describe('<ConfirmDialog />', () => {
     expect(onCancel).toHaveBeenCalledTimes(1);
   });
 
-  it("piège le focus dans la boîte de dialogue", async () => {
+  it('piège le focus dans la boîte de dialogue', async () => {
     render(
       <ConfirmDialog
         open={true}

@@ -136,7 +136,7 @@ export default function Settings() {
             {t(`settings.${key}`)}
             <input
               type="checkbox"
-              className="h-5 w-5 accent-sage"
+              className="h-5 w-5 accent-sage-dark"
               checked={profile[field]}
               onChange={(e) => onToggle(field, e.target.checked)}
             />
@@ -181,11 +181,7 @@ export default function Settings() {
             ? t('settings.confirmDeleteJournal')
             : t('settings.confirmDeleteAccount')
         }
-        confirmLabel={
-          confirmAction === 'journal'
-            ? t('common.delete')
-            : t('settings.deleteAccount')
-        }
+        confirmLabel={confirmAction === 'journal' ? t('common.delete') : t('settings.deleteAccount')}
         cancelLabel={t('common.cancel')}
         onConfirm={handleConfirmAction}
         onCancel={() => setConfirmAction(null)}

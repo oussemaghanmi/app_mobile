@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { Icon } from '@/components/ui/Icon';
 import { ScreenHeader } from '@/components/ui/ScreenHeader';
 import { AsyncView } from '@/components/AsyncView';
 import { useAuth } from '@/features/auth/AuthProvider';
@@ -54,17 +55,18 @@ export default function PatientRecord() {
         )}
       </AsyncView>
 
-      <p role="note" className="rounded-xl bg-ink/5 px-3 py-2 text-sm">
-        🔒 {t('pro.record.privacy')}
+      <p role="note" className="flex gap-2 rounded-xl bg-ink/5 px-3 py-2 text-sm">
+        <Icon name="lock" className="mt-0.5 h-4 w-4 shrink-0" />
+        <span>{t('pro.record.privacy')}</span>
       </p>
 
       <div className="grid grid-cols-2 gap-3">
         <section className="card">
-          <h2 className="text-sm font-normal text-ink/60">{t('pro.record.adherence30')}</h2>
-          <p className="text-3xl font-bold text-terracotta">{adherence ?? '–'}%</p>
+          <h2 className="text-sm font-normal text-ink/70">{t('pro.record.adherence30')}</h2>
+          <p className="text-3xl font-bold text-terracotta-dark">{adherence ?? '–'}%</p>
         </section>
         <section className="card">
-          <h2 className="text-sm font-normal text-ink/60">{t('pro.record.missed30')}</h2>
+          <h2 className="text-sm font-normal text-ink/70">{t('pro.record.missed30')}</h2>
           <p className="text-3xl font-bold text-ink">{record.intakes.data ? missed : '–'}</p>
         </section>
       </div>
@@ -87,7 +89,7 @@ export default function PatientRecord() {
               {list.map((s) => (
                 <li key={s.id} className="py-2">
                   <div className="flex flex-wrap items-center gap-2 text-sm">
-                    <span className="text-ink/60">{fmtDate(s.logged_at, true)}</span>
+                    <span className="text-ink/70">{fmtDate(s.logged_at, true)}</span>
                     <span className="rounded-full bg-terracotta/10 px-2 py-0.5">
                       {t('journal.symptoms.painShort', { value: s.pain_level ?? 0 })}
                     </span>
@@ -140,12 +142,13 @@ export default function PatientRecord() {
               {list.map((a) => (
                 <li key={a.id} className="flex items-center gap-2 py-2 text-sm">
                   <span className="flex-1">
-                    📅 {fmtDate(a.starts_at, true)}
+                    <Icon name="calendar" className="me-1 inline h-4 w-4 align-[-3px] text-sage-dark" />
+                    {fmtDate(a.starts_at, true)}
                     {a.location ? ` · ${a.location}` : ''}
                   </span>
                   {a.professional_id === profile.id && (
                     <button
-                      className="min-h-11 px-2 text-terracotta"
+                      className="min-h-11 px-2 text-terracotta-dark"
                       onClick={() => setDeleteAppointmentId(a.id)}
                     >
                       {t('community.delete')}

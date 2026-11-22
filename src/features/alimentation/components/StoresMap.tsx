@@ -50,7 +50,7 @@ export function StoresMap({ stores }: { stores: Store[] }) {
                 aria-pressed={selected?.id === s.id}
               >
                 <span className="block font-medium">{s.name}</span>
-                <span className="block text-sm text-ink/60">
+                <span className="block text-sm text-ink/70">
                   {t(`nutrition.storeKind.${s.kind}`)}
                   {s.address ? ` · ${s.address}` : ''}
                 </span>

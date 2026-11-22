@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Icon } from '@/components/ui/Icon';
 import { displayStatus } from '../status';
 import type { DisplayStatus, Intake } from '../types';
 
 const BADGE: Record<DisplayStatus, string> = {
   taken: 'bg-sage/15 text-sage-dark',
   skipped: 'bg-ink/10 text-ink/70',
-  missed: 'bg-terracotta/15 text-terracotta',
-  late: 'bg-terracotta/10 text-terracotta',
+  missed: 'bg-terracotta/15 text-terracotta-dark',
+  late: 'bg-terracotta/10 text-terracotta-dark',
   upcoming: 'bg-cream text-ink/70',
 };
 
@@ -48,7 +49,7 @@ export function IntakeRow({ intake, locale, onTake }: Props) {
         <span className="min-w-14 shrink-0 whitespace-nowrap font-medium tabular-nums">{time}</span>
         <div className="min-w-0 flex-1">
           <p className="truncate font-medium">{intake.prescriptions?.medication}</p>
-          <p className="text-sm text-ink/60">{intake.prescriptions?.dosage}</p>
+          <p className="text-sm text-ink/70">{intake.prescriptions?.dosage}</p>
         </div>
         {canTake ? (
           <button
@@ -57,7 +58,8 @@ export function IntakeRow({ intake, locale, onTake }: Props) {
             disabled={busy}
             aria-label={t('home.markTakenLabel', { name: intake.prescriptions?.medication ?? '' })}
           >
-            ✓ {t('home.markTaken')}
+            <Icon name="check" className="me-1 inline h-5 w-5 align-[-4px]" />
+            {t('home.markTaken')}
           </button>
         ) : null}
         <span className={`shrink-0 rounded-full px-2 py-1 text-xs font-medium ${BADGE[status]}`}>
@@ -65,7 +67,7 @@ export function IntakeRow({ intake, locale, onTake }: Props) {
         </span>
       </div>
       {error && (
-        <p role="alert" className="text-sm text-terracotta">
+        <p role="alert" className="text-sm text-terracotta-dark">
           {t('home.markError')}
         </p>
       )}

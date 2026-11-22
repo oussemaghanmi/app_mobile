@@ -346,7 +346,6 @@ src/
     errors.ts             ApiError + unwrap()
     useAsync.ts           hook générique chargement / erreur / données
   i18n/                   i18next + locales/{fr,en,ar,tn}.json
-  figma/                  export Figma Make (référence de design, non compilé)
 ```
 
 Fonctionnalités actuelles : `auth`, `home`, `settings`, `professional`. Les écrans à venir créent leur

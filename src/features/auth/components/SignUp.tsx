@@ -52,10 +52,7 @@ export default function SignUp() {
             <p role="status" className="rounded-xl bg-sage/15 p-3 text-sm text-sage-dark">
               {t('auth.signupSuccess')}
             </p>
-            <Link
-              to="/login"
-              className="btn min-h-11 flex items-center justify-center text-center"
-            >
+            <Link to="/login" className="btn min-h-11 flex items-center justify-center text-center">
               {t('login.submit')}
             </Link>
           </div>
@@ -98,11 +95,11 @@ export default function SignUp() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
-              <span className="text-xs text-ink/60">{t('auth.passwordRules')}</span>
+              <span className="text-xs text-ink/70">{t('auth.passwordRules')}</span>
             </label>
 
             {errorMsg && (
-              <p role="alert" className="text-sm text-terracotta">
+              <p role="alert" className="text-sm text-terracotta-dark">
                 {errorMsg}
               </p>
             )}

@@ -40,18 +40,13 @@ export default function ForgotPassword() {
             <p role="status" className="rounded-xl bg-sage/15 p-3 text-sm text-sage-dark">
               {t('auth.resetLinkSent')}
             </p>
-            <Link
-              to="/login"
-              className="btn min-h-11 flex items-center justify-center text-center"
-            >
+            <Link to="/login" className="btn min-h-11 flex items-center justify-center text-center">
               {t('auth.backToLogin')}
             </Link>
           </div>
         ) : (
           <>
-            <p className="text-sm text-ink/70">
-              {t('auth.forgotPasswordInstructions')}
-            </p>
+            <p className="text-sm text-ink/70">{t('auth.forgotPasswordInstructions')}</p>
 
             <label className="text-sm flex flex-col gap-1">
               <span>{t('login.email')}</span>
@@ -67,7 +62,7 @@ export default function ForgotPassword() {
             </label>
 
             {errorMsg && (
-              <p role="alert" className="text-sm text-terracotta">
+              <p role="alert" className="text-sm text-terracotta-dark">
                 {errorMsg}
               </p>
             )}
