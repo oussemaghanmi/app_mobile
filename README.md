@@ -1,13 +1,13 @@
 # CronCare 🌿
 
 Application mobile d'accompagnement des patients atteints de la **maladie de Crohn** en Tunisie.
-Issue d'un prototype Figma Make, transformée en application fonctionnelle avec gestion des accès par rôles (RBAC).
+Issue d'un prototype Figma Make, réalisée en application fonctionnelle avec gestion des accès par rôles (RBAC).
 
 ## Stack
 
 | Couche | Technologie |
 |---|---|
-| Interface | React 18 + TypeScript + Vite + Tailwind CSS v4 (code repris de Figma Make) |
+| Interface | React 18 + TypeScript + Vite + Tailwind CSS v4 (design défini dans le code, voir `docs/DESIGN.md`) |
 | Mobile | Capacitor 7 (Android / iOS) |
 | Backend | Supabase — Auth, PostgreSQL, Row Level Security |
 | Langues | Français, Anglais, Arabe, Darija tunisienne (RTL géré automatiquement) |
@@ -85,7 +85,6 @@ src/
   components/      navigation, composants partagés
   lib/             client Supabase typé, types générés, gestion d'erreurs
   i18n/            configuration + traductions fr / en / ar / tn
-  figma/           code exporté de Figma Make (à migrer écran par écran)
 supabase/
   migrations/      schéma + policies RLS
   tests/           tests pgTAP des policies
@@ -111,7 +110,7 @@ npm run lint && npm run typecheck && npm run check:i18n && npm test && npm run b
 - [x] Architecture documentée, ADR, outillage qualité (ESLint, Prettier, Vitest), tests RLS pgTAP
 - [x] Pipeline CI/CD (qualité, base, secrets, APK, déploiement Supabase) — voir [`docs/PIPELINE.md`](docs/PIPELINE.md)
 - [x] Génération des prises médicamenteuses + bouton « Pris »
-- [x] Écrans patient : Ma maladie, Médicaments, Alimentation, Conseils, Communauté, Journal, Calendrier (design à aligner sur l’export Figma)
+- [x] Écrans patient : Ma maladie, Médicaments, Alimentation, Conseils, Communauté, Journal, Calendrier
 - [x] Rappels médicamenteux (Capacitor Local Notifications)
 - [x] Fiche patient, prescriptions (médecin) et observations (infirmier)
 - [x] Assistant CrohnBot (Edge Function + écran de chat)

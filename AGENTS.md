@@ -49,7 +49,7 @@ qu'un filet : nouvelle issue → Todo, issue assignée → In progress, label `b
 |---|---|
 | `src/components/`, `src/features/*/components/`, `src/i18n/`, `src/styles/` (interface) | `agent:antigravity` |
 | `supabase/` (migrations, tests, fonctions), `.github/`, `scripts/`, `e2e/`, `docs/` | `agent:claude` |
-| Projet Supabase, secrets, protection de branches, contenu médical, Figma, essais sur téléphone | `humain` |
+| Projet Supabase, secrets, protection de branches, contenu médical, essais sur téléphone | `humain` |
 
 Une tâche ne modifie pas de fichiers hors de sa zone sans le dire dans la PR. Les fichiers partagés
 (`package.json`, `src/App.tsx`, fichiers de langue) : faire des changements courts et rebaser souvent.

@@ -1,6 +1,6 @@
 @import 'tailwindcss';
 
-/* Thème repris du prototype Figma Make : sauge, terracotta, crème, Lora + DM Sans */
+/* Jetons du thème CronCare (ADR-0008, docs/DESIGN.md) : sauge, terracotta, crème, Lora + DM Sans */
 @theme {
   --color-sage: #7a9e7e;
   --color-sage-dark: #5c7f60;
