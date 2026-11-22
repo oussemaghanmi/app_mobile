@@ -8,6 +8,9 @@ import PatientLayout from '@/components/PatientLayout';
 
 // Chargement différé des écrans par espace et par écran
 const Login = lazy(() => import('@/features/auth/components/Login'));
+const SignUp = lazy(() => import('@/features/auth/components/SignUp'));
+const ForgotPassword = lazy(() => import('@/features/auth/components/ForgotPassword'));
+const ResetPassword = lazy(() => import('@/features/auth/components/ResetPassword'));
 const PatientHome = lazy(() => import('@/features/home/components/PatientHome'));
 const DiseaseScreen = lazy(() => import('@/features/maladie/components/DiseaseScreen'));
 const MedicationsScreen = lazy(() => import('@/features/medicaments/components/MedicationsScreen'));
@@ -54,6 +57,9 @@ export default function App() {
       <Routes>
         <Route path="/" element={<RootRedirect />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
 
         {/* ----- Espace patient ----- */}
         <Route element={<RequireRole roles={['patient']} />}>

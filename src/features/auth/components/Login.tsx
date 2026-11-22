@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../AuthProvider';
 import { homePathFor } from '../permissions';
@@ -45,10 +45,30 @@ export default function Login() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        {error && <p className="text-sm text-terracotta">{t('login.error')}</p>}
-        <button className="btn" disabled={busy}>
+        {error && (
+          <p role="alert" className="text-sm text-terracotta">
+            {t('login.error')}
+          </p>
+        )}
+        <div className="flex justify-end">
+          <Link
+            to="/forgot-password"
+            className="text-xs text-sage-dark underline min-h-[44px] flex items-center"
+          >
+            {t('auth.forgotPasswordLink')}
+          </Link>
+        </div>
+        <button className="btn min-h-11" disabled={busy}>
           {t('login.submit')}
         </button>
+        <div className="mt-2 text-center">
+          <Link
+            to="/signup"
+            className="text-sm text-sage-dark underline min-h-[44px] inline-flex items-center justify-center"
+          >
+            {t('auth.noAccount')}
+          </Link>
+        </div>
       </form>
     </main>
   );
