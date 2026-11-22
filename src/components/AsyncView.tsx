@@ -15,7 +15,7 @@ export function AsyncView<T>({ state, isEmpty, empty, children }: Props<T>) {
   const { t } = useTranslation();
   if (state.loading && state.data === undefined) {
     return (
-      <p role="status" aria-live="polite" className="p-4 text-center text-ink/60">
+      <p role="status" aria-live="polite" className="p-4 text-center text-ink/70">
         {t('common.loading')}
       </p>
     );
@@ -32,7 +32,7 @@ export function AsyncView<T>({ state, isEmpty, empty, children }: Props<T>) {
   }
   if (state.data === undefined) return null;
   if (isEmpty?.(state.data)) {
-    return <p className="p-4 text-center text-ink/60">{empty ?? t('common.empty')}</p>;
+    return <p className="p-4 text-center text-ink/70">{empty ?? t('common.empty')}</p>;
   }
   return <>{children(state.data)}</>;
 }

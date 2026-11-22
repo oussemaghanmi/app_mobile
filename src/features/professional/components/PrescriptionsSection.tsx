@@ -67,7 +67,7 @@ export function PrescriptionsSection({ patientId, state, fmtDate }: Props) {
               >
                 <p className="font-medium">
                   {rx.medication} — {rx.dosage}
-                  {!rx.active && <span className="ms-2 text-xs text-ink/60">({t('pro.rx.inactive')})</span>}
+                  {!rx.active && <span className="ms-2 text-xs text-ink/70">({t('pro.rx.inactive')})</span>}
                 </p>
                 <p className="text-sm text-ink/70">
                   {rx.times_of_day.map((h) => h.slice(0, 5)).join(' · ')} ·{' '}
@@ -75,7 +75,7 @@ export function PrescriptionsSection({ patientId, state, fmtDate }: Props) {
                     ? t('meds.fromTo', { from: fmtDate(rx.start_date), to: fmtDate(rx.end_date) })
                     : t('meds.since', { from: fmtDate(rx.start_date) })}
                 </p>
-                <p className="text-xs text-ink/60">{t('pro.rx.by', { name: author(rx) })}</p>
+                <p className="text-xs text-ink/70">{t('pro.rx.by', { name: author(rx) })}</p>
                 {canWrite && editing !== rx.id && (
                   <div className="mt-1 flex gap-2 text-sm">
                     {rx.active && (
@@ -87,7 +87,7 @@ export function PrescriptionsSection({ patientId, state, fmtDate }: Props) {
                       </button>
                     )}
                     <button
-                      className={`min-h-11 px-2 underline ${rx.active ? 'text-terracotta' : 'text-sage-dark'}`}
+                      className={`min-h-11 px-2 underline ${rx.active ? 'text-terracotta-dark' : 'text-sage-dark'}`}
                       onClick={() => toggle(rx)}
                     >
                       {rx.active ? t('pro.rx.stop') : t('pro.rx.resume')}
@@ -116,7 +116,7 @@ export function PrescriptionsSection({ patientId, state, fmtDate }: Props) {
           </ul>
         )}
       </AsyncView>
-      {canWrite && <p className="mt-2 text-xs text-ink/60">{t('pro.rx.regenerateNote')}</p>}
+      {canWrite && <p className="mt-2 text-xs text-ink/70">{t('pro.rx.regenerateNote')}</p>}
     </section>
   );
 }

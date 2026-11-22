@@ -84,9 +84,9 @@ export default function JournalScreen() {
                   {list.map((l) => (
                     <li key={l.id} className="card">
                       <div className="flex items-start justify-between gap-2">
-                        <p className="text-sm text-ink/60">{fmt(l.logged_at)}</p>
+                        <p className="text-sm text-ink/70">{fmt(l.logged_at)}</p>
                         <button
-                          className="-mt-2 -me-2 h-11 w-11 shrink-0 rounded-full text-terracotta"
+                          className="-mt-2 -me-2 h-11 w-11 shrink-0 rounded-full text-terracotta-dark"
                           aria-label={t('journal.deleteEntry')}
                           onClick={() => removeLog(l.id)}
                         >
@@ -141,9 +141,9 @@ export default function JournalScreen() {
                   {list.map((e) => (
                     <li key={e.id} className="card">
                       <div className="flex items-start justify-between gap-2">
-                        <p className="text-sm text-ink/60">{fmt(e.created_at)}</p>
+                        <p className="text-sm text-ink/70">{fmt(e.created_at)}</p>
                         <button
-                          className="-mt-2 -me-2 h-11 w-11 shrink-0 rounded-full text-terracotta"
+                          className="-mt-2 -me-2 h-11 w-11 shrink-0 rounded-full text-terracotta-dark"
                           aria-label={t('journal.deleteEntry')}
                           onClick={() => removeEntry(e.id)}
                         >

@@ -58,11 +58,11 @@ export default function PatientRecord() {
 
       <div className="grid grid-cols-2 gap-3">
         <section className="card">
-          <h2 className="text-sm font-normal text-ink/60">{t('pro.record.adherence30')}</h2>
-          <p className="text-3xl font-bold text-terracotta">{adherence ?? '–'}%</p>
+          <h2 className="text-sm font-normal text-ink/70">{t('pro.record.adherence30')}</h2>
+          <p className="text-3xl font-bold text-terracotta-dark">{adherence ?? '–'}%</p>
         </section>
         <section className="card">
-          <h2 className="text-sm font-normal text-ink/60">{t('pro.record.missed30')}</h2>
+          <h2 className="text-sm font-normal text-ink/70">{t('pro.record.missed30')}</h2>
           <p className="text-3xl font-bold text-ink">{record.intakes.data ? missed : '–'}</p>
         </section>
       </div>
@@ -85,7 +85,7 @@ export default function PatientRecord() {
               {list.map((s) => (
                 <li key={s.id} className="py-2">
                   <div className="flex flex-wrap items-center gap-2 text-sm">
-                    <span className="text-ink/60">{fmtDate(s.logged_at, true)}</span>
+                    <span className="text-ink/70">{fmtDate(s.logged_at, true)}</span>
                     <span className="rounded-full bg-terracotta/10 px-2 py-0.5">
                       {t('journal.symptoms.painShort', { value: s.pain_level ?? 0 })}
                     </span>
@@ -143,7 +143,7 @@ export default function PatientRecord() {
                   </span>
                   {a.professional_id === profile.id && (
                     <button
-                      className="min-h-11 px-2 text-terracotta"
+                      className="min-h-11 px-2 text-terracotta-dark"
                       onClick={async () => {
                         if (!confirm(t('pro.appointments.confirmDelete'))) return;
                         await api.deleteAppointment(a.id);

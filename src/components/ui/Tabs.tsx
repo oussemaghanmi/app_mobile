@@ -53,7 +53,7 @@ export function Tabs<K extends string>({ tabs, active, onChange, label, children
               onClick={() => onChange(tab.key)}
               onKeyDown={(e) => onKeyDown(e, i)}
               className={`min-h-11 shrink-0 rounded-full px-4 text-sm font-medium transition-colors ${
-                selected ? 'bg-sage text-white' : 'bg-white text-ink/70 shadow-sm'
+                selected ? 'bg-sage-dark text-white' : 'bg-white text-ink/70 shadow-sm'
               }`}
             >
               {tab.label}

@@ -56,7 +56,7 @@ export default function CalendarScreen() {
           </button>
         </div>
 
-        <div className="mt-2 grid grid-cols-7 text-center text-xs text-ink/60" aria-hidden>
+        <div className="mt-2 grid grid-cols-7 text-center text-xs text-ink/70" aria-hidden>
           {weekdays.map((w, i) => (
             <span key={i}>{w}</span>
           ))}
@@ -87,7 +87,7 @@ export default function CalendarScreen() {
                 onClick={() => setSelected(k)}
                 className={`flex min-h-12 flex-col items-center justify-center rounded-xl text-sm ${
                   selected === k
-                    ? 'bg-sage text-white'
+                    ? 'bg-sage-dark text-white'
                     : k === today
                       ? 'ring-2 ring-sage'
                       : 'active:bg-sage/10'
@@ -96,7 +96,7 @@ export default function CalendarScreen() {
                 <span className="font-medium">{d.getDate()}</span>
                 <span aria-hidden className="flex h-2 gap-0.5">
                   {taken > 0 && <span className="h-1.5 w-1.5 rounded-full bg-sage-dark" />}
-                  {missed > 0 && <span className="h-1.5 w-1.5 rounded-full bg-terracotta" />}
+                  {missed > 0 && <span className="h-1.5 w-1.5 rounded-full bg-terracotta-dark" />}
                   {upcoming > 0 && <span className="h-1.5 w-1.5 rounded-full bg-ink/30" />}
                   {appts > 0 && <span className="h-1.5 w-1.5 rotate-45 bg-amber-500" />}
                 </span>
@@ -111,7 +111,7 @@ export default function CalendarScreen() {
             {t('meds.status.taken')}
           </li>
           <li className="flex items-center gap-1">
-            <span aria-hidden className="h-2 w-2 rounded-full bg-terracotta" />
+            <span aria-hidden className="h-2 w-2 rounded-full bg-terracotta-dark" />
             {t('meds.status.missed')}
           </li>
           <li className="flex items-center gap-1">
@@ -154,7 +154,7 @@ export default function CalendarScreen() {
             ))}
           </ul>
         ) : (
-          dayAppts.length === 0 && <p className="mt-2 text-ink/60">{t('calendar.nothing')}</p>
+          dayAppts.length === 0 && <p className="mt-2 text-ink/70">{t('calendar.nothing')}</p>
         )}
       </section>
     </div>

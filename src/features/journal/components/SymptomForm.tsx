@@ -30,7 +30,7 @@ export function SymptomForm({ onSubmit }: { onSubmit: (input: SymptomInput) => P
       <label className="flex flex-col gap-1 text-sm font-medium">
         <span className="flex justify-between">
           {t('journal.symptoms.pain')}
-          <output className="text-lg font-bold text-terracotta">{value.pain_level}/10</output>
+          <output className="text-lg font-bold text-terracotta-dark">{value.pain_level}/10</output>
         </span>
         <input
           type="range"
@@ -39,10 +39,10 @@ export function SymptomForm({ onSubmit }: { onSubmit: (input: SymptomInput) => P
           step={1}
           value={value.pain_level}
           onChange={(e) => set('pain_level', Number(e.target.value))}
-          className="h-11 w-full accent-terracotta"
+          className="h-11 w-full accent-terracotta-dark"
           aria-valuetext={t('journal.symptoms.painValue', { value: value.pain_level })}
         />
-        <span className="flex justify-between text-xs font-normal text-ink/60">
+        <span className="flex justify-between text-xs font-normal text-ink/70">
           <span>{t('journal.symptoms.painNone')}</span>
           <span>{t('journal.symptoms.painMax')}</span>
         </span>
@@ -79,7 +79,7 @@ export function SymptomForm({ onSubmit }: { onSubmit: (input: SymptomInput) => P
         {t('journal.symptoms.period')}
         <input
           type="checkbox"
-          className="h-6 w-6 accent-sage"
+          className="h-6 w-6 accent-sage-dark"
           checked={value.on_period}
           onChange={(e) => set('on_period', e.target.checked)}
         />
@@ -103,7 +103,7 @@ export function SymptomForm({ onSubmit }: { onSubmit: (input: SymptomInput) => P
         </p>
       )}
       {status === 'error' && (
-        <p role="alert" className="text-sm text-terracotta">
+        <p role="alert" className="text-sm text-terracotta-dark">
           {t('common.error')}
         </p>
       )}

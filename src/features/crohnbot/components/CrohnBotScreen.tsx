@@ -72,7 +72,7 @@ export default function CrohnBotScreen() {
             key={i}
             className={`max-w-[85%] rounded-2xl px-4 py-2 leading-relaxed whitespace-pre-line ${
               m.role === 'user'
-                ? 'self-end rounded-ee-sm bg-sage text-white'
+                ? 'self-end rounded-ee-sm bg-sage-dark text-white'
                 : 'self-start rounded-es-sm bg-white shadow-sm'
             }`}
           >
@@ -81,12 +81,12 @@ export default function CrohnBotScreen() {
           </div>
         ))}
         {pending && (
-          <div role="status" className="self-start rounded-2xl bg-white px-4 py-2 text-ink/60 shadow-sm">
+          <div role="status" className="self-start rounded-2xl bg-white px-4 py-2 text-ink/70 shadow-sm">
             {t('bot.thinking')}
           </div>
         )}
         {noticeText && (
-          <p role="alert" className="rounded-xl bg-terracotta/10 px-3 py-2 text-sm text-terracotta">
+          <p role="alert" className="rounded-xl bg-terracotta/10 px-3 py-2 text-sm text-terracotta-dark">
             {noticeText}
           </p>
         )}
@@ -124,7 +124,7 @@ export default function CrohnBotScreen() {
         </button>
       </form>
       {remaining !== null && (
-        <p className="-mt-2 text-center text-xs text-ink/60">{t('bot.remaining', { count: remaining })}</p>
+        <p className="-mt-2 text-center text-xs text-ink/70">{t('bot.remaining', { count: remaining })}</p>
       )}
     </div>
   );

@@ -126,7 +126,7 @@ export default function Settings() {
             {t(`settings.${key}`)}
             <input
               type="checkbox"
-              className="h-5 w-5 accent-sage"
+              className="h-5 w-5 accent-sage-dark"
               checked={profile[field]}
               onChange={(e) => onToggle(field, e.target.checked)}
             />

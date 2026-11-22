@@ -61,7 +61,7 @@ export default function CommunityScreen() {
             onChange={(e) => setDraft(e.target.value)}
           />
           {error && (
-            <p role="alert" className="text-sm text-terracotta">
+            <p role="alert" className="text-sm text-terracotta-dark">
               {t('common.error')}
             </p>
           )}

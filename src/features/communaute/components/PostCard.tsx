@@ -59,10 +59,10 @@ export function PostCard({ post, currentUserId, canWrite, onChanged }: Props) {
         </span>
         <div className="min-w-0 flex-1">
           <p className="truncate font-medium">{post.author?.pseudonym}</p>
-          <p className="text-xs text-ink/60">{timeAgo(post.created_at, i18n.language)}</p>
+          <p className="text-xs text-ink/70">{timeAgo(post.created_at, i18n.language)}</p>
         </div>
         {post.hidden && mine && (
-          <span className="rounded-full bg-terracotta/10 px-2 py-0.5 text-xs text-terracotta">
+          <span className="rounded-full bg-terracotta/10 px-2 py-0.5 text-xs text-terracotta-dark">
             {t('community.hidden')}
           </span>
         )}
@@ -79,14 +79,14 @@ export function PostCard({ post, currentUserId, canWrite, onChanged }: Props) {
         </button>
         {!mine && (
           <button
-            className="min-h-11 rounded-full px-3 text-ink/60 active:bg-terracotta/10"
+            className="min-h-11 rounded-full px-3 text-ink/70 active:bg-terracotta/10"
             onClick={() => setReporting({ postId: post.id })}
           >
             ⚑ {t('community.report.action')}
           </button>
         )}
         {mine && (
-          <button className="min-h-11 rounded-full px-3 text-terracotta" onClick={remove}>
+          <button className="min-h-11 rounded-full px-3 text-terracotta-dark" onClick={remove}>
             🗑 {t('community.delete')}
           </button>
         )}
@@ -103,20 +103,20 @@ export function PostCard({ post, currentUserId, canWrite, onChanged }: Props) {
               <li key={c.id} className="rounded-xl bg-cream p-2 text-sm">
                 <p>
                   <span className="font-medium">{c.author?.pseudonym}</span>
-                  <span className="ms-2 text-xs text-ink/60">{timeAgo(c.created_at, i18n.language)}</span>
+                  <span className="ms-2 text-xs text-ink/70">{timeAgo(c.created_at, i18n.language)}</span>
                 </p>
                 <p className="break-words whitespace-pre-line">{c.content}</p>
                 <div className="flex gap-1">
                   {c.author_id === currentUserId ? (
                     <button
-                      className="min-h-11 px-2 text-xs text-terracotta"
+                      className="min-h-11 px-2 text-xs text-terracotta-dark"
                       onClick={() => removeComment(c.id)}
                     >
                       {t('community.delete')}
                     </button>
                   ) : (
                     <button
-                      className="min-h-11 px-2 text-xs text-ink/60"
+                      className="min-h-11 px-2 text-xs text-ink/70"
                       onClick={() => setReporting({ commentId: c.id })}
                     >
                       {t('community.report.action')}
