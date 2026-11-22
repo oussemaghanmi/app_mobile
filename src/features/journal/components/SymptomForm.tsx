@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Icon } from '@/components/ui/Icon';
 import type { SymptomInput } from '../types';
 
 const EMPTY: SymptomInput = { pain_level: 0, stools_per_day: 0, on_period: false, notes: '' };
@@ -59,7 +60,7 @@ export function SymptomForm({ onSubmit }: { onSubmit: (input: SymptomInput) => P
             aria-label={t('journal.symptoms.less')}
             onClick={() => set('stools_per_day', Math.max(0, value.stools_per_day - 1))}
           >
-            −
+            <Icon name="minus" className="mx-auto h-5 w-5" />
           </button>
           <output aria-live="polite" className="w-8 text-center text-lg font-bold">
             {value.stools_per_day}
@@ -70,7 +71,7 @@ export function SymptomForm({ onSubmit }: { onSubmit: (input: SymptomInput) => P
             aria-label={t('journal.symptoms.more')}
             onClick={() => set('stools_per_day', Math.min(50, value.stools_per_day + 1))}
           >
-            +
+            <Icon name="plus" className="mx-auto h-5 w-5" />
           </button>
         </div>
       </div>

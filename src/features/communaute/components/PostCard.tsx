@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Icon } from '@/components/ui/Icon';
 import { timeAgo } from '@/lib/format';
 import * as api from '../api';
 import { useComments } from '../hooks';
@@ -75,19 +76,22 @@ export function PostCard({ post, currentUserId, canWrite, onChanged }: Props) {
           aria-expanded={showComments}
           onClick={() => setShowComments((s) => !s)}
         >
-          💬 {t('community.comments', { count })}
+          <Icon name="comment" className="me-1 inline h-4 w-4 align-[-3px]" />
+          {t('community.comments', { count })}
         </button>
         {!mine && (
           <button
             className="min-h-11 rounded-full px-3 text-ink/70 active:bg-terracotta/10"
             onClick={() => setReporting({ postId: post.id })}
           >
-            ⚑ {t('community.report.action')}
+            <Icon name="flag" className="me-1 inline h-4 w-4 align-[-3px]" />
+            {t('community.report.action')}
           </button>
         )}
         {mine && (
           <button className="min-h-11 rounded-full px-3 text-terracotta-dark" onClick={remove}>
-            🗑 {t('community.delete')}
+            <Icon name="trash" className="me-1 inline h-4 w-4 align-[-3px]" />
+            {t('community.delete')}
           </button>
         )}
       </div>

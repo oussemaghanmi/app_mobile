@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Icon } from '@/components/ui/Icon';
 import { displayStatus } from '../status';
 import type { DisplayStatus, Intake } from '../types';
 
@@ -57,7 +58,8 @@ export function IntakeRow({ intake, locale, onTake }: Props) {
             disabled={busy}
             aria-label={t('home.markTakenLabel', { name: intake.prescriptions?.medication ?? '' })}
           >
-            ✓ {t('home.markTaken')}
+            <Icon name="check" className="me-1 inline h-5 w-5 align-[-4px]" />
+            {t('home.markTaken')}
           </button>
         ) : null}
         <span className={`shrink-0 rounded-full px-2 py-1 text-xs font-medium ${BADGE[status]}`}>

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Icon } from '@/components/ui/Icon';
 import { ScreenHeader } from '@/components/ui/ScreenHeader';
 import { useCrohnBot } from '../hooks';
 
@@ -47,7 +48,8 @@ export default function CrohnBotScreen() {
         role="note"
         className="sticky top-0 z-10 rounded-xl border border-terracotta/30 bg-cream px-3 py-2 text-sm"
       >
-        ⚕️ {t('bot.disclaimer')}
+        <Icon name="info" className="me-1 inline h-4 w-4 align-[-3px] text-terracotta-dark" />
+        {t('bot.disclaimer')}
       </p>
 
       <div className="flex flex-1 flex-col gap-2" aria-live="polite" aria-busy={pending}>
@@ -118,9 +120,7 @@ export default function CrohnBotScreen() {
           aria-label={t('bot.send')}
           disabled={pending || !draft.trim() || remaining === 0}
         >
-          <span aria-hidden className="inline-block rtl:-scale-x-100">
-            ➤
-          </span>
+          <Icon name="send" className="mx-auto h-5 w-5" flip />
         </button>
       </form>
       {remaining !== null && (

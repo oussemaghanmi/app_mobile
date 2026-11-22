@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Icon } from '@/components/ui/Icon';
 import { ScreenHeader } from '@/components/ui/ScreenHeader';
 import { AsyncView } from '@/components/AsyncView';
 import { useAuth } from '@/features/auth/AuthProvider';
@@ -38,8 +39,9 @@ export default function CommunityScreen() {
   return (
     <div className="flex flex-col gap-4 p-4">
       <ScreenHeader title={t('sections.community')} subtitle={t('community.subtitle')} />
-      <p role="note" className="rounded-xl bg-sage/10 px-3 py-2 text-sm">
-        🛡️ {t('community.rules')}
+      <p role="note" className="flex gap-2 rounded-xl bg-sage/10 px-3 py-2 text-sm">
+        <Icon name="shield" className="mt-0.5 h-4 w-4 shrink-0 text-sage-dark" />
+        <span>{t('community.rules')}</span>
       </p>
 
       {profile?.role === 'patient' && !pseudonym.loading && !pseudonym.data && (

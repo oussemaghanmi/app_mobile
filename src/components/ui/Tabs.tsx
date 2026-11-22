@@ -1,8 +1,10 @@
 import { useId, useRef, type KeyboardEvent, type ReactNode } from 'react';
+import { Icon, type IconName } from './Icon';
 
 export interface TabItem<K extends string> {
   key: K;
   label: string;
+  icon?: IconName;
 }
 
 interface Props<K extends string> {
@@ -52,10 +54,11 @@ export function Tabs<K extends string>({ tabs, active, onChange, label, children
               tabIndex={selected ? 0 : -1}
               onClick={() => onChange(tab.key)}
               onKeyDown={(e) => onKeyDown(e, i)}
-              className={`min-h-11 shrink-0 rounded-full px-4 text-sm font-medium transition-colors ${
+              className={`flex min-h-11 shrink-0 items-center gap-1.5 rounded-full px-4 text-sm font-medium transition-colors ${
                 selected ? 'bg-sage-dark text-white' : 'bg-white text-ink/70 shadow-sm'
               }`}
             >
+              {tab.icon && <Icon name={tab.icon} className="h-4 w-4" />}
               {tab.label}
             </button>
           );

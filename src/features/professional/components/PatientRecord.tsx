@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { Icon } from '@/components/ui/Icon';
 import { ScreenHeader } from '@/components/ui/ScreenHeader';
 import { AsyncView } from '@/components/AsyncView';
 import { useAuth } from '@/features/auth/AuthProvider';
@@ -52,8 +53,9 @@ export default function PatientRecord() {
         )}
       </AsyncView>
 
-      <p role="note" className="rounded-xl bg-ink/5 px-3 py-2 text-sm">
-        🔒 {t('pro.record.privacy')}
+      <p role="note" className="flex gap-2 rounded-xl bg-ink/5 px-3 py-2 text-sm">
+        <Icon name="lock" className="mt-0.5 h-4 w-4 shrink-0" />
+        <span>{t('pro.record.privacy')}</span>
       </p>
 
       <div className="grid grid-cols-2 gap-3">
@@ -138,7 +140,8 @@ export default function PatientRecord() {
               {list.map((a) => (
                 <li key={a.id} className="flex items-center gap-2 py-2 text-sm">
                   <span className="flex-1">
-                    📅 {fmtDate(a.starts_at, true)}
+                    <Icon name="calendar" className="me-1 inline h-4 w-4 align-[-3px] text-sage-dark" />
+                    {fmtDate(a.starts_at, true)}
                     {a.location ? ` · ${a.location}` : ''}
                   </span>
                   {a.professional_id === profile.id && (

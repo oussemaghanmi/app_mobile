@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Icon } from '@/components/ui/Icon';
 import { todayInTunis } from '@/lib/dates';
 import type { PrescriptionInput } from '../types';
 
@@ -90,7 +91,7 @@ export function PrescriptionForm({ initial, onSubmit, onCancel }: Props) {
                     )
                   }
                 >
-                  ✕
+                  <Icon name="close" className="mx-auto h-5 w-5" />
                 </button>
               )}
             </div>

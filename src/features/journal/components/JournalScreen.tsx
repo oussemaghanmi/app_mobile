@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Icon } from '@/components/ui/Icon';
 import { ScreenHeader } from '@/components/ui/ScreenHeader';
 import { Tabs } from '@/components/ui/Tabs';
 import { AsyncView } from '@/components/AsyncView';
@@ -62,14 +63,15 @@ export default function JournalScreen() {
         active={tab}
         onChange={setTab}
         tabs={[
-          { key: 'symptoms', label: `🩺 ${t('journal.tabs.symptoms')}` },
-          { key: 'private', label: `🔒 ${t('journal.tabs.private')}` },
+          { key: 'symptoms', label: t('journal.tabs.symptoms'), icon: 'journal' },
+          { key: 'private', label: t('journal.tabs.private'), icon: 'lock' },
         ]}
       >
         {tab === 'symptoms' ? (
           <div className="flex flex-col gap-3">
-            <p role="note" className="rounded-xl bg-sage/10 px-3 py-2 text-sm">
-              👁️ {t('journal.symptoms.visibility')}
+            <p role="note" className="flex gap-2 rounded-xl bg-sage/10 px-3 py-2 text-sm">
+              <Icon name="eye" className="mt-0.5 h-4 w-4 shrink-0 text-sage-dark" />
+              <span>{t('journal.symptoms.visibility')}</span>
             </p>
             <SymptomForm
               onSubmit={async (input) => {
@@ -90,7 +92,7 @@ export default function JournalScreen() {
                           aria-label={t('journal.deleteEntry')}
                           onClick={() => removeLog(l.id)}
                         >
-                          🗑
+                          <Icon name="trash" className="mx-auto h-5 w-5" />
                         </button>
                       </div>
                       <div className="flex flex-wrap gap-2 text-sm">
@@ -115,8 +117,9 @@ export default function JournalScreen() {
           </div>
         ) : (
           <div className="flex flex-col gap-3">
-            <p role="note" className="rounded-xl bg-ink/5 px-3 py-2 text-sm">
-              🔒 {t('journal.private.visibility')}
+            <p role="note" className="flex gap-2 rounded-xl bg-ink/5 px-3 py-2 text-sm">
+              <Icon name="lock" className="mt-0.5 h-4 w-4 shrink-0" />
+              <span>{t('journal.private.visibility')}</span>
             </p>
             <form onSubmit={addEntry} className="card flex flex-col gap-2">
               <label htmlFor="private-entry" className="text-sm font-medium">
@@ -147,7 +150,7 @@ export default function JournalScreen() {
                           aria-label={t('journal.deleteEntry')}
                           onClick={() => removeEntry(e.id)}
                         >
-                          🗑
+                          <Icon name="trash" className="mx-auto h-5 w-5" />
                         </button>
                       </div>
                       <p className="whitespace-pre-line">{e.content}</p>
