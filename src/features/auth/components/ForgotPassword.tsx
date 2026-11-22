@@ -18,7 +18,7 @@ export default function ForgotPassword() {
     try {
       const res = await resetPasswordForEmail(email);
       if (!res.success) {
-        setErrorMsg(res.error || t('auth.genericError'));
+        setErrorMsg(t(res.errorKey ?? 'auth.genericError'));
       } else {
         setSent(true);
       }

@@ -79,7 +79,7 @@ describe('Auth screens', () => {
     it('affiche une alerte en cas d’erreur de l’API', async () => {
       vi.mocked(api.signUp).mockResolvedValueOnce({
         success: false,
-        error: 'User already registered',
+        errorKey: 'auth.errors.alreadyRegistered',
       });
 
       render(
@@ -94,7 +94,7 @@ describe('Auth screens', () => {
       await userEvent.click(screen.getByRole('button', { name: 'Créer mon compte' }));
 
       const alert = await screen.findByRole('alert');
-      expect(alert).toHaveTextContent('User already registered');
+      expect(alert).toHaveTextContent('Un compte existe déjà');
     });
   });
 
@@ -120,7 +120,7 @@ describe('Auth screens', () => {
     it('affiche une alerte si la réinitialisation échoue', async () => {
       vi.mocked(api.resetPasswordForEmail).mockResolvedValueOnce({
         success: false,
-        error: 'Erreur e-mail invalide',
+        errorKey: 'auth.errors.invalidEmail',
       });
 
       render(
@@ -133,7 +133,7 @@ describe('Auth screens', () => {
       await userEvent.click(screen.getByRole('button', { name: 'Envoyer le lien' }));
 
       const alert = await screen.findByRole('alert');
-      expect(alert).toHaveTextContent('Erreur e-mail invalide');
+      expect(alert).toHaveTextContent("adresse e-mail n'est pas valide");
     });
   });
 

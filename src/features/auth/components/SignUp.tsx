@@ -30,7 +30,7 @@ export default function SignUp() {
     try {
       const res = await signUp(email, password, firstName);
       if (!res.success) {
-        setErrorMsg(res.error || t('auth.genericError'));
+        setErrorMsg(t(res.errorKey ?? 'auth.genericError'));
       } else {
         setSuccess(true);
       }

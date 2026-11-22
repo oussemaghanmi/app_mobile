@@ -29,7 +29,13 @@
     "backToLogin": "Back to sign in",
     "passwordTooShort": "Password must be at least 6 characters long.",
     "passwordsDoNotMatch": "Passwords do not match.",
-    "genericError": "An error occurred. Please verify your details and try again."
+    "genericError": "An error occurred. Please verify your details and try again.",
+    "errors": {
+      "alreadyRegistered": "An account already exists with this e-mail. Sign in or reset your password.",
+      "invalidEmail": "This e-mail address is not valid.",
+      "rateLimited": "Too many requests. Please wait a moment before trying again.",
+      "linkExpired": "This link has expired or has already been used. Request a new reset link."
+    }
   },
   "home": {
     "hello": "Hello {{name}}",

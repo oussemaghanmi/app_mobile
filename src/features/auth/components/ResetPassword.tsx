@@ -29,7 +29,7 @@ export default function ResetPassword() {
     try {
       const res = await updatePassword(password);
       if (!res.success) {
-        setErrorMsg(res.error || t('auth.genericError'));
+        setErrorMsg(t(res.errorKey ?? 'auth.genericError'));
       } else {
         setSuccess(true);
       }
