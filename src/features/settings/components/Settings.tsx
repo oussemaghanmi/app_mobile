@@ -121,7 +121,8 @@ export default function Settings() {
             <button
               key={l.code}
               onClick={() => changeLanguage(l.code)}
-              className={`rounded-xl border px-3 py-2 ${profile.language === l.code ? 'border-sage bg-sage/10 font-bold' : 'border-black/10'}`}
+              aria-pressed={profile.language === l.code}
+              className={`min-h-11 rounded-xl border px-3 py-2 ${profile.language === l.code ? 'border-sage bg-sage/10 font-bold' : 'border-black/10'}`}
             >
               {l.label}
             </button>
