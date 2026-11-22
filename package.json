@@ -21,8 +21,8 @@
     "cap:sync": "npm run build && cap sync",
     "cap:android": "npm run cap:sync && cap open android",
     "e2e": "playwright test",
-    "functions:check": "deno check --node-modules-dir=none supabase/functions/crohnbot/index.ts",
-    "functions:test": "deno test --node-modules-dir=none --allow-net --allow-env supabase/functions/"
+    "functions:check": "deno check --no-lock --node-modules-dir=none supabase/functions/crohnbot/index.ts",
+    "functions:test": "deno test --no-lock --node-modules-dir=none --allow-net --allow-env supabase/functions/"
   },
   "dependencies": {
     "@capacitor/android": "^7.0.0",

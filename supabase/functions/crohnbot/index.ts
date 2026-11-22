@@ -64,16 +64,18 @@ Deno.serve(async (req) => {
   }
   if (!payload) return json(400, { error: 'invalid_request' });
 
-  // 3. Quota quotidien (incrément atomique en base, avec le JWT de l'utilisateur).
+  // 3. Service configuré ? Vérifié AVANT le quota : un service indisponible ne coûte aucun des 30 messages du jour.
+  const apiKey = Deno.env.get('ANTHROPIC_API_KEY');
+  if (!apiKey) return json(503, { error: 'not_configured' });
+
+  // 4. Quota quotidien (incrément atomique en base, avec le JWT de l'utilisateur).
   const { data: remaining, error: quotaError } = await supabase.rpc('consume_chatbot_quota', {
     p_limit: DAILY_LIMIT,
   });
   if (quotaError) return json(500, { error: 'quota_unavailable' });
   if (remaining === -1) return json(429, { error: 'daily_limit', remaining: 0 });
 
-  // 4. Appel du modèle : uniquement le prompt système et la conversation.
-  const apiKey = Deno.env.get('ANTHROPIC_API_KEY');
-  if (!apiKey) return json(503, { error: 'not_configured' });
+  // 5. Appel du modèle : uniquement le prompt système et la conversation.
   const anthropic = new Anthropic({ apiKey, maxRetries: 2, timeout: 60_000 });
 
   try {
