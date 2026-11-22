@@ -47,6 +47,19 @@ jobs:
       - name: Tests RLS (pgTAP)
         run: supabase test db
 
+  edge-functions:
+    name: edge-functions
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+      - name: Vérification des types
+        run: deno check --node-modules-dir=none supabase/functions/crohnbot/index.ts
+      - name: Tests (faux serveurs, sans clé réelle ni réseau externe)
+        run: deno test --node-modules-dir=none --allow-net --allow-env supabase/functions/
+
   secrets-scan:
     name: secrets-scan
     runs-on: ubuntu-latest

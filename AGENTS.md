@@ -60,6 +60,7 @@ en cas de collision. Ne jamais modifier une migration déjà fusionnée.
 ```bash
 npm run lint && npm run typecheck && npm run check:i18n && npm test && npm run build
 npm run db:test            # si le schéma ou une fonction SQL change (Docker) ; sinon ./scripts/test-db-local.sh
+npm run functions:check && npm run functions:test   # si une Edge Function change (nécessite Deno 2)
 ```
 - [ ] Les 4 langues sont renseignées pour tout nouveau texte (vraie traduction, pas de copie du français).
 - [ ] Classes Tailwind logiques (RTL) ; cibles tactiles ≥ 44 px ; `aria-label` sur les boutons icônes.

@@ -7,6 +7,7 @@ flowchart LR
     Q["quality<br/>lint · typecheck · check:i18n · test · build"]
     D["database<br/>supabase start · db reset · test db (pgTAP)"]
     S["secrets-scan<br/>gitleaks"]
+    F["edge-functions<br/>deno check + tests"]
   end
   CI -- "vert → merge" --> Develop["develop"]
   Develop -- "push" --> APK["android.yml<br/>APK debug → artefact croncare-debug-apk"]
@@ -18,7 +19,7 @@ flowchart LR
 
 | Workflow | Déclencheur | Jobs | Bloquant pour la PR |
 |---|---|---|---|
-| `ci.yml` | `pull_request`, push sur `develop` / `main` | `quality`, `database`, `secrets-scan` | **Oui** (avec la protection de branche) |
+| `ci.yml` | `pull_request`, push sur `develop` / `main` | `quality`, `database`, `edge-functions`, `secrets-scan` | **Oui** (avec la protection de branche) |
 | `android.yml` | push sur `develop` / `main`, manuel | `apk` → artefact `croncare-debug-apk` | Non |
 | `deploy-supabase.yml` | push sur `main`, manuel | `deploy` (environment `production`) | Non |
 | `dependabot.yml` | hebdomadaire | PR npm + GitHub Actions vers `develop` | — |
@@ -54,7 +55,7 @@ d'administration du dépôt.
 **Par l'interface** : Settings → Branches → *Add branch ruleset* (ou *Add classic protection rule*)
 pour `main` puis pour `develop` :
 - Require a pull request before merging
-- Require status checks to pass : `quality`, `database`, `secrets-scan`
+- Require status checks to pass : `quality`, `database`, `edge-functions`, `secrets-scan`
 - Require branches to be up to date before merging
 - Block force pushes, restrict deletions
 
@@ -63,7 +64,7 @@ pour `main` puis pour `develop` :
 for b in develop main; do
   gh api -X PUT repos/oussemaghanmi/app_mobile/branches/$b/protection --input - <<'JSON'
 {
-  "required_status_checks": { "strict": true, "contexts": ["quality", "database", "secrets-scan"] },
+  "required_status_checks": { "strict": true, "contexts": ["quality", "database", "edge-functions", "secrets-scan"] },
   "enforce_admins": false,
   "required_pull_request_reviews": { "required_approving_review_count": 0 },
   "restrictions": null,
