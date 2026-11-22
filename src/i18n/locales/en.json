@@ -15,7 +15,11 @@
     "next": "Next dose",
     "none": "No dose scheduled",
     "tip": "Tip of the day",
-    "quick": "Quick access"
+    "quick": "Quick access",
+    "markTaken": "Taken",
+    "markTakenLabel": "Mark as taken: {{name}}",
+    "late": "Late",
+    "markError": "Could not save this dose. Please try again."
   },
   "sections": {
     "disease": "My disease",
@@ -26,7 +30,8 @@
     "calendar": "Calendar",
     "meds": "Medications",
     "home": "Home",
-    "settings": "Settings"
+    "settings": "Settings",
+    "bot": "CrohnBot"
   },
   "settings": {
     "profile": "Patient profile",
@@ -53,6 +58,425 @@
     "noPatients": "No assigned patients",
     "prescriptions": "Prescriptions",
     "nursingNotes": "Nursing notes",
-    "symptoms": "Symptom journal"
+    "symptoms": "Symptom journal",
+    "record": {
+      "subtitle": "Patient record",
+      "privacy": "The patient's private journal is never accessible to the care team.",
+      "notFound": "Patient not found or not assigned.",
+      "adherence30": "30-day adherence",
+      "missed30": "Missed doses (30 d)",
+      "mood": "Mood over the last 30 days",
+      "moodAverage": "Average {{value}}/5",
+      "noData": "No entries",
+      "showValues": "Show values",
+      "date": "Date",
+      "moodValue": "Mood"
+    },
+    "rx": {
+      "inactive": "stopped",
+      "by": "Prescribed by {{name}}",
+      "new": "New prescription",
+      "edit": "Edit",
+      "stop": "Stop",
+      "resume": "Resume",
+      "confirmStop": "Stop the {{name}} prescription? Future doses will be removed.",
+      "medication": "Medicine",
+      "dosage": "Dosage",
+      "dosagePlaceholder": "e.g. 1 tablet of 50 mg",
+      "times": "Dose times (Tunisia time)",
+      "timeN": "Time {{n}}",
+      "removeTime": "Remove time {{n}}",
+      "addTime": "Add a time",
+      "start": "Start",
+      "end": "End (optional)",
+      "datesError": "The end date must be after the start date.",
+      "regenerateNote": "After a change, upcoming doses are recalculated the next time the patient opens the app."
+    },
+    "notes": {
+      "empty": "No observations yet.",
+      "new": "New observation",
+      "placeholder": "Care given, patient education, general condition, points to report…",
+      "immutable": "A saved observation can no longer be changed (traceability)."
+    },
+    "appointments": {
+      "title": "Upcoming appointments",
+      "new": "New",
+      "add": "Add appointment",
+      "when": "Date and time",
+      "duration": "Duration (min)",
+      "location": "Place",
+      "empty": "No appointment planned.",
+      "confirmDelete": "Delete this appointment permanently?"
+    }
+  },
+  "common": {
+    "loading": "Loading…",
+    "error": "Something went wrong.",
+    "retry": "Try again",
+    "empty": "Nothing to show yet.",
+    "back": "Back",
+    "medicalNotice": "General information: it does not replace your doctor's advice.",
+    "close": "Close",
+    "cancel": "Cancel"
+  },
+  "nav": {
+    "main": "Main navigation"
+  },
+  "emergency": {
+    "title": "Warning signs: seek urgent care",
+    "signs": {
+      "blood": "A lot of blood in your stools",
+      "fever": "High fever",
+      "pain": "Severe or unusual abdominal pain",
+      "vomiting": "Vomiting that won't stop",
+      "dehydration": "Signs of dehydration (intense thirst, dry mouth, very little urine, dizziness)"
+    },
+    "call": "Call the SAMU (190)"
+  },
+  "disease": {
+    "subtitle": "Understanding Crohn's disease",
+    "tabsLabel": "Information topics",
+    "tabs": {
+      "understand": "Understand",
+      "symptoms": "Symptoms",
+      "treatments": "Treatments",
+      "living": "Living with it"
+    },
+    "understand": {
+      "what": {
+        "title": "What is Crohn's disease?",
+        "text": "It is a chronic inflammatory bowel disease (IBD). The immune system causes inflammation of the wall of the digestive tract. It is not contagious and it is not your fault."
+      },
+      "where": {
+        "title": "Which parts of the body?",
+        "text": "It can affect the whole digestive tract, from the mouth to the anus. Most often it affects the end of the small intestine (ileum) and the colon."
+      },
+      "course": {
+        "title": "How does it evolve?",
+        "text": "It alternates between flares, when symptoms are present, and periods of remission, when they ease or disappear. With regular treatment and follow-up, many patients lead an active life."
+      },
+      "causes": {
+        "title": "Why me?",
+        "text": "The exact cause is unknown. It combines a genetic predisposition, an abnormal reaction of the immune system and environmental factors. Smoking is the best-known aggravating factor."
+      }
+    },
+    "symptoms": {
+      "digestive": {
+        "title": "Digestive symptoms",
+        "text": "Abdominal pain (often lower right), lasting diarrhoea, sometimes with blood or mucus, an urgent need to go to the toilet. Lesions around the anus (fissures, abscesses, fistulas) are possible."
+      },
+      "general": {
+        "title": "General symptoms",
+        "text": "Severe tiredness, loss of appetite, weight loss, sometimes fever. Fatigue is common, even between flares: talk about it with your care team."
+      },
+      "extra": {
+        "title": "Outside the gut",
+        "text": "The disease can also affect the joints (pain), the skin, the eyes (redness, pain) or the liver. Report these symptoms to your doctor."
+      }
+    },
+    "treatments": {
+      "goals": {
+        "title": "What are treatments for?",
+        "text": "There is no treatment yet that cures the disease for good. Treatments aim to calm the inflammation, achieve and then maintain remission, and prevent complications."
+      },
+      "families": {
+        "title": "Several families of medicines",
+        "text": "Depending on your situation, your doctor may suggest anti-inflammatories, corticosteroids for a limited time, immunosuppressants or biologics. The choice and the dose are personal: your doctor decides them."
+      },
+      "surgery": {
+        "title": "What about surgery?",
+        "text": "Surgery is sometimes needed, for example for a narrowing of the bowel or a complication. It does not cure the disease but can bring a lot of relief. It is discussed with the medical team."
+      },
+      "adherence": {
+        "title": "Taking your treatment well",
+        "text": "Keep taking your treatment even when you feel well: that is what helps prevent flares. Never stop or change a medicine without your doctor's advice. CronCare reminders are there to help."
+      }
+    },
+    "living": {
+      "followup": {
+        "title": "Regular follow-up",
+        "text": "Consultations, blood tests and examinations help adjust your treatment. Write your symptoms in the journal to discuss them with your doctor. Check your vaccinations with your doctor, especially before some treatments."
+      },
+      "food": {
+        "title": "Food",
+        "text": "There is no single diet. During a flare, adapted eating can help; in remission, eat as varied as possible. Ask your doctor or a dietitian for advice. See also the Recipes section."
+      },
+      "activity": {
+        "title": "Physical activity",
+        "text": "Gentle, regular activity (walking, swimming, cycling…) helps against fatigue and stress. Adapt the effort to how you feel and rest during flares."
+      },
+      "mind": {
+        "title": "Your wellbeing matters",
+        "text": "Living with a chronic disease can be hard. Talking to your loved ones, your care team, a psychologist or other patients in the Community can help."
+      }
+    },
+    "more": "Learn more",
+    "cycle": {
+      "title": "Menstrual cycle and Crohn's disease",
+      "menstruation": {
+        "title": "During your period",
+        "text": "Many women notice more abdominal pain or diarrhoea just before or during their period. This is common and is not necessarily a flare."
+      },
+      "contraception": {
+        "title": "Contraception",
+        "text": "Some medicines and some forms of the disease can influence the choice of contraception. Discuss it with your gastroenterologist and gynaecologist."
+      },
+      "pregnancy": {
+        "title": "Planning a pregnancy",
+        "text": "Pregnancy is usually possible. It is best planned with your doctors, ideally during remission. Do not stop your treatment on your own if you are pregnant: talk to your doctor first."
+      },
+      "journal": {
+        "title": "Tip",
+        "text": "Write your symptoms in the journal and note your period days: it will help your doctor tell the difference with a flare."
+      }
+    },
+    "tobacco": {
+      "title": "Quitting smoking: a priority",
+      "why": {
+        "title": "Why it matters",
+        "text": "In people with Crohn's disease, smoking increases the risk of flares, complications and surgery, and can make treatments less effective."
+      },
+      "benefits": {
+        "title": "It is never too late",
+        "text": "Quitting helps at any stage of the disease. The benefits on the disease build up gradually in the months after quitting."
+      },
+      "shisha": {
+        "title": "What about shisha?",
+        "text": "Shisha (hookah) also contains tobacco and produces a lot of smoke: it is not a less harmful alternative to cigarettes."
+      },
+      "help": {
+        "title": "Get support",
+        "text": "Your doctor or a smoking-cessation specialist can support you and offer suitable help. Being supported greatly increases your chances of success."
+      }
+    }
+  },
+  "meds": {
+    "adherenceMonth": "This month's adherence",
+    "adherence14": "14-day adherence",
+    "tabsLabel": "Medication views",
+    "tabs": {
+      "today": "Today",
+      "treatment": "My treatment",
+      "history": "History"
+    },
+    "status": {
+      "taken": "Taken",
+      "skipped": "Skipped",
+      "missed": "Missed",
+      "late": "Late",
+      "upcoming": "Upcoming"
+    },
+    "noIntakeToday": "No dose planned today.",
+    "noPrescription": "No current treatment.",
+    "noHistory": "No history yet.",
+    "readOnly": "Your treatment is prescribed by your doctor. To change anything, talk to them.",
+    "times": "Times",
+    "since": "Since {{from}}",
+    "fromTo": "From {{from}} to {{to}}"
+  },
+  "nutrition": {
+    "title": "Nutrition",
+    "subtitle": "Recipes, guidance and shops",
+    "tabsLabel": "Nutrition sections",
+    "tabs": {
+      "recipes": "Recipes",
+      "foods": "Guidance",
+      "stores": "Shops"
+    },
+    "filterLabel": "Filter recipes",
+    "filter": {
+      "all": "All",
+      "flare": "Flare",
+      "remission": "Remission"
+    },
+    "phase": {
+      "flare": "Suitable during a flare",
+      "remission": "In remission",
+      "all": "For every day"
+    },
+    "showRecipe": "Show recipe",
+    "hideRecipe": "Hide recipe",
+    "ingredients": "Ingredients",
+    "steps": "Method",
+    "noRecipe": "No recipes yet.",
+    "noStore": "No shops listed yet.",
+    "city": "City",
+    "mapTitle": "Map of shops in {{city}}",
+    "openMap": "Open map",
+    "storeKind": {
+      "supermarket": "Supermarket",
+      "organic": "Organic",
+      "gluten_free": "Gluten-free",
+      "pharmacy": "Pharmacy"
+    },
+    "foods": {
+      "flareOften": {
+        "title": "During a flare: often better tolerated",
+        "text": "Cooked, low-fibre foods: white rice, pasta, potatoes, cooked and peeled carrots and courgettes, white meat, fish, eggs, stewed fruit. Everyone reacts differently: notice what suits you."
+      },
+      "flareLimit": {
+        "title": "During a flare: often best limited",
+        "text": "Raw vegetables, pulses (chickpeas, lentils), fruit with skin or seeds, very fatty, fried or very spicy food (harissa), fizzy drinks. This advice is temporary and should be adapted with your doctor."
+      },
+      "remission": {
+        "title": "In remission",
+        "text": "Eat as varied as possible to avoid deficiencies. Reintroduce foods gradually, one at a time. A very restrictive diet is not recommended without medical advice."
+      },
+      "hydration": {
+        "title": "Stay hydrated",
+        "text": "Drink water regularly, especially with diarrhoea or in hot weather. Soups and broths also help replace losses."
+      }
+    },
+    "minutes": "{{count}} min"
+  },
+  "tips": {
+    "subtitle": "Everyday guidance",
+    "priority": "Priority",
+    "category": {
+      "hydratation": "Hydration",
+      "tabac": "Tobacco",
+      "sommeil": "Sleep",
+      "stress": "Stress",
+      "activite": "Physical activity",
+      "voyage": "Travel",
+      "alimentation": "Food",
+      "suivi": "Medical follow-up"
+    },
+    "tobacco": {
+      "title": "Quit cigarettes and shisha",
+      "intro": "It is the step with the biggest effect on how Crohn's disease evolves. Here are four steps to get started.",
+      "date": {
+        "title": "Set a date",
+        "text": "pick a calm day, for example early in the week, and prepare a few days before."
+      },
+      "triggers": {
+        "title": "Spot risky moments",
+        "text": "morning coffee, the work break, shisha with friends or the evening after iftar during Ramadan. Plan an alternative: walk, drink water, chew gum."
+      },
+      "entourage": {
+        "title": "Tell the people around you",
+        "text": "ask family and friends not to offer you cigarettes or shisha, and not to smoke near you."
+      },
+      "help": {
+        "title": "Get support",
+        "text": "your doctor or a smoking-cessation specialist can offer support and suitable nicotine replacement. Don't give up after a slip: start again."
+      },
+      "more": "Why it matters (My disease)"
+    }
+  },
+  "community": {
+    "subtitle": "Talk with other patients",
+    "rules": "You appear under your nickname, never your name. Be kind, don't share personal data and don't give treatment advice: only your doctor can do that.",
+    "pseudonym": {
+      "title": "Choose your nickname",
+      "explain": "Your real name is never shown in the community. Choose a nickname that can't identify you.",
+      "label": "Nickname",
+      "hint": "3 to 30 characters: letters, digits, space, _ . -",
+      "submit": "Confirm",
+      "taken": "This nickname is already taken.",
+      "invalid": "This nickname contains characters that are not allowed."
+    },
+    "postAs": "Post as {{pseudonym}}",
+    "postPlaceholder": "Share your experience, ask a question…",
+    "publish": "Post",
+    "empty": "No posts yet. Start the conversation!",
+    "comments": "Comments ({{count}})",
+    "commentPlaceholder": "Write a comment",
+    "send": "Send",
+    "delete": "Delete",
+    "confirmDelete": "Delete this message permanently?",
+    "hidden": "Hidden after reports",
+    "report": {
+      "action": "Report",
+      "why": "Why are you reporting this message?",
+      "details": "Details (optional)",
+      "submit": "Send report",
+      "thanks": "Thank you, your report has been sent.",
+      "already": "You have already reported this message.",
+      "reasons": {
+        "medical_misinformation": "Dangerous or false medical information",
+        "harassment": "Hurtful words or harassment",
+        "spam": "Advertising or spam",
+        "personal_data": "Personal data exposed",
+        "other": "Other"
+      }
+    }
+  },
+  "journal": {
+    "tabsLabel": "Journal spaces",
+    "tabs": {
+      "symptoms": "Symptoms",
+      "private": "Private journal"
+    },
+    "history": "History",
+    "saved": "Entry saved.",
+    "confirmDelete": "Delete this entry permanently?",
+    "deleteEntry": "Delete entry",
+    "symptoms": {
+      "visibility": "This information is visible to your care team (the doctor and nurse who follow you).",
+      "newEntry": "How are you today?",
+      "pain": "Pain",
+      "painValue": "Pain {{value}} out of 10",
+      "painNone": "0: none",
+      "painMax": "10: worst",
+      "stools": "Number of stools today",
+      "less": "Decrease",
+      "more": "Increase",
+      "period": "Period day",
+      "notes": "Notes",
+      "notesPlaceholder": "Fatigue, food, sleep, events…",
+      "empty": "No entries yet.",
+      "painShort": "Pain {{value}}/10",
+      "stoolsShort": "{{value}} stool(s)",
+      "periodShort": "Period"
+    },
+    "private": {
+      "visibility": "Personal space: only you can read these notes. They are never shared with your care team.",
+      "newEntry": "New note",
+      "placeholder": "Write freely…",
+      "empty": "Your private journal is empty."
+    }
+  },
+  "calendar": {
+    "prev": "Previous month",
+    "next": "Next month",
+    "legend": "Legend",
+    "appointment": "Appointment",
+    "summary": "{{taken}} taken, {{missed}} missed, {{upcoming}} upcoming",
+    "appointmentsCount": "{{count}} appointment(s)",
+    "nothing": "Nothing planned that day."
+  },
+  "reminders": {
+    "title": "💊 Time for your treatment",
+    "body": "{{medication}} — {{dosage}}. Open CronCare to record the dose.",
+    "webOnly": "Reminders work in the installed Android app, not in the browser.",
+    "denied": "Notifications are blocked: allow them in your phone settings to receive reminders."
+  },
+  "bot": {
+    "title": "CrohnBot",
+    "subtitle": "Information assistant",
+    "newChat": "New conversation",
+    "disclaimer": "General information only: CrohnBot does not replace medical advice and does not diagnose. In an emergency, call 190.",
+    "welcome": "Hello! I answer your general questions about Crohn's disease and daily life. For your treatment, always talk to your doctor.",
+    "suggestions": {
+      "fatigue": "How can I manage fatigue?",
+      "food": "What can I eat during a flare?",
+      "tobacco": "Why should I quit smoking?",
+      "consultation": "How do I prepare my appointment?"
+    },
+    "you": "You",
+    "thinking": "CrohnBot is typing…",
+    "placeholder": "Type your question…",
+    "send": "Send",
+    "remaining": "{{count}} messages left today",
+    "truncated": "The answer was cut off. Ask a more specific question to continue.",
+    "refused": "CrohnBot can't answer this question. Please talk to your doctor.",
+    "errors": {
+      "daily_limit": "You have reached the limit of 30 messages for today. Come back tomorrow.",
+      "not_configured": "CrohnBot is not available yet.",
+      "busy": "CrohnBot is very busy. Try again in a moment.",
+      "network": "No connection. Check your internet access.",
+      "unknown": "Something went wrong. Please try again."
+    }
   }
 }

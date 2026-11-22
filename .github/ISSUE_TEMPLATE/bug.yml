@@ -1,0 +1,23 @@
+name: Bug
+description: Quelque chose ne fonctionne pas comme prévu
+labels: ['bug']
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: Ce qui se passe
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Ce qui devrait se passer
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Pour reproduire
+      description: Rôle utilisé (patient, médecin, infirmier), langue, étapes.
+    validations:
+      required: true

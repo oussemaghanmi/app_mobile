@@ -19,3 +19,18 @@ ios/App/Pods/
 .idea/
 .DS_Store
 *.log
+
+# Build TypeScript incrémental
+*.tsbuildinfo
+
+# Supabase local
+supabase/.temp/
+supabase/.branches/
+
+# Playwright
+playwright-report/
+test-results/
+
+# Deno : verrou généré par les tests des Edge Functions, non versionné
+deno.lock
+validation-medicale.md

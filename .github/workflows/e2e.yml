@@ -1,0 +1,49 @@
+name: e2e
+
+on:
+  pull_request:
+  push:
+    branches: [develop, main]
+
+concurrency:
+  group: e2e-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  e2e:
+    name: e2e
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - uses: supabase/setup-cli@v1
+        with:
+          version: 2.122.0
+      - name: Démarrer Supabase local (base, authentification, API)
+        run: supabase start -x studio,imgproxy,inbucket,mailpit,vector,logflare,supavisor,realtime,storage-api,postgres-meta,edge-runtime
+      - name: Exporter les clés de la base locale
+        run: |
+          eval "$(supabase status -o env)"
+          echo "::add-mask::$SERVICE_ROLE_KEY"
+          echo "E2E_ANON_KEY=$ANON_KEY" >> "$GITHUB_ENV"
+          echo "E2E_SERVICE_ROLE_KEY=$SERVICE_ROLE_KEY" >> "$GITHUB_ENV"
+          echo "E2E_SUPABASE_URL=$API_URL" >> "$GITHUB_ENV"
+      - name: Tests de bout en bout
+        run: npm run e2e
+      - name: Rapport Playwright
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          if-no-files-found: ignore
+          retention-days: 7

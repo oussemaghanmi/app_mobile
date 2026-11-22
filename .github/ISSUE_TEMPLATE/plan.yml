@@ -1,0 +1,28 @@
+name: Plan
+description: Regroupe les tâches d'un lot ; réservé à la personne qui pilote le projet
+title: '[Plan] '
+labels: ['plan']
+body:
+  - type: textarea
+    id: goal
+    attributes:
+      label: Objectif du lot
+      description: Ce que le lot apporte et pourquoi, en quelques lignes.
+    validations:
+      required: true
+  - type: textarea
+    id: tasks
+    attributes:
+      label: Tâches
+      description: Une ligne par tâche, `- [ ] #numéro titre (agent)`. Les tâches sont aussi ajoutées comme sous-issues.
+    validations:
+      required: true
+  - type: textarea
+    id: interfaces
+    attributes:
+      label: Interfaces entre les tâches
+      description: Pour chaque tâche qui en alimente une autre, le nom exact de ce qu'elle produit (composant, fonction, route, fonction SQL) et qui le consomme.
+  - type: textarea
+    id: order
+    attributes:
+      label: Ordre et dépendances

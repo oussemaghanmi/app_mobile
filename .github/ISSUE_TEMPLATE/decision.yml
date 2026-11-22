@@ -1,0 +1,28 @@
+name: Décision
+description: Un choix à trancher (donnera un ADR dans docs/adr/)
+labels: ['décision']
+body:
+  - type: input
+    id: blocked
+    attributes:
+      label: Tâche bloquée
+      description: Numéro de la tâche qui attend cette décision, ex. `#42`. Sa carte passe en « Blocked » à l'ouverture et revient en « In progress » à la fermeture.
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Contexte
+    validations:
+      required: true
+  - type: textarea
+    id: options
+    attributes:
+      label: Options
+      description: Deux ou trois options, avec ce que chacune coûte.
+    validations:
+      required: true
+  - type: textarea
+    id: recommendation
+    attributes:
+      label: Recommandation

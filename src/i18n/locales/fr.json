@@ -15,7 +15,11 @@
     "next": "Prochaine prise",
     "none": "Aucune prise prévue",
     "tip": "Conseil du jour",
-    "quick": "Accès rapide"
+    "quick": "Accès rapide",
+    "markTaken": "Pris",
+    "markTakenLabel": "Marquer comme pris : {{name}}",
+    "late": "En retard",
+    "markError": "Impossible d'enregistrer la prise. Réessayez."
   },
   "sections": {
     "disease": "Ma maladie",
@@ -26,7 +30,8 @@
     "calendar": "Calendrier",
     "meds": "Médicaments",
     "home": "Accueil",
-    "settings": "Paramètres"
+    "settings": "Paramètres",
+    "bot": "CrohnBot"
   },
   "settings": {
     "profile": "Profil patient",
@@ -53,6 +58,425 @@
     "noPatients": "Aucun patient affecté",
     "prescriptions": "Prescriptions",
     "nursingNotes": "Observations infirmières",
-    "symptoms": "Journal des symptômes"
+    "symptoms": "Journal des symptômes",
+    "record": {
+      "subtitle": "Fiche patient",
+      "privacy": "Le journal privé du patient n'est jamais accessible à l'équipe soignante.",
+      "notFound": "Patient introuvable ou non affecté.",
+      "adherence30": "Observance 30 jours",
+      "missed30": "Prises oubliées (30 j)",
+      "mood": "Humeur des 30 derniers jours",
+      "moodAverage": "Moyenne {{value}}/5",
+      "noData": "Aucune saisie",
+      "showValues": "Voir les valeurs",
+      "date": "Date",
+      "moodValue": "Humeur"
+    },
+    "rx": {
+      "inactive": "arrêtée",
+      "by": "Prescrit par {{name}}",
+      "new": "Nouvelle prescription",
+      "edit": "Modifier",
+      "stop": "Arrêter",
+      "resume": "Reprendre",
+      "confirmStop": "Arrêter la prescription de {{name}} ? Les prises futures seront supprimées.",
+      "medication": "Médicament",
+      "dosage": "Dosage",
+      "dosagePlaceholder": "ex. 1 comprimé de 50 mg",
+      "times": "Horaires de prise (heure de Tunisie)",
+      "timeN": "Horaire {{n}}",
+      "removeTime": "Retirer l'horaire {{n}}",
+      "addTime": "Ajouter un horaire",
+      "start": "Début",
+      "end": "Fin (facultatif)",
+      "datesError": "La date de fin doit être postérieure à la date de début.",
+      "regenerateNote": "Après une modification, les prises à venir sont recalculées à la prochaine ouverture de l'application par le patient."
+    },
+    "notes": {
+      "empty": "Aucune observation pour le moment.",
+      "new": "Nouvelle observation",
+      "placeholder": "Soins réalisés, éducation thérapeutique, état général, points à signaler…",
+      "immutable": "Une observation enregistrée ne peut plus être modifiée (traçabilité)."
+    },
+    "appointments": {
+      "title": "Rendez-vous à venir",
+      "new": "Nouveau",
+      "add": "Ajouter le rendez-vous",
+      "when": "Date et heure",
+      "duration": "Durée (min)",
+      "location": "Lieu",
+      "empty": "Aucun rendez-vous prévu.",
+      "confirmDelete": "Supprimer définitivement ce rendez-vous ?"
+    }
+  },
+  "common": {
+    "loading": "Chargement…",
+    "error": "Une erreur est survenue.",
+    "retry": "Réessayer",
+    "empty": "Rien à afficher pour le moment.",
+    "back": "Retour",
+    "medicalNotice": "Information générale : elle ne remplace pas l'avis de votre médecin.",
+    "close": "Fermer",
+    "cancel": "Annuler"
+  },
+  "nav": {
+    "main": "Navigation principale"
+  },
+  "emergency": {
+    "title": "Signes d'alerte : consultez en urgence",
+    "signs": {
+      "blood": "Sang abondant dans les selles",
+      "fever": "Fièvre élevée",
+      "pain": "Douleur abdominale intense ou inhabituelle",
+      "vomiting": "Vomissements qui ne s'arrêtent pas",
+      "dehydration": "Signes de déshydratation (soif intense, bouche sèche, très peu d'urine, vertiges)"
+    },
+    "call": "Appeler le SAMU (190)"
+  },
+  "disease": {
+    "subtitle": "Comprendre la maladie de Crohn",
+    "tabsLabel": "Thèmes d'information",
+    "tabs": {
+      "understand": "Comprendre",
+      "symptoms": "Symptômes",
+      "treatments": "Traitements",
+      "living": "Vivre avec"
+    },
+    "understand": {
+      "what": {
+        "title": "Qu'est-ce que la maladie de Crohn ?",
+        "text": "C'est une maladie inflammatoire chronique de l'intestin (MICI). Le système immunitaire provoque une inflammation de la paroi du tube digestif. Elle n'est ni contagieuse, ni due à une faute de votre part."
+      },
+      "where": {
+        "title": "Quelles parties du corps ?",
+        "text": "Elle peut toucher tout le tube digestif, de la bouche à l'anus. Le plus souvent, elle atteint la fin de l'intestin grêle (iléon) et le côlon."
+      },
+      "course": {
+        "title": "Comment évolue-t-elle ?",
+        "text": "Elle alterne des poussées, où les symptômes sont présents, et des périodes de rémission, où ils diminuent ou disparaissent. Avec un traitement et un suivi réguliers, beaucoup de patients mènent une vie active."
+      },
+      "causes": {
+        "title": "Pourquoi moi ?",
+        "text": "La cause exacte n'est pas connue. Elle associe une prédisposition génétique, une réaction anormale du système immunitaire et des facteurs de l'environnement. Le tabac est le facteur aggravant le mieux connu."
+      }
+    },
+    "symptoms": {
+      "digestive": {
+        "title": "Symptômes digestifs",
+        "text": "Douleurs au ventre (souvent en bas à droite), diarrhée qui dure, parfois avec du sang ou des glaires, besoin urgent d'aller aux toilettes. Des lésions autour de l'anus (fissures, abcès, fistules) sont possibles."
+      },
+      "general": {
+        "title": "Symptômes généraux",
+        "text": "Fatigue importante, perte d'appétit, perte de poids, parfois fièvre. La fatigue est fréquente, même en dehors des poussées : parlez-en à votre équipe soignante."
+      },
+      "extra": {
+        "title": "En dehors de l'intestin",
+        "text": "La maladie peut aussi toucher les articulations (douleurs), la peau, les yeux (rougeur, douleur) ou le foie. Signalez ces symptômes à votre médecin."
+      }
+    },
+    "treatments": {
+      "goals": {
+        "title": "À quoi servent les traitements ?",
+        "text": "Il n'existe pas encore de traitement qui guérit définitivement la maladie. Les traitements visent à calmer l'inflammation, à obtenir une rémission puis à la maintenir, et à éviter les complications."
+      },
+      "families": {
+        "title": "Plusieurs familles de médicaments",
+        "text": "Selon votre situation, le médecin peut proposer des anti-inflammatoires, des corticoïdes pour une durée limitée, des immunosuppresseurs ou des biothérapies. Le choix et la dose sont personnels : ils sont décidés par votre médecin."
+      },
+      "surgery": {
+        "title": "Et la chirurgie ?",
+        "text": "Une opération est parfois nécessaire, par exemple en cas de rétrécissement de l'intestin ou de complication. Elle ne guérit pas la maladie mais peut beaucoup soulager. Elle se discute avec l'équipe médicale."
+      },
+      "adherence": {
+        "title": "Bien prendre son traitement",
+        "text": "Prenez votre traitement même quand vous allez bien : c'est ce qui aide à éviter les poussées. N'arrêtez jamais et ne modifiez jamais un médicament sans l'avis de votre médecin. Les rappels de CronCare sont là pour vous aider."
+      }
+    },
+    "living": {
+      "followup": {
+        "title": "Un suivi régulier",
+        "text": "Les consultations, les analyses et les examens permettent d'adapter le traitement. Notez vos symptômes dans le journal pour en parler à votre médecin. Vos vaccins sont à vérifier avec lui, surtout avant certains traitements."
+      },
+      "food": {
+        "title": "Alimentation",
+        "text": "Il n'existe pas de régime unique. Pendant une poussée, une alimentation adaptée peut soulager ; en rémission, mangez le plus varié possible. Demandez conseil à votre médecin ou à un diététicien. Voir aussi la rubrique Recettes."
+      },
+      "activity": {
+        "title": "Activité physique",
+        "text": "Une activité douce et régulière (marche, natation, vélo…) aide contre la fatigue et le stress. Adaptez l'effort à votre état et reposez-vous pendant les poussées."
+      },
+      "mind": {
+        "title": "Le moral compte",
+        "text": "Vivre avec une maladie chronique peut être difficile. En parler à vos proches, à l'équipe soignante, à un psychologue ou à d'autres patients dans la Communauté peut vous aider."
+      }
+    },
+    "more": "Pour aller plus loin",
+    "cycle": {
+      "title": "Cycle féminin et maladie de Crohn",
+      "menstruation": {
+        "title": "Pendant les règles",
+        "text": "Beaucoup de femmes remarquent plus de douleurs au ventre ou de diarrhée juste avant ou pendant les règles. C'est fréquent et ce n'est pas forcément une poussée."
+      },
+      "contraception": {
+        "title": "Contraception",
+        "text": "Certains médicaments et certaines formes de la maladie peuvent influencer le choix de la contraception. Parlez-en avec votre gastro-entérologue et votre gynécologue."
+      },
+      "pregnancy": {
+        "title": "Projet de grossesse",
+        "text": "Une grossesse est le plus souvent possible. Il est conseillé de la préparer avec vos médecins, idéalement en période de rémission. N'arrêtez pas votre traitement de vous-même si vous êtes enceinte : parlez-en d'abord à votre médecin."
+      },
+      "journal": {
+        "title": "Astuce",
+        "text": "Notez vos symptômes dans le journal en indiquant les jours de règles : cela aidera votre médecin à faire la différence avec une poussée."
+      }
+    },
+    "tobacco": {
+      "title": "Arrêter le tabac : une priorité",
+      "why": {
+        "title": "Pourquoi c'est important",
+        "text": "Chez les personnes atteintes de la maladie de Crohn, fumer augmente le risque de poussées, de complications et d'opérations, et peut rendre les traitements moins efficaces."
+      },
+      "benefits": {
+        "title": "Il n'est jamais trop tard",
+        "text": "Arrêter de fumer est bénéfique à tout moment de la maladie. Les bénéfices sur la maladie s'installent progressivement dans les mois qui suivent l'arrêt."
+      },
+      "shisha": {
+        "title": "Et la chicha ?",
+        "text": "La chicha (narguilé) contient aussi du tabac et produit beaucoup de fumée : elle n'est pas une alternative moins nocive à la cigarette."
+      },
+      "help": {
+        "title": "Se faire aider",
+        "text": "Votre médecin ou un tabacologue peut vous accompagner et vous proposer des aides adaptées. Être aidé augmente beaucoup les chances de réussir."
+      }
+    }
+  },
+  "meds": {
+    "adherenceMonth": "Observance du mois",
+    "adherence14": "Observance 14 jours",
+    "tabsLabel": "Vues des médicaments",
+    "tabs": {
+      "today": "Aujourd'hui",
+      "treatment": "Mon traitement",
+      "history": "Historique"
+    },
+    "status": {
+      "taken": "Pris",
+      "skipped": "Sauté",
+      "missed": "Oublié",
+      "late": "En retard",
+      "upcoming": "À venir"
+    },
+    "noIntakeToday": "Aucune prise prévue aujourd'hui.",
+    "noPrescription": "Aucun traitement en cours.",
+    "noHistory": "Pas encore d'historique.",
+    "readOnly": "Votre traitement est prescrit par votre médecin. Pour toute modification, parlez-en avec lui.",
+    "times": "Horaires",
+    "since": "Depuis le {{from}}",
+    "fromTo": "Du {{from}} au {{to}}"
+  },
+  "nutrition": {
+    "title": "Alimentation",
+    "subtitle": "Recettes, repères et magasins",
+    "tabsLabel": "Rubriques alimentation",
+    "tabs": {
+      "recipes": "Recettes",
+      "foods": "Repères",
+      "stores": "Magasins"
+    },
+    "filterLabel": "Filtrer les recettes",
+    "filter": {
+      "all": "Toutes",
+      "flare": "Poussée",
+      "remission": "Rémission"
+    },
+    "phase": {
+      "flare": "Adaptée en poussée",
+      "remission": "En rémission",
+      "all": "Pour tous les jours"
+    },
+    "showRecipe": "Voir la recette",
+    "hideRecipe": "Masquer la recette",
+    "ingredients": "Ingrédients",
+    "steps": "Préparation",
+    "noRecipe": "Aucune recette pour le moment.",
+    "noStore": "Aucun magasin référencé pour le moment.",
+    "city": "Ville",
+    "mapTitle": "Carte des magasins à {{city}}",
+    "openMap": "Ouvrir la carte",
+    "storeKind": {
+      "supermarket": "Supermarché",
+      "organic": "Bio",
+      "gluten_free": "Sans gluten",
+      "pharmacy": "Pharmacie"
+    },
+    "foods": {
+      "flareOften": {
+        "title": "En poussée : souvent mieux tolérés",
+        "text": "Aliments cuits et peu riches en fibres : riz blanc, pâtes, pommes de terre, carottes et courgettes cuites et épluchées, viande blanche, poisson, œufs, compotes. Chacun réagit différemment : observez ce qui vous convient."
+      },
+      "flareLimit": {
+        "title": "En poussée : souvent à limiter",
+        "text": "Crudités, légumes secs (pois chiches, lentilles), fruits avec peau ou pépins, aliments très gras, frits ou très épicés (harissa), boissons gazeuses. Ces conseils sont temporaires et à adapter avec votre médecin."
+      },
+      "remission": {
+        "title": "En rémission",
+        "text": "Mangez le plus varié possible pour éviter les carences. Réintroduisez les aliments progressivement, un à la fois. Un régime trop restrictif n'est pas recommandé sans avis médical."
+      },
+      "hydration": {
+        "title": "Bien s'hydrater",
+        "text": "Buvez régulièrement de l'eau, surtout en cas de diarrhée ou de forte chaleur. Les soupes et bouillons aident aussi à compenser les pertes."
+      }
+    },
+    "minutes": "{{count}} min"
+  },
+  "tips": {
+    "subtitle": "Des repères pour le quotidien",
+    "priority": "Priorité",
+    "category": {
+      "hydratation": "Hydratation",
+      "tabac": "Tabac",
+      "sommeil": "Sommeil",
+      "stress": "Stress",
+      "activite": "Activité physique",
+      "voyage": "Voyage",
+      "alimentation": "Alimentation",
+      "suivi": "Suivi médical"
+    },
+    "tobacco": {
+      "title": "Arrêter le tabac et la chicha",
+      "intro": "C'est le geste qui a le plus d'effet sur l'évolution de la maladie de Crohn. Voici quatre étapes pour vous lancer.",
+      "date": {
+        "title": "Fixez une date",
+        "text": "choisissez un jour calme, par exemple en début de semaine, et préparez-vous quelques jours avant."
+      },
+      "triggers": {
+        "title": "Repérez les moments à risque",
+        "text": "le café du matin, la pause au travail, la chicha entre amis ou la soirée après l'iftar pendant le Ramadan. Prévoyez une alternative : marcher, boire de l'eau, mâcher un chewing-gum."
+      },
+      "entourage": {
+        "title": "Prévenez votre entourage",
+        "text": "demandez à vos proches et amis de ne pas vous proposer de cigarette ni de chicha, et de ne pas fumer près de vous."
+      },
+      "help": {
+        "title": "Faites-vous aider",
+        "text": "votre médecin ou un tabacologue peut vous proposer un accompagnement et des substituts adaptés. Ne vous découragez pas en cas d'écart : recommencez."
+      },
+      "more": "Pourquoi c'est important (Ma maladie)"
+    }
+  },
+  "community": {
+    "subtitle": "Échanger entre patients",
+    "rules": "Vous apparaissez sous votre pseudonyme, jamais sous votre nom. Soyez bienveillant, ne partagez pas de données personnelles et ne donnez pas de conseils de traitement : seul votre médecin peut le faire.",
+    "pseudonym": {
+      "title": "Choisissez votre pseudonyme",
+      "explain": "Votre nom réel n'est jamais affiché dans la communauté. Choisissez un pseudonyme qui ne permet pas de vous reconnaître.",
+      "label": "Pseudonyme",
+      "hint": "3 à 30 caractères : lettres, chiffres, espace, _ . -",
+      "submit": "Valider",
+      "taken": "Ce pseudonyme est déjà pris.",
+      "invalid": "Ce pseudonyme contient des caractères non autorisés."
+    },
+    "postAs": "Publier en tant que {{pseudonym}}",
+    "postPlaceholder": "Partagez votre expérience, posez une question…",
+    "publish": "Publier",
+    "empty": "Aucune publication pour le moment. Lancez la discussion !",
+    "comments": "Commentaires ({{count}})",
+    "commentPlaceholder": "Écrire un commentaire",
+    "send": "Envoyer",
+    "delete": "Supprimer",
+    "confirmDelete": "Supprimer définitivement ce message ?",
+    "hidden": "Masqué après signalements",
+    "report": {
+      "action": "Signaler",
+      "why": "Pourquoi signalez-vous ce message ?",
+      "details": "Précisions (facultatif)",
+      "submit": "Envoyer le signalement",
+      "thanks": "Merci, votre signalement a été transmis.",
+      "already": "Vous avez déjà signalé ce message.",
+      "reasons": {
+        "medical_misinformation": "Information médicale dangereuse ou fausse",
+        "harassment": "Propos blessants ou harcèlement",
+        "spam": "Publicité ou spam",
+        "personal_data": "Données personnelles exposées",
+        "other": "Autre"
+      }
+    }
+  },
+  "journal": {
+    "tabsLabel": "Espaces du journal",
+    "tabs": {
+      "symptoms": "Symptômes",
+      "private": "Journal privé"
+    },
+    "history": "Historique",
+    "saved": "Entrée enregistrée.",
+    "confirmDelete": "Supprimer définitivement cette entrée ?",
+    "deleteEntry": "Supprimer l'entrée",
+    "symptoms": {
+      "visibility": "Ces informations sont visibles par votre équipe soignante (médecin et infirmier qui vous suivent).",
+      "newEntry": "Comment ça va aujourd'hui ?",
+      "pain": "Douleur",
+      "painValue": "Douleur {{value}} sur 10",
+      "painNone": "0 : aucune",
+      "painMax": "10 : maximale",
+      "stools": "Nombre de selles aujourd'hui",
+      "less": "Diminuer",
+      "more": "Augmenter",
+      "period": "Jour de règles",
+      "notes": "Notes",
+      "notesPlaceholder": "Fatigue, aliments, sommeil, événements…",
+      "empty": "Aucune entrée pour le moment.",
+      "painShort": "Douleur {{value}}/10",
+      "stoolsShort": "{{value}} selle(s)",
+      "periodShort": "Règles"
+    },
+    "private": {
+      "visibility": "Espace personnel : vous seul(e) pouvez lire ces notes. Elles ne sont jamais partagées avec l'équipe soignante.",
+      "newEntry": "Nouvelle note",
+      "placeholder": "Écrivez librement…",
+      "empty": "Votre journal privé est vide."
+    }
+  },
+  "calendar": {
+    "prev": "Mois précédent",
+    "next": "Mois suivant",
+    "legend": "Légende",
+    "appointment": "Rendez-vous",
+    "summary": "{{taken}} pris, {{missed}} oubliés, {{upcoming}} à venir",
+    "appointmentsCount": "{{count}} rendez-vous",
+    "nothing": "Rien de prévu ce jour-là."
+  },
+  "reminders": {
+    "title": "💊 C'est l'heure de votre traitement",
+    "body": "{{medication}} — {{dosage}}. Ouvrez CronCare pour indiquer la prise.",
+    "webOnly": "Les rappels fonctionnent dans l'application Android installée, pas dans le navigateur.",
+    "denied": "Les notifications sont bloquées : autorisez-les dans les paramètres du téléphone pour recevoir les rappels."
+  },
+  "bot": {
+    "title": "CrohnBot",
+    "subtitle": "Assistant d'information",
+    "newChat": "Nouvelle conversation",
+    "disclaimer": "Information générale uniquement : CrohnBot ne remplace pas un avis médical et ne pose pas de diagnostic. En cas d'urgence, appelez le 190.",
+    "welcome": "Bonjour ! Je réponds à vos questions générales sur la maladie de Crohn et la vie quotidienne. Pour votre traitement, parlez-en toujours à votre médecin.",
+    "suggestions": {
+      "fatigue": "Comment mieux gérer la fatigue ?",
+      "food": "Que manger pendant une poussée ?",
+      "tobacco": "Pourquoi arrêter de fumer ?",
+      "consultation": "Comment préparer ma consultation ?"
+    },
+    "you": "Vous",
+    "thinking": "CrohnBot écrit…",
+    "placeholder": "Écrivez votre question…",
+    "send": "Envoyer",
+    "remaining": "{{count}} messages restants aujourd’hui",
+    "truncated": "La réponse a été coupée. Posez une question plus précise pour la suite.",
+    "refused": "CrohnBot ne peut pas répondre à cette question. Parlez-en à votre médecin.",
+    "errors": {
+      "daily_limit": "Vous avez atteint la limite de 30 messages pour aujourd'hui. Revenez demain.",
+      "not_configured": "CrohnBot n'est pas encore disponible.",
+      "busy": "CrohnBot est très sollicité. Réessayez dans un instant.",
+      "network": "Pas de connexion. Vérifiez votre accès à Internet.",
+      "unknown": "Une erreur est survenue. Réessayez."
+    }
   }
 }
