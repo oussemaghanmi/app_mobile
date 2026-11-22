@@ -2,6 +2,7 @@ import { useState, type FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ScreenHeader } from '@/components/ui/ScreenHeader';
 import { Tabs } from '@/components/ui/Tabs';
+import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
 import { AsyncView } from '@/components/AsyncView';
 import { useAuth } from '@/features/auth/AuthProvider';
 import { intlLocale } from '@/lib/format';
@@ -20,6 +21,7 @@ export default function JournalScreen() {
   const entries = usePrivateEntries(tab === 'private');
   const [draft, setDraft] = useState('');
   const [busy, setBusy] = useState(false);
+  const [pendingDelete, setPendingDelete] = useState<{ type: 'log' | 'entry'; id: string } | null>(null);
   const fmt = (iso: string) =>
     new Date(iso).toLocaleString(intlLocale(i18n.language), {
       weekday: 'short',
@@ -31,15 +33,22 @@ export default function JournalScreen() {
 
   if (!profile) return null;
 
-  const removeLog = async (id: string) => {
-    if (!confirm(t('journal.confirmDelete'))) return;
-    await api.deleteSymptomLog(id);
-    logs.reload();
+  const removeLog = (id: string) => {
+    setPendingDelete({ type: 'log', id });
   };
-  const removeEntry = async (id: string) => {
-    if (!confirm(t('journal.confirmDelete'))) return;
-    await api.deletePrivateEntry(id);
-    entries.reload();
+  const removeEntry = (id: string) => {
+    setPendingDelete({ type: 'entry', id });
+  };
+  const handleConfirmDelete = async () => {
+    if (!pendingDelete) return;
+    if (pendingDelete.type === 'log') {
+      await api.deleteSymptomLog(pendingDelete.id);
+      logs.reload();
+    } else {
+      await api.deletePrivateEntry(pendingDelete.id);
+      entries.reload();
+    }
+    setPendingDelete(null);
   };
   const addEntry = async (e: FormEvent) => {
     e.preventDefault();
@@ -159,6 +168,15 @@ export default function JournalScreen() {
           </div>
         )}
       </Tabs>
+      <ConfirmDialog
+        open={pendingDelete !== null}
+        title={t('journal.confirmDeleteTitle')}
+        description={t('journal.confirmDelete')}
+        confirmLabel={t('common.delete')}
+        cancelLabel={t('common.cancel')}
+        onConfirm={handleConfirmDelete}
+        onCancel={() => setPendingDelete(null)}
+      />
     </div>
   );
 }
