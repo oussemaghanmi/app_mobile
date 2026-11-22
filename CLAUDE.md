@@ -77,7 +77,7 @@ Conventions détaillées : `docs/ARCHITECTURE.md` §5.
   `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`.
 
 ## Architecture
-La référence est `docs/ARCHITECTURE.md` (+ décisions dans `docs/adr/`). Toute décision structurante
+La référence est `docs/ARCHITECTURE.md` (+ décisions dans `docs/adr/`, design dans `docs/DESIGN.md`). Toute décision structurante
 nouvelle donne lieu à un ADR court.
 
 ## Commandes

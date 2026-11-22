@@ -4,16 +4,17 @@ import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/features/auth/AuthProvider';
 import { usePatientContext } from '@/components/PatientLayout';
 import { usePatientHome } from '../hooks';
+import { Icon, type IconName } from '@/components/ui/Icon';
 
 const MOODS = ['😣', '🙁', '😐', '🙂', '😄'];
-const QUICK = [
-  { to: 'disease', key: 'sections.disease' },
-  { to: 'recipes', key: 'sections.recipes' },
-  { to: 'tips', key: 'sections.tips' },
-  { to: 'community', key: 'sections.community' },
-  { to: 'journal', key: 'sections.journal' },
-  { to: 'calendar', key: 'sections.calendar' },
-  { to: 'assistant', key: 'sections.bot' },
+const QUICK: { to: string; key: string; icon: IconName; warm?: boolean }[] = [
+  { to: 'disease', key: 'sections.disease', icon: 'disease' },
+  { to: 'recipes', key: 'sections.recipes', icon: 'recipes', warm: true },
+  { to: 'tips', key: 'sections.tips', icon: 'tips' },
+  { to: 'community', key: 'sections.community', icon: 'community', warm: true },
+  { to: 'journal', key: 'sections.journal', icon: 'journal' },
+  { to: 'calendar', key: 'sections.calendar', icon: 'calendar', warm: true },
+  { to: 'assistant', key: 'sections.bot', icon: 'bot' },
 ];
 /** Écran d'accueil — cahier des charges §1 */
 export default function PatientHome() {
@@ -49,7 +50,7 @@ export default function PatientHome() {
     <div className="flex flex-col gap-4 p-4">
       <header>
         <h1 className="text-2xl">{t('home.hello', { name: profile?.first_name })}</h1>
-        <p className="text-ink/60">
+        <p className="text-ink/70">
           {new Date().toLocaleDateString(locale, { weekday: 'long', day: 'numeric', month: 'long' })}
         </p>
       </header>
@@ -76,25 +77,25 @@ export default function PatientHome() {
 
       <div className="grid grid-cols-2 gap-4">
         <section className="card">
-          <p className="text-sm text-ink/60">{t('home.intakes')}</p>
+          <p className="text-sm text-ink/70">{t('home.intakes')}</p>
           <p className="text-3xl font-bold text-sage-dark">
             {taken}/{intakes.length}
           </p>
         </section>
         <section className="card">
-          <p className="text-sm text-ink/60">{t('home.adherence')}</p>
-          <p className="text-3xl font-bold text-terracotta">{adherence ?? '–'}%</p>
+          <p className="text-sm text-ink/70">{t('home.adherence')}</p>
+          <p className="text-3xl font-bold text-terracotta-dark">{adherence ?? '–'}%</p>
         </section>
       </div>
 
       <section className="card">
-        <p className="text-sm text-ink/60">{t('home.next')}</p>
+        <p className="text-sm text-ink/70">{t('home.next')}</p>
         {next ? (
           <div className="flex items-center justify-between gap-3">
             <p className="text-lg font-medium">
               {next.prescriptions?.medication} {next.prescriptions?.dosage} — {fmtTime(next.scheduled_at)}
               {isLate && (
-                <span className="ms-2 rounded-full bg-terracotta/10 px-2 py-0.5 text-xs text-terracotta">
+                <span className="ms-2 rounded-full bg-terracotta/10 px-2 py-0.5 text-xs text-terracotta-dark">
                   {t('home.late')}
                 </span>
               )}
@@ -105,14 +106,15 @@ export default function PatientHome() {
               disabled={marking}
               aria-label={t('home.markTakenLabel', { name: next.prescriptions?.medication ?? '' })}
             >
-              ✓ {t('home.markTaken')}
+              <Icon name="check" className="me-1 inline h-5 w-5 align-[-4px]" />
+              {t('home.markTaken')}
             </button>
           </div>
         ) : (
           <p>{t('home.none')}</p>
         )}
         {markError && (
-          <p role="alert" className="mt-2 text-sm text-terracotta">
+          <p role="alert" className="mt-2 text-sm text-terracotta-dark">
             {t('home.markError')}
           </p>
         )}
@@ -124,7 +126,16 @@ export default function PatientHome() {
         </h2>
         <div className="grid grid-cols-3 gap-3">
           {QUICK.map((q) => (
-            <Link key={q.to} to={q.to} className="card text-center text-sm font-medium">
+            <Link
+              key={q.to}
+              to={q.to}
+              className="card flex min-h-24 flex-col items-center justify-center gap-2 p-3 text-center text-sm font-medium active:bg-sage/5"
+            >
+              <span
+                className={`flex h-11 w-11 items-center justify-center rounded-full ${q.warm ? 'bg-terracotta/15 text-terracotta-dark' : 'bg-sage/20 text-sage-dark'}`}
+              >
+                <Icon name={q.icon} />
+              </span>
               {t(q.key)}
             </Link>
           ))}
@@ -133,7 +144,7 @@ export default function PatientHome() {
 
       {tip && (
         <section className="card border-s-4 border-terracotta">
-          <p className="text-sm text-ink/60">{t('home.tip')}</p>
+          <p className="text-sm text-ink/70">{t('home.tip')}</p>
           <p>{tip}</p>
         </section>
       )}

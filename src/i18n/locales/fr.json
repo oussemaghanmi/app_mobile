@@ -5,7 +5,8 @@
     "email": "E-mail",
     "password": "Mot de passe",
     "submit": "Se connecter",
-    "error": "Identifiants invalides"
+    "error": "Identifiants invalides",
+    "tagline": "Votre compagnon au quotidien avec la maladie de Crohn"
   },
   "home": {
     "hello": "Bonjour {{name}}",
