@@ -34,8 +34,11 @@
       "alreadyRegistered": "An account already exists with this e-mail. Sign in or reset your password.",
       "invalidEmail": "This e-mail address is not valid.",
       "rateLimited": "Too many requests. Please wait a moment before trying again.",
-      "linkExpired": "This link has expired or has already been used. Request a new reset link."
-    }
+      "linkExpired": "This link has expired or has already been used. Request a new reset link.",
+      "noRecoverySession": "No active recovery session found. Please request a new link."
+    },
+    "signupAutoLogin": "Account created successfully! Signing in…",
+    "requestNewLink": "Request a new link"
   },
   "home": {
     "hello": "Hello {{name}}",

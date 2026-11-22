@@ -12,7 +12,8 @@ export default function SignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
-  const [success, setSuccess] = useState(false);
+  const [successWithConfirmation, setSuccessWithConfirmation] = useState(false);
+  const [autoLoggedIn, setAutoLoggedIn] = useState(false);
   const [busy, setBusy] = useState(false);
 
   if (session && profile) return <Navigate to={homePathFor(profile.role)} replace />;
@@ -31,8 +32,12 @@ export default function SignUp() {
       const res = await signUp(email, password, firstName);
       if (!res.success) {
         setErrorMsg(t(res.errorKey ?? 'auth.genericError'));
+      } else if (res.hasSession) {
+        // En local ou avec confirmations désactivées : session immédiate
+        setAutoLoggedIn(true);
       } else {
-        setSuccess(true);
+        // En production avec e-mails de confirmation activés
+        setSuccessWithConfirmation(true);
       }
     } catch {
       setErrorMsg(t('auth.genericError'));
@@ -47,7 +52,16 @@ export default function SignUp() {
       <form onSubmit={onSubmit} className="card flex flex-col gap-3">
         <h2 className="text-xl">{t('auth.signupTitle')}</h2>
 
-        {success ? (
+        {autoLoggedIn ? (
+          <div className="flex flex-col gap-4">
+            <p role="status" className="rounded-xl bg-sage/15 p-3 text-sm text-sage-dark">
+              {t('auth.signupAutoLogin')}
+            </p>
+            <Link to="/patient" className="btn min-h-11 flex items-center justify-center text-center">
+              {t('common.continue', 'Continuer')}
+            </Link>
+          </div>
+        ) : successWithConfirmation ? (
           <div className="flex flex-col gap-4">
             <p role="status" className="rounded-xl bg-sage/15 p-3 text-sm text-sage-dark">
               {t('auth.signupSuccess')}
