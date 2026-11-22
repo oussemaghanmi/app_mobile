@@ -86,7 +86,8 @@
     "journalDeleted": "Journal et symptômes supprimés.",
     "about": "À propos",
     "aboutText": "CronCare accompagne les patients atteints de la maladie de Crohn en Tunisie. Projet de fin d'études.",
-    "logout": "Se déconnecter"
+    "logout": "Se déconnecter",
+    "exportError": "L'export a échoué. Vos données n'ont pas été téléchargées. Réessayez plus tard."
   },
   "pro": {
     "patients": "Mes patients",

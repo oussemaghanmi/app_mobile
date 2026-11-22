@@ -86,7 +86,8 @@
     "journalDeleted": "Journal and symptoms deleted.",
     "about": "About",
     "aboutText": "CronCare supports Crohn's disease patients in Tunisia. Final-year project.",
-    "logout": "Sign out"
+    "logout": "Sign out",
+    "exportError": "The export failed. Your data was not downloaded. Please try again later."
   },
   "pro": {
     "patients": "My patients",

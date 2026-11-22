@@ -19,6 +19,7 @@ export default function Settings() {
   const [firstName, setFirstName] = useState(profile?.first_name ?? '');
   const [lastName, setLastName] = useState(profile?.last_name ?? '');
   const [msg, setMsg] = useState<string | null>(null);
+  const [exportFailed, setExportFailed] = useState(false);
   const [permission, setPermission] = useState<ReminderPermission>('prompt');
   const [confirmAction, setConfirmAction] = useState<'journal' | 'account' | null>(null);
   useEffect(() => {
@@ -58,12 +59,17 @@ export default function Settings() {
   };
 
   const exportData = async () => {
-    const dump = await api.exportMyData(profile.id);
-    const blob = new Blob([JSON.stringify(dump, null, 2)], { type: 'application/json' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = `croncare-export-${todayInTunis()}.json`;
-    a.click();
+    setExportFailed(false);
+    try {
+      const dump = await api.exportMyData();
+      const blob = new Blob([JSON.stringify(dump, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `croncare-export-${todayInTunis()}.json`;
+      a.click();
+    } catch {
+      setExportFailed(true);
+    }
   };
 
   const deleteJournal = () => {
@@ -154,6 +160,11 @@ export default function Settings() {
           <button className="btn" onClick={exportData}>
             {t('settings.exportData')}
           </button>
+          {exportFailed && (
+            <p role="alert" className="text-sm text-terracotta-dark">
+              {t('settings.exportError')}
+            </p>
+          )}
           <button className="btn-danger" onClick={deleteAccount}>
             {t('settings.deleteAccount')}
           </button>
