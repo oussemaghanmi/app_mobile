@@ -60,6 +60,8 @@ Conventions détaillées : `docs/ARCHITECTURE.md` §5.
 8. Actions définitives (suppressions) : toujours une confirmation explicite.
 
 ## Workflow Git (repo distant : `origin` sur GitHub)
+- **Une issue = un assigné.** Avant de commencer : s'assigner l'issue si elle n'a personne ; si elle est assignée à
+  quelqu'un d'autre, ne pas y travailler (on peut seulement relire et fusionner son travail terminé). Voir `AGENTS.md`.
 - Une branche par fonctionnalité/écran depuis `develop` : `feature/<sujet>` (ex. `feature/ecran-medicaments`).
 - Commits petits, en **Conventional Commits en français** : `feat(medicaments): …`, `fix: …`, `style: …`, `ci: …`.
 - Avant chaque commit : `npm run lint && npm run typecheck && npm run check:i18n && npm test && npm run build`

@@ -10,15 +10,32 @@ et aux personnes qui les pilotent. Les règles de fond du projet sont dans [`CLA
 2. Partir de `develop` à jour : `git checkout develop && git pull`.
 3. Ne jamais demander ni écrire un secret (clé API, mot de passe, `service_role`) dans le chat, un fichier ou un commit.
 
+## Propriété d'une issue (règle stricte)
+Une issue appartient à **une seule personne à la fois** : son assigné. Le compte GitHub de la personne qui pilote
+la session est celui qui s'assigne (un agent travaille sous le compte de la personne qui le lance).
+- **Avant de toucher au code**, regarder les assignés de l'issue :
+  - **personne** : s'assigner **tout de suite**, avant la première ligne de code, puis seulement commencer ;
+  - **vous** : continuer ;
+  - **quelqu'un d'autre** : **ne pas y travailler**, ne pas ouvrir de PR, ne pas pousser sur sa branche, même si
+    l'issue porte le label de votre agent ou semble facile. Choisir une autre issue, ou demander à l'assigné (commentaire
+    sur l'issue) de se désassigner s'il ne la fait plus.
+- Ne jamais réassigner ni désassigner l'issue de quelqu'un d'autre, ni fermer son issue.
+- Si l'on abandonne une issue : se **désassigner**, remettre le label `prêt` et dire dans un commentaire ce qui est fait.
+- Ce que l'on peut faire sur le travail d'un autre : **relire** sa PR, **la fusionner une fois terminée** (CI verte,
+  critères de fin cochés, par la personne qui pilote ou la propriétaire du dépôt) et signaler un défaut par un commentaire
+  ou une issue `bug`. Pas de commit dans sa branche sans son accord écrit dans l'issue.
+
 ## Cycle d'une tâche
-1. **Choisir** une issue au label `prêt` et au label de votre agent (`agent:claude` ou `agent:antigravity`).
-   Une issue `bloqué` ou `humain` n'est pas pour un agent. Une issue = un agent à la fois.
+1. **Choisir** une issue au label `prêt` et au label de votre agent (`agent:claude` ou `agent:antigravity`),
+   **sans assigné** (voir « Propriété d'une issue »). Une issue `bloqué` ou `humain` n'est pas pour un agent.
 2. **Annoncer** : vous **assigner** l'issue (la carte passe en « In progress ») et retirer le label `prêt`.
+   Rien n'est commencé avant cette étape.
 3. **Brancher** : `feature/<numéro>-<sujet>` depuis `develop` (ex. `feature/42-dialogue-confirmation`).
 4. **Travailler petit** : commits en Conventional Commits **en français** (`feat(journal): …`, `fix: …`, `test: …`).
 5. **Vérifier** avant chaque commit (voir « Définition de fini »).
 6. **Ouvrir une PR** vers `develop` avec le modèle de PR, en écrivant `Closes #<numéro>`. Attendre la CI verte.
-7. **Ne pas fusionner** soi-même : la fusion est faite par la personne qui pilote la session ou la propriétaire du dépôt.
+7. **Ne pas fusionner sa propre PR** : la fusion est faite par une autre personne (celle qui pilote la session ou la
+   propriétaire du dépôt) quand la tâche est terminée et la CI verte.
 8. **Terminer** : la fusion de la PR ferme l'issue (`Closes #n`) et la carte passe en « Done ».
 
 ## Types d'issues
