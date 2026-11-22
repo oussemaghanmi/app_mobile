@@ -118,3 +118,4 @@ npm run lint && npm run typecheck && npm run check:i18n && npm test && npm run b
 
 Voir [`docs/CONTRIBUTING.md`](docs/CONTRIBUTING.md) pour le workflow Git.
 Pour créer des médecins et infirmiers et les affecter à des patients : [`docs/ADMIN.md`](docs/ADMIN.md).
+Mise en ligne et première version (tâches de la propriétaire) : [`docs/MISE-EN-PRODUCTION.md`](docs/MISE-EN-PRODUCTION.md).
