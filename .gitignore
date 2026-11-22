@@ -33,3 +33,4 @@ test-results/
 
 # Deno : verrou généré par les tests des Edge Functions, non versionné
 deno.lock
+validation-medicale.md
