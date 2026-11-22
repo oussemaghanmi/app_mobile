@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "typecheck": "tsc -b --noEmit",
+    "typecheck": "tsc -b --noEmit && tsc -p e2e --noEmit",
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
@@ -20,6 +20,7 @@
     "db:types": "supabase gen types typescript --local > src/lib/database.types.ts && prettier --write src/lib/database.types.ts",
     "cap:sync": "npm run build && cap sync",
     "cap:android": "npm run cap:sync && cap open android",
+    "e2e": "playwright test",
     "functions:check": "deno check --node-modules-dir=none supabase/functions/crohnbot/index.ts",
     "functions:test": "deno test --node-modules-dir=none --allow-net --allow-env supabase/functions/"
   },
@@ -37,6 +38,7 @@
   "devDependencies": {
     "@capacitor/cli": "^7.0.0",
     "@eslint/js": "^9.39.5",
+    "@playwright/test": "^1.65.1",
     "@tailwindcss/vite": "^4.0.0",
     "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.3",

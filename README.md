@@ -58,6 +58,20 @@ npx supabase functions deploy crohnbot --project-ref <ref>                     #
 Limites : 30 messages par utilisateur et par jour (`chatbot_usage`). Seule la conversation est envoyée au modèle :
 aucune donnée de santé, jamais le journal privé. Les signes d'alerte renvoient vers le **190 (SAMU)**.
 
+### Tests de bout en bout (Playwright)
+Ils parcourent l'application réelle contre Supabase local : connexion, accès par rôle, prise cochée, journal privé
+invisible pour l'équipe soignante. Le jeu de données (patientes, médecin, infirmière, affectations) est créé par
+`e2e/fixtures.ts` avec les fonctions d'administration de la migration `0012`.
+```bash
+supabase start                               # Docker requis
+eval "$(supabase status -o env)"             # définit ANON_KEY, SERVICE_ROLE_KEY, API_URL
+export E2E_ANON_KEY="$ANON_KEY" E2E_SERVICE_ROLE_KEY="$SERVICE_ROLE_KEY" E2E_SUPABASE_URL="$API_URL"
+npx playwright install chromium              # une seule fois
+npm run e2e
+```
+Les clés ci-dessus sont celles de la base **locale** ; la clé `service_role` d'un vrai projet n'est jamais utilisée ici.
+Le workflow `e2e.yml` rejoue ces tests à chaque PR.
+
 ### Application Android
 ```bash
 npm run cap:android         # build + sync + ouvre Android Studio
