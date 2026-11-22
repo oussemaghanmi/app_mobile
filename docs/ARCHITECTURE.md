@@ -246,6 +246,24 @@ Garde-fous complémentaires :
 - Ces règles sont **testées** par pgTAP : [`supabase/tests/rls_rbac.test.sql`](../supabase/tests/rls_rbac.test.sql).
 - Le front (`features/auth/permissions.ts`, `RequireRole`) ne fait qu'**adapter l'interface**.
 
+### Export des données personnelles (`export_my_data()`, migration 0013)
+Le patient exporte **toutes** ses données par un seul appel `rpc('export_my_data')`, qui renvoie un objet JSON :
+une clé par table, chaque valeur étant le tableau de ses lignes (`[]` si aucune, jamais `null`).
+
+| Clé | Filtre (en plus du RLS) |
+|---|---|
+| `profiles` | `id = auth.uid()` |
+| `care_assignments`, `prescriptions`, `medication_intakes`, `mood_logs`, `symptom_logs`, `private_journal`, `nursing_notes`, `appointments` | `patient_id = auth.uid()` |
+| `community_profiles`, `chatbot_usage` | `user_id = auth.uid()` |
+| `community_posts`, `community_comments` | `author_id = auth.uid()` (publications masquées comprises) |
+| `reports` | `reporter_id = auth.uid()` |
+
+- `security invoker` : le RLS reste la barrière ; le filtre explicite exclut les contenus lisibles par tous
+  (communauté) et, pour un soignant, les données de ses patients affectés (il n'obtient que son profil).
+- C'est la **seule** fonction autorisée à référencer `private_journal`, à condition de rester `security invoker`
+  (vérifié par `securite_generale.test.sql`). Tests : [`export_donnees.test.sql`](../supabase/tests/export_donnees.test.sql).
+- Exécutable uniquement par `authenticated` (`anon` : erreur 42501).
+
 ## 4. Diagrammes de séquence
 
 ### 4.1 Connexion et chargement du profil / rôle

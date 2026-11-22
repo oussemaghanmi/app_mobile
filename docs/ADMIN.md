@@ -1,4 +1,4 @@
-# Administration : rôles et affectations
+# Administration : rôles, affectations et modération
 
 Un compte créé dans l'application est **toujours un patient** (trigger `handle_new_user`). Pour qu'une personne
 soit médecin ou infirmier, puis suive des patients, l'administration utilise trois fonctions SQL
@@ -50,6 +50,37 @@ select public.admin_set_role('<uuid>', 'nurse');                            -- c
 `admin_assign` est idempotente : la relancer ne crée pas de doublon. Les données existantes (prescriptions,
 observations) sont conservées quand on change un rôle ou retire une affectation ; seul l'**accès** change :
 `is_assigned_to` ne compte que les affectations vers un compte qui est réellement médecin ou infirmier.
+
+## Modération de la communauté
+**Règle** : dès **3 signalements** de personnes différentes, une publication ou un commentaire est **masqué
+automatiquement** (déclencheur `auto_hide_reported`, migration 0006) ; son auteur le voit toujours, les autres non.
+La **modération humaine tranche ensuite** avec trois fonctions (migration `0014_moderation.sql`), réservées à
+l'administration comme les précédentes (testé dans `supabase/tests/moderation.test.sql`).
+
+1. **Lister les contenus signalés** (le plus récemment signalé d'abord) :
+   ```sql
+   select * from public.admin_list_reports();
+   ```
+   Colonnes : `kind` (`post` ou `comment`), `content_id`, `content`, `hidden`, `author_pseudonym`, `reason`
+   (motifs distincts), `report_count`, `last_reported_at`. Les personnes qui signalent restent **anonymes** et
+   l'auteur n'apparaît que sous son **pseudonyme**.
+2. **Remettre en ligne** un contenu masqué à tort (efface aussi ses signalements, pour qu'un nouveau signalement
+   ne le masque pas aussitôt) :
+   ```sql
+   select public.admin_restore_content('post', '<content_id>');     -- ou 'comment'
+   ```
+3. **Supprimer** un contenu abusif (définitif : ses signalements et, pour une publication, ses commentaires
+   partent avec lui) :
+   ```sql
+   select public.admin_remove_content('comment', '<content_id>');   -- ou 'post'
+   ```
+
+| Fonction | Refuse | Message |
+|---|---|---|
+| `admin_restore_content(kind, id)` / `admin_remove_content(kind, id)` | `kind` autre que `post` ou `comment` ; contenu inconnu | « type inconnu », « publication inconnue », « commentaire inconnu » |
+
+La modération ne juge pas le contenu médical : en cas de doute sur une information de santé, demander l'avis de
+l'équipe soignante avant de restaurer.
 
 ## Environnement local
 `supabase start` puis `npm run db:reset` rejouent les migrations et `supabase/seed.sql`. Les mêmes fonctions

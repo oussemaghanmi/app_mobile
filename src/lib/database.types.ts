@@ -706,8 +706,30 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
+      admin_assign: { Args: { p_patient: string; p_professional: string }; Returns: undefined };
+      admin_list_reports: {
+        Args: Record<PropertyKey, never>;
+        Returns: {
+          author_pseudonym: string;
+          content: string;
+          content_id: string;
+          hidden: boolean;
+          kind: string;
+          last_reported_at: string;
+          reason: string;
+          report_count: number;
+        }[];
+      };
+      admin_remove_content: { Args: { p_id: string; p_kind: string }; Returns: undefined };
+      admin_restore_content: { Args: { p_id: string; p_kind: string }; Returns: undefined };
+      admin_set_role: {
+        Args: { p_role: Database['public']['Enums']['app_role']; p_user: string };
+        Returns: undefined;
+      };
+      admin_unassign: { Args: { p_patient: string; p_professional: string }; Returns: undefined };
       consume_chatbot_quota: { Args: { p_limit?: number }; Returns: number };
       delete_my_account: { Args: Record<PropertyKey, never>; Returns: undefined };
+      export_my_data: { Args: Record<PropertyKey, never>; Returns: Json };
       generate_intakes: { Args: { p_days?: number }; Returns: number };
       in_my_care_team: { Args: { p_profile: string }; Returns: boolean };
       is_assigned_to: { Args: { p_patient: string }; Returns: boolean };

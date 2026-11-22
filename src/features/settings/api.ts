@@ -14,23 +14,12 @@ export async function updateProfile(id: string, fields: ProfileUpdate): Promise<
   unwrap(await supabase.from('profiles').update(fields).eq('id', id));
 }
 
-const EXPORT_TABLES = [
-  'prescriptions',
-  'medication_intakes',
-  'mood_logs',
-  'symptom_logs',
-  'private_journal',
-] as const;
-
-/** Export RGPD : toutes les données du patient connecté (RLS : uniquement les siennes). */
-export async function exportMyData(profileId: string): Promise<Record<string, unknown>> {
-  const dump: Record<string, unknown> = {
-    profiles: (await supabase.from('profiles').select('*').eq('id', profileId)).data,
-  };
-  for (const table of EXPORT_TABLES) {
-    dump[table] = (await supabase.from(table).select('*').eq('patient_id', profileId)).data;
-  }
-  return dump;
+/**
+ * Export RGPD : une seule fonction SQL (`export_my_data`, migration 0013) renvoie toutes les données de la
+ * personne connectée (14 tables). Une erreur est levée, jamais un export vide silencieux.
+ */
+export async function exportMyData(): Promise<Record<string, unknown>> {
+  return unwrap(await supabase.rpc('export_my_data')) as Record<string, unknown>;
 }
 
 /** Supprime le journal privé et le journal des symptômes du patient. */

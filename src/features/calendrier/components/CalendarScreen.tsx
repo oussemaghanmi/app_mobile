@@ -58,7 +58,7 @@ export default function CalendarScreen() {
             <span key={i}>{w}</span>
           ))}
         </div>
-        <div role="grid" aria-labelledby="month-title" className="mt-1 grid grid-cols-7 gap-1">
+        <div role="grid" aria-labelledby="month-title" className="mt-1 grid grid-cols-7 gap-0.5">
           {cells.map((d, i) => {
             if (!d) return <span key={i} />;
             const k = dayKey(d);

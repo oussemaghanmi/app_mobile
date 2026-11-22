@@ -1,12 +1,14 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import type { Session } from '@supabase/supabase-js';
 import SignUp from './SignUp';
 import ForgotPassword from './ForgotPassword';
 import ResetPassword from './ResetPassword';
 import Login from './Login';
 import * as api from '../api';
+import { applyLanguage } from '@/i18n';
 
 vi.mock('../AuthProvider', () => ({
   useAuth: () => ({ session: null, profile: null, loading: false }),
@@ -17,11 +19,32 @@ vi.mock('../api', () => ({
   signUp: vi.fn(),
   resetPasswordForEmail: vi.fn(),
   updatePassword: vi.fn(),
+  getSession: vi.fn(),
+  onAuthStateChange: vi.fn((_cb: (event: string, session: Session | null) => void) => () => {}),
+  onSessionChange: vi.fn(() => () => {}),
+  authErrorKey: vi.fn((err: string | { name?: string; code?: string }) => {
+    if (typeof err === 'string') {
+      if (err === 'otp_expired' || err === 'access_denied') return 'auth.errors.linkExpired';
+      if (err === 'user_already_exists') return 'auth.errors.alreadyRegistered';
+    }
+    return 'auth.genericError';
+  }),
 }));
 
 describe('Auth screens', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    window.location.hash = '';
+    window.location.search = '';
+    vi.mocked(api.getSession).mockResolvedValue({
+      user: { id: 'test-user-id' },
+    } as unknown as Awaited<ReturnType<typeof api.getSession>>);
+  });
+
+  afterEach(() => {
+    applyLanguage('fr');
+    window.location.hash = '';
+    window.location.search = '';
   });
 
   describe('<SignUp />', () => {
@@ -57,8 +80,8 @@ describe('Auth screens', () => {
       expect(api.signUp).not.toHaveBeenCalled();
     });
 
-    it('appelle signUp avec prénom, e-mail et mot de passe et affiche le succès', async () => {
-      vi.mocked(api.signUp).mockResolvedValueOnce({ success: true });
+    it('affiche le message d’auto-connexion quand confirmations désactivées (hasSession: true)', async () => {
+      vi.mocked(api.signUp).mockResolvedValueOnce({ success: true, hasSession: true });
 
       render(
         <MemoryRouter>
@@ -73,10 +96,29 @@ describe('Auth screens', () => {
 
       expect(api.signUp).toHaveBeenCalledWith('sarah@test.com', 'password123', 'Sarah');
       const status = await screen.findByRole('status');
-      expect(status).toHaveTextContent('Compte créé !');
+      expect(status).toHaveTextContent('Compte créé avec succès ! Connexion en cours…');
     });
 
-    it('affiche une alerte en cas d’erreur de l’API', async () => {
+    it('affiche le message de confirmation par e-mail quand confirmations activées (hasSession: false)', async () => {
+      vi.mocked(api.signUp).mockResolvedValueOnce({ success: true, hasSession: false });
+
+      render(
+        <MemoryRouter>
+          <SignUp />
+        </MemoryRouter>,
+      );
+
+      await userEvent.type(screen.getByPlaceholderText('Prénom'), 'Sarah');
+      await userEvent.type(screen.getByPlaceholderText('E-mail'), 'sarah@test.com');
+      await userEvent.type(screen.getByPlaceholderText('Mot de passe'), 'password123');
+      await userEvent.click(screen.getByRole('button', { name: 'Créer mon compte' }));
+
+      expect(api.signUp).toHaveBeenCalledWith('sarah@test.com', 'password123', 'Sarah');
+      const status = await screen.findByRole('status');
+      expect(status).toHaveTextContent('Compte créé ! Vérifiez votre boîte de réception');
+    });
+
+    it('traduit l’erreur en cas d’e-mail déjà enregistré', async () => {
       vi.mocked(api.signUp).mockResolvedValueOnce({
         success: false,
         errorKey: 'auth.errors.alreadyRegistered',
@@ -95,6 +137,21 @@ describe('Auth screens', () => {
 
       const alert = await screen.findByRole('alert');
       expect(alert).toHaveTextContent('Un compte existe déjà');
+    });
+
+    it('s’affiche correctement en arabe avec RTL', async () => {
+      applyLanguage('ar');
+
+      render(
+        <MemoryRouter>
+          <SignUp />
+        </MemoryRouter>,
+      );
+
+      expect(screen.getByRole('heading', { name: 'إنشاء حساب' })).toBeInTheDocument();
+      expect(screen.getByPlaceholderText('الاسم الشخصي')).toBeInTheDocument();
+      expect(screen.getByPlaceholderText('البريد الإلكتروني')).toBeInTheDocument();
+      expect(document.documentElement.dir).toBe('rtl');
     });
   });
 
@@ -117,10 +174,10 @@ describe('Auth screens', () => {
       expect(status).toHaveTextContent('un lien de réinitialisation a été envoyé');
     });
 
-    it('affiche une alerte si la réinitialisation échoue', async () => {
+    it('affiche une alerte traduite si la réinitialisation échoue par rate limit', async () => {
       vi.mocked(api.resetPasswordForEmail).mockResolvedValueOnce({
         success: false,
-        errorKey: 'auth.errors.invalidEmail',
+        errorKey: 'auth.errors.rateLimited',
       });
 
       render(
@@ -133,7 +190,21 @@ describe('Auth screens', () => {
       await userEvent.click(screen.getByRole('button', { name: 'Envoyer le lien' }));
 
       const alert = await screen.findByRole('alert');
-      expect(alert).toHaveTextContent("adresse e-mail n'est pas valide");
+      expect(alert).toHaveTextContent('Trop de demandes');
+    });
+
+    it('s’affiche correctement en arabe avec RTL', async () => {
+      applyLanguage('ar');
+
+      render(
+        <MemoryRouter>
+          <ForgotPassword />
+        </MemoryRouter>,
+      );
+
+      expect(screen.getByRole('heading', { name: 'نسيت كلمة المرور' })).toBeInTheDocument();
+      expect(screen.getByPlaceholderText('البريد الإلكتروني')).toBeInTheDocument();
+      expect(document.documentElement.dir).toBe('rtl');
     });
   });
 
@@ -178,6 +249,84 @@ describe('Auth screens', () => {
       expect(api.updatePassword).toHaveBeenCalledWith('secret123');
       const status = await screen.findByRole('status');
       expect(status).toHaveTextContent('Votre mot de passe a été réinitialisé avec succès.');
+    });
+
+    it('affiche une erreur traduite si le lien URL contient error_code=otp_expired', () => {
+      window.location.hash = '#error=access_denied&error_code=otp_expired&error_description=Email+link+is+invalid+or+has+expired';
+      vi.mocked(api.authErrorKey).mockReturnValueOnce('auth.errors.linkExpired');
+
+      render(
+        <MemoryRouter>
+          <ResetPassword />
+        </MemoryRouter>,
+      );
+
+      const alert = screen.getByRole('alert');
+      expect(alert).toHaveTextContent('Ce lien a expiré ou a déjà été utilisé');
+      expect(screen.getByRole('link', { name: 'Demander un nouveau lien' })).toHaveAttribute(
+        'href',
+        '/forgot-password',
+      );
+    });
+
+    it('affiche un message et un bouton de nouveau lien si aucune session de récupération n’est active', async () => {
+      vi.mocked(api.getSession).mockResolvedValueOnce(null);
+
+      render(
+        <MemoryRouter>
+          <ResetPassword />
+        </MemoryRouter>,
+      );
+
+      const alert = await screen.findByRole('alert');
+      expect(alert).toHaveTextContent(
+        'Aucune session de récupération active. Veuillez demander un nouveau lien.',
+      );
+      expect(screen.getByRole('link', { name: 'Demander un nouveau lien' })).toHaveAttribute(
+        'href',
+        '/forgot-password',
+      );
+    });
+
+    it('affiche le formulaire si un événement PASSWORD_RECOVERY survient', async () => {
+      vi.mocked(api.getSession).mockResolvedValueOnce(null);
+      let authCallback: ((event: string, session: Session | null) => void) | null = null;
+      vi.mocked(api.onAuthStateChange).mockImplementationOnce((cb) => {
+        authCallback = cb;
+        return () => {};
+      });
+
+      render(
+        <MemoryRouter>
+          <ResetPassword />
+        </MemoryRouter>,
+      );
+
+      // Initialement pas de session
+      expect(
+        await screen.findByText('Aucune session de récupération active. Veuillez demander un nouveau lien.'),
+      ).toBeInTheDocument();
+
+      // Arrivée de l'événement PASSWORD_RECOVERY
+      authCallback!('PASSWORD_RECOVERY', { user: { id: 'recovered-user' } } as unknown as Session);
+
+      await waitFor(() => {
+        expect(screen.getByPlaceholderText('Nouveau mot de passe')).toBeInTheDocument();
+      });
+    });
+
+    it('s’affiche correctement en arabe avec RTL', async () => {
+      applyLanguage('ar');
+
+      render(
+        <MemoryRouter>
+          <ResetPassword />
+        </MemoryRouter>,
+      );
+
+      expect(screen.getByRole('heading', { name: 'كلمة مرور جديدة' })).toBeInTheDocument();
+      expect(screen.getByPlaceholderText('كلمة مرور جديدة')).toBeInTheDocument();
+      expect(document.documentElement.dir).toBe('rtl');
     });
   });
 
