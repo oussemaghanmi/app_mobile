@@ -29,7 +29,7 @@ jobs:
             [ -n "${!s}" ] || missing="$missing $s"
           done
           if [ -n "$missing" ]; then echo "::error::Secrets GitHub manquants :$missing (voir docs/PIPELINE.md)"; exit 1; fi
-      - uses: supabase/setup-cli@v1
+      - uses: supabase/setup-cli@v3
         with:
           version: 2.122.0
       - run: supabase link --project-ref "$SUPABASE_PROJECT_REF"
