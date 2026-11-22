@@ -1,8 +1,9 @@
 import { useState, type FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
+import { todayInTunis } from '@/lib/dates';
 import type { PrescriptionInput } from '../types';
 
-const today = () => new Date().toISOString().slice(0, 10);
+const today = () => todayInTunis();
 const emptyPrescription = (): PrescriptionInput => ({
   medication: '',
   dosage: '',

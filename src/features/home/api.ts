@@ -1,8 +1,9 @@
 import { supabase } from '@/lib/supabase';
 import { unwrap } from '@/lib/errors';
+import { todayInTunis } from '@/lib/dates';
 import type { Tip, TodayIntake } from './types';
 
-export const today = () => new Date().toISOString().slice(0, 10);
+export const today = () => todayInTunis();
 
 /** Prises prévues aujourd'hui (RLS : seulement celles du patient connecté). */
 export async function fetchTodayIntakes(): Promise<TodayIntake[]> {

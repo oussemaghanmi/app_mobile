@@ -1,5 +1,6 @@
 import { supabase } from '@/lib/supabase';
 import { unwrap } from '@/lib/errors';
+import { toTunisDate } from '@/lib/dates';
 import type { Intake, Prescription } from './types';
 
 /** Nombre de jours de prises générés à l'avance (et couverts par les rappels). */
@@ -52,5 +53,5 @@ export async function fetchIntakesBetween(from: Date, to: Date): Promise<Intake[
 
 /** Observance (%) du mois donné pour le patient connecté. */
 export async function fetchAdherence(month = new Date()): Promise<number> {
-  return unwrap(await supabase.rpc('monthly_adherence', { p_month: month.toISOString().slice(0, 10) })) ?? 0;
+  return unwrap(await supabase.rpc('monthly_adherence', { p_month: toTunisDate(month) })) ?? 0;
 }

@@ -9,6 +9,7 @@ import {
   type ReminderPermission,
 } from '@/features/rappels/notifications';
 import { applyLanguage, LANGUAGES, type LangCode } from '@/i18n';
+import { todayInTunis } from '@/lib/dates';
 
 /** Paramètres — cahier des charges §2 */
 export default function Settings() {
@@ -59,7 +60,7 @@ export default function Settings() {
     const blob = new Blob([JSON.stringify(dump, null, 2)], { type: 'application/json' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = `croncare-export-${new Date().toISOString().slice(0, 10)}.json`;
+    a.download = `croncare-export-${todayInTunis()}.json`;
     a.click();
   };
 
