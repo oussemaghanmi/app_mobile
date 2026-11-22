@@ -3,6 +3,5 @@ android
 ios
 coverage
 package-lock.json
-src/figma
 supabase/.temp
 *.md
