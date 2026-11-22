@@ -3,6 +3,7 @@ name: Android (APK debug)
 on:
   push:
     branches: [develop, main]
+    tags: ['v*']
   workflow_dispatch:
 
 concurrency:
@@ -45,3 +46,27 @@ jobs:
           name: croncare-debug-apk
           path: android/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
+
+  # Sur un tag v0.x.0 : crée la GitHub Release et y joint l'APK (voir docs/MISE-EN-PRODUCTION.md).
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: apk
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: croncare-debug-apk
+      - name: Release avec l'APK
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          mv app-debug.apk "croncare-$TAG-debug.apk"
+          if gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release upload "$TAG" "croncare-$TAG-debug.apk" --clobber --repo "$GITHUB_REPOSITORY"
+          else
+            gh release create "$TAG" "croncare-$TAG-debug.apk" --repo "$GITHUB_REPOSITORY" \
+              --title "CronCare $TAG" --notes "Voir CHANGELOG.md." --verify-tag
+          fi
