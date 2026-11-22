@@ -7,6 +7,7 @@ import type { AsyncState } from '@/lib/useAsync';
 import * as api from '../api';
 import type { PrescriptionWithAuthor } from '../types';
 import { PrescriptionForm } from './PrescriptionForm';
+import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
 
 interface Props {
   patientId: string;
@@ -22,13 +23,17 @@ export function PrescriptionsSection({ patientId, state, fmtDate }: Props) {
   const { t } = useTranslation();
   const { profile } = useAuth();
   const [editing, setEditing] = useState<'new' | string | null>(null);
+  const [stoppingRx, setStoppingRx] = useState<PrescriptionWithAuthor | null>(null);
   const canWrite = can(profile?.role, 'prescriptions:write');
   const author = (rx: PrescriptionWithAuthor) =>
     rx.author ? `${rx.author.first_name} ${rx.author.last_name}`.trim() : '—';
 
   const toggle = async (rx: PrescriptionWithAuthor) => {
-    if (rx.active && !confirm(t('pro.rx.confirmStop', { name: rx.medication }))) return;
-    await api.setPrescriptionActive(rx.id, !rx.active);
+    if (rx.active) {
+      setStoppingRx(rx);
+      return;
+    }
+    await api.setPrescriptionActive(rx.id, true);
     state.reload();
   };
 
@@ -117,6 +122,21 @@ export function PrescriptionsSection({ patientId, state, fmtDate }: Props) {
         )}
       </AsyncView>
       {canWrite && <p className="mt-2 text-xs text-ink/70">{t('pro.rx.regenerateNote')}</p>}
+      <ConfirmDialog
+        open={stoppingRx !== null}
+        title={t('pro.rx.confirmStopTitle')}
+        description={stoppingRx ? t('pro.rx.confirmStop', { name: stoppingRx.medication }) : ''}
+        confirmLabel={t('pro.rx.stop')}
+        cancelLabel={t('common.cancel')}
+        onConfirm={async () => {
+          if (stoppingRx) {
+            await api.setPrescriptionActive(stoppingRx.id, false);
+            state.reload();
+            setStoppingRx(null);
+          }
+        }}
+        onCancel={() => setStoppingRx(null)}
+      />
     </section>
   );
 }

@@ -46,10 +46,15 @@
     "notifCommunity": "شنوة صاير في الجماعة",
     "notifTips": "نصيحة اليوم",
     "privacy": "الخصوصية",
-    "deleteJournal": "فسّخ الكرّاس",
+    "deleteJournal": "فسّخ الكرّاس والأعراض",
     "exportData": "خرّج المعطيات متاعي",
     "deleteAccount": "فسّخ الحساب",
     "confirm": "ما تنجمش ترجع فيها. متأكد؟",
+    "confirmDeleteJournalTitle": "فسّخ الكرّاس والأعراض",
+    "confirmDeleteJournal": "كرّاسك الخاص وتسجيلات الأعراض الكل باش يتفسّخوا نهائيًا.",
+    "confirmDeleteAccountTitle": "فسّخ حسابي",
+    "confirmDeleteAccount": "حسابك ومعلوماتك الكل باش يتفسّخوا نهائيًا. ما تنجمش ترجع فيها.",
+    "journalDeleted": "الكرّاس والأعراض تفسّخوا.",
     "about": "على التطبيقة",
     "aboutText": "كرون كير يعاون المرضى بالكرون في تونس. مشروع تخرّج.",
     "logout": "أخرج"
@@ -81,6 +86,7 @@
       "stop": "حبّس",
       "resume": "رجّع",
       "confirmStop": "تحبّس الوصفة متاع {{name}}؟ الدوا الجاي باش يتفسّخ.",
+      "confirmStopTitle": "حبّس الوصفة",
       "medication": "الدوا",
       "dosage": "قدّاش",
       "dosagePlaceholder": "مثلًا: حبّة 50 ملغ",
@@ -107,7 +113,8 @@
       "duration": "المدّة (دقيقة)",
       "location": "البلاصة",
       "empty": "ما فمّا حتّى موعد.",
-      "confirmDelete": "تفسّخ الموعد هذا نهائيًا؟"
+      "confirmDelete": "تفسّخ الموعد هذا نهائيًا؟",
+      "confirmDeleteTitle": "فسّخ الموعد"
     }
   },
   "common": {
@@ -118,7 +125,9 @@
     "back": "ارجع",
     "medicalNotice": "معلومات عامّة، ما تعوّضش رأي الطبيب متاعك.",
     "close": "سكّر",
-    "cancel": "بطّل"
+    "cancel": "بطّل",
+    "confirm": "تأكيد",
+    "delete": "فسّخ"
   },
   "nav": {
     "main": "التنقّل الرئيسي"
@@ -386,6 +395,8 @@
     "send": "ابعث",
     "delete": "فسّخ",
     "confirmDelete": "تفسّخ الميساج هذا نهائيًا؟",
+    "confirmDeletePostTitle": "فسّخ المنشور",
+    "confirmDeleteCommentTitle": "فسّخ التعليق",
     "hidden": "مخبّي بعد البلاغات",
     "report": {
       "action": "بلّغ",
@@ -412,6 +423,7 @@
     "history": "اللي فات",
     "saved": "تسجّل.",
     "confirmDelete": "تفسّخ هاذي نهائيًا؟",
+    "confirmDeleteTitle": "فسّخ التسجيل",
     "deleteEntry": "فسّخ",
     "symptoms": {
       "visibility": "المعلومات هاذي يشوفها الفريق الطبي متاعك (الطبيب والفرملي اللي يتابعوك).",

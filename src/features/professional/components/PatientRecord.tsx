@@ -14,6 +14,7 @@ import { AppointmentForm } from './AppointmentForm';
 import { MoodChart } from './MoodChart';
 import { PrescriptionsSection } from './PrescriptionsSection';
 import { NursingNotesSection } from './NursingNotesSection';
+import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
 
 /**
  * Fiche patient (médecin / infirmier affecté) : identité, humeur 30 jours, symptômes, observance,
@@ -26,6 +27,7 @@ export default function PatientRecord() {
   const locale = intlLocale(i18n.language);
   const record = usePatientRecord(id);
   const [addingAppt, setAddingAppt] = useState(false);
+  const [deleteAppointmentId, setDeleteAppointmentId] = useState<string | null>(null);
   const name = (p: { first_name: string; last_name: string } | null) =>
     p ? `${p.first_name} ${p.last_name}`.trim() : '—';
   const fmtDate = (iso: string, withTime = false) =>
@@ -147,11 +149,7 @@ export default function PatientRecord() {
                   {a.professional_id === profile.id && (
                     <button
                       className="min-h-11 px-2 text-terracotta-dark"
-                      onClick={async () => {
-                        if (!confirm(t('pro.appointments.confirmDelete'))) return;
-                        await api.deleteAppointment(a.id);
-                        record.appointments.reload();
-                      }}
+                      onClick={() => setDeleteAppointmentId(a.id)}
                     >
                       {t('community.delete')}
                     </button>
@@ -162,6 +160,22 @@ export default function PatientRecord() {
           )}
         </AsyncView>
       </section>
+
+      <ConfirmDialog
+        open={deleteAppointmentId !== null}
+        title={t('pro.appointments.confirmDeleteTitle')}
+        description={t('pro.appointments.confirmDelete')}
+        confirmLabel={t('common.delete')}
+        cancelLabel={t('common.cancel')}
+        onConfirm={async () => {
+          if (deleteAppointmentId) {
+            await api.deleteAppointment(deleteAppointmentId);
+            record.appointments.reload();
+            setDeleteAppointmentId(null);
+          }
+        }}
+        onCancel={() => setDeleteAppointmentId(null)}
+      />
     </div>
   );
 }

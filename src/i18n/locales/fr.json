@@ -46,10 +46,15 @@
     "notifCommunity": "Activité de la communauté",
     "notifTips": "Conseils du jour",
     "privacy": "Confidentialité",
-    "deleteJournal": "Supprimer le journal",
+    "deleteJournal": "Supprimer le journal et les symptômes",
     "exportData": "Exporter mes données",
     "deleteAccount": "Supprimer le compte",
     "confirm": "Cette action est définitive. Confirmer ?",
+    "confirmDeleteJournalTitle": "Supprimer le journal et les symptômes",
+    "confirmDeleteJournal": "Votre journal intime ainsi que l'ensemble de vos symptômes enregistrés seront définitivement effacés.",
+    "confirmDeleteAccountTitle": "Supprimer mon compte",
+    "confirmDeleteAccount": "Votre compte et l'ensemble de vos données associées seront définitivement supprimés. Cette action est irréversible.",
+    "journalDeleted": "Journal et symptômes supprimés.",
     "about": "À propos",
     "aboutText": "CronCare accompagne les patients atteints de la maladie de Crohn en Tunisie. Projet de fin d'études.",
     "logout": "Se déconnecter"
@@ -81,6 +86,7 @@
       "stop": "Arrêter",
       "resume": "Reprendre",
       "confirmStop": "Arrêter la prescription de {{name}} ? Les prises futures seront supprimées.",
+      "confirmStopTitle": "Arrêter la prescription",
       "medication": "Médicament",
       "dosage": "Dosage",
       "dosagePlaceholder": "ex. 1 comprimé de 50 mg",
@@ -107,7 +113,8 @@
       "duration": "Durée (min)",
       "location": "Lieu",
       "empty": "Aucun rendez-vous prévu.",
-      "confirmDelete": "Supprimer définitivement ce rendez-vous ?"
+      "confirmDelete": "Supprimer définitivement ce rendez-vous ?",
+      "confirmDeleteTitle": "Supprimer le rendez-vous"
     }
   },
   "common": {
@@ -118,7 +125,9 @@
     "back": "Retour",
     "medicalNotice": "Information générale : elle ne remplace pas l'avis de votre médecin.",
     "close": "Fermer",
-    "cancel": "Annuler"
+    "cancel": "Annuler",
+    "confirm": "Confirmer",
+    "delete": "Supprimer"
   },
   "nav": {
     "main": "Navigation principale"
@@ -386,6 +395,8 @@
     "send": "Envoyer",
     "delete": "Supprimer",
     "confirmDelete": "Supprimer définitivement ce message ?",
+    "confirmDeletePostTitle": "Supprimer le message",
+    "confirmDeleteCommentTitle": "Supprimer le commentaire",
     "hidden": "Masqué après signalements",
     "report": {
       "action": "Signaler",
@@ -412,6 +423,7 @@
     "history": "Historique",
     "saved": "Entrée enregistrée.",
     "confirmDelete": "Supprimer définitivement cette entrée ?",
+    "confirmDeleteTitle": "Supprimer l'entrée",
     "deleteEntry": "Supprimer l'entrée",
     "symptoms": {
       "visibility": "Ces informations sont visibles par votre équipe soignante (médecin et infirmier qui vous suivent).",

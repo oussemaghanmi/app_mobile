@@ -6,6 +6,7 @@ import * as api from '../api';
 import { useComments } from '../hooks';
 import type { Post, ReportTarget } from '../types';
 import { ReportForm } from './ReportForm';
+import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
 
 interface Props {
   post: Post;
@@ -21,19 +22,29 @@ export function PostCard({ post, currentUserId, canWrite, onChanged }: Props) {
   const [reporting, setReporting] = useState<ReportTarget | null>(null);
   const [draft, setDraft] = useState('');
   const [busy, setBusy] = useState(false);
+  const [pendingDelete, setPendingDelete] = useState<
+    { type: 'post' } | { type: 'comment'; id: string } | null
+  >(null);
   const comments = useComments(post.id, showComments);
   const mine = post.author_id === currentUserId;
   const count = post.community_comments[0]?.count ?? 0;
 
-  const remove = async () => {
-    if (!confirm(t('community.confirmDelete'))) return;
-    await api.deletePost(post.id);
-    onChanged();
+  const remove = () => {
+    setPendingDelete({ type: 'post' });
   };
-  const removeComment = async (id: string) => {
-    if (!confirm(t('community.confirmDelete'))) return;
-    await api.deleteComment(id);
-    comments.reload();
+  const removeComment = (id: string) => {
+    setPendingDelete({ type: 'comment', id });
+  };
+  const handleConfirmDelete = async () => {
+    if (!pendingDelete) return;
+    if (pendingDelete.type === 'post') {
+      await api.deletePost(post.id);
+      onChanged();
+    } else {
+      await api.deleteComment(pendingDelete.id);
+      comments.reload();
+    }
+    setPendingDelete(null);
   };
   const sendComment = async (e: FormEvent) => {
     e.preventDefault();
@@ -153,6 +164,19 @@ export function PostCard({ post, currentUserId, canWrite, onChanged }: Props) {
           )}
         </div>
       )}
+      <ConfirmDialog
+        open={pendingDelete !== null}
+        title={
+          pendingDelete?.type === 'post'
+            ? t('community.confirmDeletePostTitle')
+            : t('community.confirmDeleteCommentTitle')
+        }
+        description={t('community.confirmDelete')}
+        confirmLabel={t('common.delete')}
+        cancelLabel={t('common.cancel')}
+        onConfirm={handleConfirmDelete}
+        onCancel={() => setPendingDelete(null)}
+      />
     </article>
   );
 }

@@ -10,6 +10,7 @@ import {
 } from '@/features/rappels/notifications';
 import { applyLanguage, LANGUAGES, type LangCode } from '@/i18n';
 import { todayInTunis } from '@/lib/dates';
+import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
 
 /** Paramètres — cahier des charges §2 */
 export default function Settings() {
@@ -19,6 +20,7 @@ export default function Settings() {
   const [lastName, setLastName] = useState(profile?.last_name ?? '');
   const [msg, setMsg] = useState<string | null>(null);
   const [permission, setPermission] = useState<ReminderPermission>('prompt');
+  const [confirmAction, setConfirmAction] = useState<'journal' | 'account' | null>(null);
   useEffect(() => {
     checkPermission().then(setPermission, () => setPermission('unsupported'));
   }, []);
@@ -64,14 +66,22 @@ export default function Settings() {
     a.click();
   };
 
-  const deleteJournal = async () => {
-    if (!confirm(t('settings.confirm'))) return;
-    await api.deleteJournals(profile.id);
+  const deleteJournal = () => {
+    setConfirmAction('journal');
   };
 
-  const deleteAccount = async () => {
-    if (!confirm(t('settings.confirm'))) return;
-    if (await api.deleteMyAccount()) await signOut();
+  const deleteAccount = () => {
+    setConfirmAction('account');
+  };
+
+  const handleConfirmAction = async () => {
+    if (confirmAction === 'journal') {
+      await api.deleteJournals(profile.id);
+      setMsg(t('settings.journalDeleted'));
+    } else if (confirmAction === 'account') {
+      if (await api.deleteMyAccount()) await signOut();
+    }
+    setConfirmAction(null);
   };
 
   return (
@@ -158,6 +168,24 @@ export default function Settings() {
       <button className="btn-danger" onClick={signOut}>
         {t('settings.logout')}
       </button>
+
+      <ConfirmDialog
+        open={confirmAction !== null}
+        title={
+          confirmAction === 'journal'
+            ? t('settings.confirmDeleteJournalTitle')
+            : t('settings.confirmDeleteAccountTitle')
+        }
+        description={
+          confirmAction === 'journal'
+            ? t('settings.confirmDeleteJournal')
+            : t('settings.confirmDeleteAccount')
+        }
+        confirmLabel={confirmAction === 'journal' ? t('common.delete') : t('settings.deleteAccount')}
+        cancelLabel={t('common.cancel')}
+        onConfirm={handleConfirmAction}
+        onCancel={() => setConfirmAction(null)}
+      />
     </div>
   );
 }
