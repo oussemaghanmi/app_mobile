@@ -56,9 +56,10 @@ select is(
       and (has_function_privilege('anon', p.oid, 'execute') or has_function_privilege('authenticated', p.oid, 'execute'))),
   '', 'aucune fonction admin_* n''est exécutable par anon ou authenticated');
 select is(
-  (select count(*)::int from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+  (select string_agg(p.proname, ', ' order by p.proname) from pg_proc p join pg_namespace n on n.oid = p.pronamespace
     where n.nspname = 'public' and p.proname like 'admin\_%' and has_function_privilege('service_role', p.oid, 'execute')),
-  3, 'les 3 fonctions admin_* sont exécutables par service_role');
+  'admin_assign, admin_list_reports, admin_remove_content, admin_restore_content, admin_set_role, admin_unassign',
+  'les 6 fonctions admin_* (0012 et 0014) sont exécutables par service_role');
 
 -- ---------- service_role : promotion ----------
 set local role service_role;
