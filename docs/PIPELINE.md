@@ -20,7 +20,7 @@ flowchart LR
 | Workflow | Déclencheur | Jobs | Bloquant pour la PR |
 |---|---|---|---|
 | `ci.yml` | `pull_request`, push sur `develop` / `main` | `quality`, `database`, `edge-functions`, `secrets-scan` | **Oui** (avec la protection de branche) |
-| `android.yml` | push sur `develop` / `main`, manuel | `apk` → artefact `croncare-debug-apk` | Non |
+| `android.yml` | push sur `develop` / `main`, tag `v*`, manuel | `apk` → artefact `croncare-debug-apk` ; sur tag, `release` joint l'APK à la GitHub Release | Non |
 | `deploy-supabase.yml` | push sur `main`, manuel | `deploy` (environment `production`) | Non |
 | `dependabot.yml` | hebdomadaire | PR npm + GitHub Actions vers `develop` | — |
 
