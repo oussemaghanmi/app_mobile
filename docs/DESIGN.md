@@ -35,6 +35,14 @@ Règle : du texte sur fond clair utilise `ink`, `ink/70`, `sage-dark` ou `terrac
 Classes utilitaires (`index.css`) : `.card`, `.btn` (principal), `.btn-danger` (action définitive, toujours
 avec confirmation), `.input`. Toutes font au moins 44 px de haut.
 
+## Logo, icône et écran de démarrage
+- Source : `assets/croncare-logo.svg` (vectoriel) → `assets/logo.png` (1024 px, fond transparent).
+- `npm run assets:generate` (`@capacitor/assets`) régénère les icônes et écrans de démarrage Android
+  (`android/app/src/main/res/`, fond crème `#FAF6EF`). Après un changement de logo : relancer la commande,
+  committer les fichiers produits (projet Android versionné, ADR-0006).
+- Web : `public/favicon.svg` et `public/apple-touch-icon.png`, déclarés dans `index.html`.
+- Le composant `Logo` reprend le même dessin dans l'interface.
+
 ## Règles d'interface
 - **Cibles tactiles ≥ 44 px** (`min-h-11`) ; navigation basse 64 px.
 - **RTL** : propriétés logiques uniquement (`ms-`, `pe-`, `start-`, `text-start`…), icônes directionnelles avec `flip`.
