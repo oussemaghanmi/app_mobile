@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { Profile } from '@/features/auth/types';
 import * as api from './api';
 import { markIntakeTaken } from '@/features/medicaments/api';
@@ -10,7 +11,8 @@ export function usePatientHome(profile: Profile | null, intakesReady = true) {
   const [mood, setMood] = useState<number | null>(null);
   const [intakes, setIntakes] = useState<TodayIntake[]>([]);
   const [adherence, setAdherence] = useState<number | null>(null);
-  const [tip, setTip] = useState<string | null>(null);
+  const [tips, setTips] = useState<Awaited<ReturnType<typeof api.fetchTips>>>([]);
+  const { i18n } = useTranslation();
 
   useEffect(() => {
     if (!profile || !intakesReady) return;
@@ -18,12 +20,12 @@ export function usePatientHome(profile: Profile | null, intakesReady = true) {
     api.fetchTodayIntakes().then(setIntakes, ignore);
     api.fetchMonthlyAdherence().then(setAdherence, ignore);
     api.fetchTodayMood().then(setMood, ignore);
-    api.fetchTips().then((tips) => {
-      if (!tips.length) return;
-      const pick = tips[new Date().getDate() % tips.length];
-      setTip(pick[profile.language as 'fr' | 'en' | 'ar' | 'tn'] ?? pick.fr);
-    }, ignore);
+    api.fetchTips().then(setTips, ignore);
   }, [profile, intakesReady]);
+
+  // Conseil du jour dans la langue de l'interface (comme l'écran Conseils), pas celle du profil.
+  const pick = tips.length ? tips[new Date().getDate() % tips.length] : null;
+  const tip = pick ? pick[i18n.language as 'fr' | 'en' | 'ar' | 'tn'] || pick.fr : null;
 
   const saveMood = async (value: number) => {
     if (!profile) return;

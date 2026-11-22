@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Icon } from '@/components/ui/Icon';
 import { ScreenHeader } from '@/components/ui/ScreenHeader';
 import { usePatientContext } from '@/components/PatientLayout';
 import { intlLocale } from '@/lib/format';
@@ -38,9 +39,7 @@ export default function CalendarScreen() {
             aria-label={t('calendar.prev')}
             onClick={() => setMonth((m) => addMonths(m, -1))}
           >
-            <span aria-hidden className="inline-block rtl:rotate-180">
-              ‹
-            </span>
+            <Icon name="chevron" className="mx-auto h-5 w-5 rotate-90 rtl:-rotate-90" />
           </button>
           <h2 id="month-title" className="text-lg capitalize" aria-live="polite">
             {month.toLocaleDateString(locale, { month: 'long', year: 'numeric' })}
@@ -50,13 +49,11 @@ export default function CalendarScreen() {
             aria-label={t('calendar.next')}
             onClick={() => setMonth((m) => addMonths(m, 1))}
           >
-            <span aria-hidden className="inline-block rtl:rotate-180">
-              ›
-            </span>
+            <Icon name="chevron" className="mx-auto h-5 w-5 -rotate-90 rtl:rotate-90" />
           </button>
         </div>
 
-        <div className="mt-2 grid grid-cols-7 text-center text-xs text-ink/60" aria-hidden>
+        <div className="mt-2 grid grid-cols-7 text-center text-xs text-ink/70" aria-hidden>
           {weekdays.map((w, i) => (
             <span key={i}>{w}</span>
           ))}
@@ -87,7 +84,7 @@ export default function CalendarScreen() {
                 onClick={() => setSelected(k)}
                 className={`flex min-h-12 flex-col items-center justify-center rounded-xl text-sm ${
                   selected === k
-                    ? 'bg-sage text-white'
+                    ? 'bg-sage-dark text-white'
                     : k === today
                       ? 'ring-2 ring-sage'
                       : 'active:bg-sage/10'
@@ -96,9 +93,9 @@ export default function CalendarScreen() {
                 <span className="font-medium">{d.getDate()}</span>
                 <span aria-hidden className="flex h-2 gap-0.5">
                   {taken > 0 && <span className="h-1.5 w-1.5 rounded-full bg-sage-dark" />}
-                  {missed > 0 && <span className="h-1.5 w-1.5 rounded-full bg-terracotta" />}
+                  {missed > 0 && <span className="h-1.5 w-1.5 rounded-full bg-terracotta-dark" />}
                   {upcoming > 0 && <span className="h-1.5 w-1.5 rounded-full bg-ink/30" />}
-                  {appts > 0 && <span className="h-1.5 w-1.5 rotate-45 bg-amber-500" />}
+                  {appts > 0 && <span className="h-1.5 w-1.5 rotate-45 bg-terracotta" />}
                 </span>
               </button>
             );
@@ -111,7 +108,7 @@ export default function CalendarScreen() {
             {t('meds.status.taken')}
           </li>
           <li className="flex items-center gap-1">
-            <span aria-hidden className="h-2 w-2 rounded-full bg-terracotta" />
+            <span aria-hidden className="h-2 w-2 rounded-full bg-terracotta-dark" />
             {t('meds.status.missed')}
           </li>
           <li className="flex items-center gap-1">
@@ -119,7 +116,7 @@ export default function CalendarScreen() {
             {t('meds.status.upcoming')}
           </li>
           <li className="flex items-center gap-1">
-            <span aria-hidden className="h-2 w-2 rotate-45 bg-amber-500" />
+            <span aria-hidden className="h-2 w-2 rotate-45 bg-terracotta" />
             {t('calendar.appointment')}
           </li>
         </ul>
@@ -136,12 +133,18 @@ export default function CalendarScreen() {
         {dayAppts.length > 0 && (
           <ul className="mt-2 flex flex-col gap-2">
             {dayAppts.map((a) => (
-              <li key={a.id} className="rounded-xl bg-amber-50 p-3">
+              <li key={a.id} className="rounded-xl bg-terracotta/10 p-3">
                 <p className="font-medium">
-                  📅 {t('calendar.appointment')} —{' '}
+                  <Icon name="calendar" className="me-1 inline h-4 w-4 align-[-3px] text-terracotta-dark" />
+                  {t('calendar.appointment')} —{' '}
                   {new Date(a.starts_at).toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' })}
                 </p>
-                {a.location && <p className="text-sm">📍 {a.location}</p>}
+                {a.location && (
+                  <p className="text-sm">
+                    <Icon name="pin" className="me-1 inline h-4 w-4 align-[-3px]" />
+                    {a.location}
+                  </p>
+                )}
                 {a.notes && <p className="text-sm text-ink/70">{a.notes}</p>}
               </li>
             ))}
@@ -154,7 +157,7 @@ export default function CalendarScreen() {
             ))}
           </ul>
         ) : (
-          dayAppts.length === 0 && <p className="mt-2 text-ink/60">{t('calendar.nothing')}</p>
+          dayAppts.length === 0 && <p className="mt-2 text-ink/70">{t('calendar.nothing')}</p>
         )}
       </section>
     </div>

@@ -14,15 +14,7 @@ const RTL_MESSAGE =
 
 export default tseslint.config(
   {
-    ignores: [
-      'dist',
-      'android',
-      'ios',
-      'coverage',
-      'src/lib/database.types.ts',
-      'src/figma',
-      'supabase/functions',
-    ],
+    ignores: ['dist', 'android', 'ios', 'coverage', 'src/lib/database.types.ts', 'supabase/functions'],
   },
   {
     files: ['**/*.{ts,tsx}'],

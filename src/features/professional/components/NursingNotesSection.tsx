@@ -55,14 +55,14 @@ export function NursingNotesSection({ patientId, state, fmtDate }: Props) {
             onChange={(e) => setDraft(e.target.value)}
             placeholder={t('pro.notes.placeholder')}
           />
-          <p className="text-xs text-ink/60">{t('pro.notes.immutable')}</p>
+          <p className="text-xs text-ink/70">{t('pro.notes.immutable')}</p>
           {status === 'saved' && (
             <p role="status" className="text-sm text-sage-dark">
               {t('journal.saved')}
             </p>
           )}
           {status === 'error' && (
-            <p role="alert" className="text-sm text-terracotta">
+            <p role="alert" className="text-sm text-terracotta-dark">
               {t('common.error')}
             </p>
           )}
@@ -76,7 +76,7 @@ export function NursingNotesSection({ patientId, state, fmtDate }: Props) {
           <ul className="mt-2 flex flex-col gap-2">
             {list.map((n) => (
               <li key={n.id} className="rounded-xl bg-cream p-3 text-sm">
-                <p className="text-xs text-ink/60">
+                <p className="text-xs text-ink/70">
                   {fmtDate(n.created_at)} · {author(n)}
                 </p>
                 <p className="whitespace-pre-line">{n.content}</p>

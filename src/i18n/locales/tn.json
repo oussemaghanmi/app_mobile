@@ -5,7 +5,37 @@
     "email": "الإيمايل",
     "password": "كلمة السر",
     "submit": "أدخل",
-    "error": "المعلومات غالطة"
+    "error": "المعلومات غالطة",
+    "tagline": "صاحبك كل نهار باش تعيش مع مرض كرون"
+  },
+  "auth": {
+    "signupTitle": "تسجيل جديد",
+    "firstName": "الاسم",
+    "passwordRules": "على الأقل 6 حروف",
+    "createAccount": "حل حساب جديد",
+    "signupSuccess": "تسجّل الحساب! شوف بريدك الإلكتروني باش تأكّد الحساب.",
+    "alreadyHaveAccount": "عندك حساب؟ ادخل من هنا",
+    "noAccount": "ما عندكش حساب؟ سجّل من هنا",
+    "forgotPasswordLink": "نسيت كلمة السر؟",
+    "forgotPasswordTitle": "نسيت كلمة السر",
+    "forgotPasswordInstructions": "اكتب بريدك الإلكتروني باش يجيك رابط تبديل كلمة السر.",
+    "sendResetLink": "ابعث الرابط",
+    "resetLinkSent": "كان فمّا حساب بالبريد هذا، رانا بعثنالك الرابط.",
+    "resetPasswordTitle": "كلمة سر جديدة",
+    "newPassword": "كلمة سر جديدة",
+    "confirmNewPassword": "عاود كلمة السر",
+    "changePassword": "سجّل كلمة السر",
+    "passwordChanged": "تبدّلت كلمة السر بنجاح.",
+    "backToLogin": "ارجع للدخول",
+    "passwordTooShort": "لازم كلمة السر تكون فيها 6 حروف على الأقل.",
+    "passwordsDoNotMatch": "كلمات السر موش كيف كيف.",
+    "genericError": "صار مشكل. ثبّت في معلوماتك وعاود جرّب.",
+    "errors": {
+      "alreadyRegistered": "فما حساب بهالإيمايل من قبل. ادخل لحسابك ولا بدّل كلمة السر.",
+      "invalidEmail": "عنوان الإيمايل هذا موش صحيح.",
+      "rateLimited": "عملت برشا طلبات. استنى شوية وعاود جرّب.",
+      "linkExpired": "الرابط هذا خلص وقتو ولا تستعمل من قبل. اطلب رابط جديد."
+    }
   },
   "home": {
     "hello": "عسلامة {{name}}",
@@ -45,10 +75,15 @@
     "notifCommunity": "شنوة صاير في الجماعة",
     "notifTips": "نصيحة اليوم",
     "privacy": "الخصوصية",
-    "deleteJournal": "فسّخ الكرّاس",
+    "deleteJournal": "فسّخ الكرّاس والأعراض",
     "exportData": "خرّج المعطيات متاعي",
     "deleteAccount": "فسّخ الحساب",
     "confirm": "ما تنجمش ترجع فيها. متأكد؟",
+    "confirmDeleteJournalTitle": "فسّخ الكرّاس والأعراض",
+    "confirmDeleteJournal": "كرّاسك الخاص وتسجيلات الأعراض الكل باش يتفسّخوا نهائيًا.",
+    "confirmDeleteAccountTitle": "فسّخ حسابي",
+    "confirmDeleteAccount": "حسابك ومعلوماتك الكل باش يتفسّخوا نهائيًا. ما تنجمش ترجع فيها.",
+    "journalDeleted": "الكرّاس والأعراض تفسّخوا.",
     "about": "على التطبيقة",
     "aboutText": "كرون كير يعاون المرضى بالكرون في تونس. مشروع تخرّج.",
     "logout": "أخرج"
@@ -80,6 +115,7 @@
       "stop": "حبّس",
       "resume": "رجّع",
       "confirmStop": "تحبّس الوصفة متاع {{name}}؟ الدوا الجاي باش يتفسّخ.",
+      "confirmStopTitle": "حبّس الوصفة",
       "medication": "الدوا",
       "dosage": "قدّاش",
       "dosagePlaceholder": "مثلًا: حبّة 50 ملغ",
@@ -106,7 +142,8 @@
       "duration": "المدّة (دقيقة)",
       "location": "البلاصة",
       "empty": "ما فمّا حتّى موعد.",
-      "confirmDelete": "تفسّخ الموعد هذا نهائيًا؟"
+      "confirmDelete": "تفسّخ الموعد هذا نهائيًا؟",
+      "confirmDeleteTitle": "فسّخ الموعد"
     }
   },
   "common": {
@@ -117,7 +154,9 @@
     "back": "ارجع",
     "medicalNotice": "معلومات عامّة، ما تعوّضش رأي الطبيب متاعك.",
     "close": "سكّر",
-    "cancel": "بطّل"
+    "cancel": "بطّل",
+    "confirm": "تأكيد",
+    "delete": "فسّخ"
   },
   "nav": {
     "main": "التنقّل الرئيسي"
@@ -385,6 +424,8 @@
     "send": "ابعث",
     "delete": "فسّخ",
     "confirmDelete": "تفسّخ الميساج هذا نهائيًا؟",
+    "confirmDeletePostTitle": "فسّخ المنشور",
+    "confirmDeleteCommentTitle": "فسّخ التعليق",
     "hidden": "مخبّي بعد البلاغات",
     "report": {
       "action": "بلّغ",
@@ -411,6 +452,7 @@
     "history": "اللي فات",
     "saved": "تسجّل.",
     "confirmDelete": "تفسّخ هاذي نهائيًا؟",
+    "confirmDeleteTitle": "فسّخ التسجيل",
     "deleteEntry": "فسّخ",
     "symptoms": {
       "visibility": "المعلومات هاذي يشوفها الفريق الطبي متاعك (الطبيب والفرملي اللي يتابعوك).",

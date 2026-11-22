@@ -71,7 +71,7 @@ export function AppointmentForm({ onSubmit }: { onSubmit: (input: AppointmentInp
         />
       </label>
       {status === 'error' && (
-        <p role="alert" className="text-sm text-terracotta">
+        <p role="alert" className="text-sm text-terracotta-dark">
           {t('common.error')}
         </p>
       )}

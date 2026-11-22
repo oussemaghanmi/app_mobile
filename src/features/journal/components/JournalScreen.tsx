@@ -1,7 +1,9 @@
 import { useState, type FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Icon } from '@/components/ui/Icon';
 import { ScreenHeader } from '@/components/ui/ScreenHeader';
 import { Tabs } from '@/components/ui/Tabs';
+import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
 import { AsyncView } from '@/components/AsyncView';
 import { useAuth } from '@/features/auth/AuthProvider';
 import { intlLocale } from '@/lib/format';
@@ -20,6 +22,7 @@ export default function JournalScreen() {
   const entries = usePrivateEntries(tab === 'private');
   const [draft, setDraft] = useState('');
   const [busy, setBusy] = useState(false);
+  const [pendingDelete, setPendingDelete] = useState<{ type: 'log' | 'entry'; id: string } | null>(null);
   const fmt = (iso: string) =>
     new Date(iso).toLocaleString(intlLocale(i18n.language), {
       weekday: 'short',
@@ -31,15 +34,22 @@ export default function JournalScreen() {
 
   if (!profile) return null;
 
-  const removeLog = async (id: string) => {
-    if (!confirm(t('journal.confirmDelete'))) return;
-    await api.deleteSymptomLog(id);
-    logs.reload();
+  const removeLog = (id: string) => {
+    setPendingDelete({ type: 'log', id });
   };
-  const removeEntry = async (id: string) => {
-    if (!confirm(t('journal.confirmDelete'))) return;
-    await api.deletePrivateEntry(id);
-    entries.reload();
+  const removeEntry = (id: string) => {
+    setPendingDelete({ type: 'entry', id });
+  };
+  const handleConfirmDelete = async () => {
+    if (!pendingDelete) return;
+    if (pendingDelete.type === 'log') {
+      await api.deleteSymptomLog(pendingDelete.id);
+      logs.reload();
+    } else {
+      await api.deletePrivateEntry(pendingDelete.id);
+      entries.reload();
+    }
+    setPendingDelete(null);
   };
   const addEntry = async (e: FormEvent) => {
     e.preventDefault();
@@ -62,14 +72,15 @@ export default function JournalScreen() {
         active={tab}
         onChange={setTab}
         tabs={[
-          { key: 'symptoms', label: `🩺 ${t('journal.tabs.symptoms')}` },
-          { key: 'private', label: `🔒 ${t('journal.tabs.private')}` },
+          { key: 'symptoms', label: t('journal.tabs.symptoms'), icon: 'journal' },
+          { key: 'private', label: t('journal.tabs.private'), icon: 'lock' },
         ]}
       >
         {tab === 'symptoms' ? (
           <div className="flex flex-col gap-3">
-            <p role="note" className="rounded-xl bg-sage/10 px-3 py-2 text-sm">
-              👁️ {t('journal.symptoms.visibility')}
+            <p role="note" className="flex gap-2 rounded-xl bg-sage/10 px-3 py-2 text-sm">
+              <Icon name="eye" className="mt-0.5 h-4 w-4 shrink-0 text-sage-dark" />
+              <span>{t('journal.symptoms.visibility')}</span>
             </p>
             <SymptomForm
               onSubmit={async (input) => {
@@ -84,13 +95,13 @@ export default function JournalScreen() {
                   {list.map((l) => (
                     <li key={l.id} className="card">
                       <div className="flex items-start justify-between gap-2">
-                        <p className="text-sm text-ink/60">{fmt(l.logged_at)}</p>
+                        <p className="text-sm text-ink/70">{fmt(l.logged_at)}</p>
                         <button
-                          className="-mt-2 -me-2 h-11 w-11 shrink-0 rounded-full text-terracotta"
+                          className="-mt-2 -me-2 h-11 w-11 shrink-0 rounded-full text-terracotta-dark"
                           aria-label={t('journal.deleteEntry')}
                           onClick={() => removeLog(l.id)}
                         >
-                          🗑
+                          <Icon name="trash" className="mx-auto h-5 w-5" />
                         </button>
                       </div>
                       <div className="flex flex-wrap gap-2 text-sm">
@@ -115,8 +126,9 @@ export default function JournalScreen() {
           </div>
         ) : (
           <div className="flex flex-col gap-3">
-            <p role="note" className="rounded-xl bg-ink/5 px-3 py-2 text-sm">
-              🔒 {t('journal.private.visibility')}
+            <p role="note" className="flex gap-2 rounded-xl bg-ink/5 px-3 py-2 text-sm">
+              <Icon name="lock" className="mt-0.5 h-4 w-4 shrink-0" />
+              <span>{t('journal.private.visibility')}</span>
             </p>
             <form onSubmit={addEntry} className="card flex flex-col gap-2">
               <label htmlFor="private-entry" className="text-sm font-medium">
@@ -141,13 +153,13 @@ export default function JournalScreen() {
                   {list.map((e) => (
                     <li key={e.id} className="card">
                       <div className="flex items-start justify-between gap-2">
-                        <p className="text-sm text-ink/60">{fmt(e.created_at)}</p>
+                        <p className="text-sm text-ink/70">{fmt(e.created_at)}</p>
                         <button
-                          className="-mt-2 -me-2 h-11 w-11 shrink-0 rounded-full text-terracotta"
+                          className="-mt-2 -me-2 h-11 w-11 shrink-0 rounded-full text-terracotta-dark"
                           aria-label={t('journal.deleteEntry')}
                           onClick={() => removeEntry(e.id)}
                         >
-                          🗑
+                          <Icon name="trash" className="mx-auto h-5 w-5" />
                         </button>
                       </div>
                       <p className="whitespace-pre-line">{e.content}</p>
@@ -159,6 +171,15 @@ export default function JournalScreen() {
           </div>
         )}
       </Tabs>
+      <ConfirmDialog
+        open={pendingDelete !== null}
+        title={t('journal.confirmDeleteTitle')}
+        description={t('journal.confirmDelete')}
+        confirmLabel={t('common.delete')}
+        cancelLabel={t('common.cancel')}
+        onConfirm={handleConfirmDelete}
+        onCancel={() => setPendingDelete(null)}
+      />
     </div>
   );
 }

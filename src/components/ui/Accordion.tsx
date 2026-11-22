@@ -1,4 +1,5 @@
 import { useId, useState, type ReactNode } from 'react';
+import { Icon } from './Icon';
 
 interface Props {
   title: ReactNode;
@@ -30,9 +31,10 @@ export function Accordion({ title, icon, defaultOpen = false, highlight = false,
             </span>
           )}
           <span className="flex-1">{title}</span>
-          <span aria-hidden className={`text-sage-dark transition-transform ${open ? 'rotate-180' : ''}`}>
-            ▾
-          </span>
+          <Icon
+            name="chevron"
+            className={`h-5 w-5 shrink-0 text-sage-dark transition-transform ${open ? 'rotate-180' : ''}`}
+          />
         </button>
       </h3>
       {open && (

@@ -41,11 +41,11 @@ export function PseudonymSetup({ onDone }: { onDone: () => void }) {
           aria-describedby="pseudo-hint"
         />
       </label>
-      <p id="pseudo-hint" className="text-xs text-ink/60">
+      <p id="pseudo-hint" className="text-xs text-ink/70">
         {t('community.pseudonym.hint')}
       </p>
       {error && (
-        <p role="alert" className="text-sm text-terracotta">
+        <p role="alert" className="text-sm text-terracotta-dark">
           {error}
         </p>
       )}

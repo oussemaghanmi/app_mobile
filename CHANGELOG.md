@@ -26,6 +26,6 @@ Première version utilisable (procédure de publication : `docs/MISE-EN-PRODUCTI
 
 ### Limites connues
 - Textes médicaux en attente de validation par l'équipe soignante (#44).
-- Interface pas encore alignée sur le prototype Figma Make (#43) ; recettes illustrées par un emoji.
+- Recettes illustrées par un emoji (aucune image libre de droits fournie).
 - Magasins de démonstration seulement (liste réelle à fournir).
 - Rappels pas encore testés sur un vrai téléphone (#45).

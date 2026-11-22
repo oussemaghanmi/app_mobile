@@ -1,9 +1,10 @@
 import { useState, type FormEvent } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../AuthProvider';
 import { homePathFor } from '../permissions';
 import { signIn } from '../api';
+import { Logo } from '@/components/ui/Logo';
 
 export default function Login() {
   const { t } = useTranslation();
@@ -24,31 +25,61 @@ export default function Login() {
 
   return (
     <main className="mx-auto flex min-h-full max-w-sm flex-col justify-center gap-6 p-6">
-      <h1 className="text-center text-3xl text-sage-dark">{t('app')}</h1>
+      <header className="flex flex-col items-center gap-2 text-center">
+        <Logo className="h-20 w-20 drop-shadow-sm" />
+        <h1 className="text-3xl text-sage-dark">{t('app')}</h1>
+        <p className="text-ink/70">{t('login.tagline')}</p>
+      </header>
       <form onSubmit={onSubmit} className="card flex flex-col gap-3">
         <h2 className="text-xl">{t('login.title')}</h2>
+        <label htmlFor="login-email" className="text-sm font-medium">
+          {t('login.email')}
+        </label>
         <input
+          id="login-email"
           className="input"
           type="email"
           autoComplete="email"
-          placeholder={t('login.email')}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
         />
+        <label htmlFor="login-password" className="text-sm font-medium">
+          {t('login.password')}
+        </label>
         <input
+          id="login-password"
           className="input"
           type="password"
           autoComplete="current-password"
-          placeholder={t('login.password')}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        {error && <p className="text-sm text-terracotta">{t('login.error')}</p>}
-        <button className="btn" disabled={busy}>
+        {error && (
+          <p role="alert" className="text-sm text-terracotta-dark">
+            {t('login.error')}
+          </p>
+        )}
+        <div className="flex justify-end">
+          <Link
+            to="/forgot-password"
+            className="text-xs text-sage-dark underline min-h-[44px] flex items-center"
+          >
+            {t('auth.forgotPasswordLink')}
+          </Link>
+        </div>
+        <button className="btn min-h-11" disabled={busy}>
           {t('login.submit')}
         </button>
+        <div className="mt-2 text-center">
+          <Link
+            to="/signup"
+            className="text-sm text-sage-dark underline min-h-[44px] inline-flex items-center justify-center"
+          >
+            {t('auth.noAccount')}
+          </Link>
+        </div>
       </form>
     </main>
   );

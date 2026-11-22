@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Icon } from '@/components/ui/Icon';
 import { todayInTunis } from '@/lib/dates';
 import type { PrescriptionInput } from '../types';
 
@@ -81,7 +82,7 @@ export function PrescriptionForm({ initial, onSubmit, onCancel }: Props) {
               {value.times_of_day.length > 1 && (
                 <button
                   type="button"
-                  className="h-11 w-11 rounded-full text-terracotta"
+                  className="h-11 w-11 rounded-full text-terracotta-dark"
                   aria-label={t('pro.rx.removeTime', { n: i + 1 })}
                   onClick={() =>
                     set(
@@ -90,7 +91,7 @@ export function PrescriptionForm({ initial, onSubmit, onCancel }: Props) {
                     )
                   }
                 >
-                  ✕
+                  <Icon name="close" className="mx-auto h-5 w-5" />
                 </button>
               )}
             </div>
@@ -129,12 +130,12 @@ export function PrescriptionForm({ initial, onSubmit, onCancel }: Props) {
         </label>
       </div>
       {status === 'dates' && (
-        <p role="alert" className="text-sm text-terracotta">
+        <p role="alert" className="text-sm text-terracotta-dark">
           {t('pro.rx.datesError')}
         </p>
       )}
       {status === 'error' && (
-        <p role="alert" className="text-sm text-terracotta">
+        <p role="alert" className="text-sm text-terracotta-dark">
           {t('common.error')}
         </p>
       )}

@@ -5,7 +5,37 @@
     "email": "Email",
     "password": "Password",
     "submit": "Sign in",
-    "error": "Invalid credentials"
+    "error": "Invalid credentials",
+    "tagline": "Your everyday companion for living with Crohn's disease"
+  },
+  "auth": {
+    "signupTitle": "Sign up",
+    "firstName": "First name",
+    "passwordRules": "At least 6 characters",
+    "createAccount": "Create account",
+    "signupSuccess": "Account created! Please check your email to confirm your account.",
+    "alreadyHaveAccount": "Already have an account? Sign in",
+    "noAccount": "Don't have an account? Sign up",
+    "forgotPasswordLink": "Forgot password?",
+    "forgotPasswordTitle": "Forgot password",
+    "forgotPasswordInstructions": "Enter your email to receive a password reset link.",
+    "sendResetLink": "Send reset link",
+    "resetLinkSent": "If an account exists for this email, a reset link has been sent.",
+    "resetPasswordTitle": "New password",
+    "newPassword": "New password",
+    "confirmNewPassword": "Confirm password",
+    "changePassword": "Save password",
+    "passwordChanged": "Your password has been successfully reset.",
+    "backToLogin": "Back to sign in",
+    "passwordTooShort": "Password must be at least 6 characters long.",
+    "passwordsDoNotMatch": "Passwords do not match.",
+    "genericError": "An error occurred. Please verify your details and try again.",
+    "errors": {
+      "alreadyRegistered": "An account already exists with this e-mail. Sign in or reset your password.",
+      "invalidEmail": "This e-mail address is not valid.",
+      "rateLimited": "Too many requests. Please wait a moment before trying again.",
+      "linkExpired": "This link has expired or has already been used. Request a new reset link."
+    }
   },
   "home": {
     "hello": "Hello {{name}}",
@@ -45,10 +75,15 @@
     "notifCommunity": "Community activity",
     "notifTips": "Tip of the day",
     "privacy": "Privacy",
-    "deleteJournal": "Delete journal",
+    "deleteJournal": "Delete journal and symptoms",
     "exportData": "Export my data",
     "deleteAccount": "Delete account",
     "confirm": "This action is permanent. Confirm?",
+    "confirmDeleteJournalTitle": "Delete journal and symptoms",
+    "confirmDeleteJournal": "Your private journal and all logged symptoms will be permanently deleted.",
+    "confirmDeleteAccountTitle": "Delete my account",
+    "confirmDeleteAccount": "Your account and all associated data will be permanently deleted. This action cannot be undone.",
+    "journalDeleted": "Journal and symptoms deleted.",
     "about": "About",
     "aboutText": "CronCare supports Crohn's disease patients in Tunisia. Final-year project.",
     "logout": "Sign out"
@@ -80,6 +115,7 @@
       "stop": "Stop",
       "resume": "Resume",
       "confirmStop": "Stop the {{name}} prescription? Future doses will be removed.",
+      "confirmStopTitle": "Stop prescription",
       "medication": "Medicine",
       "dosage": "Dosage",
       "dosagePlaceholder": "e.g. 1 tablet of 50 mg",
@@ -106,7 +142,8 @@
       "duration": "Duration (min)",
       "location": "Place",
       "empty": "No appointment planned.",
-      "confirmDelete": "Delete this appointment permanently?"
+      "confirmDelete": "Delete this appointment permanently?",
+      "confirmDeleteTitle": "Delete appointment"
     }
   },
   "common": {
@@ -117,7 +154,9 @@
     "back": "Back",
     "medicalNotice": "General information: it does not replace your doctor's advice.",
     "close": "Close",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "delete": "Delete"
   },
   "nav": {
     "main": "Main navigation"
@@ -385,6 +424,8 @@
     "send": "Send",
     "delete": "Delete",
     "confirmDelete": "Delete this message permanently?",
+    "confirmDeletePostTitle": "Delete post",
+    "confirmDeleteCommentTitle": "Delete comment",
     "hidden": "Hidden after reports",
     "report": {
       "action": "Report",
@@ -411,6 +452,7 @@
     "history": "History",
     "saved": "Entry saved.",
     "confirmDelete": "Delete this entry permanently?",
+    "confirmDeleteTitle": "Delete entry",
     "deleteEntry": "Delete entry",
     "symptoms": {
       "visibility": "This information is visible to your care team (the doctor and nurse who follow you).",

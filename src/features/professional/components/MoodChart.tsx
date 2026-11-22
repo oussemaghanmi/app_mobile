@@ -27,7 +27,7 @@ export function MoodChart({ moods, days = 30 }: { moods: MoodLog[]; days?: numbe
     <figure className="m-0">
       <figcaption className="flex items-baseline justify-between">
         <span className="font-serif text-lg">{t('pro.record.mood')}</span>
-        <span className="text-sm text-ink/60">
+        <span className="text-sm text-ink/70">
           {avg !== null ? t('pro.record.moodAverage', { value: avg.toFixed(1) }) : t('pro.record.noData')}
         </span>
       </figcaption>
@@ -46,7 +46,7 @@ export function MoodChart({ moods, days = 30 }: { moods: MoodLog[]; days?: numbe
           </div>
         ))}
       </div>
-      <div className="mt-1 flex justify-between text-xs text-ink/60" aria-hidden>
+      <div className="mt-1 flex justify-between text-xs text-ink/70" aria-hidden>
         <span>{fmt(series[0].date)}</span>
         <span>{fmt(series[series.length - 1].date)}</span>
       </div>
@@ -56,7 +56,7 @@ export function MoodChart({ moods, days = 30 }: { moods: MoodLog[]; days?: numbe
         </summary>
         <table className="w-full text-start">
           <thead>
-            <tr className="text-ink/60">
+            <tr className="text-ink/70">
               <th className="text-start font-normal">{t('pro.record.date')}</th>
               <th className="text-start font-normal">{t('pro.record.moodValue')}</th>
             </tr>

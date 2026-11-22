@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useIntakeGeneration } from '@/features/medicaments/hooks';
 import { useMedicationReminders } from '@/features/rappels/hooks';
 import { useAuth } from '@/features/auth/AuthProvider';
+import { Icon, type IconName } from '@/components/ui/Icon';
 
 export interface PatientOutletContext {
   /** Vrai une fois les prises des prochains jours générées. */
@@ -13,12 +14,12 @@ export interface PatientOutletContext {
 // eslint-disable-next-line react-refresh/only-export-components
 export const usePatientContext = () => useOutletContext<PatientOutletContext>();
 
-const TABS = [
-  { to: '/patient', key: 'sections.home', icon: '⌂', end: true },
-  { to: '/patient/meds', key: 'sections.meds', icon: '💊' },
-  { to: '/patient/journal', key: 'sections.journal', icon: '✎' },
-  { to: '/patient/community', key: 'sections.community', icon: '☺' },
-  { to: '/patient/settings', key: 'sections.settings', icon: '⚙' },
+const TABS: { to: string; key: string; icon: IconName; end?: boolean }[] = [
+  { to: '/patient', key: 'sections.home', icon: 'home', end: true },
+  { to: '/patient/meds', key: 'sections.meds', icon: 'pill' },
+  { to: '/patient/journal', key: 'sections.journal', icon: 'journal' },
+  { to: '/patient/community', key: 'sections.community', icon: 'community' },
+  { to: '/patient/settings', key: 'sections.settings', icon: 'settings' },
 ];
 
 /**
@@ -37,7 +38,7 @@ export default function PatientLayout() {
       </main>
       <nav
         aria-label={t('nav.main')}
-        className="fixed inset-x-0 bottom-0 flex justify-around border-t border-black/5 bg-white pb-[env(safe-area-inset-bottom)]"
+        className="fixed inset-x-0 bottom-0 flex justify-around border-t border-black/5 bg-white/95 pb-[env(safe-area-inset-bottom)] shadow-[0_-2px_12px_rgba(47,58,51,0.06)] backdrop-blur"
       >
         {TABS.map((tab) => (
           <NavLink
@@ -45,13 +46,19 @@ export default function PatientLayout() {
             to={tab.to}
             end={tab.end}
             className={({ isActive }) =>
-              `flex min-h-14 min-w-14 flex-col items-center justify-center text-xs ${isActive ? 'text-sage-dark font-bold' : 'text-ink/60'}`
+              `group flex min-h-16 min-w-16 flex-1 flex-col items-center justify-center gap-0.5 text-xs ${isActive ? 'font-bold text-sage-dark' : 'text-ink/70'}`
             }
           >
-            <span aria-hidden className="text-lg">
-              {tab.icon}
-            </span>
-            {t(tab.key)}
+            {({ isActive }) => (
+              <>
+                <span
+                  className={`flex h-8 w-14 items-center justify-center rounded-full transition-colors ${isActive ? 'bg-sage/20' : ''}`}
+                >
+                  <Icon name={tab.icon} className="h-6 w-6" />
+                </span>
+                {t(tab.key)}
+              </>
+            )}
           </NavLink>
         ))}
       </nav>

@@ -8,7 +8,7 @@ et ce qu'il reste à faire à la main. Aucun secret ne doit être collé dans un
 |---|---|---|---|---|
 | 1 | #47 | Tableau GitHub Projects | rien (PR #46 déjà fusionnée) | `docs/BOARD.md` |
 | 2 | #42 | Projet Supabase, secrets, clé CrohnBot, protection des branches | rien | `docs/PIPELINE.md`, `docs/ADMIN.md` |
-| 3 | #43 | Export Figma Make et images des recettes | rien | `src/figma/README.md` |
+| 3 | ~~#43~~ | ~~Export Figma Make~~ : abandonné (ADR-0008) | — | — |
 | 4 | #44 | Validation médicale des textes | rien (en parallèle) | ci-dessous |
 | 5 | #45 | Essai sur téléphone, magasins, release `v0.1.0` | #42 (et de préférence #44) | ci-dessous |
 
@@ -38,11 +38,10 @@ Suivre `docs/BOARD.md` de l'étape 1 à 7. Vérification finale : assigner une i
    `edge-functions` a été ajouté par la PR #50, après la rédaction de l'issue.
 6. Premiers comptes et affectations : `docs/ADMIN.md`.
 
-## 3. Prototype Figma Make (#43)
+## 3. Prototype Figma Make (#43) — abandonné
 
-Export dans `src/figma/` (voir `src/figma/README.md`), PR vers `develop`, puis passer l'issue
-« Aligner l'interface sur le prototype » de `bloqué` à `prêt`. Joindre les images des recettes
-(ou leurs URL Unsplash) : question n°6 de `docs/QUESTIONS.md`.
+Décision du 2026-11-22 (ADR-0008) : l'export n'est pas importé, le design est défini dans le code
+(`docs/DESIGN.md`). Rien à faire de votre côté.
 
 ## 4. Validation médicale (#44)
 
