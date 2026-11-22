@@ -270,6 +270,8 @@ t('clé API absente : 503 not_configured', async () => {
   assert.equal(res.status, 503);
   assert.equal((await res.json()).error, 'not_configured');
   assert.equal(anthropicState.received.length, 0);
+  // Service indisponible : l'utilisateur ne perd pas un de ses 30 messages quotidiens.
+  assert.equal(supabaseState.quotaCalls, 0);
 });
 
 // ---------- Sortie ----------

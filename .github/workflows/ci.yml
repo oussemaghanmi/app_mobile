@@ -56,9 +56,9 @@ jobs:
         with:
           deno-version: v2.x
       - name: Vérification des types
-        run: deno check --node-modules-dir=none supabase/functions/crohnbot/index.ts
+        run: deno check --no-lock --node-modules-dir=none supabase/functions/crohnbot/index.ts
       - name: Tests (faux serveurs, sans clé réelle ni réseau externe)
-        run: deno test --node-modules-dir=none --allow-net --allow-env supabase/functions/
+        run: deno test --no-lock --node-modules-dir=none --allow-net --allow-env supabase/functions/
 
   secrets-scan:
     name: secrets-scan
