@@ -45,10 +45,15 @@
     "notifCommunity": "Community activity",
     "notifTips": "Tip of the day",
     "privacy": "Privacy",
-    "deleteJournal": "Delete journal",
+    "deleteJournal": "Delete journal and symptoms",
     "exportData": "Export my data",
     "deleteAccount": "Delete account",
     "confirm": "This action is permanent. Confirm?",
+    "confirmDeleteJournalTitle": "Delete journal and symptoms",
+    "confirmDeleteJournal": "Your private journal and all logged symptoms will be permanently deleted.",
+    "confirmDeleteAccountTitle": "Delete my account",
+    "confirmDeleteAccount": "Your account and all associated data will be permanently deleted. This action cannot be undone.",
+    "journalDeleted": "Journal and symptoms deleted.",
     "about": "About",
     "aboutText": "CronCare supports Crohn's disease patients in Tunisia. Final-year project.",
     "logout": "Sign out"
@@ -80,6 +85,7 @@
       "stop": "Stop",
       "resume": "Resume",
       "confirmStop": "Stop the {{name}} prescription? Future doses will be removed.",
+      "confirmStopTitle": "Stop prescription",
       "medication": "Medicine",
       "dosage": "Dosage",
       "dosagePlaceholder": "e.g. 1 tablet of 50 mg",
@@ -106,7 +112,8 @@
       "duration": "Duration (min)",
       "location": "Place",
       "empty": "No appointment planned.",
-      "confirmDelete": "Delete this appointment permanently?"
+      "confirmDelete": "Delete this appointment permanently?",
+      "confirmDeleteTitle": "Delete appointment"
     }
   },
   "common": {
@@ -117,7 +124,9 @@
     "back": "Back",
     "medicalNotice": "General information: it does not replace your doctor's advice.",
     "close": "Close",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "delete": "Delete"
   },
   "nav": {
     "main": "Main navigation"
@@ -385,6 +394,8 @@
     "send": "Send",
     "delete": "Delete",
     "confirmDelete": "Delete this message permanently?",
+    "confirmDeletePostTitle": "Delete post",
+    "confirmDeleteCommentTitle": "Delete comment",
     "hidden": "Hidden after reports",
     "report": {
       "action": "Report",
@@ -411,6 +422,7 @@
     "history": "History",
     "saved": "Entry saved.",
     "confirmDelete": "Delete this entry permanently?",
+    "confirmDeleteTitle": "Delete entry",
     "deleteEntry": "Delete entry",
     "symptoms": {
       "visibility": "This information is visible to your care team (the doctor and nurse who follow you).",

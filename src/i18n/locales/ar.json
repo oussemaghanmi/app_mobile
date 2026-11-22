@@ -45,10 +45,15 @@
     "notifCommunity": "نشاط المجتمع",
     "notifTips": "نصيحة اليوم",
     "privacy": "الخصوصية",
-    "deleteJournal": "حذف اليوميات",
+    "deleteJournal": "حذف اليوميات والأعراض",
     "exportData": "تصدير بياناتي",
     "deleteAccount": "حذف الحساب",
     "confirm": "هذا الإجراء نهائي. تأكيد؟",
+    "confirmDeleteJournalTitle": "حذف اليوميات والأعراض",
+    "confirmDeleteJournal": "سيتم حذف يومياتك الخاصة وجميع الأعراض المسجلة نهائيًا.",
+    "confirmDeleteAccountTitle": "حذف حسابي",
+    "confirmDeleteAccount": "سيتم حذف حسابك وجميع بياناتك المرتبطة به نهائيًا. لا يمكن التراجع عن هذا الإجراء.",
+    "journalDeleted": "تم حذف اليوميات والأعراض.",
     "about": "حول التطبيق",
     "aboutText": "كرون كير يرافق مرضى داء كرون في تونس. مشروع تخرج.",
     "logout": "تسجيل الخروج"
@@ -80,6 +85,7 @@
       "stop": "إيقاف",
       "resume": "استئناف",
       "confirmStop": "إيقاف وصفة {{name}}؟ ستُحذف الجرعات القادمة.",
+      "confirmStopTitle": "إيقاف الوصفة",
       "medication": "الدواء",
       "dosage": "الجرعة",
       "dosagePlaceholder": "مثال: قرص واحد 50 ملغ",
@@ -106,7 +112,8 @@
       "duration": "المدة (دقيقة)",
       "location": "المكان",
       "empty": "لا يوجد موعد مبرمج.",
-      "confirmDelete": "حذف هذا الموعد نهائيًا؟"
+      "confirmDelete": "حذف هذا الموعد نهائيًا؟",
+      "confirmDeleteTitle": "حذف الموعد"
     }
   },
   "common": {
@@ -117,7 +124,9 @@
     "back": "رجوع",
     "medicalNotice": "معلومات عامة لا تُغني عن رأي طبيبك.",
     "close": "إغلاق",
-    "cancel": "إلغاء"
+    "cancel": "إلغاء",
+    "confirm": "تأكيد",
+    "delete": "حذف"
   },
   "nav": {
     "main": "التنقل الرئيسي"
@@ -385,6 +394,8 @@
     "send": "إرسال",
     "delete": "حذف",
     "confirmDelete": "حذف هذه الرسالة نهائيًا؟",
+    "confirmDeletePostTitle": "حذف المنشور",
+    "confirmDeleteCommentTitle": "حذف التعليق",
     "hidden": "مخفيّ بعد البلاغات",
     "report": {
       "action": "إبلاغ",
@@ -411,6 +422,7 @@
     "history": "السجل",
     "saved": "تمّ حفظ المدخل.",
     "confirmDelete": "حذف هذا المدخل نهائيًا؟",
+    "confirmDeleteTitle": "حذف المدخل",
     "deleteEntry": "حذف المدخل",
     "symptoms": {
       "visibility": "هذه المعلومات يطّلع عليها فريقك الطبي (الطبيب والممرّض اللذان يتابعانك).",
