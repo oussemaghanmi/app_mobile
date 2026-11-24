@@ -22,6 +22,29 @@ const saved = (() => {
   }
 })();
 
+/**
+ * Langue de départ : le choix mémorisé s'il est valide ; sinon, à la première ouverture, la première langue
+ * du navigateur ou du téléphone parmi fr, en, ar (« ar-TN » donne « ar ») ; sinon fr.
+ * Le darija (tn) n'est jamais choisi automatiquement : aucun réglage ne le désigne (#112).
+ */
+export function initialLanguage(stored: string | null, browserLanguages: readonly string[]): LangCode {
+  if (LANGUAGES.some((l) => l.code === stored)) return stored as LangCode;
+  for (const tag of browserLanguages) {
+    const primary = tag.toLowerCase().split('-')[0];
+    if (primary === 'fr' || primary === 'en' || primary === 'ar') return primary;
+  }
+  return 'fr';
+}
+
+const browserLanguages = (() => {
+  try {
+    return navigator.languages?.length ? navigator.languages : [navigator.language];
+  } catch {
+    return [];
+  }
+})();
+const startLanguage = initialLanguage(saved, browserLanguages);
+
 i18n.use(initReactI18next).init({
   resources: {
     fr: { translation: fr },
@@ -29,7 +52,7 @@ i18n.use(initReactI18next).init({
     ar: { translation: ar },
     tn: { translation: tn },
   },
-  lng: saved ?? 'fr',
+  lng: startLanguage,
   fallbackLng: 'fr',
   interpolation: { escapeValue: false },
 });
@@ -47,6 +70,6 @@ export function applyLanguage(code: LangCode) {
   return i18n.changeLanguage(code);
 }
 
-applyLanguage((saved as LangCode) ?? 'fr');
+applyLanguage(startLanguage);
 
 export default i18n;
