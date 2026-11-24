@@ -1,4 +1,6 @@
 import type { AuthError, Session } from '@supabase/supabase-js';
+import { Capacitor } from '@capacitor/core';
+import { APP_RESET_URL, type RecoveryLink } from './deepLink';
 import { supabase } from '@/lib/supabase';
 import { unwrap } from '@/lib/errors';
 import type { Profile } from './types';
@@ -120,6 +122,8 @@ export async function signUp(
  * Une variable d'environnement VITE_SITE_URL (ou deep link) permet de surcharger l'URL pour la production mobile.
  */
 export function getResetPasswordRedirectUrl(): string {
+  // Dans l'APK : lien qui rouvre l'application (ADR-0009), quel que soit VITE_SITE_URL.
+  if (Capacitor.isNativePlatform()) return APP_RESET_URL;
   const customSiteUrl = import.meta.env.VITE_SITE_URL as string | undefined;
   if (customSiteUrl) {
     return `${customSiteUrl.replace(/\/+$/, '')}/reset-password`;
@@ -151,4 +155,19 @@ export async function updatePassword(password: string): Promise<AuthResult> {
     return { success: false, errorKey: authErrorKey(error) };
   }
   return { success: true };
+}
+
+/**
+ * Ouvre la session de récupération à partir du lien reçu dans l'application (#88).
+ * Flux implicite (défaut de supabase-js) : jetons du fragment ; flux PKCE : échange du code.
+ * Renvoie false si la session n'a pas pu être ouverte (lien expiré, déjà utilisé…).
+ */
+export async function completeRecoveryFromLink(
+  link: Exclude<RecoveryLink, { kind: 'error' }>,
+): Promise<boolean> {
+  const { error } =
+    link.kind === 'tokens'
+      ? await supabase.auth.setSession({ access_token: link.accessToken, refresh_token: link.refreshToken })
+      : await supabase.auth.exchangeCodeForSession(link.code);
+  return !error;
 }

@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
+import { useRecoveryDeepLink } from '@/features/auth/useRecoveryDeepLink';
 import { useTranslation } from 'react-i18next';
 import { RequireRole } from '@/features/auth/components/RequireRole';
 import { useAuth } from '@/features/auth/AuthProvider';
@@ -52,6 +53,8 @@ function RootRedirect() {
 }
 
 export default function App() {
+  // Lien « Mot de passe oublié » ouvert dans l'APK (#88).
+  useRecoveryDeepLink();
   return (
     <Suspense fallback={<ScreenFallback />}>
       <Routes>
