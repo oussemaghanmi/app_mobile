@@ -13,3 +13,4 @@ nouveau qui le remplace (statut « Remplacé par ADR-XXXX »).
 | [0006](0006-projet-android-versionne.md) | Le projet natif `android/` est versionné | Accepté |
 | [0007](0007-aucun-droit-pour-anon.md) | Aucun droit pour le visiteur non connecté (`anon`) | Accepté |
 | [0008](0008-design-sans-export-figma.md) | Design défini dans le code, sans export Figma Make | Accepté |
+| [0009](0009-lien-reinitialisation-vers-application.md) | Le lien « Mot de passe oublié » rouvre l'application Android | Accepté |
