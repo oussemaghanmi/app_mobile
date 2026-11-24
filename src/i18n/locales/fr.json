@@ -64,7 +64,8 @@
     "meds": "Médicaments",
     "home": "Accueil",
     "settings": "Paramètres",
-    "bot": "CrohnBot"
+    "bot": "CrohnBot",
+    "tracking": "Mon suivi"
   },
   "settings": {
     "profile": "Profil patient",
@@ -524,5 +525,18 @@
       "network": "Pas de connexion. Vérifiez votre accès à Internet.",
       "unknown": "Une erreur est survenue. Réessayez."
     }
+  },
+  "tracking": {
+    "subtitle": "Vos 30 derniers jours",
+    "note": "Ces graphiques reprennent vos propres saisies. Ils ne remplacent pas l'avis de votre médecin : montrez-les-lui en consultation.",
+    "adherence": "Observance du traitement",
+    "adherenceValue": "{{value}} % des prises sur 30 jours",
+    "pain": "Douleur",
+    "stools": "Selles par jour",
+    "mood": "Humeur",
+    "noData": "Pas encore de données sur cette période.",
+    "date": "Date",
+    "value": "Valeur",
+    "lastOfDay": "Si vous avez fait plusieurs saisies le même jour, la dernière est affichée."
   }
 }

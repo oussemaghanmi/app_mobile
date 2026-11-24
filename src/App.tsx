@@ -18,6 +18,7 @@ const NutritionScreen = lazy(() => import('@/features/alimentation/components/Nu
 const TipsScreen = lazy(() => import('@/features/conseils/components/TipsScreen'));
 const CommunityScreen = lazy(() => import('@/features/communaute/components/CommunityScreen'));
 const JournalScreen = lazy(() => import('@/features/journal/components/JournalScreen'));
+const TrackingScreen = lazy(() => import('@/features/suivi/components/TrackingScreen'));
 const CalendarScreen = lazy(() => import('@/features/calendrier/components/CalendarScreen'));
 const CrohnBotScreen = lazy(() => import('@/features/crohnbot/components/CrohnBotScreen'));
 const Settings = lazy(() => import('@/features/settings/components/Settings'));
@@ -72,6 +73,7 @@ export default function App() {
             <Route path="community" element={<CommunityScreen />} />
             <Route path="journal" element={<JournalScreen />} />
             <Route path="calendar" element={<CalendarScreen />} />
+            <Route path="tracking" element={<TrackingScreen />} />
             <Route path="assistant" element={<CrohnBotScreen />} />
             <Route path="settings" element={<Settings />} />
           </Route>

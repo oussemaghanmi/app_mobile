@@ -13,6 +13,7 @@ import CommunityScreen from '@/features/communaute/components/CommunityScreen';
 import CrohnBotScreen from '@/features/crohnbot/components/CrohnBotScreen';
 import Settings from '@/features/settings/components/Settings';
 import PatientRecord from '@/features/professional/components/PatientRecord';
+import TrackingScreen from '@/features/suivi/components/TrackingScreen';
 
 const now = new Date();
 const iso = (hours: number) => new Date(now.getTime() + hours * 3_600_000).toISOString();
@@ -153,6 +154,15 @@ vi.mock('@/features/communaute/api', () => ({
 
 vi.mock('@/features/crohnbot/api', () => ({ askCrohnBot: vi.fn() }));
 
+vi.mock('@/features/suivi/hooks', () => ({
+  useTracking: () => ({
+    days: ['2026-11-22', '2026-11-23', '2026-11-24'],
+    symptoms: ok([{ logged_at: iso(-30), pain_level: 3, stools_per_day: 2 }]),
+    moods: ok([{ day: iso(-24).slice(0, 10), mood: 4 }]),
+    intakes: ok([{ status: 'taken', scheduled_at: iso(-5) }]),
+  }),
+}));
+
 vi.mock('@/features/settings/api', () => ({
   updateProfile: vi.fn(),
   exportMyData: vi.fn(),
@@ -273,6 +283,12 @@ describe('Accessibilité (axe) des écrans principaux : aucune violation sérieu
     // La langue active est annoncée aux lecteurs d'écran, pas seulement mise en gras.
     expect(screen.getByRole('button', { name: 'Français' })).toHaveAttribute('aria-pressed', 'true');
     expect(screen.getByRole('button', { name: 'English' })).toHaveAttribute('aria-pressed', 'false');
+  });
+
+  it('Mon suivi', async () => {
+    const { container } = inRouter(<TrackingScreen />);
+    await screen.findByRole('heading', { level: 1 });
+    expect(await seriousViolations(container)).toEqual([]);
   });
 
   it('Fiche patient (médecin)', async () => {

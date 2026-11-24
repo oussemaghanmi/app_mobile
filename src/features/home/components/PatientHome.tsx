@@ -14,6 +14,7 @@ const QUICK: { to: string; key: string; icon: IconName; warm?: boolean }[] = [
   { to: 'community', key: 'sections.community', icon: 'community', warm: true },
   { to: 'journal', key: 'sections.journal', icon: 'journal' },
   { to: 'calendar', key: 'sections.calendar', icon: 'calendar', warm: true },
+  { to: 'tracking', key: 'sections.tracking', icon: 'chart' },
   { to: 'assistant', key: 'sections.bot', icon: 'bot' },
 ];
 /** Écran d'accueil — cahier des charges §1 */
