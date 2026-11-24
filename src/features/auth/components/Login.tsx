@@ -5,6 +5,7 @@ import { useAuth } from '../AuthProvider';
 import { homePathFor } from '../permissions';
 import { signIn } from '../api';
 import { Logo } from '@/components/ui/Logo';
+import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher';
 
 export default function Login() {
   const { t } = useTranslation();
@@ -25,6 +26,7 @@ export default function Login() {
 
   return (
     <main className="mx-auto flex min-h-full max-w-sm flex-col justify-center gap-6 p-6">
+      <LanguageSwitcher />
       <header className="flex flex-col items-center gap-2 text-center">
         <Logo className="h-20 w-20 drop-shadow-sm" />
         <h1 className="text-3xl text-sage-dark">{t('app')}</h1>
