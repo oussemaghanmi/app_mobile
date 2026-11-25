@@ -13,6 +13,7 @@ on:
       - 'package-lock.json'
       - 'capacitor.config.ts'
       - 'scripts/ios-captures.sh'
+      - 'scripts/ios-ocr.swift'
       - '.github/workflows/ios.yml'
   workflow_dispatch:
 
@@ -59,6 +60,14 @@ jobs:
             build
       - name: Captures dans le simulateur (fr, ar)
         run: scripts/ios-captures.sh build/ios/Build/Products/Debug-iphonesimulator/App.app captures-ios
+      # Diagnostic : texte visible de chaque capture (Vision), pour vérifier la langue dans les journaux.
+      - name: Texte des captures
+        continue-on-error: true
+        run: |
+          for f in captures-ios/*.png; do
+            echo "== $f"
+            swift scripts/ios-ocr.swift "$f" || true
+          done
       - uses: actions/upload-artifact@v4
         with:
           name: captures-ios
