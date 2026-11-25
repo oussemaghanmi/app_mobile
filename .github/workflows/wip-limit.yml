@@ -1,0 +1,56 @@
+# Limite de travail en cours : un compte ne peut pas avoir plus de WIP_LIMIT issues « en cours » à la fois
+# (voir AGENTS.md, « Travail en cours »). Quand une assignation dépasse la limite, elle est retirée et un
+# commentaire explique pourquoi. Ne s'applique pas aux issues `humain`, `décision`, `plan`, `bloqué`, `incomplet`.
+# La limite se règle avec la variable de dépôt WIP_LIMIT (4 par défaut).
+name: wip-limit
+
+on:
+  issues:
+    types: [assigned]
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/github-script@v7
+        env:
+          WIP_LIMIT: ${{ vars.WIP_LIMIT }}
+        with:
+          script: |
+            const { decide, DEFAULT_LIMIT } = require(`${process.env.GITHUB_WORKSPACE}/scripts/wip-limit.cjs`);
+            const parsed = Number.parseInt(process.env.WIP_LIMIT ?? '', 10);
+            const limit = Number.isInteger(parsed) && parsed > 0 ? parsed : DEFAULT_LIMIT;
+            const { owner, repo } = context.repo;
+            const issue = context.payload.issue;
+            const assignee = context.payload.assignee.login;
+
+            const assignedIssues = await github.paginate(github.rest.issues.listForRepo, {
+              owner, repo, assignee, state: 'open', per_page: 100,
+            });
+            // 100 PR récentes suffisent pour retrouver les « Closes #n » des issues encore ouvertes.
+            const { data: prs } = await github.rest.pulls.list({
+              owner, repo, state: 'all', sort: 'updated', direction: 'desc', per_page: 100,
+            });
+
+            const { allowed, current } = decide({ issue, assignedIssues, prs, limit });
+            if (allowed) {
+              core.info(`${assignee} : ${current.length} issue(s) en cours (limite ${limit}) : assignation conservée.`);
+              return;
+            }
+            await github.rest.issues.removeAssignees({ owner, repo, issue_number: issue.number, assignees: [assignee] });
+            const list = current.filter((n) => n !== issue.number).map((n) => `#${n}`).join(', ');
+            await github.rest.issues.createComment({
+              owner, repo, issue_number: issue.number,
+              body:
+                `L'assignation de @${assignee} a été retirée : la limite de **${limit} issues en cours** par compte est atteinte.\n\n` +
+                `Issues déjà en cours pour ce compte : ${list}.\n\n` +
+                `Une issue n'est plus « en cours » dès qu'une PR qui la cite (« Closes #n ») est ouverte, ou quand elle est fermée. ` +
+                `Terminer ou ouvrir la PR d'une de ces issues, ou s'en désassigner si elle n'est pas commencée, puis s'assigner celle-ci. ` +
+                `Voir « Travail en cours » dans AGENTS.md.`,
+            });
