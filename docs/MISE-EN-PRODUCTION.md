@@ -37,6 +37,9 @@ Suivre `docs/BOARD.md` de l'étape 1 à 7. Vérification finale : assigner une i
    **Quatre** checks obligatoires : `quality`, `database`, `edge-functions`, `secrets-scan`. Le check
    `edge-functions` a été ajouté par la PR #50, après la rédaction de l'issue.
 6. Premiers comptes et affectations : `docs/ADMIN.md`.
+7. **Mot de passe oublié dans l'APK** (ADR-0009) : dans **Supabase → Authentication → URL Configuration →
+   Redirect URLs**, ajouter `tn.croncare.app://reset-password`. Sans cela, le lien de l'e-mail n'ouvre pas
+   l'application.
 
 ## 3. Prototype Figma Make (#43) — abandonné
 
@@ -85,6 +88,8 @@ Installer l'APK : section « Installer l'APK » de `docs/PIPELINE.md`. Puis coch
   - [ ] le mode économie de batterie ne la supprime pas (sinon, noter la marque et le modèle du téléphone).
 - [ ] Carte des magasins : la carte OpenStreetMap s'affiche.
 - [ ] Bouton d'appel d'urgence : il ouvre bien le composeur avec le 190.
+- [ ] **Mot de passe oublié** (ADR-0009) : demander le lien depuis l'APK, l'ouvrir dans l'e-mail sur le téléphone ;
+  l'application s'ouvre sur « Nouveau mot de passe » et le nouveau mot de passe permet de se connecter.
 - [ ] **CrohnBot** avec la vraie clé : une question simple dans chaque langue ; le compteur des 30 messages
   du jour diminue ; au 31ᵉ message, le message de limite s'affiche.
 
