@@ -12,7 +12,7 @@ conçue directement dans le code, en gardant son thème et sa navigation.
 
 ## Stack (déjà en place — ne pas changer sans demander)
 - React 18 + TypeScript + Vite 5 + Tailwind CSS v4 (`@tailwindcss/vite`)
-- Capacitor 7 : **Android et iOS** (ADR-0010) ; `android/` et `ios/` sont versionnés
+- Capacitor 7 (cibles : **Android et iOS** ; le projet iOS est ajouté par la tâche #145 : toute tâche qui touche du code natif traite les deux plateformes)
 - Supabase : Auth, PostgreSQL, Row Level Security, Edge Functions
 - i18next : `fr` (défaut), `en`, `ar`, `tn` (darija tunisienne) — `ar` et `tn` sont en RTL
 - Thème : sauge `#7A9E7E`, terracotta `#C8775A`, crème `#FAF6EF`, polices Lora (titres) + DM Sans
