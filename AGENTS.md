@@ -27,11 +27,11 @@ la session est celui qui s'assigne (un agent travaille sous le compte de la pers
 
 ## Travail en cours (limite)
 Prendre beaucoup d'issues à la fois bloque les autres, cache l'avancement réel et fait des PR trop grosses à relire.
-- Un compte a **au plus 3 issues « en cours »** à la fois. **En cours** = ouverte, assignée à ce compte, de code (hors labels
+- Un compte a **au plus 4 issues « en cours »** à la fois. **En cours** = ouverte, assignée à ce compte, de code (hors labels
   `humain`, `décision`, `plan`, `bloqué`, `incomplet`) et **sans PR** qui la cite (`Closes #n`) : dès qu'une PR est ouverte,
   l'issue est « en revue » et ne compte plus ; une issue fusionnée se **ferme à la main** (elle ne se ferme pas toute seule
   tant que la branche par défaut est `main`).
-- Pourquoi 3 et pas 1 : un même compte peut servir une personne **et** ses agents (par exemple Amal, Antigravity et Claude).
+- Pourquoi 4 et pas 1 : un même compte peut servir une personne **et** ses agents (par exemple Amal, Antigravity et Claude).
   La limite se règle avec la variable de dépôt `WIP_LIMIT`.
 - **Ne pas réserver à l'avance** : on s'assigne une issue quand on la commence, pas pour « la mettre de côté ».
 - C'est **appliqué automatiquement** (`.github/workflows/wip-limit.yml`, logique testée dans `scripts/wip-limit.test.mjs`) :

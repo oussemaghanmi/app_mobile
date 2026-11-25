@@ -4,7 +4,7 @@
 /** Une issue qui porte l'un de ces labels n'est pas du travail de code en cours. */
 const EXEMPT_LABELS = ['humain', 'décision', 'plan', 'bloqué', 'incomplet'];
 
-const DEFAULT_LIMIT = 3;
+const DEFAULT_LIMIT = 4;
 
 /** Numéros cités par « Closes #n », « Fixes #n », « Resolves #n » dans le texte d'une PR. */
 function linkedIssueNumbers(body) {

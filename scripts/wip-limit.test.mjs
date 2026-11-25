@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import wip from './wip-limit.cjs';
 
-const { decide, inProgress, isExempt, linkedIssueNumbers } = wip;
+const { DEFAULT_LIMIT, decide, inProgress, isExempt, linkedIssueNumbers } = wip;
 
 const issue = (number, labels = ['type:tâche'], extra = {}) => ({
   number,
@@ -59,31 +59,32 @@ describe('inProgress', () => {
 });
 
 describe('decide', () => {
-  const four = [issue(1), issue(2), issue(3), issue(4)];
+  const five = [issue(1), issue(2), issue(3), issue(4), issue(5)];
 
-  it('refuse la quatrième issue en cours', () => {
-    const r = decide({ issue: four[3], assignedIssues: four, prs: [], limit: 3 });
+  it('refuse la cinquième issue en cours', () => {
+    const r = decide({ issue: five[4], assignedIssues: five, prs: [], limit: 4 });
     expect(r.allowed).toBe(false);
-    expect(r.current).toEqual([1, 2, 3, 4]);
+    expect(r.current).toEqual([1, 2, 3, 4, 5]);
   });
-  it('accepte la troisième', () => {
-    expect(decide({ issue: four[2], assignedIssues: four.slice(0, 3), prs: [], limit: 3 }).allowed).toBe(
+  it('accepte la quatrième', () => {
+    expect(decide({ issue: five[3], assignedIssues: five.slice(0, 4), prs: [], limit: 4 }).allowed).toBe(
       true,
     );
   });
-  it('accepte une quatrième si une des trois autres est déjà en revue', () => {
-    expect(decide({ issue: four[3], assignedIssues: four, prs: [pr('Closes #1')], limit: 3 }).allowed).toBe(
+  it('accepte une cinquième si une des quatre autres est déjà en revue', () => {
+    expect(decide({ issue: five[4], assignedIssues: five, prs: [pr('Closes #1')], limit: 4 }).allowed).toBe(
       true,
     );
   });
   it('n’applique jamais la limite à une issue exemptée (décision, humain…)', () => {
     const decision = issue(9, ['décision']);
-    expect(decide({ issue: decision, assignedIssues: [...four, decision], prs: [], limit: 3 }).allowed).toBe(
+    expect(decide({ issue: decision, assignedIssues: [...five, decision], prs: [], limit: 4 }).allowed).toBe(
       true,
     );
   });
-  it('la limite par défaut est 3', () => {
-    expect(decide({ issue: four[3], assignedIssues: four, prs: [] }).allowed).toBe(false);
-    expect(decide({ issue: four[2], assignedIssues: four.slice(0, 3), prs: [] }).allowed).toBe(true);
+  it('la limite par défaut est 4', () => {
+    expect(DEFAULT_LIMIT).toBe(4);
+    expect(decide({ issue: five[4], assignedIssues: five, prs: [] }).allowed).toBe(false);
+    expect(decide({ issue: five[3], assignedIssues: five.slice(0, 4), prs: [] }).allowed).toBe(true);
   });
 });

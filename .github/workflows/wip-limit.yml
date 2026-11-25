@@ -1,7 +1,7 @@
 # Limite de travail en cours : un compte ne peut pas avoir plus de WIP_LIMIT issues « en cours » à la fois
 # (voir AGENTS.md, « Travail en cours »). Quand une assignation dépasse la limite, elle est retirée et un
 # commentaire explique pourquoi. Ne s'applique pas aux issues `humain`, `décision`, `plan`, `bloqué`, `incomplet`.
-# La limite se règle avec la variable de dépôt WIP_LIMIT (3 par défaut).
+# La limite se règle avec la variable de dépôt WIP_LIMIT (4 par défaut).
 name: wip-limit
 
 on:
