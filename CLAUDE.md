@@ -12,7 +12,7 @@ conçue directement dans le code, en gardant son thème et sa navigation.
 
 ## Stack (déjà en place — ne pas changer sans demander)
 - React 18 + TypeScript + Vite 5 + Tailwind CSS v4 (`@tailwindcss/vite`)
-- Capacitor 7 (cible principale : Android)
+- Capacitor 7 : **Android et iOS** (ADR-0010) ; `android/` et `ios/` sont versionnés
 - Supabase : Auth, PostgreSQL, Row Level Security, Edge Functions
 - i18next : `fr` (défaut), `en`, `ar`, `tn` (darija tunisienne) — `ar` et `tn` sont en RTL
 - Thème : sauge `#7A9E7E`, terracotta `#C8775A`, crème `#FAF6EF`, polices Lora (titres) + DM Sans
@@ -74,6 +74,8 @@ Conventions détaillées : `docs/ARCHITECTURE.md` §5.
 ## Pipeline CI/CD (`.github/workflows/`)
 - `ci.yml` : sur chaque PR → lint, typecheck, check i18n, tests, build, tests RLS (Supabase local).
 - `android.yml` : sur `develop`/`main` → APK debug en artefact téléchargeable.
+- `ios.yml` : sur `develop`/`main` et les PR qui touchent `ios/`, `src/` ou `package.json` → compilation pour le
+  simulateur iOS, sans signature, et captures fr/ar (artefact `captures-ios`).
 - `deploy-supabase.yml` : sur `main` → migrations + Edge Functions vers le projet Supabase.
 - Secrets GitHub attendus : `SUPABASE_ACCESS_TOKEN`, `SUPABASE_PROJECT_REF`, `SUPABASE_DB_PASSWORD`,
   `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`.
@@ -94,5 +96,6 @@ npm run db:start     # Supabase local (Docker)
 npm run db:reset     # rejoue migrations + seed.sql
 npm run db:test      # tests pgTAP RLS
 npm run db:types     # régénère src/lib/database.types.ts après une migration
-npm run cap:android
+npm run cap:android  # build + sync + Android Studio
+npm run cap:ios      # build + sync + Xcode (macOS ; voir docs/IOS.md)
 ```

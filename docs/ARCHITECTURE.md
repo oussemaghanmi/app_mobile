@@ -4,7 +4,7 @@
 
 ## 1. Vue d'ensemble
 
-CronCare est une application **React + TypeScript** empaquetée en application Android avec **Capacitor**.
+CronCare est une application **React + TypeScript** empaquetée en application Android et iOS avec **Capacitor** (ADR-0010).
 Toute la donnée vit dans **Supabase** (PostgreSQL), et **toute la sécurité est appliquée dans la base**
 par des policies Row Level Security (RLS). Le seul composant serveur écrit par l'équipe est une
 **Edge Function** qui relaie les messages de CrohnBot vers l'API Anthropic, pour que la clé API ne quitte
@@ -12,7 +12,7 @@ jamais le serveur.
 
 ```mermaid
 flowchart LR
-  subgraph Phone["📱 Téléphone (Android)"]
+  subgraph Phone["📱 Téléphone (Android, iOS)"]
     App["App Capacitor<br/>React 18 + Vite + Tailwind<br/>i18n fr/en/ar/tn (RTL)"]
     Notif["@capacitor/local-notifications<br/>rappels de prises"]
     App --- Notif

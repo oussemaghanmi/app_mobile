@@ -21,6 +21,7 @@ flowchart LR
 |---|---|---|---|
 | `ci.yml` | `pull_request`, push sur `develop` / `main` | `quality`, `database`, `edge-functions`, `secrets-scan` | **Oui** (avec la protection de branche) |
 | `android.yml` | push sur `develop` / `main`, tag `v*`, manuel | `apk` → artefact `croncare-debug-apk` ; sur tag, `release` joint l'APK à la GitHub Release | Non |
+| `ios.yml` | push sur `develop` / `main`, PR touchant `ios/`, `src/`, `package.json`, manuel | `simulateur` (macOS) : compilation iOS sans signature + captures fr/ar → artefact `captures-ios` | Non (à rendre obligatoire une fois stable) |
 | `deploy-supabase.yml` | push sur `main`, manuel | `deploy` (environment `production`) | Non |
 | `dependabot.yml` | hebdomadaire | PR npm + GitHub Actions vers `develop` | — |
 

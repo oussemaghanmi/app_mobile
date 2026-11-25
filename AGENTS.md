@@ -83,6 +83,9 @@ npm run functions:check && npm run functions:test   # si une Edge Function chang
 - [ ] Classes Tailwind logiques (RTL) ; cibles tactiles ≥ 44 px ; `aria-label` sur les boutons icônes.
 - [ ] Toute nouvelle table : RLS + policies + tests pgTAP, dans une **nouvelle** migration ; `private_journal` jamais exposé.
 - [ ] Contenu médical : général, jamais de posologie inventée, marqué `// TODO(validation-médicale)`.
+- [ ] Code natif ou plugin Capacitor touché : **Android et iOS** vérifiés (CI `android.yml` et `ios.yml`) ; tout nouvel
+  accès protégé (position, caméra, santé, Bluetooth…) ajoute sa description d'usage dans `ios/App/App/Info.plist`
+  et sa permission Android, dans la même PR (ADR-0010).
 - [ ] Tests ajoutés ou mis à jour ; la CI est verte ; la PR dit ce qui n'a **pas** été fait.
 
 ## Quand on est bloqué
