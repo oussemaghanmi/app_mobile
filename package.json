@@ -27,7 +27,7 @@
     "assets:generate": "capacitor-assets generate --android --iconBackgroundColor \"#FAF6EF\" --iconBackgroundColorDark \"#FAF6EF\" --splashBackgroundColor \"#FAF6EF\" --splashBackgroundColorDark \"#FAF6EF\" --logoSplashScale 0.3"
   },
   "dependencies": {
-    "@capacitor/android": "^7.0.0",
+    "@capacitor/android": "^8.6.2",
     "@capacitor/app": "^7.1.2",
     "@capacitor/core": "^7.0.0",
     "@capacitor/local-notifications": "^7.0.0",
