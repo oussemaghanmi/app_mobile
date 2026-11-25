@@ -15,7 +15,10 @@ export default function ProDashboard() {
     <div className="flex flex-col gap-4 p-4">
       <header className="flex items-center justify-between">
         <h1 className="text-2xl">{t('pro.patients')}</h1>
-        <Link to="settings" className="text-sm underline">
+        <Link
+          to="settings"
+          className="-me-2 inline-flex min-h-11 min-w-11 items-center justify-center px-2 text-sm underline"
+        >
           {t('sections.settings')}
         </Link>
       </header>
