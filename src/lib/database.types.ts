@@ -236,6 +236,54 @@ export type Database = {
           },
         ];
       };
+      health_measurements: {
+        Row: {
+          created_at: string;
+          id: string;
+          kind: string;
+          measured_at: string;
+          patient_id: string;
+          source: string;
+          source_ref: string | null;
+          unit: string;
+          value_1: number;
+          value_2: number | null;
+        };
+        ComputedFields: never;
+        Insert: {
+          created_at?: string;
+          id?: string;
+          kind: string;
+          measured_at: string;
+          patient_id?: string;
+          source?: string;
+          source_ref?: string | null;
+          unit: string;
+          value_1: number;
+          value_2?: number | null;
+        };
+        Update: {
+          created_at?: string;
+          id?: string;
+          kind?: string;
+          measured_at?: string;
+          patient_id?: string;
+          source?: string;
+          source_ref?: string | null;
+          unit?: string;
+          value_1?: number;
+          value_2?: number | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'health_measurements_patient_id_fkey';
+            columns: ['patient_id'];
+            isOneToOne: false;
+            referencedRelation: 'profiles';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
       medication_intakes: {
         Row: {
           id: string;

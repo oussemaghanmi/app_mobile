@@ -64,7 +64,8 @@
     "meds": "Medications",
     "home": "Home",
     "settings": "Settings",
-    "bot": "CrohnBot"
+    "bot": "CrohnBot",
+    "tracking": "My tracking"
   },
   "settings": {
     "profile": "Patient profile",
@@ -524,5 +525,18 @@
       "network": "No connection. Check your internet access.",
       "unknown": "Something went wrong. Please try again."
     }
+  },
+  "tracking": {
+    "subtitle": "Your last 30 days",
+    "note": "These charts show your own entries. They do not replace your doctor's advice: show them at your appointment.",
+    "adherence": "Treatment adherence",
+    "adherenceValue": "{{value}}% of doses over 30 days",
+    "pain": "Pain",
+    "stools": "Stools per day",
+    "mood": "Mood",
+    "noData": "No data yet for this period.",
+    "date": "Date",
+    "value": "Value",
+    "lastOfDay": "If you made several entries on the same day, the latest one is shown."
   }
 }

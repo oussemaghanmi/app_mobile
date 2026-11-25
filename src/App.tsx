@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
+import { useRecoveryDeepLink } from '@/features/auth/useRecoveryDeepLink';
 import { useTranslation } from 'react-i18next';
 import { RequireRole } from '@/features/auth/components/RequireRole';
 import { useAuth } from '@/features/auth/AuthProvider';
@@ -18,6 +19,7 @@ const NutritionScreen = lazy(() => import('@/features/alimentation/components/Nu
 const TipsScreen = lazy(() => import('@/features/conseils/components/TipsScreen'));
 const CommunityScreen = lazy(() => import('@/features/communaute/components/CommunityScreen'));
 const JournalScreen = lazy(() => import('@/features/journal/components/JournalScreen'));
+const TrackingScreen = lazy(() => import('@/features/suivi/components/TrackingScreen'));
 const CalendarScreen = lazy(() => import('@/features/calendrier/components/CalendarScreen'));
 const CrohnBotScreen = lazy(() => import('@/features/crohnbot/components/CrohnBotScreen'));
 const Settings = lazy(() => import('@/features/settings/components/Settings'));
@@ -52,6 +54,8 @@ function RootRedirect() {
 }
 
 export default function App() {
+  // Lien « Mot de passe oublié » ouvert dans l'APK (#88).
+  useRecoveryDeepLink();
   return (
     <Suspense fallback={<ScreenFallback />}>
       <Routes>
@@ -72,6 +76,7 @@ export default function App() {
             <Route path="community" element={<CommunityScreen />} />
             <Route path="journal" element={<JournalScreen />} />
             <Route path="calendar" element={<CalendarScreen />} />
+            <Route path="tracking" element={<TrackingScreen />} />
             <Route path="assistant" element={<CrohnBotScreen />} />
             <Route path="settings" element={<Settings />} />
           </Route>

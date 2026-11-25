@@ -2,7 +2,7 @@
 -- (cascades depuis auth.users) et uniquement les siennes.
 begin;
 create extension if not exists pgtap with schema extensions;
-select plan(25);
+select plan(27);
 
 create schema if not exists tests;
 create or replace function tests.create_user(p_id uuid, p_role public.app_role, p_name text)
@@ -67,6 +67,9 @@ insert into public.reports (reporter_id, post_id, reason) values
   ('00000000-0000-0000-0000-00000000aaa1', '40000000-0000-0000-0000-00000000bbb1', 'spam');
 insert into public.chatbot_usage (user_id, day, messages) values
   ('00000000-0000-0000-0000-00000000aaa1', current_date, 3), ('00000000-0000-0000-0000-00000000bbb1', current_date, 7);
+insert into public.health_measurements (patient_id, kind, value_1, value_2, unit, measured_at) values
+  ('00000000-0000-0000-0000-00000000aaa1', 'blood_pressure', 120, 80, 'mmHg', now() - interval '1 hour'),
+  ('00000000-0000-0000-0000-00000000bbb1', 'blood_pressure', 130, 85, 'mmHg', now() - interval '1 hour');
 
 -- ---------- anon ne peut pas appeler la fonction ----------
 set local role anon;
@@ -94,6 +97,7 @@ select is((select count(*)::int from public.community_posts where author_id = '0
 select is((select count(*)::int from public.community_comments where author_id = '00000000-0000-0000-0000-00000000aaa1'), 0, 'community_comments (dont celui sous la publication de B)');
 select is((select count(*)::int from public.reports where reporter_id = '00000000-0000-0000-0000-00000000aaa1'), 0, 'reports');
 select is((select count(*)::int from public.chatbot_usage where user_id = '00000000-0000-0000-0000-00000000aaa1'), 0, 'chatbot_usage');
+select is((select count(*)::int from public.health_measurements where patient_id = '00000000-0000-0000-0000-00000000aaa1'), 0, 'health_measurements');
 
 -- ---------- Les données de B, du médecin et de l'infirmière sont intactes ----------
 select is((select count(*)::int from public.community_posts where id = '40000000-0000-0000-0000-00000000bbb1'), 1, 'la publication de B existe toujours');
@@ -109,6 +113,7 @@ select is(
         + (select count(*) from public.chatbot_usage where user_id = '00000000-0000-0000-0000-00000000bbb1'))::int,
   4, 'humeur, symptômes, rendez-vous et consommation CrohnBot de B intacts');
 select is((select pseudonym from public.community_profiles where user_id = '00000000-0000-0000-0000-00000000bbb1'), 'SupprB', 'pseudonyme de B intact');
+select is((select count(*)::int from public.health_measurements where patient_id = '00000000-0000-0000-0000-00000000bbb1'), 1, 'mesure de santé de B intacte');
 select is((select count(*)::int from public.profiles where id in ('00000000-0000-0000-0000-00000000ddd1', '00000000-0000-0000-0000-00000000eee1')),
   2, 'les comptes du médecin et de l''infirmière existent toujours');
 select is((select count(*)::int from public.care_assignments where professional_id = '00000000-0000-0000-0000-00000000ddd1'),

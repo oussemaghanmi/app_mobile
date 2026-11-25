@@ -2,19 +2,17 @@ import { useEffect, useState, type FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { authErrorKey, getSession, onAuthStateChange, updatePassword } from '../api';
+import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher';
 
 function parseAuthUrlError(): string | null {
   if (typeof window === 'undefined') return null;
 
-  const hash = window.location.hash.startsWith('#')
-    ? window.location.hash.slice(1)
-    : window.location.hash;
+  const hash = window.location.hash.startsWith('#') ? window.location.hash.slice(1) : window.location.hash;
   const hashParams = new URLSearchParams(hash);
   const searchParams = new URLSearchParams(window.location.search);
 
   const errorCode = hashParams.get('error_code') || searchParams.get('error_code');
-  const errorDescription =
-    hashParams.get('error_description') || searchParams.get('error_description');
+  const errorDescription = hashParams.get('error_description') || searchParams.get('error_description');
   const error = hashParams.get('error') || searchParams.get('error');
 
   return errorCode || errorDescription || error;
@@ -95,6 +93,7 @@ export default function ResetPassword() {
 
   return (
     <main className="mx-auto flex min-h-full max-w-sm flex-col justify-center gap-6 p-6">
+      <LanguageSwitcher />
       <h1 className="text-center text-3xl text-sage-dark">{t('app')}</h1>
       <div className="card flex flex-col gap-3">
         <h2 className="text-xl">{t('auth.resetPasswordTitle')}</h2>
@@ -104,10 +103,7 @@ export default function ResetPassword() {
             <p role="alert" className="text-sm text-terracotta-dark">
               {errorMsg || t('auth.errors.noRecoverySession')}
             </p>
-            <Link
-              to="/forgot-password"
-              className="btn min-h-11 flex items-center justify-center text-center"
-            >
+            <Link to="/forgot-password" className="btn min-h-11 flex items-center justify-center text-center">
               {t('auth.requestNewLink')}
             </Link>
             <div className="mt-2 text-center">

@@ -14,7 +14,7 @@ import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
 
 /** Paramètres — cahier des charges §2 */
 export default function Settings() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { profile, refreshProfile, signOut } = useAuth();
   const [firstName, setFirstName] = useState(profile?.first_name ?? '');
   const [lastName, setLastName] = useState(profile?.last_name ?? '');
@@ -121,8 +121,8 @@ export default function Settings() {
             <button
               key={l.code}
               onClick={() => changeLanguage(l.code)}
-              aria-pressed={profile.language === l.code}
-              className={`min-h-11 rounded-xl border px-3 py-2 ${profile.language === l.code ? 'border-sage bg-sage/10 font-bold' : 'border-black/10'}`}
+              aria-pressed={i18n.language === l.code}
+              className={`min-h-11 rounded-xl border px-3 py-2 ${i18n.language === l.code ? 'border-sage bg-sage/10 font-bold' : 'border-black/10'}`}
             >
               {l.label}
             </button>

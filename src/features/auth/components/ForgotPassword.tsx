@@ -2,6 +2,7 @@ import { useState, type FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { resetPasswordForEmail } from '../api';
+import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher';
 
 export default function ForgotPassword() {
   const { t } = useTranslation();
@@ -31,6 +32,7 @@ export default function ForgotPassword() {
 
   return (
     <main className="mx-auto flex min-h-full max-w-sm flex-col justify-center gap-6 p-6">
+      <LanguageSwitcher />
       <h1 className="text-center text-3xl text-sage-dark">{t('app')}</h1>
       <form onSubmit={onSubmit} className="card flex flex-col gap-3">
         <h2 className="text-xl">{t('auth.forgotPasswordTitle')}</h2>
