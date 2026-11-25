@@ -12,7 +12,8 @@ export default defineConfig({
   retries: process.env.CI ? 1 : 0,
   reporter: process.env.CI ? [['list'], ['html', { open: 'never' }]] : 'list',
   use: { baseURL: `http://127.0.0.1:${PORT}`, trace: 'off', timezoneId: 'Africa/Tunis' },
-  projects: [{ name: 'mobile', use: { ...devices['Pixel 7'] } }],
+  // Téléphone en français : depuis #112, la première ouverture suit la langue du téléphone (fr, en ou ar).
+  projects: [{ name: 'mobile', use: { ...devices['Pixel 7'], locale: 'fr-FR' } }],
   webServer: {
     command: `npm run dev -- --host 127.0.0.1 --port ${PORT} --strictPort`,
     url: `http://127.0.0.1:${PORT}`,
