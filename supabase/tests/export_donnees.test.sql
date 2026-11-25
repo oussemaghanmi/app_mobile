@@ -1,7 +1,7 @@
 -- Tests de public.export_my_data() (migration 0013) : export complet des données de la personne connectée.
 begin;
 create extension if not exists pgtap with schema extensions;
-select plan(25);
+select plan(27);
 
 create schema if not exists tests;
 create or replace function tests.create_user(p_id uuid, p_role public.app_role, p_name text)
@@ -74,6 +74,9 @@ insert into public.reports (reporter_id, post_id, reason) values
 insert into public.chatbot_usage (user_id, day, messages) values
   ('00000000-0000-0000-0000-0000000000a1', current_date, 5),
   ('00000000-0000-0000-0000-0000000000b1', current_date, 9);
+insert into public.health_measurements (patient_id, kind, value_1, unit, measured_at) values
+  ('00000000-0000-0000-0000-0000000000a1', 'heart_rate', 72, 'bpm', now() - interval '1 hour'),
+  ('00000000-0000-0000-0000-0000000000b1', 'heart_rate', 99, 'bpm', now() - interval '1 hour');
 
 -- ---------- Contrat de la fonction ----------
 select has_function('public', 'export_my_data', array[]::text[], 'export_my_data() existe');
@@ -89,9 +92,9 @@ grant select on export_a to authenticated;
 select is(
   (select array_agg(k order by k) from export_a, jsonb_object_keys(j) k),
   array['appointments', 'care_assignments', 'chatbot_usage', 'community_comments', 'community_posts',
-        'community_profiles', 'medication_intakes', 'mood_logs', 'nursing_notes', 'prescriptions',
-        'private_journal', 'profiles', 'reports', 'symptom_logs']::text[],
-  'les 14 clés exactes');
+        'community_profiles', 'health_measurements', 'medication_intakes', 'mood_logs', 'nursing_notes',
+        'prescriptions', 'private_journal', 'profiles', 'reports', 'symptom_logs']::text[],
+  'les 15 clés exactes');
 
 select is((select jsonb_array_length(j->'profiles') from export_a), 1, 'profiles : sa ligne');
 select is((select j->'profiles'->0->>'id' from export_a), '00000000-0000-0000-0000-0000000000a1', 'profiles : la bonne personne');
@@ -111,6 +114,8 @@ select is((select j->'community_comments'->0->>'content' from export_a), 'commen
 select is((select jsonb_array_length(j->'community_comments') from export_a), 1, 'community_comments : pas ceux d''autrui sur ses publications');
 select is((select jsonb_array_length(j->'reports') from export_a), 1, 'reports : ses signalements');
 select is((select j->'chatbot_usage'->0->>'messages' from export_a), '5', 'chatbot_usage');
+select is((select jsonb_array_length(j->'health_measurements') from export_a), 1, 'health_measurements : sa mesure');
+select is((select j->'health_measurements'->0->>'value_1' from export_a), '72', 'health_measurements : pas celle de B');
 select ok(
   (select position('00000000-0000-0000-0000-0000000000b1' in j::text) = 0
       and position('-B' in j::text) = 0 from export_a),
