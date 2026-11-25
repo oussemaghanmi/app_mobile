@@ -45,11 +45,20 @@ export function IntakeRow({ intake, locale, onTake }: Props) {
 
   return (
     <li className="flex flex-col gap-1 py-2">
-      <div className="flex items-center gap-3">
-        <span className="min-w-14 shrink-0 whitespace-nowrap font-medium tabular-nums">{time}</span>
+      <div className="flex items-start gap-3">
+        <span className="min-w-14 shrink-0 pt-0.5 font-medium whitespace-nowrap tabular-nums">{time}</span>
+        {/* Le nom n'est jamais tronqué (#100) : il passe à la ligne ; le statut est placé dessous. */}
         <div className="min-w-0 flex-1">
-          <p className="truncate font-medium">{intake.prescriptions?.medication}</p>
-          <p className="text-sm text-ink/70">{intake.prescriptions?.dosage}</p>
+          {/* <bdi> : un nom ou un dosage saisi en français reste dans le bon ordre en arabe (« 1 comprimé »). */}
+          <p className="font-medium break-words">
+            <bdi>{intake.prescriptions?.medication}</bdi>
+          </p>
+          <p className="text-sm text-ink/70">
+            <bdi>{intake.prescriptions?.dosage}</bdi>
+          </p>
+          <span className={`mt-1 inline-block rounded-full px-2 py-1 text-xs font-medium ${BADGE[status]}`}>
+            {t(`meds.status.${status}`)}
+          </span>
         </div>
         {canTake ? (
           <button
@@ -62,9 +71,6 @@ export function IntakeRow({ intake, locale, onTake }: Props) {
             {t('home.markTaken')}
           </button>
         ) : null}
-        <span className={`shrink-0 rounded-full px-2 py-1 text-xs font-medium ${BADGE[status]}`}>
-          {t(`meds.status.${status}`)}
-        </span>
       </div>
       {error && (
         <p role="alert" className="text-sm text-terracotta-dark">
