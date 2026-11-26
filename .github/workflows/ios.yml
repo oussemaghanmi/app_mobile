@@ -1,0 +1,75 @@
+name: iOS (simulateur)
+
+# Compilation de l'application iOS pour le simulateur, sans signature (#145, ADR-0010).
+# La signature et les essais sur iPhone attendent le compte Apple Developer (tâche humaine).
+on:
+  push:
+    branches: [develop, main]
+  pull_request:
+    paths:
+      - 'ios/**'
+      - 'src/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'capacitor.config.ts'
+      - 'scripts/ios-captures.sh'
+      - 'scripts/ios-ocr.swift'
+      - '.github/workflows/ios.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: ios-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  simulateur:
+    # Dépôt public : les exécuteurs macOS de GitHub sont gratuits.
+    runs-on: macos-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      # Sans secrets Supabase : l'application s'ouvre sur l'écran de connexion (suffisant pour compiler et capturer).
+      - name: Build web
+        run: npm run build
+      - name: Versions
+        run: |
+          xcodebuild -version
+          pod --version
+      # Le projet natif ios/ est versionné (ADR-0010) ; cap sync copie le web et installe les pods.
+      - name: Projet iOS
+        run: npx cap sync ios
+      - name: Compiler pour le simulateur (sans signature)
+        run: |
+          xcodebuild \
+            -workspace ios/App/App.xcworkspace \
+            -scheme App \
+            -configuration Debug \
+            -sdk iphonesimulator \
+            -destination 'generic/platform=iOS Simulator' \
+            -derivedDataPath build/ios \
+            CODE_SIGNING_ALLOWED=NO \
+            -quiet \
+            build
+      - name: Captures dans le simulateur (fr, ar)
+        run: scripts/ios-captures.sh build/ios/Build/Products/Debug-iphonesimulator/App.app captures-ios
+      # Diagnostic : texte visible de chaque capture (Vision), pour vérifier la langue dans les journaux.
+      - name: Texte des captures
+        continue-on-error: true
+        run: |
+          for f in captures-ios/*.png; do
+            echo "== $f"
+            swift scripts/ios-ocr.swift "$f" || true
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: captures-ios
+          path: captures-ios/
+          if-no-files-found: error

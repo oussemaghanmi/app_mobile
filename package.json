@@ -24,12 +24,14 @@
     "e2e": "playwright test",
     "functions:check": "deno check --no-lock --node-modules-dir=none supabase/functions/crohnbot/index.ts",
     "functions:test": "deno test --no-lock --node-modules-dir=none --allow-net --allow-env supabase/functions/",
-    "assets:generate": "capacitor-assets generate --android --iconBackgroundColor \"#FAF6EF\" --iconBackgroundColorDark \"#FAF6EF\" --splashBackgroundColor \"#FAF6EF\" --splashBackgroundColorDark \"#FAF6EF\" --logoSplashScale 0.3"
+    "assets:generate": "capacitor-assets generate --android --ios --iconBackgroundColor \"#FAF6EF\" --iconBackgroundColorDark \"#FAF6EF\" --splashBackgroundColor \"#FAF6EF\" --splashBackgroundColorDark \"#FAF6EF\" --logoSplashScale 0.3",
+    "cap:ios": "npm run cap:sync && cap open ios"
   },
   "dependencies": {
     "@capacitor/android": "^7.0.0",
     "@capacitor/app": "^7.1.2",
     "@capacitor/core": "^7.0.0",
+    "@capacitor/ios": "^7.6.10",
     "@capacitor/local-notifications": "^7.0.0",
     "@supabase/supabase-js": "^2.118.0",
     "i18next": "^23.11.0",

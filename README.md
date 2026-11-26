@@ -77,6 +77,11 @@ Le workflow `e2e.yml` rejoue ces tests à chaque PR.
 npm run cap:android         # build + sync + ouvre Android Studio
 ```
 
+### Application iOS (macOS + Xcode, voir [`docs/IOS.md`](docs/IOS.md))
+```bash
+npm run cap:ios             # build + sync + ouvre Xcode
+```
+
 ## Structure
 
 ```
