@@ -237,7 +237,11 @@ Notations : **soi** = `patient_id = auth.uid()` (ou `id`/`author_id`/`user_id = 
 | `appointments` *(prévue)* | patient | soi | ✗ | ✗ | ✗ |
 | | médecin / infirmier | affecté | affecté ∧ `professional_id=auth.uid()` | idem | idem |
 | `chatbot_usage` *(prévue)* | tous | soi | ✗ (Edge Function, service_role) | ✗ | ✗ |
-| `health_measurements` (0015) | patient | soi | soi (`my_role()='patient'`) | ✗ **jamais** | soi |
+| `health_measurements` (0015, 0016) | patient | soi | soi (`my_role()='patient'`) | ✗ **jamais** | soi |
+| | médecin / infirmier | affecté | ✗ | ✗ | ✗ |
+| `measurement_types` (0016) | tous | types standard (`patient_id` nul) + les siens | types personnalisés à son nom (`code` commençant par `custom_`) | ✗ **jamais** | siens, si aucune mesure ne les utilise |
+| | médecin / infirmier | types de ses patients affectés | ✗ | ✗ | ✗ |
+| `health_devices` (0016) | patient | soi | soi | nom et dernière synchronisation seulement | soi |
 | | médecin / infirmier | affecté | ✗ | ✗ | ✗ |
 
 Garde-fous complémentaires :
@@ -248,7 +252,7 @@ Garde-fous complémentaires :
 - Ces règles sont **testées** par pgTAP : [`supabase/tests/rls_rbac.test.sql`](../supabase/tests/rls_rbac.test.sql).
 - Le front (`features/auth/permissions.ts`, `RequireRole`) ne fait qu'**adapter l'interface**.
 
-### Export des données personnelles (`export_my_data()`, migrations 0013 et 0015)
+### Export des données personnelles (`export_my_data()`, migrations 0013, 0015 et 0016)
 Le patient exporte **toutes** ses données par un seul appel `rpc('export_my_data')`, qui renvoie un objet JSON :
 une clé par table, chaque valeur étant le tableau de ses lignes (`[]` si aucune, jamais `null`).
 
@@ -259,6 +263,8 @@ une clé par table, chaque valeur étant le tableau de ses lignes (`[]` si aucun
 | `community_profiles`, `chatbot_usage` | `user_id = auth.uid()` |
 | `community_posts`, `community_comments` | `author_id = auth.uid()` (publications masquées comprises) |
 | `reports` | `reporter_id = auth.uid()` |
+| `health_devices` | `patient_id = auth.uid()` |
+| `measurement_types` | `patient_id = auth.uid()` : seulement les types **personnalisés** ; les types standard sont communs, pas des données personnelles |
 
 - `security invoker` : le RLS reste la barrière ; le filtre explicite exclut les contenus lisibles par tous
   (communauté) et, pour un soignant, les données de ses patients affectés (il n'obtient que son profil).

@@ -51,7 +51,7 @@ select public.admin_set_role('<uuid>', 'nurse');                            -- c
 observations) sont conservées quand on change un rôle ou retire une affectation ; seul l'**accès** change :
 `is_assigned_to` ne compte que les affectations vers un compte qui est réellement médecin ou infirmier.
 
-## Un soignant quitte l'équipe (ADR-0011)
+## Un soignant quitte l'équipe (ADR-0012)
 Un médecin ou une infirmière qui a écrit des prescriptions ou des observations **ne peut pas supprimer son compte** :
 ces écritures font partie du dossier des patients (décision provisoire #66, en attente de l'avis sur la conformité, #69).
 L'administration lui retire tout accès :

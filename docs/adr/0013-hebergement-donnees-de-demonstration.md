@@ -1,4 +1,4 @@
-# ADR-0012 — Projet Supabase créé maintenant, avec des données de démonstration uniquement (décision provisoire)
+# ADR-0013 — Projet Supabase créé maintenant, avec des données de démonstration uniquement (décision provisoire)
 
 Statut : Accepté (provisoire, à revoir après l'avis juridique) · Date : 2026-11-26 · Décision #69
 
@@ -23,4 +23,4 @@ Tunisie, information et consentement, effacement) relève d'un juriste ou de l'I
 - Si l'avis juridique impose une autre région ou un hébergement en Tunisie, il faudra recréer un projet et refaire la
   configuration (secrets, déploiement) : coût accepté, aucune vraie donnée n'étant à migrer.
 - Les questions juridiques restent ouvertes et doivent être posées par l'équipe (elles conditionnent aussi la
-  révision de l'ADR-0011 sur les comptes de soignants).
+  révision de l'ADR-0012 sur les comptes de soignants).

@@ -2,7 +2,7 @@
 -- (cascades depuis auth.users) et uniquement les siennes.
 begin;
 create extension if not exists pgtap with schema extensions;
-select plan(27);
+select plan(30);
 
 create schema if not exists tests;
 create or replace function tests.create_user(p_id uuid, p_role public.app_role, p_name text)
@@ -70,6 +70,16 @@ insert into public.chatbot_usage (user_id, day, messages) values
 insert into public.health_measurements (patient_id, kind, value_1, value_2, unit, measured_at) values
   ('00000000-0000-0000-0000-00000000aaa1', 'blood_pressure', 120, 80, 'mmHg', now() - interval '1 hour'),
   ('00000000-0000-0000-0000-00000000bbb1', 'blood_pressure', 130, 85, 'mmHg', now() - interval '1 hour');
+-- Types personnalisés, appareils et mesures qui les utilisent (0016) : A les supprime avec son compte
+insert into public.measurement_types (code, value_count, units, patient_id, label) values
+  ('custom_suppr_a', 1, '{u}', '00000000-0000-0000-0000-00000000aaa1', 'perso A'),
+  ('custom_suppr_b', 1, '{u}', '00000000-0000-0000-0000-00000000bbb1', 'perso B');
+insert into public.health_devices (id, patient_id, display_name, connection) values
+  ('50000000-0000-0000-0000-00000000aaa1', '00000000-0000-0000-0000-00000000aaa1', 'appareil A', 'manual'),
+  ('50000000-0000-0000-0000-00000000bbb1', '00000000-0000-0000-0000-00000000bbb1', 'appareil B', 'manual');
+insert into public.health_measurements (patient_id, kind, value_1, unit, measured_at, device_id) values
+  ('00000000-0000-0000-0000-00000000aaa1', 'custom_suppr_a', 5, 'u', now() - interval '1 hour', '50000000-0000-0000-0000-00000000aaa1'),
+  ('00000000-0000-0000-0000-00000000bbb1', 'custom_suppr_b', 6, 'u', now() - interval '1 hour', '50000000-0000-0000-0000-00000000bbb1');
 
 -- ---------- anon ne peut pas appeler la fonction ----------
 set local role anon;
@@ -97,7 +107,9 @@ select is((select count(*)::int from public.community_posts where author_id = '0
 select is((select count(*)::int from public.community_comments where author_id = '00000000-0000-0000-0000-00000000aaa1'), 0, 'community_comments (dont celui sous la publication de B)');
 select is((select count(*)::int from public.reports where reporter_id = '00000000-0000-0000-0000-00000000aaa1'), 0, 'reports');
 select is((select count(*)::int from public.chatbot_usage where user_id = '00000000-0000-0000-0000-00000000aaa1'), 0, 'chatbot_usage');
-select is((select count(*)::int from public.health_measurements where patient_id = '00000000-0000-0000-0000-00000000aaa1'), 0, 'health_measurements');
+select is((select count(*)::int from public.health_measurements where patient_id = '00000000-0000-0000-0000-00000000aaa1'), 0, 'health_measurements (dont celle qui utilise un type personnalisé)');
+select is((select count(*)::int from public.measurement_types where patient_id = '00000000-0000-0000-0000-00000000aaa1'), 0, 'measurement_types personnalisés');
+select is((select count(*)::int from public.health_devices where patient_id = '00000000-0000-0000-0000-00000000aaa1'), 0, 'health_devices');
 
 -- ---------- Les données de B, du médecin et de l'infirmière sont intactes ----------
 select is((select count(*)::int from public.community_posts where id = '40000000-0000-0000-0000-00000000bbb1'), 1, 'la publication de B existe toujours');
@@ -113,7 +125,11 @@ select is(
         + (select count(*) from public.chatbot_usage where user_id = '00000000-0000-0000-0000-00000000bbb1'))::int,
   4, 'humeur, symptômes, rendez-vous et consommation CrohnBot de B intacts');
 select is((select pseudonym from public.community_profiles where user_id = '00000000-0000-0000-0000-00000000bbb1'), 'SupprB', 'pseudonyme de B intact');
-select is((select count(*)::int from public.health_measurements where patient_id = '00000000-0000-0000-0000-00000000bbb1'), 1, 'mesure de santé de B intacte');
+select is((select count(*)::int from public.health_measurements where patient_id = '00000000-0000-0000-0000-00000000bbb1'), 2, 'mesures de santé de B intactes');
+select is(
+  (select (select count(*) from public.measurement_types where patient_id = '00000000-0000-0000-0000-00000000bbb1')
+        + (select count(*) from public.health_devices where patient_id = '00000000-0000-0000-0000-00000000bbb1'))::int,
+  2, 'type personnalisé et appareil de B intacts');
 select is((select count(*)::int from public.profiles where id in ('00000000-0000-0000-0000-00000000ddd1', '00000000-0000-0000-0000-00000000eee1')),
   2, 'les comptes du médecin et de l''infirmière existent toujours');
 select is((select count(*)::int from public.care_assignments where professional_id = '00000000-0000-0000-0000-00000000ddd1'),

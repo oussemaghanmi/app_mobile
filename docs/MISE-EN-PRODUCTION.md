@@ -19,7 +19,7 @@ Suivre `docs/BOARD.md` de l'étape 1 à 7. Vérification finale : assigner une i
 
 ## 2. Mise en ligne Supabase (#42)
 
-1. Créer le projet sur supabase.com, dans la **région européenne proposée la plus proche de Tunis** (ADR-0012), et
+1. Créer le projet sur supabase.com, dans la **région européenne proposée la plus proche de Tunis** (ADR-0013), et
    noter la région dans `docs/QUESTIONS.md` (question 3). **Aucune donnée de vrai patient** tant que les questions
    juridiques de #69 n'ont pas de réponse : comptes de test et données de démonstration seulement.
 2. Secrets GitHub : tableau « Secrets GitHub à créer » de `docs/PIPELINE.md`.

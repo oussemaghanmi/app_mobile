@@ -53,7 +53,7 @@ select is((select value_1 from public.health_measurements where unit = 'mmol/L')
 
 -- Contraintes techniques (aucun seuil médical)
 select throws_ok($$ insert into public.health_measurements (kind, value_1, unit, measured_at)
-                    values ('temperature', 37, 'C', now()) $$, '23514', null, 'type de mesure inconnu refusé');
+                    values ('temperature', 37, 'C', now()) $$, '23503', null, 'type de mesure inconnu refusé (clé étrangère vers measurement_types)');
 select throws_ok($$ insert into public.health_measurements (kind, value_1, unit, measured_at)
                     values ('blood_pressure', 120, 'mmHg', now()) $$, '23514', null, 'tension sans diastolique refusée');
 select throws_ok($$ insert into public.health_measurements (kind, value_1, value_2, unit, measured_at)

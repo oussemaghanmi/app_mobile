@@ -1,4 +1,4 @@
-# ADR-0011 — Un soignant qui a écrit dans des dossiers ne supprime pas son compte (décision provisoire)
+# ADR-0012 — Un soignant qui a écrit dans des dossiers ne supprime pas son compte (décision provisoire)
 
 Statut : Accepté (provisoire, à revoir après la réponse sur la conformité, #69) · Date : 2026-11-26 · Décision #66
 
