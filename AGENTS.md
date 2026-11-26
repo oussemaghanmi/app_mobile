@@ -25,11 +25,24 @@ la session est celui qui s'assigne (un agent travaille sous le compte de la pers
   critères de fin cochés, par la personne qui pilote ou la propriétaire du dépôt) et signaler un défaut par un commentaire
   ou une issue `bug`. Pas de commit dans sa branche sans son accord écrit dans l'issue.
 
+## Travail en cours (limite)
+Prendre beaucoup d'issues à la fois bloque les autres, cache l'avancement réel et fait des PR trop grosses à relire.
+- Un compte a **au plus 4 issues « en cours »** à la fois. **En cours** = ouverte, assignée à ce compte, de code (hors labels
+  `humain`, `décision`, `plan`, `bloqué`, `incomplet`) et **sans PR** qui la cite (`Closes #n`) : dès qu'une PR est ouverte,
+  l'issue est « en revue » et ne compte plus ; une issue fusionnée se **ferme à la main** (elle ne se ferme pas toute seule
+  tant que la branche par défaut est `main`).
+- Pourquoi 4 et pas 1 : un même compte peut servir une personne **et** ses agents (par exemple Amal, Antigravity et Claude).
+  La limite se règle avec la variable de dépôt `WIP_LIMIT`.
+- **Ne pas réserver à l'avance** : on s'assigne une issue quand on la commence, pas pour « la mettre de côté ».
+- C'est **appliqué automatiquement** (`.github/workflows/wip-limit.yml`, logique testée dans `scripts/wip-limit.test.mjs`) :
+  une assignation qui dépasse la limite est retirée avec un commentaire qui liste les issues en cours.
+- Pour en prendre une de plus : ouvrir la PR d'une issue en cours, la terminer, ou se **désassigner** d'une issue non commencée.
+
 ## Cycle d'une tâche
 1. **Choisir** une issue au label `prêt` et au label de votre agent (`agent:claude` ou `agent:antigravity`),
    **sans assigné** (voir « Propriété d'une issue »). Une issue `bloqué` ou `humain` n'est pas pour un agent.
 2. **Annoncer** : vous **assigner** l'issue (la carte passe en « In progress ») et retirer le label `prêt`.
-   Rien n'est commencé avant cette étape.
+   Rien n'est commencé avant cette étape. Respecter la limite de « Travail en cours ».
 3. **Brancher** : `feature/<numéro>-<sujet>` depuis `develop` (ex. `feature/42-dialogue-confirmation`).
 4. **Travailler petit** : commits en Conventional Commits **en français** (`feat(journal): …`, `fix: …`, `test: …`).
 5. **Vérifier** avant chaque commit (voir « Définition de fini »).

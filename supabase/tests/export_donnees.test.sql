@@ -1,7 +1,7 @@
 -- Tests de public.export_my_data() (migration 0013) : export complet des données de la personne connectée.
 begin;
 create extension if not exists pgtap with schema extensions;
-select plan(27);
+select plan(30);
 
 create schema if not exists tests;
 create or replace function tests.create_user(p_id uuid, p_role public.app_role, p_name text)
@@ -77,6 +77,13 @@ insert into public.chatbot_usage (user_id, day, messages) values
 insert into public.health_measurements (patient_id, kind, value_1, unit, measured_at) values
   ('00000000-0000-0000-0000-0000000000a1', 'heart_rate', 72, 'bpm', now() - interval '1 hour'),
   ('00000000-0000-0000-0000-0000000000b1', 'heart_rate', 99, 'bpm', now() - interval '1 hour');
+-- Types personnalisés et appareils (0016)
+insert into public.measurement_types (code, value_count, units, patient_id, label) values
+  ('custom_export_a', 1, '{u}', '00000000-0000-0000-0000-0000000000a1', 'type-perso-A'),
+  ('custom_export_b', 1, '{u}', '00000000-0000-0000-0000-0000000000b1', 'type-perso-B');
+insert into public.health_devices (patient_id, display_name, connection) values
+  ('00000000-0000-0000-0000-0000000000a1', 'appareil-A', 'manual'),
+  ('00000000-0000-0000-0000-0000000000b1', 'appareil-B', 'manual');
 
 -- ---------- Contrat de la fonction ----------
 select has_function('public', 'export_my_data', array[]::text[], 'export_my_data() existe');
@@ -92,9 +99,10 @@ grant select on export_a to authenticated;
 select is(
   (select array_agg(k order by k) from export_a, jsonb_object_keys(j) k),
   array['appointments', 'care_assignments', 'chatbot_usage', 'community_comments', 'community_posts',
-        'community_profiles', 'health_measurements', 'medication_intakes', 'mood_logs', 'nursing_notes',
+        'community_profiles', 'health_devices', 'health_measurements', 'measurement_types',
+        'medication_intakes', 'mood_logs', 'nursing_notes',
         'prescriptions', 'private_journal', 'profiles', 'reports', 'symptom_logs']::text[],
-  'les 15 clés exactes');
+  'les 17 clés exactes');
 
 select is((select jsonb_array_length(j->'profiles') from export_a), 1, 'profiles : sa ligne');
 select is((select j->'profiles'->0->>'id' from export_a), '00000000-0000-0000-0000-0000000000a1', 'profiles : la bonne personne');
@@ -116,6 +124,14 @@ select is((select jsonb_array_length(j->'reports') from export_a), 1, 'reports :
 select is((select j->'chatbot_usage'->0->>'messages' from export_a), '5', 'chatbot_usage');
 select is((select jsonb_array_length(j->'health_measurements') from export_a), 1, 'health_measurements : sa mesure');
 select is((select j->'health_measurements'->0->>'value_1' from export_a), '72', 'health_measurements : pas celle de B');
+select is(
+  (select array_agg(t->>'label') from export_a, jsonb_array_elements(j->'measurement_types') t),
+  array['type-perso-A'], 'measurement_types : seulement son type personnalisé (ni le type de B, ni les types standard)');
+select is(
+  (select array_agg(d->>'display_name') from export_a, jsonb_array_elements(j->'health_devices') d),
+  array['appareil-A'], 'health_devices : seulement son appareil');
+select is((select count(*)::int from export_a, jsonb_array_elements(j->'measurement_types') t where t->>'patient_id' is null), 0,
+  'les types standard (communs) ne sont pas des données personnelles');
 select ok(
   (select position('00000000-0000-0000-0000-0000000000b1' in j::text) = 0
       and position('-B' in j::text) = 0 from export_a),
