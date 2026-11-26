@@ -236,9 +236,46 @@ export type Database = {
           },
         ];
       };
+      health_devices: {
+        Row: {
+          connection: string;
+          created_at: string;
+          display_name: string;
+          id: string;
+          last_sync_at: string | null;
+          patient_id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          connection: string;
+          created_at?: string;
+          display_name: string;
+          id?: string;
+          last_sync_at?: string | null;
+          patient_id?: string;
+        };
+        Update: {
+          connection?: string;
+          created_at?: string;
+          display_name?: string;
+          id?: string;
+          last_sync_at?: string | null;
+          patient_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'health_devices_patient_id_fkey';
+            columns: ['patient_id'];
+            isOneToOne: false;
+            referencedRelation: 'profiles';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
       health_measurements: {
         Row: {
           created_at: string;
+          device_id: string | null;
           id: string;
           kind: string;
           measured_at: string;
@@ -252,6 +289,7 @@ export type Database = {
         ComputedFields: never;
         Insert: {
           created_at?: string;
+          device_id?: string | null;
           id?: string;
           kind: string;
           measured_at: string;
@@ -264,6 +302,7 @@ export type Database = {
         };
         Update: {
           created_at?: string;
+          device_id?: string | null;
           id?: string;
           kind?: string;
           measured_at?: string;
@@ -276,7 +315,60 @@ export type Database = {
         };
         Relationships: [
           {
+            foreignKeyName: 'health_measurements_device_id_fkey';
+            columns: ['device_id'];
+            isOneToOne: false;
+            referencedRelation: 'health_devices';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'health_measurements_kind_fkey';
+            columns: ['kind'];
+            isOneToOne: false;
+            referencedRelation: 'measurement_types';
+            referencedColumns: ['code'];
+          },
+          {
             foreignKeyName: 'health_measurements_patient_id_fkey';
+            columns: ['patient_id'];
+            isOneToOne: false;
+            referencedRelation: 'profiles';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      measurement_types: {
+        Row: {
+          code: string;
+          created_at: string;
+          label: string | null;
+          loinc_code: string | null;
+          patient_id: string | null;
+          units: string[];
+          value_count: number;
+        };
+        ComputedFields: never;
+        Insert: {
+          code?: string;
+          created_at?: string;
+          label?: string | null;
+          loinc_code?: string | null;
+          patient_id?: string | null;
+          units: string[];
+          value_count: number;
+        };
+        Update: {
+          code?: string;
+          created_at?: string;
+          label?: string | null;
+          loinc_code?: string | null;
+          patient_id?: string | null;
+          units?: string[];
+          value_count?: number;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'measurement_types_patient_id_fkey';
             columns: ['patient_id'];
             isOneToOne: false;
             referencedRelation: 'profiles';
