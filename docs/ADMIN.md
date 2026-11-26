@@ -51,6 +51,22 @@ select public.admin_set_role('<uuid>', 'nurse');                            -- c
 observations) sont conservées quand on change un rôle ou retire une affectation ; seul l'**accès** change :
 `is_assigned_to` ne compte que les affectations vers un compte qui est réellement médecin ou infirmier.
 
+## Un soignant quitte l'équipe (ADR-0011)
+Un médecin ou une infirmière qui a écrit des prescriptions ou des observations **ne peut pas supprimer son compte** :
+ces écritures font partie du dossier des patients (décision provisoire #66, en attente de l'avis sur la conformité, #69).
+L'administration lui retire tout accès :
+1. Lister ses affectations, puis les retirer une par une :
+   ```sql
+   select patient_id from public.care_assignments where professional_id = '<uuid du soignant>';
+   select public.admin_unassign('<uuid du patient>', '<uuid du soignant>');
+   ```
+2. Lui retirer son rôle de soignant (refusé tant qu'il reste une affectation) :
+   ```sql
+   select public.admin_set_role('<uuid du soignant>', 'patient');
+   ```
+Il ne voit alors plus aucun dossier ; ses prescriptions et observations restent visibles des soignants affectés au
+patient, avec leur auteur. **Ne jamais** supprimer ses écritures pour débloquer la suppression du compte.
+
 ## Modération de la communauté
 **Règle** : dès **3 signalements** de personnes différentes, une publication ou un commentaire est **masqué
 automatiquement** (déclencheur `auto_hide_reported`, migration 0006) ; son auteur le voit toujours, les autres non.

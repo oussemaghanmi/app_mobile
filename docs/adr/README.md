@@ -14,3 +14,5 @@ nouveau qui le remplace (statut « Remplacé par ADR-XXXX »).
 | [0007](0007-aucun-droit-pour-anon.md) | Aucun droit pour le visiteur non connecté (`anon`) | Accepté |
 | [0008](0008-design-sans-export-figma.md) | Design défini dans le code, sans export Figma Make | Accepté |
 | [0009](0009-lien-reinitialisation-vers-application.md) | Le lien « Mot de passe oublié » rouvre l'application Android | Accepté |
+| [0011](0011-compte-soignant-avec-historique.md) | Un soignant qui a écrit dans des dossiers ne supprime pas son compte (provisoire) | Accepté (provisoire) |
+| [0012](0012-hebergement-donnees-de-demonstration.md) | Projet Supabase créé maintenant, données de démonstration uniquement (provisoire) | Accepté (provisoire) |
